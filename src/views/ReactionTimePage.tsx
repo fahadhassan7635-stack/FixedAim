@@ -274,7 +274,7 @@ function FAQItem({
           border: 'none',
           cursor: 'pointer',
           textAlign: 'left',
-          color: isOpen ? '#00f5ff' : '#e0e0e0',
+          color: '#000000',
           fontFamily: 'inherit',
           fontWeight: 700,
           fontSize: '0.95rem',
@@ -283,7 +283,7 @@ function FAQItem({
         }}
       >
         <span>{question}</span>
-        <span style={{ color: isOpen ? '#00f5ff' : '#6b7280', transition: 'color 0.22s ease' }}>
+        <span style={{ color: '#000000' }}>
           <ChevronIcon open={isOpen} />
         </span>
       </button>
@@ -300,7 +300,7 @@ function FAQItem({
           style={{
             margin: 0,
             padding: '0 1.25rem 1.1rem',
-            color: '#9ca3af',
+            color: '#2D3436',
             fontSize: '0.875rem',
             lineHeight: 1.75,
           }}

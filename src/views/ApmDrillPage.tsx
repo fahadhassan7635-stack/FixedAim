@@ -1376,11 +1376,12 @@ export default function ApmDrillPage() {
               <div
                 key={idx}
                 style={{
-                  background: 'var(--bg-card, #111823)',
-                  border: `1px solid ${isOpen ? 'var(--neon-cyan)' : 'var(--border, #243245)'}`,
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  transition: 'border-color 0.2s ease'
+                  background: '#FFFFFF',
+                border: '3px solid #000000',
+                borderRadius: '0px',
+                boxShadow: '4px 4px 0 0 #000000',
+                overflow: 'hidden',
+                marginBottom: '8px'
                 }}
               >
                 <button
@@ -1395,18 +1396,19 @@ export default function ApmDrillPage() {
                     gap: '12px',
                     background: 'transparent',
                     border: 0,
-                    color: 'var(--text-primary)',
-                    fontSize: '0.98rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    textAlign: 'left'
+                    color: '#000000',
+                  fontSize: '1rem',
+                  fontWeight: 900,
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  textAlign: 'left'
                   }}
                 >
                   <span>{faq.q}</span>
                   {isOpen ? <ChevronUp size={18} color="var(--neon-cyan)" /> : <ChevronDown size={18} />}
                 </button>
                 {isOpen && (
-                  <div style={{ padding: '0 18px 16px', color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.7' }}>
+                  <div style={{ padding: '16px 20px 18px', color: '#2D3436', fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500, backgroundColor: '#FFFFFF' }}>
                     {faq.a}
                   </div>
                 )}

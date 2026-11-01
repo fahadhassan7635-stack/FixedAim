@@ -448,7 +448,7 @@ export default function DoubleClickPage() {
         {/* ── MORE TOOLS GRID ── */}
         <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
           <h2 style={{
-            fontWeight: 800, fontSize: '1.5rem', color: '#fff',
+            fontWeight: 800, fontSize: '1.5rem', color: '#000000',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
           }}>More Tools</h2>
@@ -514,7 +514,7 @@ export default function DoubleClickPage() {
           A <strong>Double Click Test</strong> is a specialized speed and hardware benchmarking utility used to measure the precise millisecond (ms) response delay between two consecutive mouse presses. OS operating systems and video games rely on this preset threshold to register context menus or inventory selections. Testing your speed ensures your mouse switches operate at maximum efficiency.
         </p>
 
-        <h3 style={{ color: '#fff', fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.75rem', marginTop: '2rem' }}>
+        <h3 style={{ color: '#000000', fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.75rem', marginTop: '2rem' }}>
           How the Double Click Speed Ranking Scale Works
         </h3>
         <p style={{ marginBottom: '1.5rem' }}>
@@ -527,7 +527,7 @@ export default function DoubleClickPage() {
           <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--text-muted)' }}>🐢 Slow (&gt; 250ms):</strong> Might cause software applications to misinterpret double-clicks as two separate individual actions.</li>
         </ul>
 
-        <h3 style={{ color: '#fff', fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.75rem', marginTop: '2rem' }}>
+        <h3 style={{ color: '#000000', fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.75rem', marginTop: '2rem' }}>
           Diagnosing Mouse Double-Clicking Hardware Issues
         </h3>
         <p style={{ marginBottom: '1.5rem' }}>
@@ -607,7 +607,7 @@ export default function DoubleClickPage() {
           padding: '1.25rem',
           textAlign: 'center'
         }}>
-          <h3 style={{ color: '#fff', fontSize: '1.15rem', fontWeight: '600', marginBottom: '1rem' }}>
+          <h3 style={{ color: '#000000', fontSize: '1.15rem', fontWeight: '600', marginBottom: '1rem' }}>
             📹 Watch: Double Click Test & Mouse Switch Guide
           </h3>
           <div style={{
@@ -678,7 +678,7 @@ export default function DoubleClickPage() {
             { title: '💡 Optical Switches',    points: ['Light-beam actuation', 'Zero bounce — no chatter', 'Rated 100M+ clicks', 'Higher upfront cost', 'Consistent every time'] },
           ].map(col => (
             <div key={col.title} style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '10px', padding: '1rem', border: '1px solid var(--border)' }}>
-              <div style={{ fontWeight: '700', color: '#fff', marginBottom: '0.5rem' }}>{col.title}</div>
+              <div style={{ fontWeight: '700', color: '#000000', marginBottom: '0.5rem' }}>{col.title}</div>
               <ul style={{ paddingLeft: '1rem', margin: 0, listStyleType: 'disc' }}>
                 {col.points.map(p => <li key={p} style={{ marginBottom: '0.3rem', fontSize: '0.85rem' }}>{p}</li>)}
               </ul>
@@ -750,9 +750,9 @@ export default function DoubleClickPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
             <thead>
               <tr style={{ background: 'rgba(0,245,255,0.08)' }}>
-                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#fff' }}>Symptom</th>
-                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#fff' }}>Likely Cause</th>
-                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#fff' }}>Recommended Fix</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>Symptom</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>Likely Cause</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>Recommended Fix</th>
               </tr>
             </thead>
             <tbody>
@@ -833,10 +833,11 @@ export default function DoubleClickPage() {
         {/* ── Expanded FAQ ─────────────────────────────────────────────── */}
         <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
           <h2 style={{
-            fontWeight: 800, fontSize: '1.75rem', color: '#fff',
+            fontWeight: 900, fontSize: '1.75rem', color: '#000000',
             marginTop: 0, marginBottom: '1.5rem',
-            borderBottom: '1px solid #1f2937', paddingBottom: '1rem',
+            borderBottom: '3px solid #000000', paddingBottom: '0.75rem',
             display: 'flex', alignItems: 'center', gap: '10px',
+            textTransform: 'uppercase', fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" 
     strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--neon-cyan, #00f5ff)', flexShrink: 0 }} 
@@ -878,7 +879,7 @@ export default function DoubleClickPage() {
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       gap: '12px',
-                      color: '#fff',
+                      color: '#000000',
                       fontWeight: 700,
                       fontSize: '0.95rem',
                     }}
@@ -903,7 +904,7 @@ export default function DoubleClickPage() {
                       aria-labelledby={`faq-question-${i}`}
                       style={{ padding: '0 18px 16px', backgroundColor: 'rgba(0,245,255,0.03)' }}
                     >
-                      <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: '1.7', margin: 0 }}>
+                      <p style={{ color: '#2D3436', fontSize: '0.95rem', lineHeight: '1.7', margin: 0 }}>
                         {faq.a}
                       </p>
                     </div>

@@ -210,12 +210,12 @@ const FaqAccordionItem = memo(({ q, a, index, isOpen, onToggle }: FaqAccordionIt
       itemProp="mainEntity"
       itemType="https://schema.org/Question"
       style={{
-        background: isOpen ? 'rgba(0,245,255,0.04)' : 'var(--bg-card, #12141f)',
-        border: `1px solid ${isOpen ? 'var(--neon-cyan, #00f5ff)' : 'var(--border, rgba(255,255,255,0.08))'}`,
-        borderRadius: '12px',
-        marginBottom: '0.75rem',
+        background: '#FFFFFF',
+        border: '3px solid #000000',
+        borderRadius: '0px',
+        boxShadow: '4px 4px 0 0 #000000',
+        marginBottom: '8px',
         overflow: 'hidden',
-        transition: 'border-color 0.2s ease, background 0.2s ease',
       }}
     >
       <h3 style={{ margin: 0 }} itemProp="name">
@@ -231,18 +231,20 @@ const FaqAccordionItem = memo(({ q, a, index, isOpen, onToggle }: FaqAccordionIt
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '1rem',
-            background: 'transparent',
+            background: isOpen ? '#FFF6D6' : '#FFFFFF',
             border: 'none',
-            padding: '1rem 1.25rem',
+            borderBottom: isOpen ? '3px solid #000000' : 'none',
+            padding: '16px 20px',
             cursor: 'pointer',
             textAlign: 'left',
-            color: '#fff',
-            fontSize: '0.96rem',
-            fontWeight: '600',
+            color: '#000000',
+            fontSize: '1rem',
+            fontWeight: 900,
+            textTransform: 'uppercase',
           }}
         >
           <span>{q}</span>
-          <span style={{ color: isOpen ? 'var(--neon-cyan, #00f5ff)' : 'var(--text-muted, #94a3b8)' }}>
+          <span style={{ color: '#000000' }}>
             <ChevronIcon open={isOpen} />
           </span>
         </button>
@@ -531,7 +533,7 @@ const ResultModal = memo(({
         <blockquote style={{
           background: 'rgba(0,0,0,0.25)', padding: '0.85rem 1rem',
           borderRadius: '12px', borderLeft: `3px solid ${rating.color}`,
-          fontStyle: 'italic', color: '#cbd5e1',
+          fontStyle: 'italic', color: '#2D3436',
           fontSize: '0.88rem', textAlign: 'left',
           marginBottom: '1.25rem', lineHeight: '1.5',
           margin: '0 0 1.25rem 0',
@@ -1444,7 +1446,7 @@ export default function SpacebarPage() {
                 </div>
                 <span style={{
                   fontSize: '0.75rem', fontWeight: 700,
-                  color: '#cbd5e1', textAlign: 'center', lineHeight: 1.3,
+                  color: '#2D3436', textAlign: 'center', lineHeight: 1.3,
                 }}>{label}</span>
               </a>
             ))}

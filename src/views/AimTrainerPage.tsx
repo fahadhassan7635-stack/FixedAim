@@ -949,7 +949,7 @@ export default function AimTrainerPage() {
           }}>
             2D Aim Trainer
           </h1>
-          <p style={{ margin: 0, fontSize: '1.02rem', color: '#9ca3af', fontWeight: 400 }}>
+          <p style={{ margin: 0, fontSize: '1.02rem', color: '#2D3436', fontWeight: 400 }}>
             Track and hit the small moving target — precision matters!
           </p>
         </header>
@@ -1539,7 +1539,7 @@ export default function AimTrainerPage() {
                 </div>
                 <span style={{
                   fontSize: '0.75rem', fontWeight: 700,
-                  color: '#cbd5e1', textAlign: 'center', lineHeight: 1.3,
+                  color: '#2D3436', textAlign: 'center', lineHeight: 1.3,
                 }}>{label}</span>
               </a>
             ))}
@@ -1987,7 +1987,7 @@ const h3Style: React.CSSProperties = {
   fontWeight: 700, fontSize: '1rem', color: '#e0e0ec', marginBottom: '0.4rem',
 };
 const pStyle: React.CSSProperties = {
-  color: '#9797a8', fontSize: '0.92rem', lineHeight: 1.75, margin: 0,
+  color: '#2D3436', fontSize: '0.92rem', lineHeight: 1.75, margin: 0,
 };
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -2061,9 +2061,12 @@ function FaqAccordionRow({
 }: { entry: FaqEntry; isOpen: boolean; onToggle: () => void; accentColor: string }) {
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.02)',
-      border: isOpen ? `1px solid ${accentColor}55` : '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '12px', overflow: 'hidden', transition: 'border-color 0.2s ease',
+      background: '#FFFFFF',
+      border: '3px solid #000000',
+      borderRadius: '0px',
+      boxShadow: '4px 4px 0 0 #000000',
+      overflow: 'hidden',
+      marginBottom: '8px',
     }}>
       <h2 style={{ margin: 0 }}>
         <button
@@ -2074,9 +2077,10 @@ function FaqAccordionRow({
           id={`${entry.id}-button`}
           style={{
             width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            gap: '1rem', padding: '0.9rem 1.1rem', background: 'transparent', border: 'none',
-            cursor: 'pointer', textAlign: 'left', color: '#fff', fontWeight: 700, fontSize: '0.92rem',
-            fontFamily: 'inherit',
+            gap: '1rem', padding: '16px 20px', background: isOpen ? '#FFF6D6' : '#FFFFFF', border: 'none',
+            borderBottom: isOpen ? '3px solid #000000' : 'none',
+            cursor: 'pointer', textAlign: 'left', color: '#000000', fontWeight: 900, fontSize: '1rem',
+            fontFamily: 'inherit', textTransform: 'uppercase',
           }}
         >
           <span>{entry.question}</span>
@@ -2096,7 +2100,7 @@ function FaqAccordionRow({
         aria-labelledby={`${entry.id}-button`}
         style={{ maxHeight: isOpen ? '400px' : '0px', transition: 'max-height 0.25s ease', overflow: 'hidden' }}
       >
-        <div style={{ padding: '0 1.1rem 1rem', color: '#9797a8', fontSize: '0.86rem', lineHeight: 1.7 }}>
+        <div style={{ padding: '16px 20px 18px', color: '#2D3436', fontSize: '0.96rem', lineHeight: 1.7, fontWeight: 500, background: '#FFFFFF' }}>
           {entry.answer}
         </div>
       </div>

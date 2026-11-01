@@ -329,19 +329,19 @@ const FaqAccordion: React.FC = () => {
         <div
           key={i}
           role="listitem"
-          style={{ border: '1px solid', borderColor: openIndex === i ? 'rgba(0,240,255,0.4)' : '#1f2937', borderRadius: '10px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+          style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', background: '#FFFFFF', overflow: 'hidden', marginBottom: '8px' }}
         >
           <button
             aria-expanded={openIndex === i}
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', background: openIndex === i ? 'rgba(0,240,255,0.05)' : '#0b111e', border: 'none', cursor: 'pointer', color: '#fff', fontWeight: 700, fontSize: '0.95rem', textAlign: 'left', gap: '12px' }}
+            style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', background: openIndex === i ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: openIndex === i ? '3px solid #000000' : 'none', cursor: 'pointer', color: '#000000', fontWeight: 900, fontSize: '1rem', textTransform: 'uppercase', textAlign: 'left', gap: '12px' }}
           >
             <span>{item.q}</span>
             {openIndex === i ? <ChevronUp size={16} color="#00f0ff" /> : <ChevronDown size={16} color="#6b7280" />}
           </button>
           {openIndex === i && (
-            <div style={{ padding: '0 18px 16px', backgroundColor: 'rgba(0,240,255,0.03)' }}>
-              <p style={{ color: '#9ca3af', margin: 0, lineHeight: '1.7', fontSize: '0.95rem' }}>{item.a}</p>
+            <div style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}>
+              <p style={{ color: '#2D3436', margin: 0, lineHeight: '1.7', fontSize: '0.95rem' }}>{item.a}</p>
             </div>
           )}
         </div>
@@ -747,14 +747,14 @@ export default function CpsRush() {
               <button
                 onClick={() => { setMuted(m => !m); audioRef.current.click(); }}
                 aria-label={muted ? 'Unmute sounds' : 'Mute sounds'}
-                style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid #1f2937', borderRadius: '8px', padding: '7px', cursor: 'pointer', color: '#9ca3af', display: 'flex', alignItems: 'center' }}
+                style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid #1f2937', borderRadius: '8px', padding: '7px', cursor: 'pointer', color: '#2D3436', display: 'flex', alignItems: 'center' }}
               >
                 {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
               </button>
               <button
                 onClick={toggleFullscreen}
                 aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-                style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid #1f2937', borderRadius: '8px', padding: '7px', cursor: 'pointer', color: '#9ca3af', display: 'flex', alignItems: 'center' }}
+                style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid #1f2937', borderRadius: '8px', padding: '7px', cursor: 'pointer', color: '#2D3436', display: 'flex', alignItems: 'center' }}
               >
                 {isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
               </button>
@@ -781,7 +781,7 @@ export default function CpsRush() {
                   </button>
                 </div>
                 <div style={{ marginBottom: '10px', color: '#6b7280', fontSize: '0.82rem', textAlign: 'center' }}>
-                  Use <strong style={{ color: '#9ca3af' }}>A / D</strong> or <strong style={{ color: '#9ca3af' }}>Arrow Keys</strong> to move
+                  Use <strong style={{ color: '#2D3436' }}>A / D</strong> or <strong style={{ color: '#2D3436' }}>Arrow Keys</strong> to move
                 </div>
                 <button onClick={startCountdown} style={btnPrimary} aria-label="Start game">
                   <Play fill="currentColor" size={12} /> START GAME
@@ -850,7 +850,7 @@ export default function CpsRush() {
               <div style={overlayStyle} role="dialog" aria-modal="true" aria-label="Level complete">
                 <Trophy size={28} style={{ color: '#00f0ff', marginBottom: '12px' }} />
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>FINISHED!</h2>
-                <p style={{ color: '#9ca3af', marginBottom: '1.5rem' }}>Score: <span style={{ color: '#00f0ff', fontWeight: 700 }}>{score}</span></p>
+                <p style={{ color: '#2D3436', marginBottom: '1.5rem' }}>Score: <span style={{ color: '#00f0ff', fontWeight: 700 }}>{score}</span></p>
                 <button onClick={startCountdown} style={btnPrimary} aria-label="Play again">
                   <RotateCcw size={14} /> PLAY AGAIN
                 </button>
@@ -934,7 +934,7 @@ export default function CpsRush() {
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '0 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
                 What is CPS Rush? (The Click-Speed Platformer Game)
               </h2>
-              <p style={{ marginBottom: '1.25rem', color: '#9ca3af' }}>
+              <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
                 <strong>CPS Rush</strong> is a high-octane browser game that turns traditional click speed testing into an interactive, physics-based platformer. Instead of clicking into a sterile, static box, your real-time <strong>Clicks Per Second (CPS)</strong> directly drives your in-game runner's horizontal velocity and jumping power. The faster and more consistently you click, the faster your character rushes across floating neon platforms, soars over bottomless chasms, and races toward the finish line.
               </p>
 
@@ -942,31 +942,31 @@ export default function CpsRush() {
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
                 How Does This CPS Rush Game Work? (Physics &amp; Mechanics)
               </h2>
-              <p style={{ marginBottom: '1.25rem', color: '#9ca3af' }}>
+              <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
                 CPS Rush combines arcade runner physics with real-time hardware input monitoring. Here is exactly how the game mechanics function under the hood:
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', margin: '1.25rem 0 1.5rem' }}>
                 <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
                   <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⚡ Click-to-Velocity Engine</h3>
-                  <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+                  <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
                     Every click you register accelerates your character horizontally. Dropping below 6 CPS slows your runner down, while sustaining 12–20+ CPS unleashes blinding hyper-speed across the terrain.
                   </p>
                 </div>
                 <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
                   <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🚀 Dynamic Jump Boost Multipliers</h3>
-                  <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+                  <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
                     When leaping off platform edges, your live CPS provides an instant vertical jump multiplier (scaling with your peak burst speed), allowing skilled clickers to clear massive gaps effortlessly.
                   </p>
                 </div>
                 <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
                   <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🎮 Dual Input Modes (Mouse &amp; Spacebar)</h3>
-                  <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+                  <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
                     You can switch seamlessly between Mouse Mode (primary/secondary mouse buttons) and Keyboard Mode (Spacebar tapping). Train both your trigger finger and keyboard thumb dexterity.
                   </p>
                 </div>
                 <div style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.15)', borderRadius: '10px', padding: '1rem' }}>
                   <h3 style={{ color: '#a855f7', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🏁 Distance Countdown &amp; Score</h3>
-                  <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+                  <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
                     A real-time HUD tracks your remaining distance to the finish platform (reducing to 0m). Your final score factors in total speed, peak burst CPS, and platform completion time.
                   </p>
                 </div>
@@ -976,10 +976,10 @@ export default function CpsRush() {
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
                 How Does CPS Rush Help You to Improve Your CPS?
               </h2>
-              <p style={{ marginBottom: '1.25rem', color: '#9ca3af' }}>
+              <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
                 Many players hit a plateau when practicing on standard 5-second CPS tests because clicking into a static box does not reflect actual gaming conditions. CPS Rush solves this by introducing dynamic physical stakes:
               </p>
-              <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#9ca3af', lineHeight: '1.85' }}>
+              <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#2D3436', lineHeight: '1.85' }}>
                 <li>
                   <strong style={{ color: '#fff' }}>1. Real-Time Biofeedback (Consequence-Driven Training):</strong>
                   In standard tests, you only see a score after the timer expires. In CPS Rush, if your clicking speed drops by even 2–3 CPS, your character immediately decelerates, falling short of incoming jumps. This visual feedback trains your nervous system to maintain an unbroken clicking rhythm.
@@ -1002,17 +1002,17 @@ export default function CpsRush() {
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
                 Play CPS Rush Games with Jitter Click &amp; Butterfly Click
               </h2>
-              <p style={{ marginBottom: '1.25rem', color: '#9ca3af' }}>
+              <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
                 CPS Rush is the ultimate training arena to test and master competitive clicking techniques. Here is how to apply jitter clicking and butterfly clicking for maximum in-game performance:
               </p>
 
               <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1.15rem', fontWeight: 700, margin: '1.5rem 0 0.5rem' }}>
                 ⚡ How to Play CPS Rush with Jitter Clicking
               </h3>
-              <p style={{ marginBottom: '1.1rem', color: '#9ca3af' }}>
+              <p style={{ marginBottom: '1.1rem', color: '#2D3436' }}>
                 In jitter clicking, you tense the flexor and extensor muscles in your forearm to induce high-frequency micro-tremors, channeling those rapid spasms into your fingertip:
               </p>
-              <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#9ca3af', lineHeight: '1.85' }}>
+              <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#2D3436', lineHeight: '1.85' }}>
                 <li><strong>Grip &amp; Stabilization:</strong> Rest your wrist firmly on your desk or mousepad. Use a firm claw or fingertip grip to prevent the mouse sensor from drifting while your arm vibrates.</li>
                 <li><strong>Pacing in CPS Rush:</strong> Keep jitter bursts timed with upcoming jump ramps. Since jitter clicking induces forearm muscle fatigue faster than other methods, maintain a steady 10–12 CPS during straight stretches and spike to 14+ CPS on major gap leaps.</li>
                 <li><strong>Safety Tip:</strong> Limit jitter sessions to short runs. If you feel tightness or wrist ache, pause the game (ESC key) and stretch your forearm muscles.</li>
@@ -1021,10 +1021,10 @@ export default function CpsRush() {
               <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1.15rem', fontWeight: 700, margin: '1.5rem 0 0.5rem' }}>
                 🦋 How to Play CPS Rush with Butterfly Clicking
               </h3>
-              <p style={{ marginBottom: '1.1rem', color: '#9ca3af' }}>
+              <p style={{ marginBottom: '1.1rem', color: '#2D3436' }}>
                 Butterfly clicking involves placing two fingers (index and middle) on the primary mouse button and rapidly alternating taps in a flutter motion:
               </p>
-              <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#9ca3af', lineHeight: '1.85' }}>
+              <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#2D3436', lineHeight: '1.85' }}>
                 <li><strong>Unrivaled Acceleration (15–25+ CPS):</strong> Butterfly clicking generates the highest sustained velocity in CPS Rush. With mouse debounce set to low (0–4ms), each finger tap can register double actuations, rocketing your character across the map.</li>
                 <li><strong>Lower Muscular Strain:</strong> Because butterfly clicking relies on relaxed tendon agility rather than sustained isometric arm tension, you can complete multiple consecutive runs without wrist exhaustion.</li>
                 <li><strong>Rhythm Discipline:</strong> Establish a metronome-like see-saw rhythm between your index and middle finger. Irregular flutters can cause micro-stutters in momentum right at the takeoff edge.</li>

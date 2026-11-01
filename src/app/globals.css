@@ -511,3 +511,290 @@ h1, h2, h3, h4, h5, h6, .tool-title {
   .main-footer         { padding: 2rem 1rem 1rem !important; }
   .footer-grid         { grid-template-columns: 1fr; }
 }
+
+
+/* ==========================================================================
+   NEUBRUTALISM CONTENT & FAQ STYLING — EXACTLY LIKE INTERNET SPEED TEST
+   ========================================================================== */
+
+/* ── 1. GLOBAL ARTICLE & GUIDE CONTENT STYLING ── */
+article,
+.cps-article,
+.seo,
+.guide-section,
+main article,
+section[aria-label*="Guide"],
+section[aria-label*="guide"],
+section[aria-label*="Accuracy Test"],
+section[aria-label*="Scroll Test"] {
+  color: #2D3436 !important;
+}
+
+article h1, article h2, article h3, article h4,
+.cps-article h1, .cps-article h2, .cps-article h3, .cps-article h4,
+.seo h1, .seo h2, .seo h3, .seo h4,
+.guide-section h1, .guide-section h2, .guide-section h3 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-family: 'Public Sans', 'Barlow Condensed', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.01em !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+article p,
+.cps-article p,
+.seo p,
+.guide-section p,
+article li,
+.cps-article li,
+.seo li,
+.guide-section li {
+  color: #2D3436 !important;
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+  font-weight: 500 !important;
+  margin-bottom: 1.15rem !important;
+}
+
+article strong,
+article b,
+.cps-article strong,
+.cps-article b,
+.seo strong,
+.seo b {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* Breadcrumbs across all pages */
+nav[aria-label="Breadcrumb"] {
+  color: #485460 !important;
+  font-weight: 700 !important;
+}
+nav[aria-label="Breadcrumb"] a {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  font-weight: 800 !important;
+}
+nav[aria-label="Breadcrumb"] span {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Article and Guide Tables (like Internet Speed Test .tw) */
+article table,
+.cps-article table,
+.seo table,
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+  margin: 1.5rem 0 !important;
+}
+
+article th,
+.cps-article th,
+.seo th,
+table th {
+  background: #FFE033 !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-size: 0.95rem !important;
+  text-transform: uppercase !important;
+  border-bottom: 2px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  padding: 12px 16px !important;
+  text-align: left !important;
+}
+
+article td,
+.cps-article td,
+.seo td,
+table td {
+  color: #2D3436 !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  border-bottom: 2px solid #000000 !important;
+  border-right: 1px solid #E2E8F0 !important;
+  padding: 12px 16px !important;
+}
+
+article tr:last-child td,
+.cps-article tr:last-child td,
+.seo tr:last-child td,
+table tr:last-child td {
+  border-bottom: none !important;
+}
+
+article td:first-child,
+.cps-article td:first-child,
+.seo td:first-child,
+table td:first-child {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* ── 2. UNIVERSAL FAQ ACCORDION STYLING (MATCHING INTERNET SPEED TEST) ── */
+
+/* FAQ Section Heading */
+.faq-h,
+section[aria-label*="Frequently Asked"] h2,
+div[aria-label*="Frequently Asked"] h2,
+section[aria-labelledby*="faq"] h2,
+section h2:has(+ div [role="listitem"]),
+section h2:has(+ div div[role="listitem"]) {
+  color: #000000 !important;
+  font-size: clamp(1.4rem, 3vw, 1.85rem) !important;
+  font-weight: 900 !important;
+  font-family: 'Public Sans', 'Barlow Condensed', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.01em !important;
+  border-bottom: 3px solid #000000 !important;
+  padding-bottom: 0.75rem !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.faq-h svg,
+section[aria-label*="Frequently Asked"] h2 svg,
+div[aria-label*="Frequently Asked"] h2 svg {
+  stroke: #000000 !important;
+  color: #000000 !important;
+}
+
+/* FAQ Box Container (Each Accordion Item) */
+.faq details,
+section[aria-label*="Frequently Asked"] [role="listitem"],
+section[aria-label*="Frequently Asked"] div[role="list"] > div,
+div[aria-label*="Frequently Asked"] [role="listitem"],
+div[aria-label*="Frequently Asked"] div[role="list"] > div,
+.sw-faq-item,
+div:has(> button[aria-expanded][id*="faq"]),
+div:has(> button[aria-expanded][aria-controls*="faq"]),
+div:has(> button[aria-expanded][aria-controls$="-panel"]),
+div:has(> h2 > button[aria-expanded]) {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0px !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+/* FAQ Question Button */
+.faq summary,
+button[aria-expanded][id*="faq"],
+button[aria-expanded][aria-controls*="faq"],
+button[aria-expanded][aria-controls$="-panel"],
+button.sw-faq-question,
+section[aria-label*="Frequently Asked"] button[aria-expanded],
+div[aria-label*="Frequently Asked"] button[aria-expanded] {
+  width: 100% !important;
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  font-family: 'Public Sans', sans-serif !important;
+  border-radius: 0px !important;
+  border: none !important;
+  padding: 16px 20px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 14px !important;
+  text-align: left !important;
+  text-transform: uppercase !important;
+  transition: background 0.15s ease !important;
+}
+
+/* FAQ Question Button When OPEN */
+.faq details[open],
+.faq details[open] summary,
+button[aria-expanded="true"],
+button.sw-faq-question.open,
+.sw-faq-item.open button {
+  background: #FFF6D6 !important;
+  color: #000000 !important;
+  border-bottom: 3px solid #000000 !important;
+}
+
+/* FAQ Question Text inside button */
+.faq summary span,
+button[aria-expanded] span,
+button.sw-faq-question span {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+}
+
+/* FAQ Chevron / Icons */
+.faq summary svg,
+button[aria-expanded] svg,
+button.sw-faq-question svg,
+.sw-faq-chevron {
+  stroke: #000000 !important;
+  color: #000000 !important;
+  flex-shrink: 0 !important;
+}
+
+/* FAQ Answer Panel */
+.faq .a,
+div[id*="faq-answer"],
+div[id$="-panel"],
+div[role="region"][aria-labelledby*="faq"],
+p.sw-faq-answer,
+section[aria-label*="Frequently Asked"] div[role="region"],
+div[aria-label*="Frequently Asked"] div[role="region"] {
+  background: #FFFFFF !important;
+  padding: 16px 20px 18px !important;
+  margin: 0 !important;
+  border-top: none !important;
+}
+
+.faq .a,
+div[id*="faq-answer"] p,
+div[id$="-panel"] p,
+div[role="region"][aria-labelledby*="faq"] p,
+p.sw-faq-answer,
+section[aria-label*="Frequently Asked"] div[role="region"] p,
+div[aria-label*="Frequently Asked"] div[role="region"] p {
+  color: #2D3436 !important;
+  font-size: 0.96rem !important;
+  line-height: 1.7 !important;
+  font-weight: 500 !important;
+  margin: 0 !important;
+}
+
+/* "Show All FAQs" Button */
+section[aria-label*="Frequently Asked"] button:not([aria-expanded]),
+div[aria-label*="Frequently Asked"] button:not([aria-expanded]) {
+  background: #FFE033 !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+  font-weight: 900 !important;
+  font-size: 0.95rem !important;
+  text-transform: uppercase !important;
+  padding: 12px 24px !important;
+  cursor: pointer !important;
+  margin-top: 1rem !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+section[aria-label*="Frequently Asked"] button:not([aria-expanded]):hover,
+div[aria-label*="Frequently Asked"] button:not([aria-expanded]):hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0 0 #000000 !important;
+  background: #FFD23F !important;
+}

@@ -1775,12 +1775,12 @@ export default function AccuracyTestPage() {
                 <div
                   key={q}
                   style={{
-                    background: isOpen ? 'rgba(0,245,255,0.06)' : 'var(--bg-card)',
-                    border: `1px solid ${isOpen ? 'var(--neon-cyan)' : 'var(--border)'}`,
-                    borderRadius: '12px',
-                    padding: '1.1rem 1.25rem',
-                    marginBottom: '0.75rem',
-                    transition: 'background 0.2s ease, border-color 0.2s ease',
+                    background: isOpen ? '#FFF6D6' : '#FFFFFF',
+                  border: '3px solid #000000',
+                  borderRadius: '0px',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  padding: '0',
+                  marginBottom: '8px',
                   }}
                 >
                   <button
@@ -1795,14 +1795,15 @@ export default function AccuracyTestPage() {
                       gap: '1rem',
                       background: 'transparent',
                       border: 'none',
-                      padding: 0,
                       margin: 0,
                       cursor: 'pointer',
-                      color: '#fff',
-                      fontWeight: 600,
-                      fontSize: '0.95rem',
+                      color: '#000000',
+                      fontWeight: 900,
+                      fontSize: '1rem',
+                      textTransform: 'uppercase',
                       textAlign: 'left',
                       font: 'inherit',
+                      padding: '16px 20px',
                     }}
                   >
                     <span>{q}</span>

@@ -1097,7 +1097,7 @@ export default function SniperModePage() {
             </h1>
           </div>
         <div style={{ position: 'absolute', top: '14px', right: '14px', display: 'flex', gap: '8px', zIndex: 100 }}>
-          <button onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '7px', color: '#9ca3af', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+          <button onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '7px', color: '#2D3436', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
             {isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
           </button>
         </div>
@@ -1105,7 +1105,7 @@ export default function SniperModePage() {
 
       <section aria-label="More Tools" style={{ maxWidth: '1000px', margin: '4rem auto 0 auto', padding: '0 2rem' }}>
         <h2 style={{
-          fontWeight: 800, fontSize: '1.5rem', color: '#fff',
+          fontWeight: 800, fontSize: '1.5rem', color: '#000000',
           marginBottom: '1.5rem', textAlign: 'center', letterSpacing: '-0.3px',
         }}>More Tools</h2>
         <div style={{
@@ -1155,11 +1155,11 @@ export default function SniperModePage() {
       
       
       
-      <article style={{ maxWidth: '1000px', margin: '0 auto', padding: '4rem 2rem', color: '#cbd5e1', fontFamily: 'system-ui, sans-serif', lineHeight: '1.6' }}>
+      <article style={{ maxWidth: '1000px', margin: '0 auto', padding: '4rem 2rem', color: '#2D3436', fontFamily: 'system-ui, sans-serif', lineHeight: '1.6' }}>
         
         {/* Table of Contents */}
         <nav aria-label="Table of Contents" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '1.5rem', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '1rem', marginTop: 0 }}>Table of Contents</h2>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#000000', marginBottom: '1rem', marginTop: 0 }}>Table of Contents</h2>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '0.5rem' }}>
             <li><a href="#introduction" style={{ color: '#4fc3f7', textDecoration: 'none' }}>1. Introduction to FPS Aim Training</a></li>
             <li><a href="#fixedaim-features" style={{ color: '#4fc3f7', textDecoration: 'none' }}>2. Why Choose FixedAim?</a></li>
@@ -1174,10 +1174,10 @@ export default function SniperModePage() {
           </ul>
         </nav>
 
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2.5rem', color: '#fff', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>The Ultimate Guide to FPS Aim Training</h1>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2.5rem', color: '#000000', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>The Ultimate Guide to FPS Aim Training</h1>
         
         <section id="introduction" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Introduction to FPS Aim Training</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Introduction to FPS Aim Training</h2>
           <p style={{ marginBottom: '1rem' }}>
             Aim training in a three-dimensional environment has revolutionized how competitive gamers prepare for tactical shooters and battle royales. Unlike simple 2D clicker games, an online aim practice tool immerses you in a simulated spatial environment that requires precise camera rotation, crosshair placement, and depth perception.
           </p>
@@ -1185,14 +1185,14 @@ export default function SniperModePage() {
             According to principles of <a href="https://en.wikipedia.org/wiki/Motor_learning" target="_blank" rel="noopener noreferrer" style={{ color: '#4fc3f7', textDecoration: 'none' }}>motor learning</a>, the specificity of practice is paramount. When you train in a dedicated 3D space, you are engaging the exact spatial awareness mechanisms relied upon in actual gameplay. Consistent, targeted repetition may lead to structural changes in the brain that support rapid, automatic execution of complex motor tasks, commonly referred to as building "muscle memory."
           </p>
           <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'linear-gradient(135deg, #4fc3f7 0%, #0288d1 100%)', color: '#fff', border: 'none', borderRadius: '8px', padding: '12px 32px', fontSize: '1.1rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 15px rgba(79,195,247,0.3)', transition: 'transform 0.2s' }}>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'linear-gradient(135deg, #4fc3f7 0%, #0288d1 100%)', color: '#000000', border: 'none', borderRadius: '8px', padding: '12px 32px', fontSize: '1.1rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 15px rgba(79,195,247,0.3)', transition: 'transform 0.2s' }}>
               Start Training Now
             </button>
           </div>
         </section>
 
         <section id="fixedaim-features" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Why Choose FixedAim?</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Why Choose FixedAim?</h2>
           <p style={{ marginBottom: '1rem' }}>
             Built by passionate developers and competitive gamers, FixedAim provides a seamless, friction-free environment to hone your mechanics. We understand that you want to train without bloat, loading screens, or paywalls.
           </p>
@@ -1205,11 +1205,11 @@ export default function SniperModePage() {
             ].map((feature, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '1.25rem' }}>
                 <h3 style={{ fontSize: '1.1rem', color: '#4fc3f7', marginBottom: '0.5rem', marginTop: 0 }}>{feature.title}</h3>
-                <p style={{ fontSize: '0.9rem', color: '#9ca3af', margin: 0 }}>{feature.desc}</p>
+                <p style={{ fontSize: '0.9rem', color: '#2D3436', margin: 0 }}>{feature.desc}</p>
               </div>
             ))}
           </div>
-          <h3 style={{ fontSize: '1.4rem', color: '#fff', marginBottom: '1rem' }}>Live Performance Tracking</h3>
+          <h3 style={{ fontSize: '1.4rem', color: '#000000', marginBottom: '1rem' }}>Live Performance Tracking</h3>
           <p style={{ marginBottom: '1rem' }}>Our tool doesn't just let you shoot targets; it tracks every micro-movement to provide real-time performance statistics, including:</p>
           <ul style={{ paddingLeft: '1.5rem', marginBottom: '1rem' }}>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#00f5ff' }}>Accuracy (%):</strong> Your precision rating. Hitting 90%+ consistently is better than missing fast.</li>
@@ -1220,45 +1220,45 @@ export default function SniperModePage() {
         </section>
         
         <section id="how-to-use" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>How to Use FixedAim (Step-by-Step)</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>How to Use FixedAim (Step-by-Step)</h2>
           <p style={{ marginBottom: '1rem' }}>Getting started with FixedAim is incredibly simple. Follow these steps to begin your first session:</p>
           <ol style={{ paddingLeft: '1.5rem', marginBottom: '1rem' }}>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Match Your Sensitivity:</strong> Before starting, ensure your mouse DPI is set to your usual gaming standard (e.g., 400, 800, or 1600 DPI).</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Start the Trainer:</strong> Click the "Start Training" button at the top of the page. Your mouse cursor will lock to the screen for a true FPS experience.</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Acquire Targets:</strong> 3D targets will spawn randomly in the virtual environment. Look around using your mouse.</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Shoot and Track:</strong> Left-click to shoot. For moving targets, track them smoothly across your screen before firing.</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Analyze Your Stats:</strong> Press ESC at any time to pause the game and unlock your cursor. Review your Accuracy, Hits, and Misses on the HUD.</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Iterate and Repeat:</strong> Hit "Resume" to continue or "Restart" to wipe the slate clean and try for a higher score!</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Match Your Sensitivity:</strong> Before starting, ensure your mouse DPI is set to your usual gaming standard (e.g., 400, 800, or 1600 DPI).</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Start the Trainer:</strong> Click the "Start Training" button at the top of the page. Your mouse cursor will lock to the screen for a true FPS experience.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Acquire Targets:</strong> 3D targets will spawn randomly in the virtual environment. Look around using your mouse.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Shoot and Track:</strong> Left-click to shoot. For moving targets, track them smoothly across your screen before firing.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Analyze Your Stats:</strong> Press ESC at any time to pause the game and unlock your cursor. Review your Accuracy, Hits, and Misses on the HUD.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Iterate and Repeat:</strong> Hit "Resume" to continue or "Restart" to wipe the slate clean and try for a higher score!</li>
           </ol>
         </section>
         
         <section id="training-plan" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>7-Day Beginner Training Plan</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>7-Day Beginner Training Plan</h2>
           <p style={{ marginBottom: '1rem' }}>Consistency is the secret to building mechanical skill. If you are new to aim training, follow this structured 7-day routine. Spend <strong>15 to 20 minutes daily</strong> on FixedAim to build foundational muscle memory without burning out.</p>
           <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '1.25rem' }}>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <strong style={{ color: '#4fc3f7' }}>Days 1 & 2: Accuracy Over Speed</strong><br/>
-                <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>Focus purely on hitting the target. Do not rush your clicks. Aim for a minimum of <strong>90% accuracy</strong>. If you miss, slow down. This builds the initial neural pathways.</span>
+                <span style={{ color: '#2D3436', fontSize: '0.9rem' }}>Focus purely on hitting the target. Do not rush your clicks. Aim for a minimum of <strong>90% accuracy</strong>. If you miss, slow down. This builds the initial neural pathways.</span>
               </li>
               <li style={{ marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <strong style={{ color: '#00ff88' }}>Days 3 & 4: Micro-Corrections</strong><br/>
-                <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>Flick to the target quickly, but pause for a split-second to verify your crosshair is centered before clicking. Try to maintain <strong>85% accuracy</strong> while increasing initial flick speed.</span>
+                <span style={{ color: '#2D3436', fontSize: '0.9rem' }}>Flick to the target quickly, but pause for a split-second to verify your crosshair is centered before clicking. Try to maintain <strong>85% accuracy</strong> while increasing initial flick speed.</span>
               </li>
               <li style={{ marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <strong style={{ color: '#bf5af2' }}>Days 5 & 6: Pushing the Pace</strong><br/>
-                <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>Start trusting your muscle memory. Shoot the moment you feel the crosshair is on target. Your accuracy may drop to <strong>75-80%</strong>, but your targets-per-minute (Score) should increase significantly.</span>
+                <span style={{ color: '#2D3436', fontSize: '0.9rem' }}>Start trusting your muscle memory. Shoot the moment you feel the crosshair is on target. Your accuracy may drop to <strong>75-80%</strong>, but your targets-per-minute (Score) should increase significantly.</span>
               </li>
               <li>
                 <strong style={{ color: '#ffd60a' }}>Day 7: The Benchmark Test</strong><br/>
-                <span style={{ color: '#9ca3af', fontSize: '0.9rem' }}>Treat today as a ranked match. Do a 3-minute warm-up, then do 3 serious runs. Record your highest Score and Accuracy. This is your new baseline for the following week!</span>
+                <span style={{ color: '#2D3436', fontSize: '0.9rem' }}>Treat today as a ranked match. Do a 3-minute warm-up, then do 3 serious runs. Record your highest Score and Accuracy. This is your new baseline for the following week!</span>
               </li>
             </ul>
           </div>
         </section>
 
         <section id="game-specific" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Game-Specific Aim Training</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Game-Specific Aim Training</h2>
           <p style={{ marginBottom: '1rem' }}>Different first-person shooters demand entirely different subsets of aiming mechanics. Tailoring your training to the game you play is critical for competitive success.</p>
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
@@ -1267,8 +1267,8 @@ export default function SniperModePage() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff4655"><path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5z"/></svg>
                 Tactical Shooters (Valorant, CS2)
               </h3>
-              <p style={{ color: '#cbd5e1', fontSize: '0.95rem', marginBottom: '1rem' }}>Tactical FPS games have extremely low Time-To-Kill (TTK). A single headshot ends the fight. Therefore, training should prioritize:</p>
-              <ul style={{ paddingLeft: '1.2rem', color: '#9ca3af', fontSize: '0.9rem' }}>
+              <p style={{ color: '#2D3436', fontSize: '0.95rem', marginBottom: '1rem' }}>Tactical FPS games have extremely low Time-To-Kill (TTK). A single headshot ends the fight. Therefore, training should prioritize:</p>
+              <ul style={{ paddingLeft: '1.2rem', color: '#2D3436', fontSize: '0.9rem' }}>
                 <li style={{ marginBottom: '0.5rem' }}><strong>Crosshair Placement:</strong> Pre-aiming corners at head height.</li>
                 <li style={{ marginBottom: '0.5rem' }}><strong>Micro-Flicks:</strong> Tiny, fast adjustments from a good crosshair position directly to the target's head.</li>
                 <li style={{ marginBottom: '0.5rem' }}><strong>Click Timing:</strong> Firing at the exact moment you counter-strafe to an absolute stop.</li>
@@ -1280,8 +1280,8 @@ export default function SniperModePage() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#00ff88"><circle cx="12" cy="12" r="10" fill="none" stroke="#00ff88" strokeWidth="2"/><path d="M12 6v6l4 2" stroke="#00ff88" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 Tracking Shooters (Apex, Overwatch)
               </h3>
-              <p style={{ color: '#cbd5e1', fontSize: '0.95rem', marginBottom: '1rem' }}>These games feature high TTK, fast player movement, and verticality. You cannot rely on a single flick shot. Training must focus on:</p>
-              <ul style={{ paddingLeft: '1.2rem', color: '#9ca3af', fontSize: '0.9rem' }}>
+              <p style={{ color: '#2D3436', fontSize: '0.95rem', marginBottom: '1rem' }}>These games feature high TTK, fast player movement, and verticality. You cannot rely on a single flick shot. Training must focus on:</p>
+              <ul style={{ paddingLeft: '1.2rem', color: '#2D3436', fontSize: '0.9rem' }}>
                 <li style={{ marginBottom: '0.5rem' }}><strong>Smooth Tracking:</strong> Keeping the crosshair glued to a target that is strafing unpredictably.</li>
                 <li style={{ marginBottom: '0.5rem' }}><strong>Reactivity:</strong> How quickly you can change the direction of your mouse when the enemy changes strafe direction.</li>
                 <li style={{ marginBottom: '0.5rem' }}><strong>Target Switching:</strong> Rapidly transitioning fire from one low-HP target to another during team fights.</li>
@@ -1291,25 +1291,25 @@ export default function SniperModePage() {
         </section>
 
         <section id="aim-mechanics" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Core Aim Mechanics Explained</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Core Aim Mechanics Explained</h2>
           <p style={{ marginBottom: '1rem' }}>Aiming is a cluster of distinct sub-skills. Identifying your weakest link can help you structure a more effective training routine.</p>
           
           <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '1.5rem', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <h3 style={{ color: '#fff', marginTop: 0, marginBottom: '1rem' }}>Visualizing Aim Mechanics</h3>
+            <h3 style={{ color: '#000000', marginTop: 0, marginBottom: '1rem' }}>Visualizing Aim Mechanics</h3>
             <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '1rem' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: '2px dashed #4fc3f7', margin: '0 auto 0.5rem', position: 'relative' }}>
                   <div style={{ position: 'absolute', top: '50%', left: '50%', width: '10px', height: '10px', background: '#ff4444', borderRadius: '50%', transform: 'translate(-50%, -50%)' }}></div>
                   <svg width="80" height="80" style={{ position: 'absolute', top: 0, left: 0 }}><path d="M 40,40 L 70,20" stroke="#4fc3f7" strokeWidth="2" markerEnd="url(#arrowhead)"/></svg>
                 </div>
-                <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>Flicking</span>
+                <span style={{ fontSize: '0.85rem', color: '#2D3436' }}>Flicking</span>
               </div>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.1)', margin: '0 auto 0.5rem', position: 'relative', overflow: 'hidden' }}>
                    <div style={{ position: 'absolute', top: '50%', left: '20%', width: '14px', height: '14px', background: '#00ff88', borderRadius: '50%', transform: 'translate(-50%, -50%)' }}></div>
                    <svg width="80" height="80" style={{ position: 'absolute', top: 0, left: 0 }}><path d="M 16,40 Q 40,10 64,40" stroke="#00ff88" strokeWidth="2" fill="none"/></svg>
                 </div>
-                <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>Tracking</span>
+                <span style={{ fontSize: '0.85rem', color: '#2D3436' }}>Tracking</span>
               </div>
             </div>
           </div>
@@ -1322,71 +1322,71 @@ export default function SniperModePage() {
         </section>
 
         <section id="ergonomics-grips" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Mouse Grips & Ergonomics</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Mouse Grips & Ergonomics</h2>
           <p style={{ marginBottom: '1rem' }}>The way you interact physically with your mouse drastically impacts your aiming potential and long-term health. The Esports medical community frequently warns about Repetitive Strain Injuries (RSI) stemming from poor ergonomics.</p>
           
-          <h3 style={{ fontSize: '1.4rem', color: '#fff', marginBottom: '1rem' }}>The 3 Primary Mouse Grips</h3>
+          <h3 style={{ fontSize: '1.4rem', color: '#000000', marginBottom: '1rem' }}>The 3 Primary Mouse Grips</h3>
           <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Palm Grip:</strong> The entire hand rests on the mouse. Offers high stability and smooth tracking control, but limits vertical range of motion. Great for low sensitivity players.</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Claw Grip:</strong> The base of the palm rests on the mouse, with fingers arched like a claw. Provides a hybrid of stability and quick micro-adjustment capabilities. The most popular grip among tactical shooter pros.</li>
-            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#fff' }}>Fingertip Grip:</strong> Only the fingertips touch the mouse. Offers maximum speed and vertical agility, but requires excellent fine motor control and can be fatiguing. Best for tracking-heavy games.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Palm Grip:</strong> The entire hand rests on the mouse. Offers high stability and smooth tracking control, but limits vertical range of motion. Great for low sensitivity players.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Claw Grip:</strong> The base of the palm rests on the mouse, with fingers arched like a claw. Provides a hybrid of stability and quick micro-adjustment capabilities. The most popular grip among tactical shooter pros.</li>
+            <li style={{ marginBottom: '0.75rem' }}><strong style={{ color: '#000000' }}>Fingertip Grip:</strong> Only the fingertips touch the mouse. Offers maximum speed and vertical agility, but requires excellent fine motor control and can be fatiguing. Best for tracking-heavy games.</li>
           </ul>
 
           <div style={{ background: 'rgba(255,200,0,0.1)', borderLeft: '4px solid #ffcc00', padding: '1rem 1.5rem', borderRadius: '0 8px 8px 0' }}>
             <h4 style={{ color: '#ffcc00', marginTop: 0, marginBottom: '0.5rem', fontSize: '1.1rem' }}>Ergonomic Warning: Beware the "Death Grip"</h4>
-            <p style={{ color: '#cbd5e1', fontSize: '0.9rem', margin: 0 }}>
+            <p style={{ color: '#2D3436', fontSize: '0.9rem', margin: 0 }}>
               Squeezing your mouse too tightly (the "death grip") creates immense tension in your forearm flexors, leading to "aim shake" (micro-tremors) and significantly increasing the risk of carpal tunnel syndrome. Consciously practice a relaxed grip during aim training sessions.
             </p>
           </div>
         </section>
 
         <section id="comparison" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>FixedAim vs. Desktop Trainers</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>FixedAim vs. Desktop Trainers</h2>
           <p style={{ marginBottom: '1rem' }}>How does our browser aim trainer stack up against heavy desktop clients like Aim Lab or KovaaK's?</p>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', marginBottom: '1rem' }}>
               <thead>
                 <tr style={{ background: 'rgba(79,195,247,0.1)', borderBottom: '1px solid rgba(79,195,247,0.3)' }}>
-                  <th style={{ padding: '0.75rem', textAlign: 'left', color: '#fff' }}>Feature</th>
+                  <th style={{ padding: '0.75rem', textAlign: 'left', color: '#000000' }}>Feature</th>
                   <th style={{ padding: '0.75rem', textAlign: 'left', color: '#4fc3f7' }}>FixedAim</th>
-                  <th style={{ padding: '0.75rem', textAlign: 'left', color: '#9ca3af' }}>Desktop Trainers</th>
+                  <th style={{ padding: '0.75rem', textAlign: 'left', color: '#2D3436' }}>Desktop Trainers</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Installation Required</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Installation Required</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88', fontWeight: 'bold' }}>No (Browser-based)</td>
                   <td style={{ padding: '0.75rem', color: '#ff4444' }}>Yes (10GB+ Downloads)</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Account & Login</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Account & Login</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88', fontWeight: 'bold' }}>Not Required</td>
                   <td style={{ padding: '0.75rem', color: '#ff4444' }}>Required</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Engine Technology</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Engine Technology</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88', fontWeight: 'bold' }}>WebGL (Instant Load)</td>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Unity / Unreal Engine</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Unity / Unreal Engine</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Custom Drills</td>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1', fontWeight: 'bold' }}>Core fundamentals</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Custom Drills</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436', fontWeight: 'bold' }}>Core fundamentals</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88' }}>Extensive Sandbox</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Updates & Patches</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Updates & Patches</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88', fontWeight: 'bold' }}>Seamless (Always updated)</td>
                   <td style={{ padding: '0.75rem', color: '#ff4444' }}>Manual client updates</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Performance Impact</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Performance Impact</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88', fontWeight: 'bold' }}>Ultra Lightweight</td>
                   <td style={{ padding: '0.75rem', color: '#ff4444' }}>Heavy CPU/GPU usage</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Price</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Price</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88', fontWeight: 'bold' }}>100% Free</td>
-                  <td style={{ padding: '0.75rem', color: '#cbd5e1' }}>Free or Paid</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Free or Paid</td>
                 </tr>
               </tbody>
             </table>
@@ -1394,7 +1394,7 @@ export default function SniperModePage() {
         </section>
 
         <section id="hardware" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Hardware & Settings Checklist</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Hardware & Settings Checklist</h2>
           <p style={{ marginBottom: '1rem' }}>Your hardware settings determine the physical mapping between hand movement and crosshair movement. For the best training results, optimize the following:</p>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
@@ -1407,24 +1407,24 @@ export default function SniperModePage() {
               </thead>
               <tbody>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '0.75rem', color: '#fff', fontWeight: 600 }}>Mouse DPI</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>400 - 1600 DPI</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>Lower DPI is standard for precision. Higher DPI reduces input delay marginally but requires very low in-game sensitivity.</td>
+                  <td style={{ padding: '0.75rem', color: '#000000', fontWeight: 600 }}>Mouse DPI</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>400 - 1600 DPI</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Lower DPI is standard for precision. Higher DPI reduces input delay marginally but requires very low in-game sensitivity.</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.02)' }}>
-                  <td style={{ padding: '0.75rem', color: '#fff', fontWeight: 600 }}>Raw Input</td>
+                  <td style={{ padding: '0.75rem', color: '#000000', fontWeight: 600 }}>Raw Input</td>
                   <td style={{ padding: '0.75rem', color: '#00ff88' }}>ON</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>Bypasses Windows mouse acceleration, ensuring 1:1 consistent mapping of physical to virtual movement.</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Bypasses Windows mouse acceleration, ensuring 1:1 consistent mapping of physical to virtual movement.</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <td style={{ padding: '0.75rem', color: '#fff', fontWeight: 600 }}>Monitor Refresh Rate</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>144Hz+ Minimum</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>Provides more recent visual information, drastically improving tracking of fast-moving targets.</td>
+                  <td style={{ padding: '0.75rem', color: '#000000', fontWeight: 600 }}>Monitor Refresh Rate</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>144Hz+ Minimum</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Provides more recent visual information, drastically improving tracking of fast-moving targets.</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.02)' }}>
-                  <td style={{ padding: '0.75rem', color: '#fff', fontWeight: 600 }}>Mouse Weight</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>&lt; 70 grams</td>
-                  <td style={{ padding: '0.75rem', color: '#9ca3af' }}>Lighter mice have less inertia, making flicking and sudden stops significantly more precise.</td>
+                  <td style={{ padding: '0.75rem', color: '#000000', fontWeight: 600 }}>Mouse Weight</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>&lt; 70 grams</td>
+                  <td style={{ padding: '0.75rem', color: '#2D3436' }}>Lighter mice have less inertia, making flicking and sudden stops significantly more precise.</td>
                 </tr>
               </tbody>
             </table>
@@ -1432,7 +1432,7 @@ export default function SniperModePage() {
         </section>
 
         <section id="faq" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#fff', marginBottom: '1.5rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Frequently Asked Questions</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1.5rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Frequently Asked Questions</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {[
               { q: 'What is eDPI and why does it matter?', a: 'eDPI (effective Dots Per Inch) is calculated by multiplying your mouse DPI by your in-game sensitivity. It acts as a universal metric allowing you to compare true sensitivities across different games and settings.' },
@@ -1449,11 +1449,11 @@ export default function SniperModePage() {
               { q: 'Is higher FOV better for aiming?', a: 'Higher FOV makes targets appear smaller and slower, while lower FOV makes them appear larger but faster. Your aim trainer FOV should exactly match your primary game for accurate muscle memory transfer.' },
               { q: 'Do heavier mice make aiming harder?', a: 'Heavier mice have more inertia, making them harder to start and stop quickly. The competitive standard has largely shifted to lightweight mice (under 70g) for optimal control.' }
             ].map(({ q, a }, i) => (
-              <details key={i} style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.07)', padding: '1rem' }}>
-                <summary style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', cursor: 'pointer' }}>
+              <details key={i} style={{ background: '#FFFFFF', border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', padding: '1rem', marginBottom: '8px' }}>
+                <summary style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', cursor: 'pointer', textTransform: 'uppercase' }}>
                   {q}
                 </summary>
-                <p style={{ marginTop: '0.75rem', color: '#cbd5e1', lineHeight: '1.6', marginBottom: 0 }}>{a}</p>
+                <p style={{ marginTop: '0.75rem', color: '#2D3436', lineHeight: '1.6', marginBottom: 0, fontWeight: 500, fontSize: '0.96rem' }}>{a}</p>
               </details>
             ))}
           </div>

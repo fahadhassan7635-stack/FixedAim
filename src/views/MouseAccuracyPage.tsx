@@ -535,10 +535,11 @@ const MouseFaqSection = memo(function MouseFaqSection() {
   return (
     <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
       <h2 style={{
-        fontWeight: 800, fontSize: '1.75rem', color: '#fff',
+        fontWeight: 900, fontSize: '1.75rem', color: '#000000',
         marginTop: 0, marginBottom: '1.5rem',
-        borderBottom: '1px solid #1f2937', paddingBottom: '1rem',
+        borderBottom: '3px solid #000000', paddingBottom: '0.75rem',
         display: 'flex', alignItems: 'center', gap: '10px',
+        textTransform: 'uppercase', fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
       }}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
           strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--neon-cyan, #00f5ff)', flexShrink: 0 }}
@@ -603,9 +604,9 @@ const MouseFaqSection = memo(function MouseFaqSection() {
                   id={`ma-faq-answer-${i}`}
                   role="region"
                   aria-labelledby={`ma-faq-question-${i}`}
-                  style={{ padding: '0 18px 16px', backgroundColor: 'rgba(0,245,255,0.03)' }}
+                  style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}
                 >
-                  <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: '1.7', margin: 0 }}>
+                  <p style={{ color: '#2D3436', fontSize: '0.95rem', lineHeight: '1.7', margin: 0 }}>
                     {faq.a}
                   </p>
                 </div>

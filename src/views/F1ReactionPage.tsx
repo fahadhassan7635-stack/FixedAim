@@ -2021,7 +2021,7 @@ export default function F1ReactionTimePage() {
             {FAQ_ITEMS.map((faq, index) => (
               <div
                 key={index}
-                style={{ backgroundColor: THEME.cardBg, border: `1px solid ${THEME.border}`, borderRadius: '8px', overflow: 'hidden' }}
+                style={{ backgroundColor: '#FFFFFF', border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', overflow: 'hidden', marginBottom: '8px' }}
               >
                 <button
                   onClick={() => toggleFaq(index)}
@@ -2031,9 +2031,9 @@ export default function F1ReactionTimePage() {
                   style={{
                     width: '100%',
                     padding: 'clamp(12px,3vw,14px) clamp(14px,4vw,20px)',
-                    backgroundColor: 'transparent', border: 'none',
-                    color: '#fff', textAlign: 'left',
-                    fontWeight: 600, fontSize: 'clamp(0.88rem,2vw,1rem)',
+                    backgroundColor: openFaq === index ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: openFaq === index ? '3px solid #000000' : 'none',
+                    color: '#000000', textAlign: 'left',
+                    fontWeight: 900, fontSize: 'clamp(0.9rem,2vw,1rem)', textTransform: 'uppercase',
                     cursor: 'pointer',
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     gap: '12px', minHeight: `${MIN_BUTTON_SIZE}px`, lineHeight: 1.4,
@@ -2060,10 +2060,10 @@ export default function F1ReactionTimePage() {
                     aria-labelledby={`faq-question-${index}`}
                     style={{
                       padding: `10px clamp(14px,4vw,20px) clamp(12px,3vw,14px)`,
-                      color: '#94a3b8',
-                      fontSize: 'clamp(0.85rem,2vw,0.92rem)',
-                      borderTop: `1px solid ${THEME.border}`,
-                      lineHeight: 1.65,
+                      color: '#2D3436',
+                      fontSize: '0.96rem',
+                      backgroundColor: '#FFFFFF',
+                      lineHeight: 1.7, fontWeight: 500,
                     }}
                   >
                     {faq.a}

@@ -1072,7 +1072,7 @@ export default function SpaceDefensePage() {
                 <button onClick={toggleSound} aria-label={isMuted ? 'Unmute sounds' : 'Mute sounds'} style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '7px', color: isMuted ? 'rgba(255,255,255,0.4)' : '#9ca3af', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
                   {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
                 </button>
-                <button onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '7px', color: '#9ca3af', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                <button onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '7px', color: '#2D3436', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
                   {isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
                 </button>
               </div>
@@ -1117,7 +1117,7 @@ export default function SpaceDefensePage() {
                 </div>
 
                 <div style={{ marginBottom: '1.2rem', color: '#6b7280', fontSize: '0.8rem' }}>
-                  <strong style={{ color: '#9ca3af' }}>WASD</strong> move · <strong style={{ color: '#9ca3af' }}>F / Space</strong> shoot
+                  <strong style={{ color: '#2D3436' }}>WASD</strong> move · <strong style={{ color: '#2D3436' }}>F / Space</strong> shoot
                 </div>
 
                 {highScore.score > 0 && (
@@ -1240,7 +1240,7 @@ export default function SpaceDefensePage() {
               </div>
               <span style={{
                 fontSize: '0.75rem', fontWeight: 700,
-                color: 'var(--text-secondary)', textAlign: 'center', lineHeight: 1.3,
+                color: '#2D3436', textAlign: 'center', lineHeight: 1.3,
               }}>{label}</span>
               </a>
             ))}
@@ -1253,7 +1253,7 @@ export default function SpaceDefensePage() {
       <hr style={{ borderColor: 'var(--border)', margin: '5rem 0 4rem' }} />
 
       <div style={{ border: '1px solid var(--border)', borderRadius: '16px', padding: '3rem 2.5rem' }}>
-        <article style={{ maxWidth: '900px', margin: '0 auto', color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1rem' }}>
+        <article style={{ maxWidth: '900px', margin: '0 auto', color: '#2D3436', lineHeight: '1.8', fontSize: '1rem' }}>
 
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
@@ -1289,7 +1289,7 @@ export default function SpaceDefensePage() {
             ].map(({ title, desc }) => (
               <div key={title} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
                 <div style={{ fontWeight: 700, color: 'var(--neon-cyan)', fontSize: '0.95rem', marginBottom: '0.4rem' }}>{title}</div>
-                <div style={{ fontSize: '0.85rem', color: '#9ca3af', lineHeight: 1.6 }}>{desc}</div>
+                <div style={{ fontSize: '0.85rem', color: '#2D3436', lineHeight: 1.6 }}>{desc}</div>
               </div>
             ))}
           </div>
@@ -1301,7 +1301,7 @@ export default function SpaceDefensePage() {
           <p style={{ marginBottom: '1rem' }}>
             The game runs on an optimized HTML5 Canvas physics engine with instantaneous input response. Here is the core combat loop:
           </p>
-          <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', color: '#9ca3af' }}>
+          <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', color: '#2D3436' }}>
             <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Dual Input Navigation:</strong> Maneuver your ship along the horizontal defense plane using <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>A / D</kbd>, <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>Left / Right Arrow</kbd>, or tap controls on mobile.</li>
             <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Flexible Firing Mechanics:</strong> Fire plasma bolts using <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>Left Mouse Click</kbd>, <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>Spacebar</kbd>, or the <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>F</kbd> key. Faster clicking produces immediate cyclic rate advantages.</li>
             <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Wave Scaling &amp; Boss Raids:</strong> Meteors speed up and cluster closer together each wave. Level 5, 10, 15, and beyond feature armored Bosses that demand concentrated 10+ CPS firing.</li>
@@ -1318,25 +1318,25 @@ export default function SpaceDefensePage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1.5rem 0 2rem' }}>
             <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
               <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>🎯 Precision Flick Aiming</h3>
-              <p style={{ fontSize: '0.85rem', color: '#9ca3af', margin: 0, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
                 Meteors spawn at unpredictable angles across the screen. Lining up shots trains target acquisition and micro-flick muscle memory similar to tactical shooters.
               </p>
             </div>
             <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
               <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>⚡ High-CPS Burst Discipline</h3>
-              <p style={{ fontSize: '0.85rem', color: '#9ca3af', margin: 0, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
                 Overwhelming meteor swarms and tough bosses require rapid 8–12+ CPS bursts without tensing your forearm to the point of losing steering control.
               </p>
             </div>
             <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
               <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>🕹️ Multitask Coordination</h3>
-              <p style={{ fontSize: '0.85rem', color: '#9ca3af', margin: 0, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
                 Simultaneously strafing with keyboard keys while hammering mouse clicks simulates the cognitive workload of high-stakes battle royales and Minecraft PvP.
               </p>
             </div>
             <div style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
               <h3 style={{ color: '#c084fc', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>🧠 Real-Time Biofeedback</h3>
-              <p style={{ fontSize: '0.85rem', color: '#9ca3af', margin: 0, lineHeight: 1.6 }}>
+              <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
                 Immediate audio cues and visual particle explosions validate every confirmed hit, training your nervous system to sustain steady rhythmic tempo.
               </p>
             </div>
@@ -1364,9 +1364,9 @@ export default function SpaceDefensePage() {
                   <tr key={diff} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                     <td style={{ padding: '0.7rem 1rem', fontWeight: 700, color: diff === 'Easy' ? '#22c55e' : diff === 'Normal' ? '#00f5ff' : '#ef4444' }}>{diff}</td>
                     <td style={{ padding: '0.7rem 1rem', color: '#fff', fontWeight: 600 }}>{mult}</td>
-                    <td style={{ padding: '0.7rem 1rem', color: '#9ca3af' }}>{spd}</td>
-                    <td style={{ padding: '0.7rem 1rem', color: '#9ca3af' }}>{dens}</td>
-                    <td style={{ padding: '0.7rem 1rem', color: '#9ca3af' }}>{best}</td>
+                    <td style={{ padding: '0.7rem 1rem', color: '#2D3436' }}>{spd}</td>
+                    <td style={{ padding: '0.7rem 1rem', color: '#2D3436' }}>{dens}</td>
+                    <td style={{ padding: '0.7rem 1rem', color: '#2D3436' }}>{best}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1414,19 +1414,19 @@ const FaqAccordion = ({ items }: { items: { q: string; a: string }[] }) => {
           <div
             key={i}
             role="listitem"
-            style={{ border: '1px solid', borderColor: isOpen ? 'rgba(0,245,255,0.4)' : 'rgba(255,255,255,0.08)', borderRadius: '10px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+            style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', background: '#FFFFFF', overflow: 'hidden', marginBottom: '8px' }}
           >
             <button
               aria-expanded={isOpen}
               onClick={() => setOpenIndex(isOpen ? null : i)}
-              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', background: isOpen ? 'rgba(0,245,255,0.05)' : 'rgba(255,255,255,0.02)', border: 'none', cursor: 'pointer', color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.95rem', textAlign: 'left', gap: '12px' }}
+              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', background: isOpen ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: isOpen ? '3px solid #000000' : 'none', cursor: 'pointer', color: '#000000', fontWeight: 900, fontSize: '1rem', textTransform: 'uppercase', textAlign: 'left', gap: '12px' }}
             >
               <span>{item.q}</span>
               {isOpen ? <ChevronUp size={16} color="var(--neon-cyan)" /> : <ChevronDown size={16} color="#6b7280" />}
             </button>
             {isOpen && (
-              <div style={{ padding: '0 18px 16px', backgroundColor: 'rgba(0,245,255,0.03)' }}>
-                <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: '1.7', fontSize: '0.95rem' }}>{item.a}</p>
+              <div style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}>
+                <p style={{ color: '#2D3436', margin: 0, lineHeight: '1.7', fontSize: '0.95rem' }}>{item.a}</p>
               </div>
             )}
           </div>

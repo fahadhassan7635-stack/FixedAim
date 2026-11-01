@@ -50,12 +50,12 @@ const h3Style: CSSProperties = {
 };
 const pStyle: CSSProperties = {
   marginBottom: '1.25rem',
-  color: '#9ca3af',
+  color: '#2D3436',
 };
 const ulStyle: CSSProperties = {
   marginBottom: '1.5rem',
   paddingLeft: '1.5rem',
-  color: '#9ca3af',
+  color: '#2D3436',
   lineHeight: '1.9',
 };
 const codeStyle: CSSProperties = {
@@ -314,7 +314,7 @@ const Breadcrumb = memo(() => (
       ].map((item, i, arr) => (
         <li key={item.href} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
           {item.current ? (
-            <span aria-current="page" style={{ color: 'var(--neon-cyan,#00f5ff)' }}>
+            <span aria-current="page" style={{ color: '#000000' }}>
               {item.label}
             </span>
           ) : (
@@ -368,7 +368,7 @@ const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => (
         borderBottom: '1px solid var(--border,#2a3047)',
         fontWeight: '700',
         fontSize: '0.9rem',
-        color: 'var(--neon-cyan,#00f5ff)',
+        color: '#000000',
         margin: '0',
       }}
     >
@@ -392,8 +392,8 @@ const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => (
             }}
           >
             <span style={{ color: 'var(--text-muted,#8395a7)' }}>#{history.length - i}</span>
-            <span style={{ color: 'var(--neon-cyan,#00f5ff)', fontWeight: '700' }}>{h.cps} CPS</span>
-            <span style={{ color: 'var(--text-secondary,#cbd5e1)' }}>{h.clicks} clicks</span>
+            <span style={{ color: '#000000', fontWeight: '700' }}>{h.cps} CPS</span>
+            <span style={{ color: '#2D3436' }}>{h.clicks} clicks</span>
             <span style={{ color: 'var(--text-muted,#8395a7)' }}>{h.duration}s test</span>
             <span style={{ color: rating.color, fontWeight: '600' }}>{rating.label}</span>
           </div>
@@ -416,19 +416,21 @@ const FaqSection = memo(() => {
     <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2rem' }}>
       <h2
         style={{
-          fontWeight: '800',
+          fontWeight: 900,
           fontSize: '1.75rem',
-          color: '#fff',
+          color: '#000000',
           marginTop: 0,
           marginBottom: '1.5rem',
-          borderBottom: '1px solid #1f2937',
-          paddingBottom: '1rem',
+          borderBottom: '3px solid #000000',
+          paddingBottom: '0.75rem',
           display: 'flex',
           alignItems: 'center',
-          gap: '10px'
+          gap: '10px',
+          textTransform: 'uppercase',
+          fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif"
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
         Frequently Asked Questions
       </h2>
       <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -438,7 +440,7 @@ const FaqSection = memo(() => {
             <div
               key={i}
               role="listitem"
-              style={{ border: '1px solid', borderColor: isOpen ? 'rgba(0,240,255,0.4)' : '#1f2937', borderRadius: '10px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+              style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', background: '#FFFFFF', overflow: 'hidden', marginBottom: '8px' }}
             >
               <button
                 aria-expanded={isOpen}
@@ -448,24 +450,26 @@ const FaqSection = memo(() => {
                 style={{
                   width: '100%',
                   textAlign: 'left',
-                  background: isOpen ? 'rgba(0,240,255,0.05)' : '#0b111e',
+                  background: isOpen ? '#FFF6D6' : '#FFFFFF',
                   border: 'none',
-                  padding: '14px 18px',
+                  borderBottom: isOpen ? '3px solid #000000' : 'none',
+                  padding: '16px 20px',
                   cursor: 'pointer',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   gap: '12px',
-                  color: '#fff',
-                  fontWeight: 700,
-                  fontSize: '0.95rem'
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '1rem',
+                  textTransform: 'uppercase'
                 }}
               >
                 <span>{faq.q}</span>
                 {isOpen ? (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="18 15 12 9 6 15"></polyline></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="18 15 12 9 6 15"></polyline></svg>
                 ) : (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="6 9 12 15 18 9"></polyline></svg>
                 )}
               </button>
               {isOpen && (
@@ -473,14 +477,15 @@ const FaqSection = memo(() => {
                   id={`faq-answer-${i}`}
                   role="region"
                   aria-labelledby={`faq-question-${i}`}
-                  style={{ padding: '0 18px 16px', backgroundColor: 'rgba(0,240,255,0.03)' }}
+                  style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}
                 >
                   <p
                     style={{
-                      color: '#9ca3af',
-                      fontSize: '0.95rem',
+                      color: '#2D3436',
+                      fontSize: '0.96rem',
                       lineHeight: '1.7',
                       margin: 0,
+                      fontWeight: 500,
                     }}
                   >
                     {faq.a}
@@ -496,9 +501,10 @@ const FaqSection = memo(() => {
           <button
             onClick={() => setShowAll(true)}
             style={{
-              background: 'rgba(0,245,255,0.08)',
-              border: '1px solid rgba(0,245,255,0.25)',
-              color: 'var(--neon-cyan, #00f5ff)',
+              background: '#FFE033',
+              border: '3px solid #000000',
+              boxShadow: '4px 4px 0 0 #000000',
+              color: '#000000',
               padding: '0.6rem 1.8rem',
               borderRadius: '8px',
               cursor: 'pointer',
@@ -522,9 +528,9 @@ FaqSection.displayName = 'FaqSection';
 const SeoArticle = memo(() => (
   <>
     <hr style={{ border: 0, borderTop: '1px solid var(--border)', margin: '3rem 0' }} />
-    <article className="cps-article" style={{ color: 'var(--text-secondary,#cbd5e1)', fontSize: '0.95rem', lineHeight: '1.8' }}>
+    <article className="cps-article" style={{ color: '#2D3436', fontSize: '0.95rem', lineHeight: '1.8' }}>
 
-      <h2 style={{ fontWeight: '800', fontSize: '1.75rem', marginBottom: '1rem', color: 'var(--neon-cyan,#00f5ff)', marginTop: '0' }}>
+      <h2 style={{ fontWeight: '800', fontSize: '1.75rem', marginBottom: '1rem', color: '#000000', marginTop: '0' }}>
         CPS Test — Click Speed Testing Guide
       </h2>
       <p style={pStyle}>
@@ -545,7 +551,7 @@ const SeoArticle = memo(() => (
         ].map(t => (
           <div key={t.range} style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '8px', padding: '0.7rem', border: `1px solid ${t.color}40`, textAlign: 'center' }}>
             <div style={{ fontWeight: '800', color: t.color }}>{t.range} CPS</div>
-            <div style={{ fontSize: '0.78rem', color: '#9ca3af', marginTop: '2px' }}>{t.label}</div>
+            <div style={{ fontSize: '0.78rem', color: '#2D3436', marginTop: '2px' }}>{t.label}</div>
           </div>
         ))}
       </div>
@@ -624,19 +630,19 @@ const SeoArticle = memo(() => (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1rem 0 1.5rem' }}>
         <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
           <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⚔️ Combat &amp; Knockback Reduction</h3>
-          <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
             In Minecraft 1.8 PvP, higher left-click CPS registers more attacks, reduces incoming knockback, and allows you to combo-lock opponents before they can retaliate.
           </p>
         </div>
         <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
           <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🔫 Semi-Auto &amp; Single-Tap Fire</h3>
-          <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
             In shooters like CS2, Valorant, and PUBG, rapid left click actuation allows semi-automatic rifles, DMRs, and pistols to reach their maximum cyclic fire caps without delay.
           </p>
         </div>
         <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
           <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🖱️ Universal Technique Compatibility</h3>
-          <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
             Left click is the natural home for all core techniques—Normal Clicking (6–9 CPS), Jitter Clicking (10–14 CPS), and Butterfly Clicking (15–25+ CPS).
           </p>
         </div>
@@ -691,19 +697,19 @@ const SeoArticle = memo(() => (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1rem 0 1.5rem' }}>
         <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
           <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🧱 Minecraft Bridging &amp; Defense</h3>
-          <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
             Placing blocks while speed-bridging, god-bridging, or clutching over the void relies entirely on right-click output. Reaching 12–20+ Right CPS ensures uninterrupted block placement directly under your player model.
           </p>
         </div>
         <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
           <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🎯 Tactical FPS Scoping &amp; ADS</h3>
-          <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
             In CS2, Valorant, Apex Legends, and Call of Duty, right click governs Aim Down Sights (ADS), secondary fire modes (like the Valorant Classic right-click burst), sniper zoom adjustments, and weapon attachments.
           </p>
         </div>
         <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
           <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⚔️ MOBA Navigation &amp; Kiting</h3>
-          <p style={{ fontSize: '0.88rem', color: '#9ca3af', margin: 0, lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
             In League of Legends and Dota 2, virtually every movement order, micro-pathfinding tap, and stutter-stepping (orb-walking) command is executed via right click. Higher right-click APM directly improves positioning precision.
           </p>
         </div>
@@ -734,7 +740,7 @@ const SeoArticle = memo(() => (
       </p>
       <div style={{ background: 'rgba(255,56,56,0.06)', borderLeft: '4px solid #ff3838', padding: '0.9rem 1.25rem', borderRadius: '0 8px 8px 0', margin: '1rem 0 1.5rem' }}>
         <strong style={{ color: '#ff3838', display: 'block', marginBottom: '0.3rem' }}>⚠️ Server Anti-Cheat &amp; Click Caps:</strong>
-        <p style={{ margin: 0, fontSize: '0.88rem', color: '#cbd5e1', lineHeight: '1.6' }}>
+        <p style={{ margin: 0, fontSize: '0.88rem', color: '#2D3436', lineHeight: '1.6' }}>
           Because butterfly clicking with double clicks closely mimics automated click macros, strict competitive servers (Hypixel, Minemen Club, Badlion)
           enforce hit registration caps (often 15–20 CPS) or utilize anti-cheat monitors (Watchdog/Karhu). Always check your server's rules regarding debounce modification.
         </p>
@@ -889,7 +895,7 @@ const SeoArticle = memo(() => (
 
       <div style={{ margin: '2.5rem 0 0', background: 'linear-gradient(135deg, rgba(0,245,255,0.06) 0%, rgba(0,255,136,0.06) 100%)', border: '1px solid rgba(0,245,255,0.2)', borderRadius: '16px', padding: '1.75rem', textAlign: 'center' }}>
         <h2 style={{ color: '#fff', fontWeight: '900', fontSize: '1.4rem', margin: '0 0 0.4rem' }}>Ready to Improve Your CPS?</h2>
-        <p style={{ color: '#9ca3af', margin: '0 0 1.1rem', fontSize: '0.9rem' }}>Free 5-second test — no account, no download, instant results.</p>
+        <p style={{ color: '#2D3436', margin: '0 0 1.1rem', fontSize: '0.9rem' }}>Free 5-second test — no account, no download, instant results.</p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           style={{ background: 'var(--neon-green, #00ff88)', color: '#000', border: 'none', borderRadius: '10px', padding: '0.65rem 1.75rem', fontWeight: '800', fontSize: '0.95rem', cursor: 'pointer' }}
@@ -1038,11 +1044,11 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
 
         {/* Legend */}
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', color: '#9ca3af' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', color: '#2D3436' }}>
             <span style={{ display: 'inline-block', width: '20px', height: '3px', background: lineColor, borderRadius: '2px' }} />
             Real-time CPS
           </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', color: '#9ca3af' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', color: '#2D3436' }}>
             <span style={{ display: 'inline-block', width: '20px', height: '2px', background: avgColor, borderRadius: '2px', opacity: 0.8 }} />
             Average CPS
           </span>
@@ -1172,11 +1178,11 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
             <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#fff', marginBottom: '6px', fontVariantNumeric: 'tabular-nums' }}>
               {tooltip.t}s
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#e2e8f0', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#2D3436', marginBottom: '4px' }}>
               <span style={{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '3px', background: lineColor, flexShrink: 0 }} />
               Real-time CPS: <strong style={{ color: '#fff', marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{tooltip.rtCps}</strong>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#e2e8f0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#2D3436' }}>
               <span style={{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '3px', background: avgColor, flexShrink: 0 }} />
               Average CPS: <strong style={{ color: '#fff', marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{tooltip.avgCps}</strong>
             </div>
@@ -1865,7 +1871,7 @@ export default function CPSTestPage() {
                 </div>
               </div>
 
-              <div style={{ background: 'rgba(0,0,0,0.25)', padding: '0.85rem 1rem', borderRadius: '12px', borderLeft: `3px solid ${finalRating.color}`, fontStyle: 'italic', color: '#cbd5e1', fontSize: '0.88rem', textAlign: 'left', marginBottom: '1.25rem', lineHeight: '1.5' }}>
+              <div style={{ background: 'rgba(0,0,0,0.25)', padding: '0.85rem 1rem', borderRadius: '12px', borderLeft: `3px solid ${finalRating.color}`, fontStyle: 'italic', color: '#2D3436', fontSize: '0.88rem', textAlign: 'left', marginBottom: '1.25rem', lineHeight: '1.5' }}>
                 {finalRating.desc}
               </div>
 
@@ -2011,7 +2017,7 @@ export default function CPSTestPage() {
               </div>
               <span style={{
                 fontSize: '0.75rem', fontWeight: 700,
-                color: '#cbd5e1', textAlign: 'center', lineHeight: 1.3,
+                color: '#2D3436', textAlign: 'center', lineHeight: 1.3,
               }}>{label}</span>
             </a>
           ))}

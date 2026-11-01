@@ -701,8 +701,8 @@ export default function ScrollTestPage() {
         </div>
 
         {/* FAQ Section: 30+ entries */}
-        <div style={{ marginTop: '2.5rem', borderRadius: '12px', padding: '1.5rem', border: '1px solid var(--border)' }}>
-          <h2 style={{ color: 'var(--neon-purple)', fontSize: '1.25rem', fontWeight: '700', marginBottom: '1.25rem', marginTop: '0' }}>
+        <div style={{ marginTop: '2.5rem', border: '3px solid #000000', padding: '1.5rem', boxShadow: '5px 5px 0 0 #000000', background: '#FFFFFF' }}>
+          <h2 style={{ color: '#000000', fontSize: '1.4rem', fontWeight: 900, marginBottom: '1.25rem', marginTop: '0', textTransform: 'uppercase', borderBottom: '3px solid #000000', paddingBottom: '0.75rem' }}>
             Frequently Asked Questions (FAQs)
           </h2>
 
@@ -713,10 +713,12 @@ export default function ScrollTestPage() {
                 <div
                   key={i}
                   style={{
-                    border: isOpen ? '1px solid var(--neon-cyan)' : '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '10px',
-                    overflow: 'hidden',
-                    transition: 'background 0.2s, border-color 0.2s',
+                    border: '3px solid #000000',
+                  borderRadius: '0px',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  background: '#FFFFFF',
+                  overflow: 'hidden',
+                  marginBottom: '8px',
                   }}
                 >
                   <button
@@ -727,7 +729,7 @@ export default function ScrollTestPage() {
                       padding: '0.9rem 1.1rem', textAlign: 'left',
                     }}
                   >
-                    <h3 style={{ color: '#fff', fontSize: '0.95rem', fontWeight: '600', margin: 0 }}>
+                    <h3 style={{ color: '#000000', fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase' }}>
                       {item.q}
                     </h3>
                     <svg
@@ -744,8 +746,8 @@ export default function ScrollTestPage() {
                     </svg>
                   </button>
                   {isOpen && (
-                    <div style={{ padding: '0 1.1rem 1rem 1.1rem', animation: 'fadeIn 0.2s ease-in' }}>
-                      <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6' }}>
+                    <div style={{ padding: '16px 20px 18px', background: '#FFFFFF' }}>
+                      <p style={{ margin: 0, color: '#2D3436', fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500 }}>
                         {item.a}
                       </p>
                     </div>

@@ -1609,7 +1609,7 @@ export default function VoyagerGame() {
                 </div>
 
                 {/* Title */}
-                <h1 style={{ fontSize: '2.2rem', fontWeight: 900, margin: '0 0 0.3rem', color: '#fff', letterSpacing: '-0.5px' }}>
+                <h1 style={{ fontSize: '2.2rem', fontWeight: 900, margin: '0 0 0.3rem', color: '#000000', letterSpacing: '-0.5px' }}>
                   Guide The <span style={{ color: '#00f5ff' }}>Voyager</span>
                 </h1>
                 <p style={{ color: '#64748b', fontSize: '0.85rem', margin: '0 0 1.25rem' }}>
@@ -1695,7 +1695,7 @@ export default function VoyagerGame() {
                 borderRadius: '20px', padding: '2rem', minWidth: '260px',
               }}>
                 <Pause size={36} color="#00f5ff" style={{ marginBottom: '0.75rem' }} />
-                <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#fff', margin: '0 0 0.5rem' }}>Paused</h2>
+                <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#000000', margin: '0 0 0.5rem' }}>Paused</h2>
                 <p style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>Press P or ESC to resume</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                   <button aria-label="Resume" onClick={() => actionsRef.current.resume()} style={{ ...solidBtn, background: 'linear-gradient(135deg,#00f5ff,#22c55e)', color: '#000' }}>
@@ -1728,7 +1728,7 @@ export default function VoyagerGame() {
                 boxSizing: 'border-box',
               }}>
                 <div style={{ color: '#ff4d4d', fontWeight: '900', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.2rem' }}>Signal Lost</div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#fff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>MISSION FAILED</h2>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#000000', marginBottom: '1rem', letterSpacing: '-0.02em' }}>MISSION FAILED</h2>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1rem' }}>
                   <GameOverStat label="Distance" value={Math.floor(gs.current.distance).toLocaleString()} highlight="#00f5ff" isNew={Math.floor(gs.current.distance) >= highScores.bestDistance && gs.current.distance > 0} />
@@ -1776,7 +1776,7 @@ export default function VoyagerGame() {
                 <span style={{ fontSize: '1.2rem' }}>{a.icon}</span>
                 <div>
                   <div style={{ fontSize: '0.65rem', color: '#eab308', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Achievement Unlocked!</div>
-                  <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '700' }}>{a.title}</div>
+                  <div style={{ fontSize: '0.85rem', color: '#000000', fontWeight: '700' }}>{a.title}</div>
                 </div>
               </div>
             ))}
@@ -1822,7 +1822,7 @@ export default function VoyagerGame() {
         {/* â”€â”€ MORE TOOLS GRID â”€â”€ */}
         <section aria-label="More Tools" style={{ width: '100%', maxWidth: '850px', marginBottom: '3.5rem', marginTop: '1rem' }}>
           <h2 style={{
-            fontWeight: 800, fontSize: '1.5rem', color: '#fff',
+            fontWeight: 800, fontSize: '1.5rem', color: '#000000',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
           }}>More Tools</h2>
@@ -1883,7 +1883,7 @@ export default function VoyagerGame() {
           {/* H2 Header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem' }}>
             <Gauge size={22} color="#00f5ff" />
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#fff', margin: 0, letterSpacing: '-0.3px' }}>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#000000', margin: 0, letterSpacing: '-0.3px' }}>
               Voyager Game: Space Endurance Arcade That Trains Your CPS
             </h2>
           </div>
@@ -1892,7 +1892,7 @@ export default function VoyagerGame() {
           </p>
 
           {/* Section 1: What is Voyager Game */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>What is Voyager Game?</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>What is Voyager Game?</h2>
           <p style={seoP}>Voyager Game is an <strong>endless asteroid dodge game</strong> where you control a rocket ship by clicking or pressing SPACE. The more consistently you click, the more stable your altitude — making it both a fun arcade experience and a genuine <strong>CPS training tool</strong>.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(190px,1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
             {[
@@ -1903,15 +1903,15 @@ export default function VoyagerGame() {
             ].map(({ title, desc }) => (
               <div key={title} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '14px', padding: '1.1rem' }}>
                 <div style={{ fontWeight: 700, color: '#00f5ff', fontSize: '0.9rem', marginBottom: '0.4rem' }}>{title}</div>
-                <div style={{ fontSize: '0.82rem', color: '#9ca3af' }}>{desc}</div>
+                <div style={{ fontSize: '0.82rem', color: '#2D3436' }}>{desc}</div>
               </div>
             ))}
           </div>
 
           {/* Section 2: How does it work */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>How Does Voyager Game Work?</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>How Does Voyager Game Work?</h2>
           <p style={seoP}>The game uses a <strong>Click-to-Velocity physics engine</strong> — each click adds upward force, while constant gravity pulls the ship down. Here is the full game loop:</p>
-          <ul style={{ paddingLeft: '1.4rem', marginBottom: '1.5rem', color: '#9ca3af' }}>
+          <ul style={{ paddingLeft: '1.4rem', marginBottom: '1.5rem', color: '#2D3436' }}>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Select Difficulty:</strong> Choose Easy, Normal, or Hard — each changes obstacle speed, spawn rate, and gravity multiplier.</li>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Hold SPACE or Click:</strong> Each input boosts the rocket upward. Stop clicking and gravity takes over.</li>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Dodge Asteroids:</strong> Three asteroid types — regular, comet, and boss — each with different speeds and sizes.</li>
@@ -1920,24 +1920,24 @@ export default function VoyagerGame() {
           </ul>
 
           {/* Section 3: How it improves CPS */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>How Does Voyager Game Help You Improve Your CPS?</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>How Does Voyager Game Help You Improve Your CPS?</h2>
           <p style={seoP}>Unlike static click counters, Voyager gives you <strong>immediate physical feedback</strong> — your clicking speed directly controls game outcomes, forcing you to maintain rhythm under pressure.</p>
-          <ul style={{ paddingLeft: '1.4rem', marginBottom: '1.5rem', color: '#9ca3af' }}>
+          <ul style={{ paddingLeft: '1.4rem', marginBottom: '1.5rem', color: '#2D3436' }}>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Biofeedback Loop:</strong> The ship visually responds to every click — you feel when your rhythm breaks, training you to stay consistent.</li>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Finger Stamina:</strong> Surviving 60+ seconds requires sustained clicking without fatigue, building endurance over time.</li>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Multitask Simulation:</strong> Clicking fast while dodging obstacles mirrors real gaming scenarios — improving hand-eye coordination.</li>
             <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Peak CPS Tracking:</strong> Your personal best is saved — giving you a measurable target to beat each session.</li>
           </ul>
           <div style={{ background: 'rgba(0,245,255,0.04)', borderLeft: '4px solid #00f5ff', padding: '1rem 1.2rem', margin: '1.5rem 0', borderRadius: '0 12px 12px 0' }}>
-            <span style={{ display: 'block', fontWeight: 800, color: '#fff', marginBottom: '0.3rem' }}>Did You Know?</span>
-            <span style={{ fontSize: '0.88rem', color: '#9ca3af' }}>The average global CPS is 4–6.5. Competitive gamers reach 10–14 CPS. Voyager Hard mode is calibrated to push you toward and beyond that range.</span>
+            <span style={{ display: 'block', fontWeight: 800, color: '#000000', marginBottom: '0.3rem' }}>Did You Know?</span>
+            <span style={{ fontSize: '0.88rem', color: '#2D3436' }}>The average global CPS is 4–6.5. Competitive gamers reach 10–14 CPS. Voyager Hard mode is calibrated to push you toward and beyond that range.</span>
           </div>
 
           {/* Section 4: SeoExtraSections */}
           <SeoExtraSections />
 
           {/* Section 5: Difficulty comparison table */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Voyager Difficulty Comparison</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Voyager Difficulty Comparison</h2>
           <div style={{ overflowX: 'auto', marginBottom: '1.5rem' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', minWidth: '500px' }}>
               <thead>
@@ -1955,10 +1955,10 @@ export default function VoyagerGame() {
                 ].map(([diff, speed, grav, spawn, use], i) => (
                   <tr key={diff} style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
                     <td style={{ padding: '0.65rem 1rem', color: diff === 'Easy' ? '#22c55e' : diff === 'Normal' ? '#eab308' : '#ef4444', fontWeight: 700 }}>{diff}</td>
-                    <td style={{ padding: '0.65rem 1rem', color: '#9ca3af' }}>{speed}</td>
-                    <td style={{ padding: '0.65rem 1rem', color: '#9ca3af' }}>{grav}</td>
-                    <td style={{ padding: '0.65rem 1rem', color: '#9ca3af' }}>{spawn}</td>
-                    <td style={{ padding: '0.65rem 1rem', color: '#9ca3af' }}>{use}</td>
+                    <td style={{ padding: '0.65rem 1rem', color: '#2D3436' }}>{speed}</td>
+                    <td style={{ padding: '0.65rem 1rem', color: '#2D3436' }}>{grav}</td>
+                    <td style={{ padding: '0.65rem 1rem', color: '#2D3436' }}>{spawn}</td>
+                    <td style={{ padding: '0.65rem 1rem', color: '#2D3436' }}>{use}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1966,10 +1966,10 @@ export default function VoyagerGame() {
           </div>
 
           {/* FAQ */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Frequently Asked Questions</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Frequently Asked Questions</h2>
           <FaqAccordion items={FAQ_ITEMS} />
 
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Ready to Launch?</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Ready to Launch?</h2>
           <p style={{ margin: 0 }}>Start the simulation above and see how far you can guide the Voyager through deep space. Track your Peak CPS, unlock achievements, and challenge Hard mode for the ultimate endurance test!</p>
         </article>
       </div>
@@ -2014,18 +2014,18 @@ function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
       {items.map((item, i) => {
         const open = openIdx === i;
         return (
-          <div key={i} style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${open ? 'rgba(0,245,255,0.5)' : 'rgba(255,255,255,0.08)'}`, borderRadius: '12px', overflow: 'hidden' }}>
+          <div key={i} style={{ background: '#FFFFFF', border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', overflow: 'hidden', marginBottom: '8px' }}>
             <button
               onClick={() => setOpenIdx(open ? null : i)}
               aria-expanded={open}
-              style={{ width: '100%', padding: '0.9rem 1.1rem', background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', textAlign: 'left' }}
+              style={{ width: '100%', padding: '16px 20px', background: open ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: open ? '3px solid #000000' : 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', textAlign: 'left' }}
             >
-              <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#fff' }}>{item.q}</span>
+              <span style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>{item.q}</span>
               <ChevronDown size={16} color={open ? '#00f5ff' : '#64748b'} style={{ flexShrink: 0, transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
             </button>
             {open && (
               <div style={{ padding: '0 1.1rem 1rem' }}>
-                <p style={{ margin: 0, fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.6 }}>{item.a}</p>
+                <p style={{ margin: 0, fontSize: '0.96rem', color: '#2D3436', lineHeight: 1.7, fontWeight: 500 }}>{item.a}</p>
               </div>
             )}
           </div>
@@ -2061,7 +2061,7 @@ const outlineBtn: React.CSSProperties = {
 const solidBtn: React.CSSProperties = {
   width: '100%', padding: '0.8rem',
   background: 'rgba(255,255,255,0.08)',
-  color: '#fff', fontSize: '0.9rem', fontWeight: '800',
+  color: '#000000', fontSize: '0.9rem', fontWeight: '800',
   borderRadius: '12px', border: 'none', cursor: 'pointer',
   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
 };
@@ -2076,7 +2076,7 @@ const StatBox = React.memo(({ icon, label, id, initialValue }: {
     </div>
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <span style={{ fontSize: '0.55rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748b', fontWeight: '800' }}>{label}</span>
-      <span id={id} style={{ fontSize: '0.9rem', fontFamily: 'monospace', fontWeight: '700', color: '#fff', lineHeight: 1 }}>{initialValue ?? 0}</span>
+      <span id={id} style={{ fontSize: '0.9rem', fontFamily: 'monospace', fontWeight: '700', color: '#000000', lineHeight: 1 }}>{initialValue ?? 0}</span>
     </div>
   </div>
 ));
@@ -2107,7 +2107,7 @@ const IconBtn = React.memo(({ children, onClick, 'aria-label': ariaLabel }: {
   <button
     onClick={onClick}
     aria-label={ariaLabel}
-    style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.35rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#fff' }}
+    style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.35rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#000000' }}
   >
     {children}
   </button>
@@ -2141,7 +2141,7 @@ const Modal = React.memo(({ title, icon, onClose, children }: {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {icon}
-          <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#fff' }}>{title}</h2>
+          <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#000000' }}>{title}</h2>
         </div>
         <button aria-label="Close modal" onClick={onClose} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.3rem 0.6rem', color: '#94a3b8', cursor: 'pointer', fontSize: '1rem' }}>âœ•</button>
       </div>

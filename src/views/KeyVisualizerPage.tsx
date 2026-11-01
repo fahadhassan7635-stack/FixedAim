@@ -1381,7 +1381,7 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: '0.25rem 0 0', letterSpacing: '-0.02em' }}>
             100+ Essential PC & Laptop Shortcuts
           </h2>
-          <p style={{ color: '#9ca3af', fontSize: '0.88rem', margin: '0.35rem 0 0' }}>
+          <p style={{ color: '#2D3436', fontSize: '0.88rem', margin: '0.35rem 0 0' }}>
             Master daily shortcuts for Windows, Mac, Chrome, Text Editing, VS Code & Excel. Press keys above on the visualizer to test!
           </p>
         </div>
@@ -1527,7 +1527,7 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
                 <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.25rem' }}>
                   {item.title}
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#9ca3af', lineHeight: 1.45 }}>
+                <div style={{ fontSize: '0.78rem', color: '#2D3436', lineHeight: 1.45 }}>
                   {item.desc}
                 </div>
               </div>
@@ -1624,16 +1624,20 @@ const FaqSection = memo(function FaqSection() {
   return (
     <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
       <h2 style={{
-        fontWeight: 800, fontSize: '1.75rem', color: '#fff',
-        marginTop: 0, marginBottom: '1.5rem',
-        borderBottom: '1px solid #1f2937', paddingBottom: '1rem',
-        display: 'flex', alignItems: 'center', gap: '10px',
+        fontWeight: 900,
+        fontSize: '1.75rem',
+        color: '#000000',
+        marginTop: 0,
+        marginBottom: '1.5rem',
+        borderBottom: '3px solid #000000',
+        paddingBottom: '0.75rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        textTransform: 'uppercase',
+        fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif"
       }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--neon-cyan, #00f5ff)', flexShrink: 0 }} aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <line x1="12" y1="17" x2="12.01" y2="17" />
-        </svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
         Frequently Asked Questions
       </h2>
 
@@ -1645,10 +1649,12 @@ const FaqSection = memo(function FaqSection() {
               key={i}
               role="listitem"
               style={{
-                border: `1px solid ${isOpen ? 'rgba(0,245,255,0.4)' : '#1f2937'}`,
-                borderRadius: '10px',
+                border: '3px solid #000000',
+                borderRadius: '0px',
+                boxShadow: '4px 4px 0 0 #000000',
+                background: '#FFFFFF',
                 overflow: 'hidden',
-                transition: 'border-color 0.2s',
+                marginBottom: '12px',
               }}
             >
               <button
@@ -1659,26 +1665,28 @@ const FaqSection = memo(function FaqSection() {
                 style={{
                   width: '100%',
                   textAlign: 'left',
-                  background: isOpen ? 'rgba(0,245,255,0.05)' : 'transparent',
+                  background: isOpen ? '#FFF6D6' : '#FFFFFF',
                   border: 'none',
-                  padding: '14px 18px',
+                  borderBottom: isOpen ? '3px solid #000000' : 'none',
+                  padding: '16px 20px',
                   cursor: 'pointer',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   gap: '12px',
-                  color: '#fff',
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '1rem',
+                  textTransform: 'uppercase',
                 }}
               >
                 <span>{faq.q}</span>
                 {isOpen ? (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan, #00f5ff)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden="true">
                     <polyline points="18 15 12 9 6 15" />
                   </svg>
                 ) : (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden="true">
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 )}
@@ -1688,9 +1696,9 @@ const FaqSection = memo(function FaqSection() {
                   id={`kv-faq-answer-${i}`}
                   role="region"
                   aria-labelledby={`kv-faq-question-${i}`}
-                  style={{ padding: '0 18px 16px', backgroundColor: 'rgba(0,245,255,0.03)' }}
+                  style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}
                 >
-                  <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: '1.7', margin: 0 }}>
+                  <p style={{ color: '#2D3436', fontSize: '0.96rem', lineHeight: '1.7', margin: 0, fontWeight: 500 }}>
                     {faq.a}
                   </p>
                 </div>
@@ -1774,12 +1782,12 @@ const ArticleSection = lazy(() =>
       };
       const pStyle: CSSProperties = {
         marginBottom: '1.25rem',
-        color: '#9ca3af',
+        color: '#2D3436',
       };
       const ulStyle: CSSProperties = {
         marginBottom: '1.5rem',
         paddingLeft: '1.5rem',
-        color: '#9ca3af',
+        color: '#2D3436',
         lineHeight: '1.9',
       };
       const liStyle: CSSProperties = { marginBottom: '0.55rem' };

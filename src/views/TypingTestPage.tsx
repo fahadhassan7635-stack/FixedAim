@@ -559,9 +559,9 @@ const FaqSection = memo(() => {
                   id={`typing-faq-answer-${i}`}
                   role="region"
                   aria-labelledby={`typing-faq-question-${i}`}
-                  style={{ padding: '0 18px 16px' }}
+                  style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}
                 >
-                  <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.7' }}>
+                  <p style={{ margin: 0, color: '#2D3436', fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500 }}>
                     {item.a}
                   </p>
                 </div>
