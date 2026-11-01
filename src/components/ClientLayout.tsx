@@ -69,71 +69,109 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     <>
       <div className="grid-bg" />
 
-      {/* TOP NAVIGATION BAR */}
+      {/* TOP NAVIGATION BAR — NEUBRUTALISM BLACK & YELLOW */}
       <nav className="top-nav" style={{
         position: 'sticky', top: 0, zIndex: 100,
-                borderBottom: '1px solid var(--border)',
+        background: '#000000',
+        borderBottom: '3px solid #000000',
         display: 'flex', alignItems: 'center',
         justifyContent: 'space-between',
-        height: '64px',
+        height: '66px',
         width: '100%',
         boxSizing: 'border-box'
       }}>
+        {/* LOGO BOX — CANONICAL NEUBRUTALISM */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+          <Link href="/" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+            textDecoration: 'none',
+            background: '#FFE033',
+            border: '3px solid #000000',
+            boxShadow: '4px 4px 0 0 #FFFFFF',
+            padding: '4px 12px 4px 8px',
+            transition: 'transform 0.1s ease, box-shadow 0.1s ease',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'translate(-2px, -2px)';
+            e.currentTarget.style.boxShadow = '6px 6px 0 0 #FFFFFF';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'translate(0, 0)';
+            e.currentTarget.style.boxShadow = '4px 4px 0 0 #FFFFFF';
+          }}
+          >
             <div style={{
-              width: '40px', height: '40px',
+              width: '34px', height: '34px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: 'transparent',
             }}>
-              <Image src={mouseIcon} alt="Logo" width={40} height={40} style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(0,245,255,0.7)) drop-shadow(0 0 14px rgba(0,245,255,0.4))' }} priority />
+              <Image src={mouseIcon} alt="Logo" width={34} height={34} style={{ width: '100%', height: '100%', objectFit: 'contain' }} priority />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1 }}>
               <span style={{
-                fontFamily: "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
-                fontWeight: 800,
-                fontSize: '1.65rem',
-                color: 'var(--text-primary)',
-                letterSpacing: '0.06em',
+                fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif",
+                fontWeight: 900,
+                fontSize: '1.45rem',
+                color: '#000000',
+                letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
-                textShadow: '0 0 8px rgba(0,245,255,0.5)',
                 lineHeight: 1,
               }}>
-                FIXED <span style={{
-                  color: 'var(--neon-cyan)',
-                  textShadow: '0 0 8px var(--neon-cyan), 0 0 20px var(--neon-cyan)'
-                }}>AIM</span>
+                FIXED AIM.
               </span>
               <span style={{
-                fontFamily: "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
-                fontSize: '0.6rem',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
+                fontFamily: "'Public Sans', sans-serif",
+                fontSize: '0.55rem',
+                fontWeight: 800,
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: 'var(--neon-cyan)',
-                opacity: 0.65,
-                marginTop: '2px',
+                color: '#000000',
+                marginTop: '1px',
               }}>TEST · TRAIN · DOMINATE</span>
             </div>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <ul style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', listStyle: 'none', margin: 0, padding: 0 }} className="desktop-nav">
+        <ul style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', listStyle: 'none', margin: 0, padding: 0 }} className="desktop-nav">
           {NAV_ITEMS.map(item => {
             const isActive = item.exact ? pathname === item.to : pathname?.startsWith(item.to);
-            const isGame = item.label.includes('Games');
             return (
               <li key={item.to}>
                 <Link
                   href={item.to}
                   className="top-nav-link"
                   style={{
-                    padding: '0.4rem 0.9rem', borderRadius: '6px', textDecoration: 'none',
-                    fontSize: '0.9rem', fontWeight: '500',
-                    color: isActive ? (isGame ? '#ff6b35' : 'var(--neon-cyan)') : 'var(--text-secondary)',
-                    background: isActive ? (isGame ? 'rgba(255,107,53,0.12)' : 'rgba(0,245,255,0.1)') : 'transparent',
-                    transition: 'all 0.2s', display: 'block', whiteSpace: 'nowrap'
+                    padding: '0.45rem 0.95rem',
+                    textDecoration: 'none',
+                    fontSize: '0.88rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.04em',
+                    textTransform: 'uppercase',
+                    color: isActive ? '#000000' : '#FFFFFF',
+                    background: isActive ? '#FFE033' : 'transparent',
+                    border: isActive ? '2px solid #000000' : '2px solid transparent',
+                    boxShadow: isActive ? '3px 3px 0 0 #FFE033' : 'none',
+                    transition: 'all 0.15s ease',
+                    display: 'block',
+                    whiteSpace: 'nowrap'
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = '#FFE033';
+                      e.currentTarget.style.color = '#000000';
+                      e.currentTarget.style.border = '2px solid #000000';
+                      e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFE033';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = '#FFFFFF';
+                      e.currentTarget.style.border = '2px solid transparent';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }
                   }}
                 >{item.label}</Link>
               </li>
@@ -141,23 +179,53 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           })}
           <li>
             <Link href="/cps-test" style={{
-              padding: '0.45rem 1.1rem', borderRadius: '6px', textDecoration: 'none',
-              fontSize: '0.9rem', fontWeight: '700', color: '#000',
-              background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-green))',
-              display: 'block', whiteSpace: 'nowrap', marginLeft: '10px'
-            }}>⚡ CPS Test</Link>
+              padding: '0.48rem 1.15rem',
+              textDecoration: 'none',
+              fontSize: '0.88rem',
+              fontWeight: 900,
+              color: '#000000',
+              background: '#FF6B6B',
+              border: '3px solid #000000',
+              boxShadow: '3px 3px 0 0 #FFE033',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              whiteSpace: 'nowrap',
+              marginLeft: '8px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              transition: 'transform 0.1s ease, box-shadow 0.1s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translate(-2px, -2px)';
+              e.currentTarget.style.boxShadow = '5px 5px 0 0 #FFE033';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translate(0, 0)';
+              e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFE033';
+            }}
+            >⚡ CPS TEST</Link>
           </li>
         </ul>
 
         {/* Hamburger Menu Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
+          style={{
+            display: 'none',
+            flexDirection: 'column',
+            gap: '5px',
+            background: '#FFE033',
+            border: '2px solid #000000',
+            boxShadow: '2px 2px 0 0 #FFFFFF',
+            cursor: 'pointer',
+            padding: '8px',
+          }}
           className="hamburger-btn"
           aria-label="Toggle menu"
         >
           {[0, 1, 2].map(i => (
-            <span key={i} style={{ display: 'block', width: '24px', height: '2px', background: 'var(--neon-cyan)', borderRadius: '2px', transition: 'all 0.3s' }} />
+            <span key={i} style={{ display: 'block', width: '22px', height: '3px', background: '#000000', transition: 'all 0.3s' }} />
           ))}
         </button>
       </nav>
@@ -165,25 +233,31 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       {/* MOBILE OVERLAY */}
       {menuOpen && (
         <div className="mobile-menu-overlay" style={{
-          position: 'fixed', top: '64px', left: 0, right: 0,
-                    borderBottom: '1px solid var(--border)', zIndex: 99,
+          position: 'fixed', top: '66px', left: 0, right: 0,
+          background: '#000000',
+          borderBottom: '3px solid #000000',
+          zIndex: 99,
           display: 'flex', flexDirection: 'column', gap: '0.5rem',
-          maxHeight: 'calc(100vh - 64px)', overflowY: 'auto',
+          padding: '1.25rem',
+          maxHeight: 'calc(100vh - 66px)', overflowY: 'auto',
           boxSizing: 'border-box'
         }}>
           {NAV_ITEMS.map(item => {
             const isActive = item.exact ? pathname === item.to : pathname?.startsWith(item.to);
-            const isGame = item.label.includes('Games');
             return (
               <Link
                 key={item.to} href={item.to}
                 onClick={() => setMenuOpen(false)}
-                className="mobile-nav-link"
                 style={{
-                  padding: '0.75rem 1rem', borderRadius: '8px', textDecoration: 'none',
-                  fontSize: '1rem', fontWeight: '500',
-                  color: isActive ? (isGame ? '#ff6b35' : 'var(--neon-cyan)') : 'var(--text-primary)',
-                  background: isActive ? (isGame ? 'rgba(255,107,53,0.12)' : 'rgba(0,245,255,0.1)') : 'transparent',
+                  padding: '0.75rem 1rem',
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  fontWeight: 800,
+                  textTransform: 'uppercase',
+                  color: isActive ? '#000000' : '#FFFFFF',
+                  background: isActive ? '#FFE033' : 'rgba(255,255,255,0.06)',
+                  border: '2px solid #000000',
+                  boxShadow: isActive ? '3px 3px 0 0 #FFFFFF' : 'none',
                 }}
               >{item.label}</Link>
             );
@@ -191,34 +265,40 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           <Link
             href="/cps-test" onClick={() => setMenuOpen(false)}
             style={{
-              padding: '0.75rem 1rem', borderRadius: '8px', textDecoration: 'none',
-              fontSize: '1rem', fontWeight: '700', color: '#000',
-              background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-green))',
-              textAlign: 'center', marginTop: '0.5rem',
+              padding: '0.85rem 1rem',
+              textDecoration: 'none',
+              fontSize: '1rem',
+              fontWeight: 900,
+              color: '#000000',
+              background: '#FF6B6B',
+              border: '3px solid #000000',
+              boxShadow: '4px 4px 0 0 #FFE033',
+              textAlign: 'center',
+              marginTop: '0.5rem',
+              textTransform: 'uppercase',
             }}
-          >⚡ CPS Test</Link>
+          >⚡ Start CPS Test</Link>
         </div>
       )}
 
       {/* BODY SECTION */}
       <div style={{ display: 'flex', flex: 1, position: 'relative', width: '100%', alignItems: 'flex-start' }}>
 
-        {/* SIDEBAR PANEL */}
+        {/* SIDEBAR PANEL — NEUBRUTALISM */}
         <aside className="sidebar-pannel" style={{
           width: sidebarOpen ? '280px' : '85px',
           opacity: 1,
           visibility: 'visible',
-          background: 'transparent',
-          backdropFilter: 'none',
-          borderRight: '1px solid var(--border)',
-          height: 'calc(100vh - 64px)',
+          background: '#FFFDF5',
+          borderRight: '3px solid #000000',
+          height: 'calc(100vh - 66px)',
           position: 'sticky',
-          top: '64px',
+          top: '66px',
           display: 'flex',
           flexDirection: 'column',
           zIndex: 10,
           padding: sidebarOpen ? '1.25rem' : '1.25rem 0.5rem',
-          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'width 0.2s ease, padding 0.2s ease',
           overflow: 'visible',
           boxSizing: 'border-box'
         }}>
@@ -233,13 +313,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           }}>
             {sidebarOpen && (
               <div style={{
-                background: 'linear-gradient(135deg, #00f5ff, #0cf991)',
-                color: '#000', fontSize: '1rem', fontWeight: '800',
-                padding: '0.4rem 0.8rem', borderRadius: '8px',
-                letterSpacing: '0.05em', textTransform: 'uppercase',
-                boxShadow: '0 4px 10px rgba(0, 245, 255, 0.2)', whiteSpace: 'nowrap'
+                background: '#FFE033',
+                color: '#000000',
+                fontSize: '0.9rem',
+                fontWeight: 900,
+                padding: '0.35rem 0.75rem',
+                border: '2px solid #000000',
+                boxShadow: '3px 3px 0 0 #000000',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                whiteSpace: 'nowrap'
               }}>
-                🛠️ All Tools
+                🛠️ ALL TOOLS
               </div>
             )}
 
@@ -249,23 +334,25 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
                 style={{
-                  background: 'transparent', border: 'none', cursor: 'pointer',
-                  color: 'var(--text-secondary)', display: 'flex', alignItems: 'center',
-                  justifyContent: 'center', padding: '6px', borderRadius: '6px', transition: 'all 0.2s ease',
+                  background: '#FFE033',
+                  border: '2px solid #000000',
+                  boxShadow: '2px 2px 0 0 #000000',
+                  cursor: 'pointer',
+                  color: '#000000',
+                  display: 'flex', alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '6px',
+                  transition: 'transform 0.1s ease',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.background = 'rgba(0,245,255,0.08)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translate(-1px, -1px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translate(0, 0)'; }}
               >
                 {sidebarOpen ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>
                 ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                 )}
               </button>
-
-              <span className="sidebar-toggle-tooltip">
-                {sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-              </span>
             </div>
           </div>
 
@@ -275,26 +362,34 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               style={{
-                flex: 1, padding: '0.65rem 1rem', borderRadius: '8px',
-                background: 'rgba(15, 23, 42, 0.8)', border: '1px solid var(--border)',
-                color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600',
-                outline: 'none', cursor: 'pointer', letterSpacing: '0.05em'
+                flex: 1,
+                padding: '0.55rem 0.75rem',
+                background: '#FFFFFF',
+                border: '3px solid #000000',
+                boxShadow: '3px 3px 0 0 #000000',
+                color: '#000000',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                outline: 'none',
+                cursor: 'pointer',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase'
               }}
             >
-              <option value="all">FILTER BY TYPE</option>
-              <option value="mouse">MOUSE TOOLS</option>
-              <option value="keyboard">KEYBOARD TOOLS</option>
-              <option value="aim">AIM & REACTION</option>
-              <option value="benchmark">BENCHMARKS</option>
-              <option value="games">ARCADE GAMES</option>
-              <option value="misc">OTHER SECTIONS</option>
+              <option value="all">⚡ ALL TOOLS (17)</option>
+              <option value="mouse">🖱️ MOUSE TOOLS</option>
+              <option value="keyboard">⌨️ KEYBOARD TOOLS</option>
+              <option value="aim">🎯 AIM & REACTION</option>
+              <option value="benchmark">🌐 BENCHMARKS</option>
+              <option value="games">🎮 ARCADE GAMES</option>
+              <option value="misc">📝 OTHER SECTIONS</option>
             </select>
           </div>
 
           {/* SCROLLABLE TOOLS LIST */}
           <div className="sidebar-scroll" style={{
             flex: 1, overflowY: 'auto', overflowX: 'hidden',
-            display: 'flex', flexDirection: 'column', gap: '0.35rem', paddingRight: '4px'
+            display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingRight: '4px'
           }}>
             {filteredTools.map((tool) => {
               const isCurrentActive = pathname === tool.to;
@@ -304,16 +399,26 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 <div key={tool.to} style={{ position: 'relative' }}>
                   <Link
                     href={tool.to}
+                    style={{
+                      display: 'flex', alignItems: 'center',
+                      justifyContent: sidebarOpen ? 'flex-start' : 'center',
+                      gap: sidebarOpen ? '0.65rem' : '0.4rem',
+                      padding: sidebarOpen ? '0.6rem 0.85rem' : '0.6rem 0.25rem',
+                      textDecoration: 'none',
+                      background: isCurrentActive ? '#FFE033' : '#FFFFFF',
+                      border: '2px solid #000000',
+                      boxShadow: isCurrentActive ? '3px 3px 0 0 #000000' : '2px 2px 0 0 #000000',
+                      fontSize: '0.82rem',
+                      fontWeight: isCurrentActive ? 900 : 700,
+                      color: '#000000',
+                      transition: 'transform 0.1s ease, box-shadow 0.1s ease',
+                      transform: 'translate(0, 0)',
+                    }}
                     onMouseEnter={(e) => {
                       if (!isCurrentActive) {
-                        e.currentTarget.style.background = isPinned ? 'rgba(0, 245, 255, 0.15)' : 'rgba(0, 245, 255, 0.1)';
-                        e.currentTarget.style.color = '#00f5ff';
-                        e.currentTarget.style.transform = 'translateX(6px)';
-                        e.currentTarget.style.borderTop = '1px solid rgba(0, 245, 255, 0.1)';
-                        e.currentTarget.style.borderRight = '1px solid rgba(0, 245, 255, 0.1)';
-                        e.currentTarget.style.borderBottom = '1px solid rgba(0, 245, 255, 0.1)';
-                        e.currentTarget.style.borderLeft = '1px solid rgba(0, 245, 255, 0.1)';
-                        e.currentTarget.style.textShadow = '0 0 8px rgba(0,245,255,0.6)';
+                        e.currentTarget.style.background = '#FFF6D6';
+                        e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                        e.currentTarget.style.boxShadow = '4px 4px 0 0 #000000';
                       }
                       if (!sidebarOpen) {
                         const rect = e.currentTarget.getBoundingClientRect();
@@ -322,47 +427,23 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     }}
                     onMouseLeave={(e) => {
                       if (!isCurrentActive) {
-                        e.currentTarget.style.background = isPinned ? 'rgba(15, 23, 42, 0.95)' : 'transparent';
-                        e.currentTarget.style.color = 'var(--text-secondary)';
-                        e.currentTarget.style.transform = 'translateX(0)';
-                        e.currentTarget.style.borderTop = '1px solid transparent';
-                        e.currentTarget.style.borderRight = '1px solid transparent';
-                        e.currentTarget.style.borderBottom = isPinned ? '1px solid rgba(255,255,255,0.05)' : '1px solid transparent';
-                        e.currentTarget.style.borderLeft = '1px solid transparent';
-                        e.currentTarget.style.textShadow = 'none';
+                        e.currentTarget.style.background = '#FFFFFF';
+                        e.currentTarget.style.transform = 'translate(0, 0)';
+                        e.currentTarget.style.boxShadow = '2px 2px 0 0 #000000';
                       }
                       setHoveredTool(null);
                     }}
-                    style={{
-                      display: 'flex', alignItems: 'center',
-                      justifyContent: sidebarOpen ? 'flex-start' : 'center',
-                      gap: sidebarOpen ? '0.75rem' : '0.4rem',
-                      padding: sidebarOpen ? '0.65rem 0.85rem' : '0.65rem 0.25rem',
-                      borderRadius: '6px', textDecoration: 'none',
-                      position: isPinned ? 'sticky' : 'static', top: isPinned ? 0 : 'auto', zIndex: isPinned ? 10 : 1,
-                      background: isPinned ? (isCurrentActive ? 'rgba(0, 245, 255, 0.15)' : 'rgba(15, 23, 42, 0.95)') : (isCurrentActive ? 'rgba(0, 245, 255, 0.08)' : 'transparent'),
-                      backdropFilter: isPinned ? 'blur(5px)' : 'none',
-                      borderTop: isCurrentActive ? '1px solid rgba(0, 245, 255, 0.3)' : '1px solid transparent',
-                      borderRight: isCurrentActive ? '1px solid rgba(0, 245, 255, 0.3)' : '1px solid transparent',
-                      borderBottom: isCurrentActive ? '1px solid rgba(0, 245, 255, 0.3)' : (isPinned ? '1px solid rgba(255,255,255,0.05)' : '1px solid transparent'),
-                      borderLeft: isCurrentActive ? '1px solid rgba(0, 245, 255, 0.3)' : '1px solid transparent',
-                      marginBottom: isPinned ? '5px' : '0',
-                      fontSize: '0.85rem', fontWeight: isCurrentActive ? '600' : '500',
-                      color: isCurrentActive ? '#00f5ff' : 'var(--text-secondary)',
-                      textShadow: isCurrentActive ? '0 0 8px rgba(0,245,255,0.6)' : 'none',
-                      transition: 'all 0.3s ease', transform: 'translateX(0)'
-                    }}
                   >
-                    <span style={{
-                      fontSize: '1.1rem',
-                      filter: isCurrentActive
-                        ? 'drop-shadow(0 0 6px rgba(0,245,255,0.9)) drop-shadow(0 0 14px rgba(0,245,255,0.5))'
-                        : 'drop-shadow(0 0 4px rgba(0,245,255,0.35))'
-                    }}>{tool.icon}</span>
+                    <span style={{ fontSize: '1.1rem' }}>{tool.icon}</span>
                     <span style={{
                       display: showLabel ? 'block' : 'none',
-                      textTransform: 'uppercase', fontSize: (!sidebarOpen && isPinned) ? '0.65rem' : '0.75rem',
-                      letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                      textTransform: 'uppercase',
+                      fontSize: (!sidebarOpen && isPinned) ? '0.65rem' : '0.78rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.02em',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis'
                     }}>
                       {tool.label}
                     </span>
@@ -380,40 +461,29 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             top: hoveredTool ? hoveredTool.top : 0,
             left: hoveredTool ? hoveredTool.left : 0,
             transform: hoveredTool ? 'translateY(-50%) translateX(0)' : 'translateY(-50%) translateX(-6px)',
-            background: 'rgba(0,245,255,0.12)',
-            border: '1px solid rgba(0,245,255,0.4)',
-            color: '#00f5ff',
-            fontSize: '0.75rem',
-            fontWeight: 600,
+            background: '#FFE033',
+            border: '2px solid #000000',
+            boxShadow: '3px 3px 0 0 #000000',
+            color: '#000000',
+            fontSize: '0.78rem',
+            fontWeight: 800,
             padding: '6px 10px',
-            borderRadius: '6px',
             whiteSpace: 'nowrap',
-            boxShadow: '0 2px 10px rgba(0,245,255,0.25)',
-            textShadow: '0 0 6px rgba(0,245,255,0.6)',
             opacity: hoveredTool ? 1 : 0,
             visibility: hoveredTool ? 'visible' : 'hidden',
             pointerEvents: 'none',
-            transition: 'opacity 0.18s ease, transform 0.18s ease, visibility 0.18s',
-            transitionDelay: hoveredTool ? '0.3s' : '0s',
-            zIndex: 200
+            zIndex: 200,
+            textTransform: 'uppercase'
           }}
         >
-          {hoveredTool?.label}
+          {hoveredTool ? hoveredTool.label : ''}
         </span>
 
-        {/* MAIN DYNAMIC CONTENT */}
-        <main className="main-content" style={{
-          flex: 1,
-          position: 'relative',
-          zIndex: 1,
-          transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          width: '100%',
-          maxWidth: '100%',
-          boxSizing: 'border-box',
-          overflowX: 'hidden'
-        }}>
+        {/* MAIN BODY CONTENT */}
+        <main className="main-content" style={{ flex: 1, minWidth: 0, padding: '2rem 1.5rem', width: '100%', boxSizing: 'border-box' }}>
           {children}
         </main>
+
       </div>
     </>
   );

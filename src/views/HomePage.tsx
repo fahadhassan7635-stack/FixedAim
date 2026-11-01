@@ -26,10 +26,10 @@ const tools = [
 ];
 
 const gearItems = [
-  { icon: '🖱️', brand: 'Logitech', name: 'G Pro X Superlight 2', desc: '60g ultralight. 32K DPI. Used by pro FPS players worldwide.', price: '$159.99' },
-  { icon: '⌨️', brand: 'Keychron', name: 'Q1 Pro Wireless', desc: 'Gasket-mounted TKL. Perfect for max WPM scores and typing comfort.', price: '$199.99' },
-  { icon: '🖥️', brand: 'ASUS', name: 'ROG Swift 360Hz', desc: '360Hz for silky-smooth aim training. Every ms counts at elite level.', price: '$699.99' },
-  { icon: '🎧', brand: 'SteelSeries', name: 'Arctis Nova Pro', desc: 'Hi-res audio with active noise cancellation for full focus mode.', price: '$349.99' },
+  { category: 'MOUSE', brand: 'Logitech', name: 'G Pro X Superlight 2', desc: '60g ultralight. 32K DPI. Used by pro FPS players worldwide.', price: '$159.99' },
+  { category: 'KEYBOARD', brand: 'Keychron', name: 'Q1 Pro Wireless', desc: 'Gasket-mounted TKL. Perfect for max WPM scores and typing comfort.', price: '$199.99' },
+  { category: 'MONITOR', brand: 'ASUS', name: 'ROG Swift 360Hz', desc: '360Hz for silky-smooth aim training. Every ms counts at elite level.', price: '$699.99' },
+  { category: 'AUDIO', brand: 'SteelSeries', name: 'Arctis Nova Pro', desc: 'Hi-res audio with active noise cancellation for full focus mode.', price: '$349.99' },
 ];
 
 const seoArticles = [
@@ -311,308 +311,303 @@ const seoArticles = [
 export default function HomePage() {
   const [expandedArticle, setExpandedArticle] = useState<string | null>(null);
 
-
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', paddingBottom: '3rem' }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 0.5rem', paddingBottom: '3rem' }}>
 
-      {/* Hero */}
-      <section style={{ textAlign: 'center', padding: '5rem 1rem 4rem' }}>
-        <div  style={{
-          display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-          padding: '0.3rem 1rem',
-          background: 'rgba(0,245,255,0.08)', border: '1px solid rgba(0,245,255,0.25)',
-          borderRadius: '50px', fontSize: '0.8rem', fontWeight: '600',
-          color: 'var(--neon-cyan)', marginBottom: '2rem',
-          letterSpacing: '0.05em',
-        }}>
-          <span className="hero-pulse-dot" />
-          v2.0 — Daily Challenges Live
-        </div>
-
-        <h1  style={{
-          fontSize: 'clamp(3rem, 8vw, 6rem)',
-          fontWeight: '900',
-          lineHeight: '1.1',
-          marginBottom: '1.5rem',
-        }}>
-          <span style={{ display: 'block', color: 'var(--text-primary)' }}>Test Train </span>
-          <span className="hero-gradient-text">Dominate </span>
-        </h1>
-
-        <p  style={{
-          fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-          color: 'var(--text-secondary)',
-          maxWidth: '600px', margin: '0 auto 2.5rem',
-          lineHeight: '1.7',
-        }}>
-          The ultimate free platform to test your clicking speed, typing WPM, reaction time, aim precision, and more. 14 professional tools. No signup. No downloads. Just pure performance data.
-        </p>
-
-        <div  style={{ marginBottom: '2.5rem' }}>
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', textAlign: 'center' }}>
-            🔥 Most Popular Tools
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/3d-aim-trainer" style={{ 
-              background: 'rgba(0,245,255,0.05)', 
-              border: '1px solid rgba(0,245,255,0.2)', 
-              borderRadius: '8px', 
-              padding: '0.75rem 1.25rem', 
-              color: 'var(--text-primary)', 
-              textDecoration: 'none',
-              fontWeight: '600',
-              display: 'flex',
+      {/* ── 1. HERO SECTION — CANONICAL NEUBRUTALISM SHOWCASE ── */}
+      <section style={{
+        background: '#FFE033',
+        border: '3px solid #000000',
+        boxShadow: '8px 8px 0 0 #000000',
+        padding: '3.5rem 2.5rem',
+        margin: '1rem 0 4rem',
+        position: 'relative',
+      }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+          
+          {/* Left Hero Column */}
+          <div>
+            <div style={{
+              display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--neon-cyan)';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(0,245,255,0.1)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,245,255,0.2)';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(0,245,255,0.05)';
-            }}>
-              🎮 3D Aim Trainer
-            </Link>
-            <Link href="/spacebar" style={{ 
-              background: 'rgba(0,245,255,0.05)', 
-              border: '1px solid rgba(0,245,255,0.2)', 
-              borderRadius: '8px', 
-              padding: '0.75rem 1.25rem', 
-              color: 'var(--text-primary)', 
-              textDecoration: 'none',
-              fontWeight: '600',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--neon-cyan)';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(0,245,255,0.1)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,245,255,0.2)';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(0,245,255,0.05)';
-            }}>
-              ▭ Spacebar Counter
-            </Link>
-            <Link href="/aim-trainer" style={{ 
-              background: 'rgba(0,245,255,0.05)', 
-              border: '1px solid rgba(0,245,255,0.2)', 
-              borderRadius: '8px', 
-              padding: '0.75rem 1.25rem', 
-              color: 'var(--text-primary)', 
-              textDecoration: 'none',
-              fontWeight: '600',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--neon-cyan)';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(0,245,255,0.1)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,245,255,0.2)';
-              (e.currentTarget as HTMLElement).style.background = 'rgba(0,245,255,0.05)';
-            }}>
-              🎯 2D Aim Trainer
-            </Link>
-          </div>
-        </div>
-
-        <div  style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/cps-test" className="btn btn-primary" style={{ fontSize: '1rem', padding: '0.85rem 2rem' }}>
-            ⚡ Start CPS Test
-          </Link>
-          <Link href="/typing-test" className="btn btn-secondary" style={{ fontSize: '1rem', padding: '0.85rem 2rem' }}>
-            ⌨️ Typing Speed Test
-          </Link>
-        </div>
-
-        <div  style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center' }}>
-          <button 
-            onClick={() => {
-              const element = document.getElementById('all-tools');
-              if (element) {
-                const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({ top: y, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--text-secondary)',
-              fontSize: '0.95rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              transition: 'all 0.2s ease',
+              padding: '0.4rem 1rem',
+              background: '#FF6B6B',
+              border: '3px solid #000000',
+              boxShadow: '3px 3px 0 0 #000000',
+              fontSize: '0.8rem',
+              fontWeight: 900,
+              color: '#000000',
               textTransform: 'uppercase',
-              letterSpacing: '0.05em'
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.color = 'var(--neon-cyan)';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.color = 'var(--text-secondary)';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-          >
-            View All 16 Tools <span style={{ fontSize: '1.2em' }}>→</span>
-          </button>
+              letterSpacing: '0.08em',
+              marginBottom: '1.5rem',
+            }}>
+              <span className="hero-pulse-dot" style={{ background: '#000000', boxShadow: 'none' }} />
+              EST. 2026 // FIXED AIM 2.0
+            </div>
+
+            <h1 style={{
+              fontSize: 'clamp(3rem, 7.5vw, 5.8rem)',
+              fontWeight: 900,
+              lineHeight: 0.95,
+              letterSpacing: '-0.03em',
+              textTransform: 'uppercase',
+              color: '#000000',
+              marginBottom: '1.25rem',
+              fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif"
+            }}>
+              TEST.<br />
+              TRAIN.<br />
+              DOMINATE.
+            </h1>
+
+            <p style={{
+              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+              color: '#000000',
+              fontWeight: 600,
+              maxWidth: '520px',
+              lineHeight: 1.6,
+              marginBottom: '2rem',
+            }}>
+              The definitive gaming benchmark platform that refuses to be invisible. 17 high-precision tools. Zero sign-up. Pure raw performance.
+            </p>
+
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Link href="/cps-test" className="btn btn-primary" style={{
+                background: '#FF6B6B',
+                color: '#000000',
+                border: '3px solid #000000',
+                boxShadow: '5px 5px 0 0 #000000',
+                fontSize: '1.05rem',
+                padding: '14px 28px',
+                fontWeight: 900,
+              }}>
+                ⚡ START CPS TEST
+              </Link>
+              <Link href="/typing-test" className="btn btn-secondary" style={{
+                background: '#74B9FF',
+                color: '#000000',
+                border: '3px solid #000000',
+                boxShadow: '5px 5px 0 0 #000000',
+                fontSize: '1.05rem',
+                padding: '14px 28px',
+                fontWeight: 900,
+              }}>
+                ⌨️ TYPING SPEED
+              </Link>
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('all-tools');
+                  if (element) {
+                    const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
+                className="btn"
+                style={{
+                  background: '#FFFFFF',
+                  color: '#000000',
+                  border: '3px solid #000000',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  fontSize: '0.95rem',
+                  padding: '13px 20px',
+                  fontWeight: 800,
+                }}
+              >
+                VIEW ALL 17 TOOLS ↓
+              </button>
+            </div>
+          </div>
+
+          {/* Right Hero Column — 3 Tilted Sticker Cards directly matching user reference image */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+            
+            {/* Sticker 1: Black Card */}
+            <div style={{
+              background: '#18181B',
+              color: '#FFFFFF',
+              border: '3px solid #000000',
+              boxShadow: '5px 5px 0 0 #000000',
+              padding: '1.25rem 2rem',
+              width: 'min(320px, 100%)',
+              transform: 'rotate(2.5deg)',
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 800,
+              fontSize: '1.05rem',
+              letterSpacing: '0.02em',
+              textAlign: 'center',
+            }}>
+              border: 3px solid #000;
+            </div>
+
+            {/* Sticker 2: Pink Card */}
+            <div style={{
+              background: '#FF6B6B',
+              color: '#000000',
+              border: '3px solid #000000',
+              boxShadow: '5px 5px 0 0 #000000',
+              padding: '1.25rem 2rem',
+              width: 'min(320px, 100%)',
+              transform: 'rotate(-2.5deg)',
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 800,
+              fontSize: '1.05rem',
+              letterSpacing: '0.02em',
+              textAlign: 'center',
+            }}>
+              box-shadow: 5px 5px 0 0 #000;
+            </div>
+
+            {/* Sticker 3: Mint/Cyan Card */}
+            <div style={{
+              background: '#74B9FF',
+              color: '#000000',
+              border: '3px solid #000000',
+              boxShadow: '5px 5px 0 0 #000000',
+              padding: '1.25rem 2rem',
+              width: 'min(320px, 100%)',
+              transform: 'rotate(1.5deg)',
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 800,
+              fontSize: '1.05rem',
+              letterSpacing: '0.02em',
+              textAlign: 'center',
+            }}>
+              border-radius: 0;
+            </div>
+
+          </div>
+
         </div>
       </section>
 
-      {/* Category Cards */}
+      {/* ── 2. CATEGORY CARDS — CHOOSE YOUR ARENA ── */}
       <section style={{ marginBottom: '4rem' }}>
-        <div className="section-label">Tools &amp; Games</div>
-        <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: '800', marginBottom: '0.75rem' }}>Choose Your Arena</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem' }}>Precision tools and skill games. Free, instant, no signup required.</p>
-
-        <style>{String.raw`
-          @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&display=swap');
-          .cod-card {
-            background: #0d0d0d;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 4px;
-            padding: 1.75rem 1.75rem 1.5rem 1.75rem;
-            text-decoration: none;
-            color: var(--text-primary);
-            display: block;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-          }
-          .cod-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 3px; height: 100%;
-            background: var(--card-accent, #00f5ff);
-            transition: width 0.2s ease;
-          }
-          .cod-card:hover::before { width: 5px; }
-          .cod-card:hover {
-            border-color: var(--card-accent, #00f5ff);
-            transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 24px rgba(0,0,0,0.3);
-          }
-          .cod-card-title {
-            font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 0.6rem;
-            margin-top: 0.5rem;
-          }
-          .cod-card-desc {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.55;
-            margin-bottom: 1.25rem;
-          }
-          .cod-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            padding: 0.25rem 0.65rem;
-            border-radius: 2px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            border: 1px solid;
-          }
-          .cod-arrow {
-            position: absolute;
-            top: 1.25rem; right: 1.25rem;
-            font-size: 1rem;
-            opacity: 0.45;
-            transition: opacity 0.2s, transform 0.2s;
-          }
-          .cod-card:hover .cod-arrow {
-            opacity: 1;
-            transform: translate(2px, -2px);
-          }
-        `}</style>
+        <div className="section-label">ARENA CATEGORIES</div>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>CHOOSE YOUR ARENA</h2>
+        <p style={{ color: '#2D3436', fontWeight: 600, marginBottom: '2rem' }}>Precision tools and skill games. Free, instant, zero signup required.</p>
 
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.25rem',
+          gap: '1.5rem',
         }}>
           {[
             {
               to: '/keyboard', title: 'Keyboard Tools',
-              desc: 'Test and improve your typing speed, accuracy, and keyboard mastery. From WPM records to key visualizers.',
-              color: '#00f5ff',
+              desc: 'Test and improve your typing speed, accuracy, and keyboard rollover mastery. From WPM sprints to live key visualizers.',
+              color: '#74B9FF',
               pills: [
                 { to: '/typing-test', label: 'Typing Speed' },
                 { to: '/key-visualizer', label: 'Key Visualizer' },
+                { to: '/spacebar', label: 'Spacebar' },
               ],
             },
             {
               to: '/mouse', title: 'Mouse Tools',
-              desc: 'Measure clicks per second, test double-click intervals, and challenge your overall mouse precision.',
-              color: '#4ade80',
+              desc: 'Measure clicks per second, test double-click bounce intervals, and challenge your overall mouse tracking precision.',
+              color: '#55EFC4',
               pills: [
                 { to: '/cps-test', label: 'CPS Test' },
                 { to: '/double-click', label: 'Double Click' },
+                { to: '/cps-rush', label: 'CPS Rush' },
               ],
             },
             {
               to: '/aim', title: 'Aim & Reaction',
-              desc: 'Train your reflexes, sharpen your aim, and simulate real FPS-style scenarios with moving targets.',
-              color: '#fb923c',
+              desc: 'Train your reflexes, sharpen your flicks, and simulate competitive FPS-style shootouts with dynamic moving targets.',
+              color: '#FF9F43',
               pills: [
                 { to: '/reaction-time', label: 'Reaction Time' },
                 { to: '/aim-trainer', label: 'Aim Trainer' },
+                { to: '/f1-reaction', label: 'F1 Reflex' },
               ],
             },
             {
               to: '/benchmark', title: 'Benchmark Hub',
-              desc: 'Benchmark your network speed, ping latency, jitter, and packet loss with real-time analytics.',
-              color: '#00f5ff',
+              desc: 'Benchmark your network speed, real-time ping latency, jitter variation, and packet loss with live telemetry.',
+              color: '#FFE033',
               pills: [
                 { to: '/benchmark', label: 'Benchmark Hub' },
-                { to: '/internet-speed', label: 'Internet Speed' },
+                { to: '/internet-speed', label: 'Speed Test' },
               ],
             },
             {
               to: '/games', title: 'Skill Games',
-              desc: 'Try our interactive games to develop your reaction time and CPS skills in a highly engaging environment.',
-              color: '#a855f7',
+              desc: 'Challenge yourself with interactive reflex arcade games to develop your reaction time and clicking endurance.',
+              color: '#A29BFE',
               pills: [
                 { to: '/space-defense', label: 'Space Defense' },
                 { to: '/voyager-game', label: 'Voyager Game' },
+                { to: '/space-waves', label: 'Space Waves' },
               ],
             },
           ].map(cat => (
             <Link
               key={cat.to}
               href={cat.to}
-              className="cod-card"
-              style={{ ['--card-accent' as string]: cat.color }}
+              className="card"
+              style={{
+                background: '#FFFFFF',
+                border: '3px solid #000000',
+                boxShadow: '5px 5px 0 0 #000000',
+                padding: '1.75rem',
+                textDecoration: 'none',
+                color: '#000000',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '7px 7px 0 0 #000000';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'translate(0, 0)';
+                e.currentTarget.style.boxShadow = '5px 5px 0 0 #000000';
+              }}
             >
-              <span className="cod-arrow" style={{ color: cat.color }}>↗</span>
-              <div className="cod-card-title" style={{ color: cat.color }}>{cat.title}</div>
-              <p className="cod-card-desc">{cat.desc}</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+              <div>
+                <div style={{
+                  display: 'inline-block',
+                  background: cat.color,
+                  border: '2px solid #000000',
+                  boxShadow: '2px 2px 0 0 #000000',
+                  padding: '2px 8px',
+                  fontWeight: 900,
+                  fontSize: '0.75rem',
+                  textTransform: 'uppercase',
+                  marginBottom: '0.75rem',
+                }}>
+                  {cat.title}
+                </div>
+                <div style={{
+                  fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
+                  fontSize: '1.45rem',
+                  fontWeight: 900,
+                  letterSpacing: '-0.01em',
+                  textTransform: 'uppercase',
+                  lineHeight: 1.1,
+                  marginBottom: '0.6rem',
+                  color: '#000000'
+                }}>{cat.title}</div>
+                <p style={{ color: '#2D3436', fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.55, marginBottom: '1.5rem' }}>{cat.desc}</p>
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', borderTop: '2px dashed #000000', paddingTop: '1rem' }}>
                 {cat.pills.map(p => (
-                  <span key={p.label} className="cod-pill" style={{
-                    background: cat.color + '18',
-                    color: cat.color,
-                    borderColor: cat.color + '40',
+                  <span key={p.label} style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '0.25rem 0.65rem',
+                    background: '#FFFDF5',
+                    color: '#000000',
+                    fontWeight: 800,
+                    fontSize: '0.75rem',
+                    textTransform: 'uppercase',
+                    border: '2px solid #000000',
+                    boxShadow: '2px 2px 0 0 #000000',
                   }}>{p.label}</span>
                 ))}
               </div>
@@ -621,245 +616,195 @@ export default function HomePage() {
         </div>
       </section>
 
-            {/* Quick Launch */}
+      {/* ── 3. QUICK LAUNCH GRID (ALL 17 TOOLS) ── */}
       <section id="all-tools" style={{ marginBottom: '4rem' }}>
-        <div className="section-label">Quick Launch</div>
-        <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: '800', marginBottom: '0.75rem' }}>Jump In Instantly</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem' }}>No setup required. Click a tool and start testing in under 3 seconds.</p>
+        <div className="section-label">QUICK LAUNCH</div>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>JUMP IN INSTANTLY</h2>
+        <p style={{ color: '#2D3436', fontWeight: 600, marginBottom: '2rem' }}>No setup required. Click any tool and start testing in under 2 seconds.</p>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-          gap: '1rem',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+          gap: '1.25rem',
         }}>
           {tools.map(tool => (
             <Link
               key={tool.to}
               href={tool.to}
               style={{
-                background: '#0d0d0d',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderLeft: `3px solid ${tool.accent}`,
-                borderRadius: '4px',
-                padding: '1rem 1.25rem',
+                background: '#FFFFFF',
+                border: '3px solid #000000',
+                boxShadow: '4px 4px 0 0 #000000',
+                padding: '1.1rem 1.25rem',
                 textDecoration: 'none',
-                color: 'var(--text-primary)',
+                color: '#000000',
                 display: 'flex',
-                alignItems: 'center',
-                gap: '0.85rem',
-                transition: 'all 0.2s ease',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                minHeight: '85px',
+                transition: 'transform 0.1s ease, box-shadow 0.1s ease',
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = tool.accent;
-                el.style.borderLeftWidth = '5px';
-                el.style.transform = 'translateY(-3px)';
-                el.style.boxShadow = '0 10px 28px rgba(0,0,0,0.5)';
+                el.style.transform = 'translate(-2px, -2px)';
+                el.style.boxShadow = '6px 6px 0 0 #000000';
+                el.style.background = '#FFF6D6';
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = 'rgba(255,255,255,0.07)';
-                el.style.borderLeftColor = tool.accent;
-                el.style.borderLeftWidth = '3px';
-                el.style.transform = 'translateY(0)';
-                el.style.boxShadow = 'none';
+                el.style.transform = 'translate(0, 0)';
+                el.style.boxShadow = '4px 4px 0 0 #000000';
+                el.style.background = '#FFFFFF';
               }}
             >
-              <div>
-                <div style={{ fontFamily: "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif", fontWeight: 800, fontSize: '1rem', letterSpacing: '0.04em', textTransform: 'uppercase', lineHeight: 1.2 }}>{tool.name}</div>
-                <div style={{ fontSize: '0.72rem', color: tool.accent, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '0.2rem' }}>{tool.tag}</div>
+              <div style={{
+                fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
+                fontWeight: 900,
+                fontSize: '1.05rem',
+                letterSpacing: '-0.01em',
+                textTransform: 'uppercase',
+                lineHeight: 1.2,
+                color: '#000000'
+              }}>{tool.name}</div>
+              
+              <div style={{ marginTop: '0.5rem' }}>
+                <span style={{
+                  display: 'inline-block',
+                  fontSize: '0.68rem',
+                  background: '#FFE033',
+                  border: '2px solid #000000',
+                  boxShadow: '2px 2px 0 0 #000000',
+                  color: '#000000',
+                  fontWeight: 900,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.04em',
+                  padding: '1px 6px',
+                }}>{tool.tag}</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Internet Speed Mini Widget */}
+      {/* ── 4. INTERNET SPEED MINI WIDGET — NEUBRUTALISM ── */}
       <section style={{ marginBottom: '5rem' }}>
-        <style>{`
-          @keyframes spin-gauge {
-            from { stroke-dashoffset: 283; }
-            to   { stroke-dashoffset: 0; }
-          }
-          .speed-gauge-arc {
-            transition: stroke-dashoffset 0.6s ease;
-          }
-          .speed-mini-card {
-            background: #0d0d0d;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-left: 3px solid #00f5ff;
-            border-radius: 4px;
-            padding: 2rem;
-          }
-          .speed-mini-label {
-            font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            font-size: 0.72rem;
-            color: #00f5ff;
-            margin-bottom: 0.25rem;
-          }
-          .speed-mini-value {
-            font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-            font-weight: 800;
-            font-size: 2.5rem;
-            letter-spacing: 0.04em;
-            color: #fff;
-            line-height: 1;
-          }
-          .speed-mini-unit {
-            font-size: 0.9rem;
-            color: #8a9bb2;
-            font-weight: 600;
-            margin-left: 4px;
-          }
-          .speed-stat-row {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-          }
-          .speed-stat {
-            flex: 1;
-            min-width: 80px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 4px;
-            padding: 0.75rem 1rem;
-          }
-          .speed-stat-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #566679;
-            margin-bottom: 0.3rem;
-          }
-          .speed-stat-val {
-            font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: #e7edf5;
-          }
-          .speed-cta-btn {
-            display: block;
-            width: 100%;
-            margin-top: 1.5rem;
-            padding: 0.85rem;
-            background: #00f5ff;
-            color: #000;
-            font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-            font-size: 1.05rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: opacity 0.2s;
-          }
-          .speed-cta-btn:hover { opacity: 0.85; }
-          .speed-secondary-btn {
-            display: block;
-            width: 100%;
-            margin-top: 0.75rem;
-            padding: 0.75rem;
-            background: transparent;
-            color: #00f5ff;
-            font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            text-align: center;
-            text-decoration: none;
-            border: 1px solid rgba(0,245,255,0.3);
-            border-radius: 4px;
-            transition: border-color 0.2s, background 0.2s;
-          }
-          .speed-secondary-btn:hover { border-color: #00f5ff; background: rgba(0,245,255,0.06); }
-        `}</style>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'start' }}>
 
-          {/* LEFT: Mini Speed Dashboard */}
+          {/* LEFT: Mini Speed Dashboard Card */}
           <div>
-            <div className="section-label">Benchmark</div>
-            <h2 style={{ fontFamily: "'Barlow Condensed','Arial Narrow',Arial,sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.4rem)', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-              Internet Speed<br /><span style={{ color: '#00f5ff' }}>Monitor</span>
+            <div className="section-label">BENCHMARK</div>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+              INTERNET SPEED<br /><span style={{ background: '#FFE033', padding: '0 6px', border: '2px solid #000' }}>MONITOR</span>
             </h2>
-            <div className="speed-mini-card">
+
+            <div className="card" style={{
+              background: '#FFFFFF',
+              border: '3px solid #000000',
+              boxShadow: '6px 6px 0 0 #000000',
+              padding: '2rem',
+            }}>
               {/* Gauge */}
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
                 <svg width="180" height="100" viewBox="0 0 180 100" fill="none">
-                  {/* Track arc */}
-                  <path d="M 20 90 A 70 70 0 0 1 160 90" stroke="rgba(255,255,255,0.08)" strokeWidth="10" strokeLinecap="round" fill="none"/>
-                  {/* Active arc — static decorative at ~35% for preview */}
-                  <path d="M 20 90 A 70 70 0 0 1 160 90" stroke="url(#sg)" strokeWidth="10" strokeLinecap="round" fill="none"
-                    strokeDasharray="220" strokeDashoffset="143" style={{ transition: 'stroke-dashoffset 0.6s ease' }}/>
-                  {/* Needle */}
-                  <line x1="90" y1="90" x2="50" y2="40" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/>
-                  <circle cx="90" cy="90" r="5" fill="#ef4444"/>
-                  {/* Labels */}
-                  <text x="16" y="100" fill="#566679" fontSize="10" fontWeight="700">0</text>
-                  <text x="148" y="100" fill="#566679" fontSize="10" fontWeight="700">250</text>
-                  <defs>
-                    <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#00f5ff"/>
-                      <stop offset="100%" stopColor="#4ade80"/>
-                    </linearGradient>
-                  </defs>
+                  <path d="M 20 90 A 70 70 0 0 1 160 90" stroke="#000000" strokeWidth="12" strokeLinecap="square" fill="none"/>
+                  <path d="M 20 90 A 70 70 0 0 1 160 90" stroke="#FFE033" strokeWidth="8" strokeLinecap="square" fill="none"
+                    strokeDasharray="220" strokeDashoffset="130" />
+                  <line x1="90" y1="90" x2="55" y2="45" stroke="#FF4757" strokeWidth="4" strokeLinecap="square"/>
+                  <circle cx="90" cy="90" r="7" fill="#000000"/>
+                  <text x="16" y="100" fill="#000000" fontSize="12" fontWeight="900">0</text>
+                  <text x="145" y="100" fill="#000000" fontSize="12" fontWeight="900">250</text>
                 </svg>
               </div>
+
               {/* Speed value */}
               <div style={{ textAlign: 'center', marginBottom: '0.25rem' }}>
-                <span className="speed-mini-value">—</span>
-                <span className="speed-mini-unit">Mbps</span>
+                <span style={{ fontFamily: "'Public Sans', sans-serif", fontWeight: 900, fontSize: '2.8rem', color: '#000000', lineHeight: 1 }}>—</span>
+                <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#000000', marginLeft: '6px' }}>Mbps</span>
               </div>
-              <div style={{ textAlign: 'center', fontSize: '0.78rem', color: '#566679', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Run a test to see your speed</div>
+              <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#2D3436', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                Ready to benchmark connection
+              </div>
+
               {/* Stats row */}
-              <div className="speed-stat-row">
-                <div className="speed-stat">
-                  <div className="speed-stat-label">↓ Download</div>
-                  <div className="speed-stat-val">—</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1rem' }}>
+                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>↓ Download</div>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
                 </div>
-                <div className="speed-stat">
-                  <div className="speed-stat-label">↑ Upload</div>
-                  <div className="speed-stat-val">—</div>
+                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>↑ Upload</div>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
                 </div>
-                <div className="speed-stat">
-                  <div className="speed-stat-label">Ping</div>
-                  <div className="speed-stat-val">—</div>
+                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>Ping Latency</div>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
                 </div>
-                <div className="speed-stat">
-                  <div className="speed-stat-label">Jitter</div>
-                  <div className="speed-stat-val">—</div>
+                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>Jitter</div>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
                 </div>
               </div>
+
               {/* CTA buttons */}
-              <Link href="/internet-speed" className="speed-cta-btn">Run Speed Test →</Link>
-              <Link href="/benchmark" className="speed-secondary-btn">View Benchmark Hub</Link>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.5rem' }}>
+                <Link href="/internet-speed" className="btn btn-primary" style={{
+                  background: '#FFE033',
+                  color: '#000000',
+                  border: '3px solid #000000',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  padding: '12px',
+                  fontWeight: 900,
+                  textAlign: 'center',
+                }}>
+                  RUN FULL SPEED TEST →
+                </Link>
+                <Link href="/benchmark" className="btn btn-secondary" style={{
+                  background: '#FFFFFF',
+                  color: '#000000',
+                  border: '3px solid #000000',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  padding: '10px',
+                  fontWeight: 800,
+                  textAlign: 'center',
+                }}>
+                  VIEW BENCHMARK HUB
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT: Info + why test */}
+          {/* RIGHT: Why It Matters */}
           <div>
-            <div className="section-label">Why It Matters</div>
-            <h2 style={{ fontFamily: "'Barlow Condensed','Arial Narrow',Arial,sans-serif", fontSize: 'clamp(1.75rem, 4vw, 2.4rem)', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-              Know Your<br /><span style={{ color: '#00f5ff' }}>Connection</span>
+            <div className="section-label">WHY IT MATTERS</div>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+              KNOW YOUR<br /><span style={{ background: '#74B9FF', padding: '0 6px', border: '2px solid #000' }}>CONNECTION</span>
             </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { label: 'Download Speed', color: '#00f5ff', desc: 'How fast data arrives to you — affects streaming, web browsing, and game updates.' },
-                { label: 'Upload Speed',   color: '#4ade80', desc: 'How fast you send data — critical for video calls, live streaming, and cloud backups.' },
-                { label: 'Ping / Latency', color: '#fb923c', desc: 'Round-trip delay in ms. Under 50ms is great for online gaming. Lower = better.' },
-                { label: 'Jitter',         color: '#a855f7', desc: 'Variation in ping over time. High jitter = choppy video calls and rubberbanding in games.' },
-                { label: 'Packet Loss',    color: '#ef4444', desc: 'Percentage of data that never arrives. Even 1% causes noticeable lag and stutters.' },
+                { label: 'Download Speed', color: '#74B9FF', desc: 'How fast data arrives to you — affects streaming, website rendering, and large game updates.' },
+                { label: 'Upload Speed',   color: '#55EFC4', desc: 'How fast you send data — critical for Twitch streaming, voice channels, and uploading files.' },
+                { label: 'Ping / Latency', color: '#FF9F43', desc: 'Round-trip delay in ms. Sub-30ms gives you decisive competitive advantage in FPS matches.' },
+                { label: 'Jitter',         color: '#A29BFE', desc: 'Variation in ping over time. High jitter causes rubberbanding and erratic input spikes.' },
+                { label: 'Packet Loss',    color: '#FF6B6B', desc: 'Percentage of packets dropped by your ISP. Even 1% loss triggers stutters and missed hits.' },
               ].map(item => (
-                <div key={item.label} style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)', borderLeft: `3px solid ${item.color}`, borderRadius: '4px', padding: '1rem 1.25rem' }}>
-                  <div style={{ fontFamily: "'Barlow Condensed','Arial Narrow',Arial,sans-serif", fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: item.color, marginBottom: '0.25rem' }}>{item.label}</div>
-                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.55' }}>{item.desc}</div>
+                <div key={item.label} style={{
+                  background: '#FFFFFF',
+                  border: '3px solid #000000',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  padding: '1rem 1.25rem',
+                }}>
+                  <div style={{
+                    display: 'inline-block',
+                    background: item.color,
+                    border: '2px solid #000000',
+                    padding: '2px 8px',
+                    fontWeight: 900,
+                    fontSize: '0.82rem',
+                    textTransform: 'uppercase',
+                    marginBottom: '0.35rem',
+                    color: '#000000'
+                  }}>{item.label}</div>
+                  <div style={{ color: '#2D3436', fontSize: '0.88rem', fontWeight: 600, lineHeight: 1.55 }}>{item.desc}</div>
                 </div>
               ))}
             </div>
@@ -868,44 +813,90 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Gear Section */}      <section style={{
+      {/* ── 5. GEAR UP SECTION ── */}
+      <section style={{
         marginBottom: '4rem',
-        background: 'rgba(8,13,20,0.6)',
-        border: '1px solid var(--border)',
-        borderRadius: '20px',
+        background: '#FFE033',
+        border: '3px solid #000000',
+        boxShadow: '6px 6px 0 0 #000000',
         padding: '3rem 2rem',
       }}>
-        <div className="section-label">Gear Up</div>
-        <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: '800', marginBottom: '0.75rem' }}>Top Gaming Gear Picks</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem' }}>Top gear picked by competitive gamers and professionals. Affiliate links help keep this platform free.</p>
+        <div style={{
+          display: 'inline-block',
+          background: '#FFFFFF',
+          border: '3px solid #000000',
+          boxShadow: '3px 3px 0 0 #000000',
+          padding: '4px 12px',
+          fontWeight: 900,
+          textTransform: 'uppercase',
+          fontSize: '0.85rem',
+          marginBottom: '1rem',
+        }}>GEAR UP</div>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem', color: '#000000' }}>TOP GAMING GEAR PICKS</h2>
+        <p style={{ color: '#1E272E', fontWeight: 700, marginBottom: '2.5rem' }}>Top equipment verified by competitive gamers. Affiliate links support our free platform.</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: '1.5rem' }}>
           {gearItems.map(gear => (
-            <a key={gear.name} href="#affiliate" className="gear-card" style={{ textDecoration: 'none', color: 'var(--text-primary)' }}>
-              <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }}>{gear.icon}</span>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>{gear.brand}</div>
-              <div style={{ fontWeight: '700', fontSize: '1rem', marginBottom: '0.5rem' }}>{gear.name}</div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5', marginBottom: '1rem' }}>{gear.desc}</p>
-              <div style={{ color: 'var(--neon-green)', fontWeight: '800', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{gear.price}</div>
-              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>*Affiliate link — commission earned</div>
+            <a key={gear.name} href="#affiliate" className="card" style={{
+              background: '#FFFFFF',
+              border: '3px solid #000000',
+              boxShadow: '5px 5px 0 0 #000000',
+              textDecoration: 'none',
+              color: '#000000',
+              padding: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}>
+              <div>
+                <div style={{
+                  display: 'inline-block',
+                  background: '#FFE033',
+                  border: '2px solid #000000',
+                  boxShadow: '2px 2px 0 0 #000000',
+                  padding: '2px 8px',
+                  fontSize: '0.7rem',
+                  fontWeight: 900,
+                  letterSpacing: '0.06em',
+                  marginBottom: '0.75rem',
+                }}>{gear.category}</div>
+                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#636E72', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.25rem' }}>{gear.brand}</div>
+                <div style={{ fontWeight: 900, fontSize: '1.1rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{gear.name}</div>
+                <p style={{ color: '#2D3436', fontSize: '0.85rem', fontWeight: 600, lineHeight: 1.5, marginBottom: '1rem' }}>{gear.desc}</p>
+              </div>
+              <div>
+                <div style={{
+                  display: 'inline-block',
+                  background: '#55EFC4',
+                  border: '2px solid #000000',
+                  boxShadow: '2px 2px 0 0 #000000',
+                  padding: '2px 8px',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '1.1rem',
+                  marginBottom: '0.5rem'
+                }}>{gear.price}</div>
+                <div style={{ fontSize: '0.7rem', color: '#636E72', fontWeight: 700, fontStyle: 'italic' }}>*Affiliate link — commission earned</div>
+              </div>
             </a>
           ))}
         </div>
       </section>
 
-      {/* SEO Article Section */}
-      <hr style={{ borderColor: 'var(--border)', margin: '3rem 0' }} />
+      {/* ── 6. SEO ARTICLE SECTION — ACCORDION GUIDE ── */}
+      <hr style={{ border: 0, borderTop: '3px solid #000000', margin: '3.5rem 0' }} />
 
       <section style={{ marginBottom: '4rem' }}>
-        <div className="section-label">Complete Guide</div>
-        <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', fontWeight: '800', marginBottom: '0.5rem' }}>
-          Everything You Need to Know About Our Tools
+        <div className="section-label">COMPLETE BENCHMARK GUIDE</div>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 900, marginBottom: '0.5rem' }}>
+          EVERYTHING YOU NEED TO KNOW ABOUT OUR TOOLS
         </h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', maxWidth: '700px' }}>
+        <p style={{ color: '#2D3436', fontWeight: 600, marginBottom: '2rem', maxWidth: '750px' }}>
           Detailed breakdowns of every tool — what it measures, why it matters, how to improve your score, and which gear actually helps.
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '2.5rem' }}>
+        {/* Quick jump filter buttons */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '2.5rem' }}>
           {seoArticles.map(a => (
             <button
               key={a.to}
@@ -914,24 +905,27 @@ export default function HomePage() {
                 el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
               style={{
-                padding: '0.35rem 0.85rem',
-                borderRadius: '50px',
-                border: `1px solid ${a.color}40`,
-                background: `${a.color}10`,
-                color: a.color,
-                fontSize: '0.78rem',
-                fontWeight: '600',
+                padding: '0.45rem 1rem',
+                border: '2px solid #000000',
+                boxShadow: '3px 3px 0 0 #000000',
+                background: '#FFFFFF',
+                color: '#000000',
+                fontSize: '0.82rem',
+                fontWeight: 800,
                 cursor: 'pointer',
-                transition: 'all 0.2s',
+                transition: 'all 0.1s ease',
                 whiteSpace: 'nowrap',
+                textTransform: 'uppercase',
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = `${a.color}25`;
-                (e.currentTarget as HTMLButtonElement).style.borderColor = a.color;
+                e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '5px 5px 0 0 #000000';
+                e.currentTarget.style.background = '#FFE033';
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = `${a.color}10`;
-                (e.currentTarget as HTMLButtonElement).style.borderColor = `${a.color}40`;
+                e.currentTarget.style.transform = 'translate(0, 0)';
+                e.currentTarget.style.boxShadow = '3px 3px 0 0 #000000';
+                e.currentTarget.style.background = '#FFFFFF';
               }}
             >
               {a.icon} {a.badge}
@@ -939,7 +933,8 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        {/* Accordion List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {seoArticles.map(article => {
             const isExpanded = expandedArticle === article.to;
             return (
@@ -947,12 +942,11 @@ export default function HomePage() {
                 key={article.to}
                 id={`seo-${article.to.replace('/', '')}`}
                 style={{
-                  background: '#0d0d0d',
-                  border: `1px solid ${isExpanded ? article.color : 'rgba(255,255,255,0.07)'}`,
-                  borderLeft: `3px solid ${article.color}`,
-                  borderRadius: '4px',
+                  background: '#FFFFFF',
+                  border: '3px solid #000000',
+                  boxShadow: isExpanded ? '7px 7px 0 0 #000000' : '5px 5px 0 0 #000000',
                   overflow: 'hidden',
-                  transition: 'border-color 0.3s ease',
+                  transition: 'box-shadow 0.15s ease',
                   scrollMarginTop: '80px',
                 }}
               >
@@ -960,8 +954,9 @@ export default function HomePage() {
                   onClick={() => setExpandedArticle(isExpanded ? null : article.to)}
                   style={{
                     width: '100%',
-                    background: 'none',
+                    background: isExpanded ? '#FFF6D6' : '#FFFFFF',
                     border: 'none',
+                    borderBottom: isExpanded ? '3px solid #000000' : 'none',
                     cursor: 'pointer',
                     padding: '1.5rem 1.75rem',
                     display: 'flex',
@@ -970,132 +965,123 @@ export default function HomePage() {
                     textAlign: 'left',
                   }}
                 >
-
-
                   <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.3rem', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
                       <span style={{
-                        padding: '0.15rem 0.55rem',
-                        borderRadius: '4px',
-                        fontSize: '0.65rem',
-                        fontWeight: '700',
+                        padding: '0.2rem 0.6rem',
+                        fontSize: '0.72rem',
+                        fontWeight: 900,
                         textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        background: `${article.color}20`,
-                        color: article.color,
+                        letterSpacing: '0.06em',
+                        background: '#FFE033',
+                        border: '2px solid #000000',
+                        boxShadow: '2px 2px 0 0 #000000',
+                        color: '#000000',
                       }}>{article.badge}</span>
                     </div>
                     <h3 style={{
-                      color: 'var(--text-primary)',
-                      fontFamily: "'Barlow Condensed', 'Arial Narrow', Arial, sans-serif",
-                      fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                      fontWeight: 800,
-                      letterSpacing: '0.04em',
+                      color: '#000000',
+                      fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
+                      fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
+                      fontWeight: 900,
+                      letterSpacing: '-0.01em',
                       textTransform: 'uppercase',
                       margin: 0,
-                      lineHeight: '1.2',
+                      lineHeight: 1.25,
                     }}>
                       {article.title}
                     </h3>
                   </div>
 
                   <div style={{
-                    width: '28px', height: '28px', flexShrink: 0,
-                    border: `1px solid ${article.color}50`,
-                    borderRadius: '2px',
+                    width: '34px', height: '34px', flexShrink: 0,
+                    border: '2px solid #000000',
+                    boxShadow: '2px 2px 0 0 #000000',
+                    background: '#FFE033',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: article.color,
-                    fontSize: '1rem',
-                    transition: 'transform 0.3s ease',
+                    color: '#000000',
+                    fontWeight: 900,
+                    fontSize: '1.2rem',
+                    transition: 'transform 0.2s ease',
                     transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                   }}>
                     ▾
                   </div>
                 </button>
 
-                <div style={{ display: isExpanded ? 'block' : 'none' }}>
-                  <div style={{ padding: '0 1.75rem 1.75rem', borderTop: `1px solid ${article.color}20` }}>
-                    <div style={{ marginBottom: '1.75rem', paddingTop: '1.25rem' }}>
-                      {article.content.map((para, i) => (
-                        <p
-                          key={i}
-                          style={{
-                            color: 'var(--text-secondary)',
-                            lineHeight: '1.8',
-                            fontSize: '0.95rem',
-                            marginBottom: i < article.content.length - 1 ? '1rem' : '0',
-                          }}
-                          dangerouslySetInnerHTML={{ __html: para }}
-                        />
+                <div style={{ display: isExpanded ? 'block' : 'none', padding: '1.75rem' }}>
+                  <div style={{ marginBottom: '1.75rem' }}>
+                    {article.content.map((para, i) => (
+                      <p
+                        key={i}
+                        style={{
+                          color: '#2D3436',
+                          fontWeight: 500,
+                          lineHeight: 1.8,
+                          fontSize: '0.98rem',
+                          marginBottom: i < article.content.length - 1 ? '1rem' : '0',
+                        }}
+                        dangerouslySetInnerHTML={{ __html: para }}
+                      />
+                    ))}
+                  </div>
+
+                  <div style={{
+                    background: '#FFFDF5',
+                    border: '3px solid #000000',
+                    boxShadow: '4px 4px 0 0 #000000',
+                    padding: '1.5rem',
+                    marginBottom: '1.75rem',
+                  }}>
+                    <h4 style={{
+                      color: '#000000',
+                      fontSize: '0.9rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                      marginBottom: '1.25rem',
+                      marginTop: 0,
+                      borderBottom: '2px solid #000000',
+                      paddingBottom: '4px',
+                      display: 'inline-block'
+                    }}>
+                      FREQUENTLY ASKED QUESTIONS
+                    </h4>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                      {article.faqs.map((faq, fi) => (
+                        <div key={fi}>
+                          <div style={{ color: '#000000', fontWeight: 800, fontSize: '0.95rem', marginBottom: '0.35rem' }}>
+                            Q: {faq.q}
+                          </div>
+                          <div style={{
+                            color: '#2D3436',
+                            fontSize: '0.9rem',
+                            fontWeight: 500,
+                            lineHeight: 1.65,
+                            paddingLeft: '0.85rem',
+                            borderLeft: '3px solid #000000',
+                          }}>
+                            {faq.a}
+                          </div>
+                        </div>
                       ))}
                     </div>
-
-                    <div style={{
-                      background: 'rgba(255,255,255,0.03)',
-                      border: `1px solid ${article.color}20`,
-                      borderRadius: '12px',
-                      padding: '1.25rem',
-                      marginBottom: '1.5rem',
-                    }}>
-                      <h4 style={{
-                        color: article.color,
-                        fontSize: '0.8rem',
-                        fontWeight: '700',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
-                        marginBottom: '1rem',
-                        marginTop: 0,
-                      }}>
-                        Frequently Asked Questions
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {article.faqs.map((faq, fi) => (
-                          <div key={fi}>
-                            <div style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.9rem', marginBottom: '0.3rem' }}>
-                              Q: {faq.q}
-                            </div>
-                            <div style={{
-                              color: 'var(--text-secondary)',
-                              fontSize: '0.875rem',
-                              lineHeight: '1.65',
-                              paddingLeft: '0.75rem',
-                              borderLeft: `2px solid ${article.color}40`,
-                            }}>
-                              {faq.a}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={article.to}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '0.6rem 1.4rem',
-                        background: `${article.color}15`,
-                        border: `1px solid ${article.color}50`,
-                        borderRadius: '8px',
-                        color: article.color,
-                        fontWeight: '700',
-                        fontSize: '0.875rem',
-                        textDecoration: 'none',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={e => {
-                        (e.currentTarget as HTMLAnchorElement).style.background = `${article.color}25`;
-                        (e.currentTarget as HTMLAnchorElement).style.borderColor = article.color;
-                      }}
-                      onMouseLeave={e => {
-                        (e.currentTarget as HTMLAnchorElement).style.background = `${article.color}15`;
-                        (e.currentTarget as HTMLAnchorElement).style.borderColor = `${article.color}50`;
-                      }}
-                    >
-                      {article.icon} Launch {article.badge} Tool →
-                    </Link>
                   </div>
+
+                  <Link
+                    href={article.to}
+                    className="btn btn-primary"
+                    style={{
+                      background: '#FFE033',
+                      border: '3px solid #000000',
+                      boxShadow: '4px 4px 0 0 #000000',
+                      color: '#000000',
+                      fontWeight: 900,
+                      fontSize: '0.92rem',
+                    }}
+                  >
+                    LAUNCH {article.badge} TOOL →
+                  </Link>
                 </div>
               </article>
             );
@@ -1106,5 +1092,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-

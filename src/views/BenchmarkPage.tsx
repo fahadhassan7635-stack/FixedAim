@@ -28,53 +28,64 @@ export default function BenchmarkPage() {
       />
       <style>{`
   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&display=swap');
-  .cod-hub-card {
-    background: #0d0d0d;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-left: 3px solid var(--ch-accent, #00f5ff);
-    border-radius: 4px;
+    .cod-hub-card {
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0 0 #000000;
+    border-radius: 0;
     padding: 1.75rem 1.75rem 1.5rem 1.75rem;
     text-decoration: none;
-    color: var(--text-primary);
+    color: #000000;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
-    transition: all 0.2s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
     position: relative;
   }
   .cod-hub-card:hover {
-    border-left-width: 5px;
-    border-color: var(--ch-accent, #00f5ff);
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #000000;
+    border-color: #000000;
   }
   .cod-hub-title {
-    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
     font-size: 1.4rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
+    font-weight: 900;
+    letter-spacing: -0.01em;
     text-transform: uppercase;
     line-height: 1.1;
     margin-bottom: 0.5rem;
+    color: #000000;
   }
   .cod-hub-tag {
     position: absolute;
     top: 1rem; right: 1rem;
-    padding: 0.2rem 0.55rem;
-    border-radius: 2px;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    border: 1px solid;
+    background: #FFE033;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0 0 #000000;
+    color: #000000;
+  }
+  .cod-hub-desc {
+    color: #2D3436;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
   }
   .cod-hub-cta {
-    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 0.06em;
+    font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    color: #000000;
   }
   .cod-tip-box {
     background: #0d0d0d;

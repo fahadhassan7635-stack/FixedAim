@@ -1153,18 +1153,32 @@ export default function BlogPage() {
 
         <div
           style={{
-            background: `${post.tagColor}15`,
-            height: '160px',
-            borderRadius: '16px',
+            background: '#FFE033',
+            border: '3px solid #000000',
+            boxShadow: '5px 5px 0 0 #000000',
+            padding: '1.25rem 1.75rem',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '5rem',
+            justifyContent: 'space-between',
             marginBottom: '2rem',
-            border: `1px solid ${post.tagColor}30`,
           }}
         >
-          {post.emoji}
+          <span
+            style={{
+              background: '#000000',
+              color: '#FFE033',
+              padding: '4px 10px',
+              fontSize: '0.85rem',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
+          >
+            {post.tag} GUIDE
+          </span>
+          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#000000' }}>
+            {post.readTime}
+          </span>
         </div>
 
         <div
@@ -1303,18 +1317,17 @@ export default function BlogPage() {
             key={tag}
             onClick={() => setFilter(tag)}
             style={{
-              padding: '0.4rem 1rem',
-              borderRadius: '8px',
-              border:
-                filter === tag ? '1px solid var(--neon-cyan)' : '1px solid var(--border)',
-              background:
-                filter === tag ? 'rgba(0,245,255,0.1)' : 'var(--bg-card)',
-              color:
-                filter === tag ? 'var(--neon-cyan)' : 'var(--text-secondary)',
-              fontWeight: '600',
+              padding: '0.45rem 1rem',
+              border: '2px solid #000000',
+              boxShadow: filter === tag ? '4px 4px 0 0 #000000' : '2px 2px 0 0 #000000',
+              background: filter === tag ? '#FFE033' : '#FFFFFF',
+              color: '#000000',
+              fontWeight: 900,
               cursor: 'pointer',
-              fontSize: '0.875rem',
-              transition: 'all 0.2s',
+              fontSize: '0.85rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              transition: 'transform 0.1s ease',
             }}
           >
             {tag}
@@ -1334,38 +1347,50 @@ export default function BlogPage() {
             key={p.id}
             onClick={() => setSelected(p.id)}
             style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border)',
-              borderRadius: '16px',
+              background: '#FFFFFF',
+              border: '3px solid #000000',
+              boxShadow: '5px 5px 0 0 #000000',
               overflow: 'hidden',
               cursor: 'pointer',
-              transition: 'all 0.3s ease',
+              transition: 'transform 0.15s ease, box-shadow 0.15s ease',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.borderColor = p.tagColor;
-              el.style.transform = 'translateY(-4px)';
-              el.style.boxShadow = '0 15px 40px rgba(0,0,0,0.4)';
+              el.style.transform = 'translate(-2px, -2px)';
+              el.style.boxShadow = '7px 7px 0 0 #000000';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.borderColor = 'var(--border)';
-              el.style.transform = 'translateY(0)';
-              el.style.boxShadow = 'none';
+              el.style.transform = 'translate(0, 0)';
+              el.style.boxShadow = '5px 5px 0 0 #000000';
             }}
           >
             <div
               style={{
-                height: '120px',
-                background: `linear-gradient(135deg, ${p.tagColor}15, transparent)`,
+                padding: '1.25rem',
+                background: '#FFE033',
+                borderBottom: '3px solid #000000',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '3.5rem',
-                borderBottom: '1px solid var(--border)',
+                justifyContent: 'space-between',
               }}
             >
-              {p.emoji}
+              <span
+                style={{
+                  padding: '3px 8px',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  background: '#000000',
+                  color: '#FFE033',
+                }}
+              >
+                {p.tag}
+              </span>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000' }}>
+                {p.readTime}
+              </span>
             </div>
             <div style={{ padding: '1.25rem' }}>
               <div
@@ -1379,42 +1404,48 @@ export default function BlogPage() {
               >
                 <span
                   style={{
-                    padding: '0.2rem 0.6rem',
-                    borderRadius: '4px',
-                    fontSize: '0.7rem',
-                    fontWeight: '700',
-                    background: `${p.tagColor}15`,
-                    color: p.tagColor,
+                    padding: '2px 8px',
+                    fontSize: '0.72rem',
+                    fontWeight: 900,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    background: '#FFE033',
+                    border: '2px solid #000000',
+                    boxShadow: '2px 2px 0 0 #000000',
+                    color: '#000000',
                   }}
                 >
                   {p.tag}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#485460' }}>
                   {p.readTime}
                 </span>
               </div>
               <h3
                 style={{
-                  fontWeight: '700',
-                  fontSize: '1rem',
+                  fontWeight: 900,
+                  fontSize: '1.05rem',
                   marginBottom: '0.5rem',
-                  lineHeight: '1.4',
+                  lineHeight: '1.35',
+                  textTransform: 'uppercase',
+                  color: '#000000'
                 }}
               >
                 {p.title}
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
+              <p style={{ color: '#2D3436', fontSize: '0.88rem', fontWeight: 500, lineHeight: '1.6' }}>
                 {p.excerpt}
               </p>
               <div
                 style={{
                   marginTop: '1rem',
-                  color: p.tagColor,
-                  fontWeight: '600',
-                  fontSize: '0.85rem',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '0.88rem',
+                  textTransform: 'uppercase',
                 }}
               >
-                Read more →
+                READ ARTICLE →
               </div>
             </div>
           </div>
