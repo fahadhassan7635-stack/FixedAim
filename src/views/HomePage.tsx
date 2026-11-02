@@ -797,30 +797,30 @@ export default function HomePage() {
 
               {/* Speed value */}
               <div style={{ textAlign: 'center', marginBottom: '0.25rem' }}>
-                <span style={{ fontFamily: "'Public Sans', sans-serif", fontWeight: 900, fontSize: '2.8rem', color: '#000000', lineHeight: 1 }}>—</span>
-                <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#000000', marginLeft: '6px' }}>Mbps</span>
+                <span className="speed-metric-num" style={{ fontFamily: "'Public Sans', sans-serif", fontWeight: 900, fontSize: '2.8rem', lineHeight: 1 }}>—</span>
+                <span className="speed-metric-unit" style={{ fontSize: '1.1rem', fontWeight: 800, marginLeft: '6px' }}>Mbps</span>
               </div>
-              <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#2D3436', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+              <div className="speed-sub-status" style={{ textAlign: 'center', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1rem' }}>
                 Ready to benchmark connection
               </div>
 
               {/* Stats row */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1rem' }}>
-                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>↓ Download</div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
+                <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>↓ Download</div>
+                  <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
-                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>↑ Upload</div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
+                <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>↑ Upload</div>
+                  <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
-                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>Ping Latency</div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
+                <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>Ping Latency</div>
+                  <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
-                <div style={{ background: '#FFFDF5', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', padding: '0.75rem' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#485460' }}>Jitter</div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#000000' }}>—</div>
+                <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>Jitter</div>
+                  <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
               </div>
 
@@ -866,10 +866,7 @@ export default function HomePage() {
                 { label: 'Jitter',         color: '#A29BFE', desc: 'Variation in ping over time. High jitter causes rubberbanding and erratic input spikes.' },
                 { label: 'Packet Loss',    color: '#FF6B6B', desc: 'Percentage of packets dropped by your ISP. Even 1% loss triggers stutters and missed hits.' },
               ].map(item => (
-                <div key={item.label} style={{
-                  background: '#FFFFFF',
-                  border: '3px solid #000000',
-                  boxShadow: '4px 4px 0 0 #000000',
+                <div key={item.label} className="why-matter-card" style={{
                   padding: '1rem 1.25rem',
                 }}>
                   <div style={{
@@ -883,7 +880,7 @@ export default function HomePage() {
                     marginBottom: '0.35rem',
                     color: '#000000'
                   }}>{item.label}</div>
-                  <div style={{ color: '#2D3436', fontSize: '0.88rem', fontWeight: 600, lineHeight: 1.55 }}>{item.desc}</div>
+                  <div className="why-matter-desc" style={{ fontSize: '0.88rem', fontWeight: 600, lineHeight: 1.55 }}>{item.desc}</div>
                 </div>
               ))}
             </div>
@@ -916,12 +913,8 @@ export default function HomePage() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: '1.5rem' }}>
           {gearItems.map(gear => (
-            <a key={gear.name} href="#affiliate" className="card" style={{
-              background: '#FFFFFF',
-              border: '3px solid #000000',
-              boxShadow: '5px 5px 0 0 #000000',
+            <a key={gear.name} href="#affiliate" className="gear-card" style={{
               textDecoration: 'none',
-              color: '#000000',
               padding: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
@@ -938,10 +931,11 @@ export default function HomePage() {
                   fontWeight: 900,
                   letterSpacing: '0.06em',
                   marginBottom: '0.75rem',
+                  color: '#000000'
                 }}>{gear.category}</div>
-                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#636E72', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.25rem' }}>{gear.brand}</div>
-                <div style={{ fontWeight: 900, fontSize: '1.1rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{gear.name}</div>
-                <p style={{ color: '#2D3436', fontSize: '0.85rem', fontWeight: 600, lineHeight: 1.5, marginBottom: '1rem' }}>{gear.desc}</p>
+                <div className="gear-brand" style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.25rem' }}>{gear.brand}</div>
+                <div className="gear-name" style={{ fontWeight: 900, fontSize: '1.1rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{gear.name}</div>
+                <p className="gear-desc" style={{ fontSize: '0.85rem', fontWeight: 600, lineHeight: 1.5, marginBottom: '1rem' }}>{gear.desc}</p>
               </div>
               <div>
                 <div style={{
@@ -955,7 +949,7 @@ export default function HomePage() {
                   fontSize: '1.1rem',
                   marginBottom: '0.5rem'
                 }}>{gear.price}</div>
-                <div style={{ fontSize: '0.7rem', color: '#636E72', fontWeight: 700, fontStyle: 'italic' }}>*Affiliate link — commission earned</div>
+                <div className="gear-affiliate" style={{ fontSize: '0.7rem', fontWeight: 700, fontStyle: 'italic' }}>*Affiliate link — commission earned</div>
               </div>
             </a>
           ))}
@@ -979,32 +973,18 @@ export default function HomePage() {
           {seoArticles.map(a => (
             <button
               key={a.to}
+              className="seo-jump-btn"
               onClick={() => {
                 const el = document.getElementById(`seo-${a.to.replace('/', '')}`);
                 el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
               style={{
                 padding: '0.45rem 1rem',
-                border: '2px solid #000000',
-                boxShadow: '3px 3px 0 0 #000000',
-                background: '#FFFFFF',
-                color: '#000000',
                 fontSize: '0.82rem',
                 fontWeight: 800,
                 cursor: 'pointer',
-                transition: 'all 0.1s ease',
                 whiteSpace: 'nowrap',
                 textTransform: 'uppercase',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                e.currentTarget.style.boxShadow = '5px 5px 0 0 #000000';
-                e.currentTarget.style.background = '#FFE033';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'translate(0, 0)';
-                e.currentTarget.style.boxShadow = '3px 3px 0 0 #000000';
-                e.currentTarget.style.background = '#FFFFFF';
               }}
             >
               {a.icon} {a.badge}
@@ -1020,22 +1000,18 @@ export default function HomePage() {
               <article
                 key={article.to}
                 id={`seo-${article.to.replace('/', '')}`}
+                className="seo-accordion-item"
                 style={{
-                  background: '#FFFFFF',
-                  border: '3px solid #000000',
-                  boxShadow: isExpanded ? '7px 7px 0 0 #000000' : '5px 5px 0 0 #000000',
                   overflow: 'hidden',
-                  transition: 'box-shadow 0.15s ease',
                   scrollMarginTop: '80px',
                 }}
               >
                 <button
+                  className={`seo-accordion-header ${isExpanded ? 'open' : ''}`}
                   onClick={() => setExpandedArticle(isExpanded ? null : article.to)}
                   style={{
                     width: '100%',
-                    background: isExpanded ? '#FFF6D6' : '#FFFFFF',
                     border: 'none',
-                    borderBottom: isExpanded ? '3px solid #000000' : 'none',
                     cursor: 'pointer',
                     padding: '1.5rem 1.75rem',
                     display: 'flex',
@@ -1046,7 +1022,7 @@ export default function HomePage() {
                 >
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
-                      <span style={{
+                      <span className="seo-badge" style={{
                         padding: '0.2rem 0.6rem',
                         fontSize: '0.72rem',
                         fontWeight: 900,
@@ -1058,8 +1034,7 @@ export default function HomePage() {
                         color: '#000000',
                       }}>{article.badge}</span>
                     </div>
-                    <h3 style={{
-                      color: '#000000',
+                    <h3 className="seo-accordion-title" style={{
                       fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
                       fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
                       fontWeight: 900,
@@ -1072,7 +1047,7 @@ export default function HomePage() {
                     </h3>
                   </div>
 
-                  <div style={{
+                  <div className="seo-accordion-chevron" style={{
                     width: '34px', height: '34px', flexShrink: 0,
                     border: '2px solid #000000',
                     boxShadow: '2px 2px 0 0 #000000',
@@ -1088,13 +1063,13 @@ export default function HomePage() {
                   </div>
                 </button>
 
-                <div style={{ display: isExpanded ? 'block' : 'none', padding: '1.75rem' }}>
+                <div className="seo-accordion-body" style={{ display: isExpanded ? 'block' : 'none', padding: '1.75rem' }}>
                   <div style={{ marginBottom: '1.75rem' }}>
                     {article.content.map((para, i) => (
                       <p
                         key={i}
+                        className="seo-accordion-p"
                         style={{
-                          color: '#2D3436',
                           fontWeight: 500,
                           lineHeight: 1.8,
                           fontSize: '0.98rem',
@@ -1105,22 +1080,17 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  <div style={{
-                    background: '#FFFDF5',
-                    border: '3px solid #000000',
-                    boxShadow: '4px 4px 0 0 #000000',
+                  <div className="seo-faq-box" style={{
                     padding: '1.5rem',
                     marginBottom: '1.75rem',
                   }}>
-                    <h4 style={{
-                      color: '#000000',
+                    <h4 className="seo-faq-title" style={{
                       fontSize: '0.9rem',
                       fontWeight: 900,
                       textTransform: 'uppercase',
                       letterSpacing: '0.06em',
                       marginBottom: '1.25rem',
                       marginTop: 0,
-                      borderBottom: '2px solid #000000',
                       paddingBottom: '4px',
                       display: 'inline-block'
                     }}>
@@ -1129,16 +1099,14 @@ export default function HomePage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                       {article.faqs.map((faq, fi) => (
                         <div key={fi}>
-                          <div style={{ color: '#000000', fontWeight: 800, fontSize: '0.95rem', marginBottom: '0.35rem' }}>
+                          <div className="seo-faq-q" style={{ fontWeight: 800, fontSize: '0.95rem', marginBottom: '0.35rem' }}>
                             Q: {faq.q}
                           </div>
-                          <div style={{
-                            color: '#2D3436',
+                          <div className="seo-faq-a" style={{
                             fontSize: '0.9rem',
                             fontWeight: 500,
                             lineHeight: 1.65,
                             paddingLeft: '0.85rem',
-                            borderLeft: '3px solid #000000',
                           }}>
                             {faq.a}
                           </div>

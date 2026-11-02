@@ -919,6 +919,128 @@ html[data-theme="dark"] .grid-bg {
   color: #111111 !important;
 }
 
+/* SEO Quick Jump Buttons — Light Mode */
+.seo-jump-btn {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #000000 !important;
+  transition: all 0.1s ease !important;
+}
+.seo-jump-btn:hover {
+  background: #FFE033 !important;
+  color: #000000 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 5px 5px 0 0 #000000 !important;
+}
+
+/* SEO Accordion Card — Light Mode */
+.seo-accordion-item {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #000000 !important;
+  transition: box-shadow 0.15s ease !important;
+}
+
+.seo-accordion-header {
+  background: #FFFFFF !important;
+  border-bottom: none !important;
+}
+
+.seo-accordion-header.open {
+  background: #FFF6D6 !important;
+  border-bottom: 3px solid #000000 !important;
+}
+
+.seo-accordion-title {
+  color: #000000 !important;
+}
+
+.seo-accordion-body {
+  background: #FFFFFF !important;
+}
+
+.seo-accordion-p {
+  color: #111111 !important;
+}
+
+.seo-accordion-p strong {
+  color: #000000 !important;
+}
+
+.seo-faq-box {
+  background: #FFFDF5 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+}
+
+.seo-faq-title {
+  color: #000000 !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+.seo-faq-q {
+  color: #000000 !important;
+}
+
+.seo-faq-a {
+  color: #222222 !important;
+  border-left: 3px solid #000000 !important;
+}
+
+/* Why It Matters & Gear — Light Mode */
+.why-matter-card {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+}
+.why-matter-desc {
+  color: #111111 !important;
+}
+
+.gear-card {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #000000 !important;
+}
+.gear-brand {
+  color: #485460 !important;
+}
+.gear-name {
+  color: #000000 !important;
+}
+.gear-desc {
+  color: #2D3436 !important;
+}
+.gear-affiliate {
+  color: #636E72 !important;
+}
+
+/* Speed Mini Dashboard — Light Mode */
+.speed-mini-card {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #000000 !important;
+}
+.speed-metric-num,
+.speed-metric-unit {
+  color: #000000 !important;
+}
+.speed-sub-status {
+  color: #485460 !important;
+}
+.speed-stat-box {
+  background: #FFFDF5 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #000000 !important;
+}
+.speed-stat-label {
+  color: #485460 !important;
+}
+.speed-stat-val {
+  color: #000000 !important;
+}
+
 /* Dark mode sidebar */
 html[data-theme="dark"] .sidebar-pannel {
   background: #13151A !important;
@@ -1000,6 +1122,125 @@ html[data-theme="dark"] .quick-launch-card:hover {
 
 html[data-theme="dark"] .section-desc {
   color: #CBD5E1 !important;
+}
+
+/* SEO Quick Jump Buttons — Dark Mode */
+html[data-theme="dark"] .seo-jump-btn {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .seo-jump-btn:hover {
+  background: #252834 !important;
+  color: #FFE033 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+
+/* SEO Accordion Card — Dark Mode */
+html[data-theme="dark"] .seo-accordion-item {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .seo-accordion-header {
+  background: #181A20 !important;
+  border-bottom: none !important;
+}
+
+html[data-theme="dark"] .seo-accordion-header.open {
+  background: #252834 !important;
+  border-bottom: 3px solid #000000 !important;
+}
+
+html[data-theme="dark"] .seo-accordion-title {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .seo-accordion-body {
+  background: #181A20 !important;
+}
+
+html[data-theme="dark"] .seo-accordion-p {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .seo-accordion-p strong {
+  color: #FFE033 !important;
+}
+
+html[data-theme="dark"] .seo-faq-box {
+  background: #20242D !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .seo-faq-title {
+  color: #FFFFFF !important;
+  border-bottom: 2px solid #FFE033 !important;
+}
+
+html[data-theme="dark"] .seo-faq-q {
+  color: #FFE033 !important;
+}
+
+html[data-theme="dark"] .seo-faq-a {
+  color: #CBD5E1 !important;
+  border-left: 3px solid #FFE033 !important;
+}
+
+/* Why It Matters & Gear — Dark Mode */
+html[data-theme="dark"] .why-matter-card {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .why-matter-desc {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .gear-card {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .gear-brand {
+  color: #94A3B8 !important;
+}
+html[data-theme="dark"] .gear-name {
+  color: #FFFFFF !important;
+}
+html[data-theme="dark"] .gear-desc {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .gear-affiliate {
+  color: #94A3B8 !important;
+}
+
+/* Speed Mini Dashboard — Dark Mode */
+html[data-theme="dark"] .speed-mini-card {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .speed-metric-num,
+html[data-theme="dark"] .speed-metric-unit {
+  color: #FFFFFF !important;
+}
+html[data-theme="dark"] .speed-sub-status {
+  color: #94A3B8 !important;
+}
+html[data-theme="dark"] .speed-stat-box {
+  background: #20242D !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .speed-stat-label {
+  color: #94A3B8 !important;
+}
+html[data-theme="dark"] .speed-stat-val {
+  color: #FFFFFF !important;
 }
 
 /* Dark mode cards (Universal) */
