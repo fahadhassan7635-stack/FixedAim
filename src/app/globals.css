@@ -421,7 +421,7 @@ h1, h2, h3, h4, h5, h6, .tool-title {
    NAVIGATION & FOOTER STYLES
    ========================================================================== */
 .top-nav {
-  padding: 0 2rem;
+  padding: 0 0.85rem !important;
   background: #000000 !important;
   border-bottom: 3px solid #000000 !important;
   box-shadow: 0 4px 0 0 #000000;
@@ -728,9 +728,20 @@ button.sw-faq-question.open,
 }
 
 /* FAQ Question Text inside button */
-.faq summary span,
-button[aria-expanded] span,
-button.sw-faq-question span {
+.faq summary,
+.faq summary *,
+button[aria-expanded][id*="faq"],
+button[aria-expanded][id*="faq"] *,
+button[aria-expanded][aria-controls*="faq"],
+button[aria-expanded][aria-controls*="faq"] *,
+button[aria-expanded][aria-controls$="-panel"],
+button[aria-expanded][aria-controls$="-panel"] *,
+button.sw-faq-question,
+button.sw-faq-question *,
+section[aria-label*="Frequently Asked"] button[aria-expanded],
+section[aria-label*="Frequently Asked"] button[aria-expanded] *,
+div[aria-label*="Frequently Asked"] button[aria-expanded],
+div[aria-label*="Frequently Asked"] button[aria-expanded] * {
   color: #000000 !important;
   font-weight: 900 !important;
   font-size: 1rem !important;
@@ -763,16 +774,22 @@ div[aria-label*="Frequently Asked"] div[role="region"] {
 }
 
 .faq .a,
+.faq .a *,
 div[id*="faq-answer"] p,
+div[id*="faq-answer"] *,
 div[id$="-panel"] p,
+div[id$="-panel"] *,
 div[role="region"][aria-labelledby*="faq"] p,
+div[role="region"][aria-labelledby*="faq"] *,
 p.sw-faq-answer,
 section[aria-label*="Frequently Asked"] div[role="region"] p,
-div[aria-label*="Frequently Asked"] div[role="region"] p {
-  color: #2D3436 !important;
+section[aria-label*="Frequently Asked"] div[role="region"] *,
+div[aria-label*="Frequently Asked"] div[role="region"] p,
+div[aria-label*="Frequently Asked"] div[role="region"] * {
+  color: #111111 !important;
   font-size: 0.96rem !important;
   line-height: 1.7 !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   margin: 0 !important;
 }
 
@@ -825,6 +842,83 @@ html[data-theme="dark"] .grid-bg {
   opacity: 0.18 !important;
 }
 
+/* ==========================================================================
+   SIDEBAR TOOL BUTTONS (LIGHT & DARK MODES)
+   ========================================================================== */
+.sidebar-tool-btn {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0 0 #000000 !important;
+  cursor: pointer;
+  transform: translate(0, 0);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease !important;
+}
+
+.sidebar-tool-btn span {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+.sidebar-tool-btn:hover {
+  background: #FFE033 !important;
+  color: #000000 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+}
+
+.sidebar-tool-btn:hover span {
+  color: #000000 !important;
+}
+
+.sidebar-tool-btn.active {
+  background: #FFE033 !important;
+  color: #000000 !important;
+  box-shadow: 3px 3px 0 0 #000000 !important;
+}
+
+.sidebar-tool-btn.active span {
+  color: #000000 !important;
+}
+
+/* Category Arena Cards (Light Mode) */
+.category-title {
+  color: #000000 !important;
+}
+
+.category-desc {
+  color: #111111 !important;
+}
+
+.category-pill {
+  background: #FFFDF5 !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Quick Launch Cards (Light Mode) */
+.quick-launch-card {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #000000 !important;
+  color: #000000 !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease !important;
+}
+
+.quick-launch-card .tool-card-title {
+  color: #000000 !important;
+}
+
+.quick-launch-card:hover {
+  background: #FFF6D6 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0 0 #000000 !important;
+}
+
+.section-desc {
+  color: #111111 !important;
+}
+
 /* Dark mode sidebar */
 html[data-theme="dark"] .sidebar-pannel {
   background: #13151A !important;
@@ -837,13 +931,75 @@ html[data-theme="dark"] .sidebar-pannel select {
   border: 2px solid #000000 !important;
 }
 
-html[data-theme="dark"] .sidebar-pannel a {
-  color: #E2E8F0 !important;
+/* Dark mode sidebar buttons — high contrast dark cards with crisp white text */
+html[data-theme="dark"] .sidebar-tool-btn {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0 0 #FFE033 !important;
 }
 
-html[data-theme="dark"] .sidebar-pannel a:hover {
-  background: #1E222B !important;
+html[data-theme="dark"] .sidebar-tool-btn span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .sidebar-tool-btn:hover {
+  background: #252834 !important;
   color: #FFE033 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .sidebar-tool-btn:hover span {
+  color: #FFE033 !important;
+}
+
+html[data-theme="dark"] .sidebar-tool-btn.active {
+  background: #FFE033 !important;
+  color: #000000 !important;
+  box-shadow: 3px 3px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .sidebar-tool-btn.active span {
+  color: #000000 !important;
+}
+
+/* Category Arena Cards (Dark Mode) */
+html[data-theme="dark"] .category-title {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .category-desc {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .category-pill {
+  background: #232733 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0 0 #FFE033 !important;
+}
+
+/* Quick Launch Cards (Dark Mode) */
+html[data-theme="dark"] .quick-launch-card {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .quick-launch-card .tool-card-title {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .quick-launch-card:hover {
+  background: #232733 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .section-desc {
+  color: #CBD5E1 !important;
 }
 
 /* Dark mode cards (Universal) */
@@ -1072,13 +1228,19 @@ html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] {
   background: #181A20 !important;
 }
 
-html[data-theme="dark"] .faq .a p,
-html[data-theme="dark"] div[id*="faq-answer"] p,
-html[data-theme="dark"] div[id$="-panel"] p,
-html[data-theme="dark"] div[role="region"][aria-labelledby*="faq"] p,
+html[data-theme="dark"] .faq .a,
+html[data-theme="dark"] .faq .a *,
+html[data-theme="dark"] div[id*="faq-answer"],
+html[data-theme="dark"] div[id*="faq-answer"] *,
+html[data-theme="dark"] div[id$="-panel"],
+html[data-theme="dark"] div[id$="-panel"] *,
+html[data-theme="dark"] div[role="region"][aria-labelledby*="faq"],
+html[data-theme="dark"] div[role="region"][aria-labelledby*="faq"] *,
 html[data-theme="dark"] p.sw-faq-answer,
-html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="region"] p,
-html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] p {
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="region"],
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="region"] *,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"],
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] * {
   color: #CBD5E1 !important;
 }
 

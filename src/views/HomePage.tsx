@@ -681,7 +681,7 @@ export default function HomePage() {
                 }}>
                   {cat.title}
                 </div>
-                <div style={{
+                <div className="category-title" style={{
                   fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
                   fontSize: '1.45rem',
                   fontWeight: 900,
@@ -689,19 +689,16 @@ export default function HomePage() {
                   textTransform: 'uppercase',
                   lineHeight: 1.1,
                   marginBottom: '0.6rem',
-                  color: '#000000'
                 }}>{cat.title}</div>
-                <p style={{ color: '#2D3436', fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.55, marginBottom: '1.5rem' }}>{cat.desc}</p>
+                <p className="category-desc" style={{ fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.55, marginBottom: '1.5rem' }}>{cat.desc}</p>
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', borderTop: '2px dashed #000000', paddingTop: '1rem' }}>
                 {cat.pills.map(p => (
-                  <span key={p.label} style={{
+                  <span key={p.label} className="category-pill" style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     padding: '0.25rem 0.65rem',
-                    background: '#FFFDF5',
-                    color: '#000000',
                     fontWeight: 800,
                     fontSize: '0.75rem',
                     textTransform: 'uppercase',
@@ -719,7 +716,7 @@ export default function HomePage() {
       <section id="all-tools" style={{ marginBottom: '4rem' }}>
         <div className="section-label">QUICK LAUNCH</div>
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>JUMP IN INSTANTLY</h2>
-        <p style={{ color: '#2D3436', fontWeight: 600, marginBottom: '2rem' }}>No setup required. Click any tool and start testing in under 2 seconds.</p>
+        <p className="section-desc" style={{ fontWeight: 600, marginBottom: '2rem' }}>No setup required. Click any tool and start testing in under 2 seconds.</p>
 
         <div style={{
           display: 'grid',
@@ -730,40 +727,23 @@ export default function HomePage() {
             <Link
               key={tool.to}
               href={tool.to}
+              className="quick-launch-card"
               style={{
-                background: '#FFFFFF',
-                border: '3px solid #000000',
-                boxShadow: '4px 4px 0 0 #000000',
                 padding: '1.1rem 1.25rem',
                 textDecoration: 'none',
-                color: '#000000',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 minHeight: '85px',
-                transition: 'transform 0.1s ease, box-shadow 0.1s ease',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.transform = 'translate(-2px, -2px)';
-                el.style.boxShadow = '6px 6px 0 0 #000000';
-                el.style.background = '#FFF6D6';
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.transform = 'translate(0, 0)';
-                el.style.boxShadow = '4px 4px 0 0 #000000';
-                el.style.background = '#FFFFFF';
               }}
             >
-              <div style={{
+              <div className="tool-card-title" style={{
                 fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
                 fontWeight: 900,
                 fontSize: '1.05rem',
                 letterSpacing: '-0.01em',
                 textTransform: 'uppercase',
                 lineHeight: 1.2,
-                color: '#000000'
               }}>{tool.name}</div>
               
               <div style={{ marginTop: '0.5rem' }}>

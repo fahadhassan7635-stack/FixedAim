@@ -79,6 +79,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         justifyContent: 'space-between',
         height: '66px',
         width: '100%',
+        padding: '0 0.85rem',
         boxSizing: 'border-box'
       }}>
         {/* LOGO BOX — CANONICAL NEUBRUTALISM */}
@@ -91,7 +92,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             background: '#FFE033',
             border: '3px solid #000000',
             boxShadow: '4px 4px 0 0 #FFFFFF',
-            padding: '4px 12px 4px 8px',
+            padding: '6px 14px 6px 10px',
             transition: 'transform 0.1s ease, box-shadow 0.1s ease',
           }}
           onMouseEnter={e => {
@@ -104,33 +105,22 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           }}
           >
             <div style={{
-              width: '34px', height: '34px',
+              width: '32px', height: '32px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <Image src={mouseIcon} alt="Logo" width={34} height={34} style={{ width: '100%', height: '100%', objectFit: 'contain' }} priority />
+              <Image src={mouseIcon} alt="Logo" width={32} height={32} style={{ width: '100%', height: '100%', objectFit: 'contain' }} priority />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1 }}>
-              <span style={{
-                fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif",
-                fontWeight: 900,
-                fontSize: '1.45rem',
-                color: '#000000',
-                letterSpacing: '-0.02em',
-                textTransform: 'uppercase',
-                lineHeight: 1,
-              }}>
-                FIXED AIM.
-              </span>
-              <span style={{
-                fontFamily: "'Public Sans', sans-serif",
-                fontSize: '0.55rem',
-                fontWeight: 800,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: '#000000',
-                marginTop: '1px',
-              }}>TEST · TRAIN · DOMINATE</span>
-            </div>
+            <span style={{
+              fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif",
+              fontWeight: 900,
+              fontSize: '1.45rem',
+              color: '#000000',
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase',
+              lineHeight: 1,
+            }}>
+              FIXED AIM.
+            </span>
           </Link>
         </div>
 
@@ -405,38 +395,26 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 <div key={tool.to} style={{ position: 'relative' }}>
                   <Link
                     href={tool.to}
+                    className={`sidebar-tool-btn ${isCurrentActive ? 'active' : ''}`}
                     style={{
                       display: 'flex', alignItems: 'center',
                       justifyContent: sidebarOpen ? 'flex-start' : 'center',
                       gap: sidebarOpen ? '0.65rem' : '0.4rem',
                       padding: sidebarOpen ? '0.6rem 0.85rem' : '0.6rem 0.25rem',
                       textDecoration: 'none',
-                      background: isCurrentActive ? '#FFE033' : '#FFFFFF',
-                      border: '2px solid #000000',
-                      boxShadow: isCurrentActive ? '3px 3px 0 0 #000000' : '2px 2px 0 0 #000000',
                       fontSize: '0.82rem',
-                      fontWeight: isCurrentActive ? 900 : 700,
-                      color: '#000000',
+                      fontWeight: 800,
                       transition: 'transform 0.1s ease, box-shadow 0.1s ease',
-                      transform: 'translate(0, 0)',
                     }}
-                    onMouseEnter={(e) => {
-                      if (!isCurrentActive) {
-                        e.currentTarget.style.background = '#FFF6D6';
-                        e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                        e.currentTarget.style.boxShadow = '4px 4px 0 0 #000000';
-                      }
+                    onMouseEnter={() => {
                       if (!sidebarOpen) {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        setHoveredTool({ label: tool.label, top: rect.top + rect.height / 2, left: rect.right + 10 });
+                        const rect = document.querySelector(`[href="${tool.to}"]`)?.getBoundingClientRect();
+                        if (rect) {
+                          setHoveredTool({ label: tool.label, top: rect.top + rect.height / 2, left: rect.right + 10 });
+                        }
                       }
                     }}
-                    onMouseLeave={(e) => {
-                      if (!isCurrentActive) {
-                        e.currentTarget.style.background = '#FFFFFF';
-                        e.currentTarget.style.transform = 'translate(0, 0)';
-                        e.currentTarget.style.boxShadow = '2px 2px 0 0 #000000';
-                      }
+                    onMouseLeave={() => {
                       setHoveredTool(null);
                     }}
                   >
