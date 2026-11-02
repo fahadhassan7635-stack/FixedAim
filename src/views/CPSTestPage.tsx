@@ -1719,18 +1719,21 @@ export default function CPSTestPage() {
         onClick={handleClick}
         onContextMenu={handleRightClick}
         onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => { if (e.key === 'Enter' || e.key === ' ') handleClick(e as unknown as React.MouseEvent<HTMLDivElement>); }}
+        className={`cps-click-area ${phase === 'running' ? 'running' : ''}`}
         style={{
-          position: 'relative', overflow: 'hidden', width: '100%', minHeight: '220px',
+          position: 'relative',
+          overflow: 'hidden',
+          width: '100%',
+          minHeight: '260px',
           height: isFullscreen ? '100vh' : undefined,
-          borderRadius: isFullscreen ? '0' : '16px',
-          border: phase === 'running' ? '2px solid var(--neon-green, #00ff88)' : phase === 'done' ? '2px solid var(--neon-orange, #ff9f43)' : (isFullscreen ? 'none' : '2px solid var(--border, #2a3047)'),
-          background: phase === 'running' ? 'rgba(0,255,136,0.04)' : (isFullscreen ? '#02040a' : 'var(--bg-card, #1e2235)'),
+          borderRadius: 0,
+          border: '3px solid #000000',
+          boxShadow: phase === 'running' ? '6px 6px 0 0 #000000' : '5px 5px 0 0 #000000',
           cursor: phase === 'done' ? 'default' : 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexDirection: 'column', gap: '0.75rem', userSelect: 'none',
-          transition: 'all 0.2s ease', 
+          flexDirection: 'column', gap: '0.85rem', userSelect: 'none',
+          transition: 'transform 0.1s ease, box-shadow 0.1s ease', 
           marginBottom: phase === 'running' ? '1rem' : '1.5rem',
-          boxShadow: phase === 'running' ? '0 0 30px rgba(0,255,136,0.1)' : 'none',
         }}
       >
         <button
@@ -1740,24 +1743,24 @@ export default function CPSTestPage() {
             top: '1rem',
             right: '1rem',
             zIndex: 50,
-            background: 'rgba(255, 255, 255, 0.1)',
-            border: 'none',
-            borderRadius: '8px',
+            background: '#FFE033',
+            border: '2px solid #000000',
+            boxShadow: '2px 2px 0 0 #000000',
             padding: '0.5rem',
-            color: '#fff',
+            color: '#000000',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            transition: 'background 0.2s',
+            transition: 'transform 0.1s ease',
           }}
           title="Toggle Fullscreen"
         >
-          {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+          {isFullscreen ? <Minimize2 size={20} color="#000000" /> : <Maximize2 size={20} color="#000000" />}
         </button>
 
         {ripples.map(r => {
-          const rc = r.color || '#00f5ff';
+          const rc = r.color || '#FFE033';
           return (
             <span key={r.id} style={{
               position: 'absolute',
@@ -1778,22 +1781,22 @@ export default function CPSTestPage() {
 
         {phase === 'idle' && (
           <>
-            <span style={{ fontSize: '3rem' }}>🖱️</span>
-            <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--neon-green, #00ff88)' }}>Click to Start!</span>
-            <span style={{ color: 'var(--text-secondary, #cbd5e1)', fontSize: '0.9rem' }}>Click anywhere in this area to begin the test</span>
+            <span style={{ fontSize: '3.2rem' }}>🖱️</span>
+            <span className="cps-click-prompt" style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase' }}>Click to Start!</span>
+            <span className="cps-click-sub" style={{ fontSize: '0.95rem', fontWeight: 700 }}>Click anywhere in this area to begin the test</span>
           </>
         )}
         {phase === 'running' && (
           <>
-            <span style={{ fontSize: '4rem', fontWeight: '900', color: 'var(--neon-green, #00ff88)', fontVariantNumeric: 'tabular-nums', zIndex: 10 }}>{clicks}</span>
-            <span style={{ color: 'var(--text-secondary, #cbd5e1)', fontSize: '1rem', zIndex: 10 }}>Keep clicking! 🔥</span>
-            <span style={{ color: 'var(--neon-cyan, #00f5ff)', fontWeight: '700', zIndex: 10 }}>{timeLeft.toFixed(1)}s remaining</span>
+            <span className="cps-click-counter" style={{ fontSize: '4.8rem', fontWeight: 900, fontVariantNumeric: 'tabular-nums', zIndex: 10, lineHeight: 1 }}>{clicks}</span>
+            <span className="cps-click-prompt" style={{ fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase', zIndex: 10 }}>Keep clicking! 🔥</span>
+            <span style={{ color: '#D63031', fontWeight: 900, fontSize: '1rem', zIndex: 10 }}>{timeLeft.toFixed(1)}s remaining</span>
           </>
         )}
         {phase === 'done' && (
           <>
             <span style={{ fontSize: '3rem' }}>🏁</span>
-            <span style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--neon-orange, #ff9f43)' }}>Test Complete!</span>
+            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: '#D63031', textTransform: 'uppercase' }}>Test Complete!</span>
           </>
         )}
 
@@ -1802,7 +1805,7 @@ export default function CPSTestPage() {
           <>
             <div style={{
               position: 'fixed', inset: 0,
-              background: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(8px)',
+              background: 'rgba(0, 0, 0, 0.75)',
               zIndex: 999, animation: 'fadeIn 0.3s ease-out forwards',
             }} />
 
@@ -1816,17 +1819,16 @@ export default function CPSTestPage() {
                 position: 'fixed', top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
                 width: '95%',
-                maxWidth: '560px',
+                maxWidth: '540px',
                 maxHeight: '90vh',
                 overflowY: 'auto',
-                background: '#0d1117',
-                border: `2px solid ${finalRating.color}`,
-                borderRadius: '20px',
-                padding: '2rem 1.5rem',
+                border: '3px solid #000000',
+                borderRadius: '0px',
+                boxShadow: '8px 8px 0 0 #000000',
+                padding: '2rem 1.75rem',
                 textAlign: 'center',
                 zIndex: 1000,
-                animation: 'modalPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
-                boxShadow: `0 0 40px ${finalRating.color}25`,
+                animation: 'modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
               }}
             >
               {/* Close button */}
@@ -1835,10 +1837,12 @@ export default function CPSTestPage() {
                 aria-label="Close modal"
                 style={{
                   position: 'absolute', top: '0.75rem', right: '0.75rem',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${finalRating.color}40`,
-                  color: finalRating.color, width: '32px', height: '32px',
-                  borderRadius: '50%', cursor: 'pointer', fontSize: '0.9rem',
+                  background: '#FFE033',
+                  border: '2px solid #000000',
+                  boxShadow: '2px 2px 0 0 #000000',
+                  color: '#000000', width: '32px', height: '32px',
+                  borderRadius: '0px', cursor: 'pointer', fontSize: '0.95rem',
+                  fontWeight: 900,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}
               >✕</button>
@@ -1849,49 +1853,52 @@ export default function CPSTestPage() {
               >
                 <div
                   className="cps-modal-left"
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.08)', paddingRight: '1rem', height: '100%' }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '2px solid #000000', paddingRight: '1rem', height: '100%' }}
                 >
                   <span
                     className="cps-modal-emoji"
-                    style={{ fontSize: '4.5rem', lineHeight: '1', filter: `drop-shadow(0 0 15px ${finalRating.color}40)` }}
+                    style={{ fontSize: '4.5rem', lineHeight: '1' }}
                   >{finalRating.emoji}</span>
                 </div>
                 <div style={{ textAlign: 'left' }}>
-                  <div id="modal-title" style={{ fontSize: '0.85rem', color: 'var(--text-muted, #8395a7)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your Rank is</div>
+                  <div id="modal-title" className="cps-modal-sub" style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>YOUR RANK IS</div>
                   <div
                     className="cps-modal-rank"
-                    style={{ fontSize: '2.2rem', fontWeight: '900', color: finalRating.color, fontStyle: 'italic', margin: '0.1rem 0' }}
+                    style={{ fontSize: '2.4rem', fontWeight: 900, color: finalRating.color, textTransform: 'uppercase', margin: '0.1rem 0', lineHeight: 1.1 }}
                   >{finalRating.label}!</div>
                   <div style={{ display: 'flex', gap: '3px', marginBottom: '0.5rem' }}>
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <span key={i} style={{ fontSize: '1.2rem', color: i < finalRating.stars ? '#ffca28' : 'rgba(255,255,255,0.1)' }}>★</span>
+                      <span key={i} style={{ fontSize: '1.2rem', color: i < finalRating.stars ? '#F59E0B' : '#D1D5DB' }}>★</span>
                     ))}
                   </div>
-                  <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary, #cbd5e1)' }}>You clicked with a speed of <strong style={{ color: '#fff', fontSize: '1.15rem', fontVariantNumeric: 'tabular-nums' }}>{finalCpsValue}</strong> CPS</div>
+                  <div className="cps-modal-speed-text" style={{ fontSize: '0.92rem', fontWeight: 700 }}>
+                    You clicked with a speed of <strong className="cps-score-num" style={{ fontSize: '1.4rem', fontVariantNumeric: 'tabular-nums', fontWeight: 900, margin: '0 4px' }}>{finalCpsValue}</strong> CPS
+                  </div>
                 </div>
               </div>
 
-              <div style={{ background: 'rgba(0,0,0,0.25)', padding: '0.85rem 1rem', borderRadius: '12px', borderLeft: `3px solid ${finalRating.color}`, fontStyle: 'italic', color: '#2D3436', fontSize: '0.88rem', textAlign: 'left', marginBottom: '1.25rem', lineHeight: '1.5' }}>
-                {finalRating.desc}
+              <div className="cps-modal-quote" style={{ padding: '0.85rem 1rem', border: '2px solid #000000', borderLeft: `5px solid ${finalRating.color}`, fontStyle: 'italic', fontSize: '0.88rem', fontWeight: 600, textAlign: 'left', marginBottom: '1.25rem', lineHeight: '1.5' }}>
+                "{finalRating.desc}"
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem', marginBottom: '1.5rem' }}>
                 {[
-                  { value: clicks, label: 'Total Clicks', color: 'var(--neon-green, #00ff88)' },
-                  { value: maxCps, label: 'Peak (1s)', color: 'var(--neon-cyan, #00f5ff)' },
-                  { value: `${duration}s`, label: 'Duration', color: 'var(--neon-orange, #ff9f43)' },
+                  { value: clicks, label: 'Total Clicks' },
+                  { value: maxCps, label: 'Peak (1s)' },
+                  { value: `${duration}s`, label: 'Duration' },
                 ].map(s => (
-                  <div key={s.label} style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', padding: '0.5rem 0.25rem', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <div style={{ fontSize: '1.2rem', fontWeight: '800', color: s.color }}>{s.value}</div>
-                    <div style={{ fontSize: '0.55rem', color: 'var(--text-muted, #8395a7)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px' }}>{s.label}</div>
+                  <div key={s.label} className="cps-modal-stat-card" style={{ border: '2px solid #000000', padding: '0.65rem 0.25rem' }}>
+                    <div className="cps-modal-stat-val" style={{ fontSize: '1.3rem', fontWeight: 900 }}>{s.value}</div>
+                    <div className="cps-modal-stat-lbl" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px', fontWeight: 800 }}>{s.label}</div>
                   </div>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
                 <button
                   onClick={resetTest}
-                  style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', flex: 1, maxWidth: '160px', height: '38px', borderRadius: '8px', cursor: 'pointer', background: 'var(--bg-card, #1e2235)', border: '1px solid var(--border, #2a3047)', color: '#fff' }}
+                  className="btn"
+                  style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', background: '#FFFFFF', color: '#000000', fontWeight: 800, textTransform: 'uppercase' }}
                 >
                   🔄 Reset
                 </button>
@@ -1902,7 +1909,8 @@ export default function CPSTestPage() {
                       startTest();
                     }
                   }}
-                  style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', flex: 1, maxWidth: '160px', height: '38px', borderRadius: '8px', cursor: 'pointer', backgroundColor: finalRating.color, border: `1px solid ${finalRating.color}`, color: '#000', fontWeight: '700' }}
+                  className="btn"
+                  style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', backgroundColor: '#55EFC4', color: '#000000', fontWeight: 900, textTransform: 'uppercase' }}
                 >
                   ▶ Try Again
                 </button>

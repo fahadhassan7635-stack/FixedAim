@@ -506,10 +506,46 @@ h1, h2, h3, h4, h5, h6, .tool-title {
 }
 
 @media (max-width: 768px) {
-  .top-nav             { padding: 0 1rem !important; }
-  .main-content        { padding: 1rem !important; }
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .top-nav             { padding: 0 0.85rem !important; }
+  .main-content        { padding: 1rem 0.65rem !important; overflow-x: hidden !important; }
   .main-footer         { padding: 2rem 1rem 1rem !important; }
   .footer-grid         { grid-template-columns: 1fr; }
+
+  /* Keep all neubrutalism cards inside screen boundary with consistent clean borders */
+  .card, .gear-card, .blog-card, .cod-card, .cod-hub-card, 
+  .speed-mini-card, .cps-stat-card, .hero-section, .why-matter-card, 
+  .seo-accordion-item, .cod-tip-box, .cps-click-area {
+    max-width: 100% !important;
+    box-shadow: 4px 4px 0 0 #000000 !important;
+  }
+  
+  html[data-theme="dark"] .card,
+  html[data-theme="dark"] .gear-card,
+  html[data-theme="dark"] .blog-card,
+  html[data-theme="dark"] .cod-card,
+  html[data-theme="dark"] .cod-hub-card,
+  html[data-theme="dark"] .speed-mini-card,
+  html[data-theme="dark"] .cps-stat-card,
+  html[data-theme="dark"] .hero-section,
+  html[data-theme="dark"] .why-matter-card,
+  html[data-theme="dark"] .seo-accordion-item,
+  html[data-theme="dark"] .cod-tip-box,
+  html[data-theme="dark"] .cps-click-area {
+    box-shadow: 4px 4px 0 0 #FFE033 !important;
+  }
+
+  /* Reset any rotated elements on phone so borders are never cut off */
+  [style*="rotate"],
+  .hero-sticker-btn {
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
 
 
@@ -1041,6 +1077,131 @@ html[data-theme="dark"] .grid-bg {
   color: #000000 !important;
 }
 
+/* Hero Section (Neubrutalism Light Mode) */
+.hero-section {
+  background: #FFE033 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 8px 8px 0 0 #000000 !important;
+  padding: 3.5rem 2.5rem !important;
+  margin: 1rem 0 4rem !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* Hub Tips Box — Light Mode */
+.cod-tip-box {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 6px 6px 0 0 #000000 !important;
+  border-radius: 0px !important;
+  padding: 2rem 1.75rem !important;
+}
+.cod-tip-title {
+  font-family: 'Public Sans', 'Barlow Condensed', sans-serif !important;
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: uppercase !important;
+  color: #000000 !important;
+  margin-bottom: 0.75rem !important;
+}
+.cod-tip-desc,
+.cod-tip-box p {
+  color: #111111 !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.7 !important;
+}
+.cod-tip-item {
+  background: #FFFDF5 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #000000 !important;
+  border-radius: 0px !important;
+  padding: 1.1rem !important;
+}
+.cod-tip-item-title {
+  font-family: 'Public Sans', 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  color: #000000 !important;
+  margin-bottom: 0.4rem !important;
+}
+.cod-tip-item-desc,
+.cod-tip-item div {
+  color: #2D3436 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  font-weight: 600 !important;
+}
+
+/* CPS Test Click Area & Modal — Light Mode */
+.cps-click-area {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #000000 !important;
+}
+.cps-click-area:hover {
+  background: #FFFDF5 !important;
+}
+.cps-click-area.running {
+  background: #FFF6D6 !important;
+  box-shadow: 6px 6px 0 0 #000000 !important;
+}
+.cps-click-prompt {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+.cps-click-sub {
+  color: #485460 !important;
+  font-weight: 700 !important;
+}
+.cps-click-counter {
+  color: #000000 !important;
+}
+
+.cps-modal-inner {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 8px 8px 0 0 #000000 !important;
+}
+.cps-modal-sub {
+  color: #485460 !important;
+  font-weight: 800 !important;
+}
+.cps-modal-speed-text {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+.cps-score-num {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+.cps-modal-quote {
+  background: #FFFDF5 !important;
+  color: #000000 !important;
+}
+.cps-modal-stat-card {
+  background: #FFFDF5 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0 0 #000000 !important;
+}
+.cps-modal-stat-val {
+  color: #000000 !important;
+}
+.cps-modal-stat-lbl {
+  color: #485460 !important;
+}
+
 /* Dark mode sidebar */
 html[data-theme="dark"] .sidebar-pannel {
   background: #13151A !important;
@@ -1241,6 +1402,86 @@ html[data-theme="dark"] .speed-stat-label {
 }
 html[data-theme="dark"] .speed-stat-val {
   color: #FFFFFF !important;
+}
+
+/* Hub Tips Box — Dark Mode */
+html[data-theme="dark"] .cod-tip-box {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 6px 6px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .cod-tip-title {
+  color: #55EFC4 !important;
+}
+html[data-theme="dark"] .cod-tip-desc,
+html[data-theme="dark"] .cod-tip-box p {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .cod-tip-item {
+  background: #232733 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .cod-tip-item-title {
+  color: #55EFC4 !important;
+}
+html[data-theme="dark"] .cod-tip-item-desc,
+html[data-theme="dark"] .cod-tip-item div {
+  color: #E2E8F0 !important;
+}
+
+/* CPS Test Click Area & Modal — Dark Mode */
+html[data-theme="dark"] .cps-click-area {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .cps-click-area:hover {
+  background: #1E222B !important;
+}
+html[data-theme="dark"] .cps-click-area.running {
+  background: #252834 !important;
+  box-shadow: 6px 6px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .cps-click-prompt {
+  color: #FFE033 !important;
+}
+html[data-theme="dark"] .cps-click-sub {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .cps-click-counter {
+  color: #55EFC4 !important;
+}
+
+html[data-theme="dark"] .cps-modal-inner {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 8px 8px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .cps-modal-sub {
+  color: #94A3B8 !important;
+}
+html[data-theme="dark"] .cps-modal-speed-text {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .cps-score-num {
+  color: #FFE033 !important;
+}
+html[data-theme="dark"] .cps-modal-quote {
+  background: #20242D !important;
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .cps-modal-stat-card {
+  background: #20242D !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] .cps-modal-stat-val {
+  color: #55EFC4 !important;
+}
+html[data-theme="dark"] .cps-modal-stat-lbl {
+  color: #94A3B8 !important;
 }
 
 /* Dark mode cards (Universal) */

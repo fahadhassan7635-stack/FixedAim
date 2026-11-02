@@ -315,15 +315,10 @@ export default function HomePage() {
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 0.5rem', paddingBottom: '3rem' }}>
 
       {/* ── 1. HERO SECTION — CANONICAL NEUBRUTALISM SHOWCASE ── */}
-      <section style={{
-        background: '#FFE033',
-        border: '3px solid #000000',
-        boxShadow: '8px 8px 0 0 #000000',
-        padding: '3.5rem 2.5rem',
-        margin: '1rem 0 4rem',
+      <section className="hero-section" style={{
         position: 'relative',
       }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+        <div className="hero-grid">
           
           {/* Left Hero Column */}
           <div>
@@ -347,7 +342,7 @@ export default function HomePage() {
             </div>
 
             <h1 style={{
-              fontSize: 'clamp(3rem, 7.5vw, 5.8rem)',
+              fontSize: 'clamp(2.75rem, 7.5vw, 5.8rem)',
               fontWeight: 900,
               lineHeight: 0.95,
               letterSpacing: '-0.03em',
@@ -420,18 +415,19 @@ export default function HomePage() {
           </div>
 
           {/* Right Hero Column — 3 Tilted Sticker Cards directly matching user reference image */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 0' }}>
             
             {/* Sticker 1: 3D Aim Trainer Button (Black Card) */}
             <Link
               href="/3d-aim-trainer"
+              className="hero-sticker-btn"
               style={{
                 display: 'block',
                 background: '#18181B',
                 color: '#FFFFFF',
                 border: '3px solid #000000',
                 boxShadow: '5px 5px 0 0 #000000',
-                padding: '1.1rem 1.75rem',
+                padding: '1.25rem 2rem',
                 width: 'min(320px, 100%)',
                 transform: 'rotate(2.5deg)',
                 textDecoration: 'none',
@@ -453,7 +449,7 @@ export default function HomePage() {
               <div style={{
                 fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
                 fontWeight: 900,
-                fontSize: '1.25rem',
+                fontSize: '1.35rem',
                 letterSpacing: '-0.01em',
                 textTransform: 'uppercase',
                 color: '#FFE033',
@@ -461,28 +457,19 @@ export default function HomePage() {
               }}>
                 3D AIM TRAINER
               </div>
-              <div style={{
-                fontFamily: "'Space Grotesk', monospace",
-                fontWeight: 700,
-                fontSize: '0.82rem',
-                color: '#A1A1AA',
-                marginTop: '0.3rem',
-                letterSpacing: '0.04em',
-              }}>
-                border: 3px solid #000;
-              </div>
             </Link>
 
             {/* Sticker 2: 2D Aim Trainer Button (Pink Card) */}
             <Link
               href="/aim-trainer"
+              className="hero-sticker-btn"
               style={{
                 display: 'block',
                 background: '#FF6B6B',
                 color: '#000000',
                 border: '3px solid #000000',
                 boxShadow: '5px 5px 0 0 #000000',
-                padding: '1.1rem 1.75rem',
+                padding: '1.25rem 2rem',
                 width: 'min(320px, 100%)',
                 transform: 'rotate(-2.5deg)',
                 textDecoration: 'none',
@@ -504,7 +491,7 @@ export default function HomePage() {
               <div style={{
                 fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
                 fontWeight: 900,
-                fontSize: '1.25rem',
+                fontSize: '1.35rem',
                 letterSpacing: '-0.01em',
                 textTransform: 'uppercase',
                 color: '#000000',
@@ -512,28 +499,19 @@ export default function HomePage() {
               }}>
                 2D AIM TRAINER
               </div>
-              <div style={{
-                fontFamily: "'Space Grotesk', monospace",
-                fontWeight: 700,
-                fontSize: '0.82rem',
-                color: '#18181B',
-                marginTop: '0.3rem',
-                letterSpacing: '0.04em',
-              }}>
-                box-shadow: 5px 5px 0 0 #000;
-              </div>
             </Link>
 
             {/* Sticker 3: Key Visualizer Button (Mint/Blue Card) */}
             <Link
               href="/key-visualizer"
+              className="hero-sticker-btn"
               style={{
                 display: 'block',
                 background: '#74B9FF',
                 color: '#000000',
                 border: '3px solid #000000',
                 boxShadow: '5px 5px 0 0 #000000',
-                padding: '1.1rem 1.75rem',
+                padding: '1.25rem 2rem',
                 width: 'min(320px, 100%)',
                 transform: 'rotate(1.5deg)',
                 textDecoration: 'none',
@@ -555,23 +533,13 @@ export default function HomePage() {
               <div style={{
                 fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
                 fontWeight: 900,
-                fontSize: '1.25rem',
+                fontSize: '1.35rem',
                 letterSpacing: '-0.01em',
                 textTransform: 'uppercase',
                 color: '#000000',
                 lineHeight: 1.2,
               }}>
                 KEY VISUALIZER
-              </div>
-              <div style={{
-                fontFamily: "'Space Grotesk', monospace",
-                fontWeight: 700,
-                fontSize: '0.82rem',
-                color: '#18181B',
-                marginTop: '0.3rem',
-                letterSpacing: '0.04em',
-              }}>
-                border-radius: 0;
               </div>
             </Link>
 

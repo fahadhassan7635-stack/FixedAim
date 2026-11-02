@@ -71,32 +71,42 @@ export default function MousePage() {
     color: #000000;
   }
   .cod-tip-box {
-    background: #0d0d0d;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 4px;
-    padding: 1.75rem;
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0 0 #000000;
+    border-radius: 0;
+    padding: 2rem;
   }
   .cod-tip-title {
-    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
+    font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    color: #000000;
+    margin-bottom: 0.75rem;
+  }
+  .cod-tip-desc {
+    color: #111111;
   }
   .cod-tip-item {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 4px;
-    padding: 1rem;
+    background: #FFFDF5;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0 0 #000000;
+    border-radius: 0;
+    padding: 1.1rem;
   }
   .cod-tip-item-title {
-    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
+    font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
+    color: #000000;
     margin-bottom: 0.4rem;
+  }
+  .cod-tip-item-desc {
+    color: #2D3436;
   }
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -119,8 +129,8 @@ export default function MousePage() {
       </div>
 
       <div className="cod-tip-box">
-        <div className="cod-tip-title" style={{ color: '#4ade80' }}>Mouse Performance Tips</div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.7', marginBottom: '1.25rem' }}>
+        <div className="cod-tip-title">Mouse Performance Tips</div>
+        <p className="cod-tip-desc" style={{ fontSize: '0.92rem', lineHeight: '1.7', marginBottom: '1.5rem', fontWeight: 600 }}>
           Optimizing your mouse settings can drastically improve your aim. Professional gamers carefully tune their DPI, polling rate, and grip styles.
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -131,8 +141,8 @@ export default function MousePage() {
             { t: 'Surface Matters', d: 'A quality mousepad reduces jitter and improves accuracy.' },
           ].map(tip => (
             <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title" style={{ color: '#4ade80' }}>{tip.t}</div>
-              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tip.d}</div>
+              <div className="cod-tip-item-title">{tip.t}</div>
+              <div className="cod-tip-item-desc" style={{ fontSize: '0.85rem', lineHeight: '1.55', fontWeight: 500 }}>{tip.d}</div>
             </div>
           ))}
         </div>
