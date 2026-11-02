@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import ThemeToggle from './ThemeToggle';
 
 const mouseIcon = '/gun-pfp.png';
 
@@ -208,26 +209,31 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </li>
         </ul>
 
-        {/* Hamburger Menu Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            display: 'none',
-            flexDirection: 'column',
-            gap: '5px',
-            background: '#FFE033',
-            border: '2px solid #000000',
-            boxShadow: '2px 2px 0 0 #FFFFFF',
-            cursor: 'pointer',
-            padding: '8px',
-          }}
-          className="hamburger-btn"
-          aria-label="Toggle menu"
-        >
-          {[0, 1, 2].map(i => (
-            <span key={i} style={{ display: 'block', width: '22px', height: '3px', background: '#000000', transition: 'all 0.3s' }} />
-          ))}
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <ThemeToggle />
+
+          {/* Hamburger Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              display: 'none',
+              flexDirection: 'column',
+              gap: '5px',
+              background: '#FFE033',
+              border: '2px solid #000000',
+              boxShadow: '2px 2px 0 0 #FFFFFF',
+              cursor: 'pointer',
+              padding: '8px',
+              marginLeft: '8px',
+            }}
+            className="hamburger-btn"
+            aria-label="Toggle menu"
+          >
+            {[0, 1, 2].map(i => (
+              <span key={i} style={{ display: 'block', width: '22px', height: '3px', background: '#000000', transition: 'all 0.3s' }} />
+            ))}
+          </button>
+        </div>
       </nav>
 
       {/* MOBILE OVERLAY */}

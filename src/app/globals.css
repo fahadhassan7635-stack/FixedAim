@@ -798,3 +798,316 @@ div[aria-label*="Frequently Asked"] button:not([aria-expanded]):hover {
   box-shadow: 6px 6px 0 0 #000000 !important;
   background: #FFD23F !important;
 }
+
+
+/* ==========================================================================
+   NEUBRUTALISM DARK MODE SYSTEM
+   ========================================================================== */
+html[data-theme="dark"] {
+  --bg: #0D0E12;
+  --bg-card: #181A20;
+  --text-primary: #FFFFFF;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --border: 3px solid #000000;
+  --shadow: 5px 5px 0 0 #FFE033;
+}
+
+html[data-theme="dark"] html,
+html[data-theme="dark"] body {
+  background: #0D0E12 !important;
+  color: #FFFFFF !important;
+}
+
+/* Dark mode dot grid texture */
+html[data-theme="dark"] .grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px) !important;
+  opacity: 0.18 !important;
+}
+
+/* Dark mode sidebar */
+html[data-theme="dark"] .sidebar-pannel {
+  background: #13151A !important;
+  border-right: 3px solid #000000 !important;
+}
+
+html[data-theme="dark"] .sidebar-pannel select {
+  background: #1A1D24 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+}
+
+html[data-theme="dark"] .sidebar-pannel a {
+  color: #E2E8F0 !important;
+}
+
+html[data-theme="dark"] .sidebar-pannel a:hover {
+  background: #1E222B !important;
+  color: #FFE033 !important;
+}
+
+/* Dark mode cards (Universal) */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .gear-card,
+html[data-theme="dark"] .blog-card,
+html[data-theme="dark"] .cod-card,
+html[data-theme="dark"] .cod-hub-card,
+html[data-theme="dark"] .speed-mini-card,
+html[data-theme="dark"] .cps-stat-card {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+
+/* Homepage Quick Launch tool cards */
+html[data-theme="dark"] section a[href^="/"]:has(span) {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] section a[href^="/"]:has(span):hover {
+  background: #232733 !important;
+  box-shadow: 6px 6px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] section a[href^="/"]:has(span) div {
+  color: #FFFFFF !important;
+}
+
+/* Dark mode headings */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] .tool-title,
+html[data-theme="dark"] article h1,
+html[data-theme="dark"] article h2,
+html[data-theme="dark"] article h3,
+html[data-theme="dark"] article h4,
+html[data-theme="dark"] .cps-article h1,
+html[data-theme="dark"] .cps-article h2,
+html[data-theme="dark"] .cps-article h3,
+html[data-theme="dark"] .cps-article h4,
+html[data-theme="dark"] .seo h1,
+html[data-theme="dark"] .seo h2,
+html[data-theme="dark"] .seo h3,
+html[data-theme="dark"] .seo h4 {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .tool-subtitle {
+  color: #CBD5E1 !important;
+}
+
+/* Hero section in dark mode retains high impact yellow box */
+html[data-theme="dark"] section:has(h1) h1 {
+  color: #000000 !important;
+}
+html[data-theme="dark"] section:has(h1) p {
+  color: #000000 !important;
+}
+
+/* Dark mode inputs, selects, textareas */
+html[data-theme="dark"] .nb-input,
+html[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 3px 3px 0 0 #FFE033 !important;
+}
+
+/* Dark mode articles and body texts */
+html[data-theme="dark"] article,
+html[data-theme="dark"] .cps-article,
+html[data-theme="dark"] .seo,
+html[data-theme="dark"] .guide-section,
+html[data-theme="dark"] section[aria-label*="Guide"],
+html[data-theme="dark"] article p,
+html[data-theme="dark"] .cps-article p,
+html[data-theme="dark"] .seo p,
+html[data-theme="dark"] .guide-section p,
+html[data-theme="dark"] article li,
+html[data-theme="dark"] .cps-article li,
+html[data-theme="dark"] .seo li {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] article strong,
+html[data-theme="dark"] article b,
+html[data-theme="dark"] .cps-article strong,
+html[data-theme="dark"] .cps-article b,
+html[data-theme="dark"] .seo strong,
+html[data-theme="dark"] .seo b {
+  color: #FFE033 !important;
+}
+
+/* Dark mode breadcrumbs */
+html[data-theme="dark"] nav[aria-label="Breadcrumb"] {
+  color: #94A3B8 !important;
+}
+html[data-theme="dark"] nav[aria-label="Breadcrumb"] a {
+  color: #FFFFFF !important;
+}
+html[data-theme="dark"] nav[aria-label="Breadcrumb"] span {
+  color: #FFE033 !important;
+}
+
+/* Dark mode tables */
+html[data-theme="dark"] article table,
+html[data-theme="dark"] .cps-article table,
+html[data-theme="dark"] .seo table,
+html[data-theme="dark"] table {
+  background: #181A20 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] article th,
+html[data-theme="dark"] table th {
+  background: #FFE033 !important;
+  color: #000000 !important;
+}
+
+html[data-theme="dark"] article td,
+html[data-theme="dark"] table td {
+  color: #E2E8F0 !important;
+  border-bottom: 2px solid #272B36 !important;
+  border-right: 1px solid #272B36 !important;
+}
+
+html[data-theme="dark"] article td:first-child,
+html[data-theme="dark"] table td:first-child {
+  color: #FFE033 !important;
+}
+
+/* Dark mode FAQs */
+html[data-theme="dark"] .faq-h,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] h2,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] h2 {
+  color: #FFFFFF !important;
+  border-bottom: 3px solid #000000 !important;
+}
+
+html[data-theme="dark"] .faq-h svg,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] h2 svg,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] h2 svg {
+  stroke: #FFE033 !important;
+  color: #FFE033 !important;
+}
+
+html[data-theme="dark"] .faq details,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] [role="listitem"],
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="list"] > div,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] [role="listitem"],
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="list"] > div,
+html[data-theme="dark"] .sw-faq-item,
+html[data-theme="dark"] div:has(> button[aria-expanded][id*="faq"]),
+html[data-theme="dark"] div:has(> button[aria-expanded][aria-controls*="faq"]),
+html[data-theme="dark"] div:has(> button[aria-expanded][aria-controls$="-panel"]),
+html[data-theme="dark"] div:has(> h2 > button[aria-expanded]) {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .faq summary,
+html[data-theme="dark"] button[aria-expanded][id*="faq"],
+html[data-theme="dark"] button[aria-expanded][aria-controls*="faq"],
+html[data-theme="dark"] button[aria-expanded][aria-controls$="-panel"],
+html[data-theme="dark"] button.sw-faq-question,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] button[aria-expanded],
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] button[aria-expanded] {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .faq details[open],
+html[data-theme="dark"] .faq details[open] summary,
+html[data-theme="dark"] button[aria-expanded="true"],
+html[data-theme="dark"] button.sw-faq-question.open,
+html[data-theme="dark"] .sw-faq-item.open button {
+  background: #252834 !important;
+  color: #FFE033 !important;
+  border-bottom: 3px solid #000000 !important;
+}
+
+html[data-theme="dark"] .faq summary span,
+html[data-theme="dark"] button[aria-expanded] span,
+html[data-theme="dark"] button.sw-faq-question span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .faq details[open] summary span,
+html[data-theme="dark"] button[aria-expanded="true"] span {
+  color: #FFE033 !important;
+}
+
+html[data-theme="dark"] .faq summary svg,
+html[data-theme="dark"] button[aria-expanded] svg,
+html[data-theme="dark"] button.sw-faq-question svg,
+html[data-theme="dark"] .sw-faq-chevron {
+  stroke: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .faq details[open] summary svg,
+html[data-theme="dark"] button[aria-expanded="true"] svg {
+  stroke: #FFE033 !important;
+  color: #FFE033 !important;
+}
+
+html[data-theme="dark"] .faq .a,
+html[data-theme="dark"] div[id*="faq-answer"],
+html[data-theme="dark"] div[id$="-panel"],
+html[data-theme="dark"] div[role="region"][aria-labelledby*="faq"],
+html[data-theme="dark"] p.sw-faq-answer,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="region"],
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] {
+  background: #181A20 !important;
+}
+
+html[data-theme="dark"] .faq .a p,
+html[data-theme="dark"] div[id*="faq-answer"] p,
+html[data-theme="dark"] div[id$="-panel"] p,
+html[data-theme="dark"] div[role="region"][aria-labelledby*="faq"] p,
+html[data-theme="dark"] p.sw-faq-answer,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="region"] p,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] p {
+  color: #CBD5E1 !important;
+}
+
+/* Modals & Keyboard keys in dark mode */
+html[data-theme="dark"] .cps-modal-inner {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  box-shadow: 8px 8px 0 0 #FFE033 !important;
+}
+
+html[data-theme="dark"] .key {
+  background: #1E2129 !important;
+  color: #FFFFFF !important;
+  box-shadow: 3px 3px 0 0 #000000 !important;
+}
+
+html[data-theme="dark"] .key.active {
+  background: #FFE033 !important;
+  color: #000000 !important;
+}
+
+/* Dark mode speed monitor floating widget */
+html[data-theme="dark"] #dash,
+html[data-theme="dark"] #set {
+  background: #181A20 !important;
+  color: #FFFFFF !important;
+  box-shadow: 6px 6px 0 0 #FFE033 !important;
+}
+html[data-theme="dark"] #dash b,
+html[data-theme="dark"] #set h2 {
+  color: #FFFFFF !important;
+}

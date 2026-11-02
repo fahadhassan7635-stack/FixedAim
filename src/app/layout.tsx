@@ -79,7 +79,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('fixedaim-theme');var sys=window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||(s!=='light'&&sys)?'dark':'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-theme-setting',s||'system');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body>
         <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%' }}>
           <ClientLayout>{children}</ClientLayout>

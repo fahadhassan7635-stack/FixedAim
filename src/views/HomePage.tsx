@@ -422,59 +422,158 @@ export default function HomePage() {
           {/* Right Hero Column — 3 Tilted Sticker Cards directly matching user reference image */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             
-            {/* Sticker 1: Black Card */}
-            <div style={{
-              background: '#18181B',
-              color: '#FFFFFF',
-              border: '3px solid #000000',
-              boxShadow: '5px 5px 0 0 #000000',
-              padding: '1.25rem 2rem',
-              width: 'min(320px, 100%)',
-              transform: 'rotate(2.5deg)',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 800,
-              fontSize: '1.05rem',
-              letterSpacing: '0.02em',
-              textAlign: 'center',
-            }}>
-              border: 3px solid #000;
-            </div>
+            {/* Sticker 1: 3D Aim Trainer Button (Black Card) */}
+            <Link
+              href="/3d-aim-trainer"
+              style={{
+                display: 'block',
+                background: '#18181B',
+                color: '#FFFFFF',
+                border: '3px solid #000000',
+                boxShadow: '5px 5px 0 0 #000000',
+                padding: '1.1rem 1.75rem',
+                width: 'min(320px, 100%)',
+                transform: 'rotate(2.5deg)',
+                textDecoration: 'none',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'rotate(2.5deg) translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '7px 7px 0 0 #000000';
+                e.currentTarget.style.background = '#27272A';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'rotate(2.5deg)';
+                e.currentTarget.style.boxShadow = '5px 5px 0 0 #000000';
+                e.currentTarget.style.background = '#18181B';
+              }}
+            >
+              <div style={{
+                fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
+                fontWeight: 900,
+                fontSize: '1.25rem',
+                letterSpacing: '-0.01em',
+                textTransform: 'uppercase',
+                color: '#FFE033',
+                lineHeight: 1.2,
+              }}>
+                3D AIM TRAINER
+              </div>
+              <div style={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                color: '#A1A1AA',
+                marginTop: '0.3rem',
+                letterSpacing: '0.04em',
+              }}>
+                border: 3px solid #000;
+              </div>
+            </Link>
 
-            {/* Sticker 2: Pink Card */}
-            <div style={{
-              background: '#FF6B6B',
-              color: '#000000',
-              border: '3px solid #000000',
-              boxShadow: '5px 5px 0 0 #000000',
-              padding: '1.25rem 2rem',
-              width: 'min(320px, 100%)',
-              transform: 'rotate(-2.5deg)',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 800,
-              fontSize: '1.05rem',
-              letterSpacing: '0.02em',
-              textAlign: 'center',
-            }}>
-              box-shadow: 5px 5px 0 0 #000;
-            </div>
+            {/* Sticker 2: 2D Aim Trainer Button (Pink Card) */}
+            <Link
+              href="/aim-trainer"
+              style={{
+                display: 'block',
+                background: '#FF6B6B',
+                color: '#000000',
+                border: '3px solid #000000',
+                boxShadow: '5px 5px 0 0 #000000',
+                padding: '1.1rem 1.75rem',
+                width: 'min(320px, 100%)',
+                transform: 'rotate(-2.5deg)',
+                textDecoration: 'none',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'rotate(-2.5deg) translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '7px 7px 0 0 #000000';
+                e.currentTarget.style.background = '#FF5252';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'rotate(-2.5deg)';
+                e.currentTarget.style.boxShadow = '5px 5px 0 0 #000000';
+                e.currentTarget.style.background = '#FF6B6B';
+              }}
+            >
+              <div style={{
+                fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
+                fontWeight: 900,
+                fontSize: '1.25rem',
+                letterSpacing: '-0.01em',
+                textTransform: 'uppercase',
+                color: '#000000',
+                lineHeight: 1.2,
+              }}>
+                2D AIM TRAINER
+              </div>
+              <div style={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                color: '#18181B',
+                marginTop: '0.3rem',
+                letterSpacing: '0.04em',
+              }}>
+                box-shadow: 5px 5px 0 0 #000;
+              </div>
+            </Link>
 
-            {/* Sticker 3: Mint/Cyan Card */}
-            <div style={{
-              background: '#74B9FF',
-              color: '#000000',
-              border: '3px solid #000000',
-              boxShadow: '5px 5px 0 0 #000000',
-              padding: '1.25rem 2rem',
-              width: 'min(320px, 100%)',
-              transform: 'rotate(1.5deg)',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 800,
-              fontSize: '1.05rem',
-              letterSpacing: '0.02em',
-              textAlign: 'center',
-            }}>
-              border-radius: 0;
-            </div>
+            {/* Sticker 3: Key Visualizer Button (Mint/Blue Card) */}
+            <Link
+              href="/key-visualizer"
+              style={{
+                display: 'block',
+                background: '#74B9FF',
+                color: '#000000',
+                border: '3px solid #000000',
+                boxShadow: '5px 5px 0 0 #000000',
+                padding: '1.1rem 1.75rem',
+                width: 'min(320px, 100%)',
+                transform: 'rotate(1.5deg)',
+                textDecoration: 'none',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'rotate(1.5deg) translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '7px 7px 0 0 #000000';
+                e.currentTarget.style.background = '#58A6FF';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'rotate(1.5deg)';
+                e.currentTarget.style.boxShadow = '5px 5px 0 0 #000000';
+                e.currentTarget.style.background = '#74B9FF';
+              }}
+            >
+              <div style={{
+                fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
+                fontWeight: 900,
+                fontSize: '1.25rem',
+                letterSpacing: '-0.01em',
+                textTransform: 'uppercase',
+                color: '#000000',
+                lineHeight: 1.2,
+              }}>
+                KEY VISUALIZER
+              </div>
+              <div style={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                color: '#18181B',
+                marginTop: '0.3rem',
+                letterSpacing: '0.04em',
+              }}>
+                border-radius: 0;
+              </div>
+            </Link>
 
           </div>
 
