@@ -1501,7 +1501,7 @@ export default function AimTrainerPage() {
           }}>More Tools</h2>
           <div className="more-tools-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
             gap: '1rem',
           }}>
             {MORE_TOOLS.map(({ label, href, icon }) => (

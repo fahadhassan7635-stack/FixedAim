@@ -319,7 +319,7 @@ export default function DoubleClickPage() {
       </div>
 
       {/* ─── Top Stats ───────────────────────────────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div className="double-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
         {[
           { value: lastInterval ? `${lastInterval}ms` : '—', label: 'Last Interval', color: 'var(--neon-cyan)'   },
           { value: avg          ? `${avg}ms`          : '—', label: 'Average',       color: 'var(--neon-green)'  },
@@ -415,7 +415,7 @@ export default function DoubleClickPage() {
         <div style={{ padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border)', fontWeight: '700', fontSize: '0.85rem', color: 'var(--neon-cyan)' }}>
           📈 Statistics
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="double-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '0.75rem' }}>
           {[
             { label: 'Total Attempts',  value: stats.totalAttempts,                                              color: 'var(--neon-cyan)'    },
             { label: 'Successes',       value: stats.successes,                                                  color: 'var(--neon-green)'   },

@@ -884,7 +884,7 @@ export default function CpsRush() {
               className="cps-games-grid"
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(6, 1fr)',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
                 gap: '1rem',
               }}
             >

@@ -1392,7 +1392,7 @@ export default function SpacebarPage() {
           }}>More Tools</h2>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
             gap: '1rem',
           }}>
             {[

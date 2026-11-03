@@ -859,7 +859,7 @@ export default function ApmDrillPage() {
       </section>
 
       {/* MAIN GAME LAYOUT */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 280px', gap: '16px', alignItems: 'start', marginBottom: '1.5rem' }}>
+      <div className="apm-main-layout" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 280px', gap: '16px', alignItems: 'start', marginBottom: '1.5rem' }}>
         {/* PLAY ARENA */}
         <section style={{
           background: 'var(--bg-card, #111823)',
@@ -870,7 +870,7 @@ export default function ApmDrillPage() {
           position: 'relative'
         }}>
           {/* STATS HEADER */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '8px', textAlign: 'center' }}>
+          <div className="apm-stats-header" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '8px', textAlign: 'center' }}>
             <div>
               <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>APM</div>
               <div style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--neon-cyan)' }}>{liveApm}</div>

@@ -1303,6 +1303,25 @@ export default function InternetSpeedPage() {
         .faq summary::after { content: ""; flex: none; width: 8px; height: 8px; border-right: 3px solid #000; border-bottom: 3px solid #000; transform: rotate(45deg); transition: transform .2s; }
         .faq details[open] summary::after { transform: rotate(-135deg); border-color: #000; }
         .faq .a { padding: 0 18px 16px; color: #2D3436; line-height: 1.6; font-size: 0.92rem; font-weight: 500; }
+
+        @media (max-width: 768px) {
+          #fw { display: none !important; }
+          .ctrl {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+            width: 100% !important;
+          }
+          .ctrl .btn {
+            width: 100% !important;
+            min-height: 44px !important;
+            padding: 0 8px !important;
+            font-size: 0.85rem !important;
+          }
+          #bStart {
+            grid-column: 1 / -1 !important;
+          }
+        }
       `}} />{/* BREADCRUMB */}
       <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
         <Link href="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>

@@ -539,12 +539,69 @@ h1, h2, h3, h4, h5, h6, .tool-title {
     box-shadow: 4px 4px 0 0 #FFE033 !important;
   }
 
-  /* Reset any rotated elements on phone so borders are never cut off */
-  [style*="rotate"],
+  /* Reset hero sticker button rotation on phone so borders are never cut off */
   .hero-sticker-btn {
     transform: none !important;
     width: 100% !important;
     max-width: 100% !important;
+  }
+
+  /* Responsive More Tools grid */
+  .cps-games-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.6rem !important;
+    width: 100% !important;
+  }
+  .cps-games-grid a {
+    min-width: 0 !important;
+    width: 100% !important;
+    padding: 0.8rem 0.3rem !important;
+    font-size: 0.72rem !important;
+    box-sizing: border-box !important;
+  }
+  .cps-games-grid svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  /* Responsive Stats cards on phone */
+  .cps-stats-grid,
+  .double-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.45rem !important;
+    width: 100% !important;
+  }
+  .cps-stat-card {
+    padding: 0.6rem 0.25rem !important;
+    min-width: 0 !important;
+    box-shadow: 3px 3px 0 0 #000000 !important;
+  }
+  html[data-theme="dark"] .cps-stat-card {
+    box-shadow: 3px 3px 0 0 #FFE033 !important;
+  }
+  .cps-stat-value {
+    font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
+  }
+  .cps-stat-label {
+    font-size: 0.62rem !important;
+    letter-spacing: -0.02em !important;
+    white-space: normal !important;
+    line-height: 1.15 !important;
+  }
+
+  /* APM Drill responsive layout on phone */
+  .apm-main-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .apm-stats-header {
+    gap: 4px !important;
+  }
+  .apm-stats-header > div > div:first-child {
+    font-size: 0.6rem !important;
+  }
+  .apm-stats-header > div > div:last-child {
+    font-size: 1.25rem !important;
   }
 }
 
@@ -552,6 +609,81 @@ h1, h2, h3, h4, h5, h6, .tool-title {
 /* ==========================================================================
    NEUBRUTALISM CONTENT & FAQ STYLING — EXACTLY LIKE INTERNET SPEED TEST
    ========================================================================== */
+
+/* ==========================================================================
+   CPS TEST SMOOTH CLICK ANIMATIONS (MATCHING CPSTEST.ORG)
+   ========================================================================== */
+@keyframes cpsRippleAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.15);
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes cpsRingAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes cpsFloatUp {
+  0% {
+    transform: translate(-50%, 0) scale(0.85);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -22px) scale(1.15);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -45px) scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes rippleAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.15);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+.cps-click-area {
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.cps-click-area:active {
+  transform: scale(0.992) translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0 0 #000000 !important;
+}
+
+html[data-theme="dark"] .cps-click-area:active {
+  box-shadow: 2px 2px 0 0 #FFE033 !important;
+}
+
+/* More tools universal default grid */
+.cps-games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 1rem;
+}
 
 /* ── 1. GLOBAL ARTICLE & GUIDE CONTENT STYLING ── */
 article,

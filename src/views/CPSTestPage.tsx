@@ -1471,33 +1471,62 @@ export default function CPSTestPage() {
     setCustomTime(validatedTime.toString());
   };
 
+  const lastTouchTime = useRef<number>(0);
+
+  const spawnRipple = (x: number, y: number, color: string) => {
+    const id = ++rippleId.current;
+    setRipples(prev => {
+      const next: RippleItem[] = [...prev, { id, x, y, color }];
+      if (next.length > 25) return next.slice(next.length - 25);
+      return next;
+    });
+    setTimeout(() => setRipples(prev => prev.filter(r => r.id !== id)), 650);
+  };
+
   const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+    if (Date.now() - lastTouchTime.current < 400) return;
     if (e.detail === 0) return;
-    // In right-click mode, left clicks do nothing (right-click handler takes over)
     if (clickModeRef.current === 'right') return;
 
     initAudio();
 
-    if (phaseRef.current === 'idle') { startTest(); return; }
-    if (phaseRef.current !== 'running') return;
-
-    recordClick();
-    playSound('click');
+    if (phaseRef.current === 'idle') {
+      startTest();
+      recordClick();
+      playSound('click');
+    } else if (phaseRef.current === 'running') {
+      recordClick();
+      playSound('click');
+    } else {
+      return;
+    }
 
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const id = ++rippleId.current;
+    spawnRipple(e.clientX - rect.left, e.clientY - rect.top, '#00f5ff');
+  };
 
-    setRipples(prev => {
-      const next: RippleItem[] = [...prev, { id, x, y, color: '#00f5ff' }];
-      if (next.length > 15) {
-        return next.slice(next.length - 15);
-      }
-      return next;
-    });
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>): void => {
+    lastTouchTime.current = Date.now();
+    if (clickModeRef.current === 'right') return;
 
-    setTimeout(() => setRipples(prev => prev.filter(r => r.id !== id)), 660);
+    initAudio();
+
+    if (phaseRef.current === 'idle') {
+      startTest();
+      recordClick();
+      playSound('click');
+    } else if (phaseRef.current === 'running') {
+      recordClick();
+      playSound('click');
+    } else {
+      return;
+    }
+
+    const touch = e.touches[0];
+    if (touch) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnRipple(touch.clientX - rect.left, touch.clientY - rect.top, '#00f5ff');
+    }
   };
 
   // RIGHT CLICK handler — prevents context menu and records click in right mode
@@ -1507,24 +1536,19 @@ export default function CPSTestPage() {
 
     initAudio();
 
-    if (phaseRef.current === 'idle') { startTest(); return; }
-    if (phaseRef.current !== 'running') return;
-
-    recordClick();
-    playSound('click');
+    if (phaseRef.current === 'idle') {
+      startTest();
+      recordClick();
+      playSound('click');
+    } else if (phaseRef.current === 'running') {
+      recordClick();
+      playSound('click');
+    } else {
+      return;
+    }
 
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const id = ++rippleId.current;
-
-    setRipples(prev => {
-      const next: RippleItem[] = [...prev, { id, x, y, color: '#ff9f43' }];
-      if (next.length > 15) return next.slice(next.length - 15);
-      return next;
-    });
-
-    setTimeout(() => setRipples(prev => prev.filter(r => r.id !== id)), 660);
+    spawnRipple(e.clientX - rect.left, e.clientY - rect.top, '#ff9f43');
   };
 
   useEffect(() => {
@@ -1717,6 +1741,7 @@ export default function CPSTestPage() {
         tabIndex={0}
         aria-label="Click area to start CPS test"
         onClick={handleClick}
+        onTouchStart={handleTouchStart}
         onContextMenu={handleRightClick}
         onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => { if (e.key === 'Enter' || e.key === ' ') handleClick(e as unknown as React.MouseEvent<HTMLDivElement>); }}
         className={`cps-click-area ${phase === 'running' ? 'running' : ''}`}
@@ -1762,20 +1787,55 @@ export default function CPSTestPage() {
         {ripples.map(r => {
           const rc = r.color || '#FFE033';
           return (
-            <span key={r.id} style={{
-              position: 'absolute',
-              left: r.x,
-              top: r.y,
-              width: '300px',
-              height: '300px',
-              borderRadius: '50%',
-              background: rc,
-              opacity: 0,
-              transform: 'translate(-50%, -50%) scale(0)',
-              animation: 'rippleAnim 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) forwards',
-              pointerEvents: 'none',
-              willChange: 'transform, opacity',
-            }} />
+            <React.Fragment key={r.id}>
+              {/* Smooth Expanding Ripple Wave */}
+              <span style={{
+                position: 'absolute',
+                left: r.x,
+                top: r.y,
+                width: '260px',
+                height: '260px',
+                borderRadius: '50%',
+                background: `radial-gradient(circle, ${rc}99 0%, ${rc}33 50%, transparent 70%)`,
+                transform: 'translate(-50%, -50%) scale(0)',
+                animation: 'cpsRippleAnim 0.6s cubic-bezier(0.1, 0.85, 0.25, 1) forwards',
+                pointerEvents: 'none',
+                willChange: 'transform, opacity',
+                zIndex: 2,
+              }} />
+              {/* Smooth Expanding Shockwave Ring */}
+              <span style={{
+                position: 'absolute',
+                left: r.x,
+                top: r.y,
+                width: '180px',
+                height: '180px',
+                borderRadius: '50%',
+                border: `3px solid ${rc}`,
+                transform: 'translate(-50%, -50%) scale(0.1)',
+                animation: 'cpsRingAnim 0.55s cubic-bezier(0.15, 0.9, 0.3, 1) forwards',
+                pointerEvents: 'none',
+                willChange: 'transform, opacity',
+                zIndex: 2,
+              }} />
+              {/* Floating +1 click badge (cpstest.org style) */}
+              <span style={{
+                position: 'absolute',
+                left: r.x,
+                top: r.y,
+                fontSize: '1.15rem',
+                fontWeight: 900,
+                color: rc,
+                textShadow: '0 2px 4px rgba(0,0,0,0.6)',
+                transform: 'translate(-50%, 0)',
+                animation: 'cpsFloatUp 0.55s ease-out forwards',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                zIndex: 3,
+              }}>
+                +1
+              </span>
+            </React.Fragment>
           );
         })}
 
@@ -1969,7 +2029,7 @@ export default function CPSTestPage() {
           className="cps-games-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
             gap: '1rem',
           }}
         >
