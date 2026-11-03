@@ -2010,22 +2010,33 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.25rem' }}>
+    <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.25rem' }}>
       {items.map((item, i) => {
         const open = openIdx === i;
         return (
-          <div key={i} style={{ background: '#FFFFFF', border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', overflow: 'hidden', marginBottom: '8px' }}>
+          <div
+            key={i}
+            role="listitem"
+            style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', overflow: 'hidden', marginBottom: '8px' }}
+          >
             <button
               onClick={() => setOpenIdx(open ? null : i)}
               aria-expanded={open}
-              style={{ width: '100%', padding: '16px 20px', background: open ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: open ? '3px solid #000000' : 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', textAlign: 'left' }}
+              id={`voyager-faq-question-${i}`}
+              aria-controls={`voyager-faq-answer-${i}`}
+              style={{ width: '100%', padding: '16px 20px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', textAlign: 'left' }}
             >
-              <span style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>{item.q}</span>
+              <span style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase' }}>{item.q}</span>
               <ChevronDown size={16} color={open ? '#00f5ff' : '#64748b'} style={{ flexShrink: 0, transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
             </button>
             {open && (
-              <div style={{ padding: '0 1.1rem 1rem' }}>
-                <p style={{ margin: 0, fontSize: '0.96rem', color: '#2D3436', lineHeight: 1.7, fontWeight: 500 }}>{item.a}</p>
+              <div
+                id={`voyager-faq-answer-${i}`}
+                role="region"
+                aria-labelledby={`voyager-faq-question-${i}`}
+                style={{ padding: '16px 20px 18px' }}
+              >
+                <p style={{ margin: 0, fontSize: '0.96rem', lineHeight: 1.7, fontWeight: 500 }}>{item.a}</p>
               </div>
             )}
           </div>

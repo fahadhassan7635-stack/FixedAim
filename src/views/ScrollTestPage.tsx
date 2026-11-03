@@ -701,35 +701,38 @@ export default function ScrollTestPage() {
         </div>
 
         {/* FAQ Section: 30+ entries */}
-        <div style={{ marginTop: '2.5rem', border: '3px solid #000000', padding: '1.5rem', boxShadow: '5px 5px 0 0 #000000', background: '#FFFFFF' }}>
-          <h2 style={{ color: '#000000', fontSize: '1.4rem', fontWeight: 900, marginBottom: '1.25rem', marginTop: '0', textTransform: 'uppercase', borderBottom: '3px solid #000000', paddingBottom: '0.75rem' }}>
+        <div className="faq-wrapper" aria-label="Frequently Asked Questions" style={{ marginTop: '2.5rem', border: '3px solid #000000', padding: '1.5rem', boxShadow: '5px 5px 0 0 #000000' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '1.25rem', marginTop: '0', textTransform: 'uppercase', borderBottom: '3px solid #000000', paddingBottom: '0.75rem' }}>
             Frequently Asked Questions (FAQs)
           </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+          <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {faqs.map((item, i) => {
               const isOpen = openFaqIndex === i;
               return (
                 <div
                   key={i}
+                  role="listitem"
                   style={{
                     border: '3px solid #000000',
-                  borderRadius: '0px',
-                  boxShadow: '4px 4px 0 0 #000000',
-                  background: '#FFFFFF',
-                  overflow: 'hidden',
-                  marginBottom: '8px',
+                    borderRadius: '0px',
+                    boxShadow: '4px 4px 0 0 #000000',
+                    overflow: 'hidden',
+                    marginBottom: '8px',
                   }}
                 >
                   <button
                     onClick={() => setOpenFaqIndex(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    id={`scroll-faq-question-${i}`}
+                    aria-controls={`scroll-faq-answer-${i}`}
                     style={{
                       width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      gap: '1rem', background: 'transparent', border: 'none', cursor: 'pointer',
-                      padding: '0.9rem 1.1rem', textAlign: 'left',
+                      gap: '1rem', border: 'none', cursor: 'pointer',
+                      padding: '16px 20px', textAlign: 'left',
                     }}
                   >
-                    <h3 style={{ color: '#000000', fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase' }}>
                       {item.q}
                     </h3>
                     <svg
@@ -746,8 +749,13 @@ export default function ScrollTestPage() {
                     </svg>
                   </button>
                   {isOpen && (
-                    <div style={{ padding: '16px 20px 18px', background: '#FFFFFF' }}>
-                      <p style={{ margin: 0, color: '#2D3436', fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500 }}>
+                    <div
+                      id={`scroll-faq-answer-${i}`}
+                      role="region"
+                      aria-labelledby={`scroll-faq-question-${i}`}
+                      style={{ padding: '16px 20px 18px' }}
+                    >
+                      <p style={{ margin: 0, fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500 }}>
                         {item.a}
                       </p>
                     </div>

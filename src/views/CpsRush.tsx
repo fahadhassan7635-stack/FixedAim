@@ -329,19 +329,26 @@ const FaqAccordion: React.FC = () => {
         <div
           key={i}
           role="listitem"
-          style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', background: '#FFFFFF', overflow: 'hidden', marginBottom: '8px' }}
+          style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', overflow: 'hidden', marginBottom: '8px' }}
         >
           <button
             aria-expanded={openIndex === i}
+            id={`rush-faq-question-${i}`}
+            aria-controls={`rush-faq-answer-${i}`}
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', background: openIndex === i ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: openIndex === i ? '3px solid #000000' : 'none', cursor: 'pointer', color: '#000000', fontWeight: 900, fontSize: '1rem', textTransform: 'uppercase', textAlign: 'left', gap: '12px' }}
+            style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', border: 'none', cursor: 'pointer', fontWeight: 900, fontSize: '1rem', textTransform: 'uppercase', textAlign: 'left', gap: '12px' }}
           >
             <span>{item.q}</span>
             {openIndex === i ? <ChevronUp size={16} color="#00f0ff" /> : <ChevronDown size={16} color="#6b7280" />}
           </button>
           {openIndex === i && (
-            <div style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}>
-              <p style={{ color: '#2D3436', margin: 0, lineHeight: '1.7', fontSize: '0.95rem' }}>{item.a}</p>
+            <div
+              id={`rush-faq-answer-${i}`}
+              role="region"
+              aria-labelledby={`rush-faq-question-${i}`}
+              style={{ padding: '16px 20px 18px' }}
+            >
+              <p style={{ margin: 0, lineHeight: '1.7', fontSize: '0.96rem', fontWeight: 500 }}>{item.a}</p>
             </div>
           )}
         </div>

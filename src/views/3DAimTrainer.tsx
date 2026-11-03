@@ -1431,9 +1431,9 @@ export default function SniperModePage() {
           </div>
         </section>
 
-        <section id="faq" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1.5rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Frequently Asked Questions</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <section id="faq" className="faq-section" style={{ marginBottom: '3rem' }}>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '1.5rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Frequently Asked Questions</h2>
+          <div className="faq" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {[
               { q: 'What is eDPI and why does it matter?', a: 'eDPI (effective Dots Per Inch) is calculated by multiplying your mouse DPI by your in-game sensitivity. It acts as a universal metric allowing you to compare true sensitivities across different games and settings.' },
               { q: 'How often should I use an aim trainer?', a: 'Consistency is key. 15-30 minutes daily is vastly superior to a single 3-hour session once a week. Aim for frequent, focused sessions without causing cognitive fatigue.' },
@@ -1449,11 +1449,13 @@ export default function SniperModePage() {
               { q: 'Is higher FOV better for aiming?', a: 'Higher FOV makes targets appear smaller and slower, while lower FOV makes them appear larger but faster. Your aim trainer FOV should exactly match your primary game for accurate muscle memory transfer.' },
               { q: 'Do heavier mice make aiming harder?', a: 'Heavier mice have more inertia, making them harder to start and stop quickly. The competitive standard has largely shifted to lightweight mice (under 70g) for optimal control.' }
             ].map(({ q, a }, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', padding: '1rem', marginBottom: '8px' }}>
-                <summary style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', cursor: 'pointer', textTransform: 'uppercase' }}>
+              <details key={i} style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', padding: '1rem', marginBottom: '8px' }}>
+                <summary style={{ fontSize: '1rem', fontWeight: 900, cursor: 'pointer', textTransform: 'uppercase' }}>
                   {q}
                 </summary>
-                <p style={{ marginTop: '0.75rem', color: '#2D3436', lineHeight: '1.6', marginBottom: 0, fontWeight: 500, fontSize: '0.96rem' }}>{a}</p>
+                <div className="a">
+                  <p style={{ marginTop: '0.75rem', lineHeight: '1.6', marginBottom: 0, fontWeight: 500, fontSize: '0.96rem' }}>{a}</p>
+                </div>
               </details>
             ))}
           </div>

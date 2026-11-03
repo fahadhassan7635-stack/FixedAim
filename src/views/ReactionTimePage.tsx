@@ -263,27 +263,26 @@ function FAQItem({
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
+        id={`rt-faq-question-${question.slice(0, 15).replace(/\s+/g, '-')}`}
         style={{
           width: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '1rem',
-          padding: '1rem 1.25rem',
-          background: 'transparent',
+          padding: '16px 20px',
           border: 'none',
           cursor: 'pointer',
           textAlign: 'left',
-          color: '#000000',
           fontFamily: 'inherit',
-          fontWeight: 700,
-          fontSize: '0.95rem',
+          fontWeight: 900,
+          fontSize: '1rem',
+          textTransform: 'uppercase',
           lineHeight: 1.45,
-          transition: 'color 0.22s ease',
         }}
       >
         <span>{question}</span>
-        <span style={{ color: '#000000' }}>
+        <span>
           <ChevronIcon open={isOpen} />
         </span>
       </button>
@@ -324,12 +323,14 @@ function FAQSection() {
 
   return (
     <div
+      className="faq-wrapper"
+      aria-label="Frequently Asked Questions"
       style={{
         marginTop: '2.5rem',
-        borderRadius: '12px',
+        borderRadius: '0px',
         padding: '1.5rem',
-        border: '1px solid var(--border)',
-        background: 'rgba(0,0,0,0.2)',
+        border: '3px solid #000000',
+        boxShadow: '5px 5px 0 0 #000000',
       }}
     >
       <h2

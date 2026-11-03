@@ -1761,77 +1761,87 @@ export default function AccuracyTestPage() {
           </p>
 
           {/* FAQ */}
-          <div style={{ marginTop: '3rem' }}>
+          <div aria-label="Frequently Asked Questions" style={{ marginTop: '3rem' }}>
             <h2 style={{
-              color: 'var(--neon-cyan)', fontSize: '1.3rem', fontWeight: 700,
+              fontSize: '1.3rem', fontWeight: 900,
               marginTop: 0, marginBottom: '1.25rem',
             }}>
               Frequently Asked Questions
             </h2>
 
-            {FAQ_ITEMS.map(({ q, a }, idx) => {
-              const isOpen = openFaqs.has(idx);
-              return (
-                <div
-                  key={q}
-                  style={{
-                    background: isOpen ? '#FFF6D6' : '#FFFFFF',
-                  border: '3px solid #000000',
-                  borderRadius: '0px',
-                  boxShadow: '4px 4px 0 0 #000000',
-                  padding: '0',
-                  marginBottom: '8px',
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleFaq(idx)}
-                    aria-expanded={isOpen}
+            <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              {FAQ_ITEMS.map(({ q, a }, idx) => {
+                const isOpen = openFaqs.has(idx);
+                return (
+                  <div
+                    key={q}
+                    role="listitem"
                     style={{
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      gap: '1rem',
-                      background: 'transparent',
-                      border: 'none',
-                      margin: 0,
-                      cursor: 'pointer',
-                      color: '#000000',
-                      fontWeight: 900,
-                      fontSize: '1rem',
-                      textTransform: 'uppercase',
-                      textAlign: 'left',
-                      font: 'inherit',
-                      padding: '16px 20px',
+                      border: '3px solid #000000',
+                      borderRadius: '0px',
+                      boxShadow: '4px 4px 0 0 #000000',
+                      padding: '0',
+                      overflow: 'hidden',
+                      marginBottom: '8px',
                     }}
                   >
-                    <span>{q}</span>
-                    <svg
-                      width="18" height="18" viewBox="0 0 24 24" fill="none"
-                      stroke={isOpen ? 'var(--neon-cyan)' : 'var(--text-muted)'}
-                      strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(idx)}
+                      aria-expanded={isOpen}
+                      id={`accuracy-faq-question-${idx}`}
+                      aria-controls={`accuracy-faq-answer-${idx}`}
                       style={{
-                        flexShrink: 0,
-                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.25s ease, stroke 0.2s ease',
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        gap: '1rem',
+                        border: 'none',
+                        margin: 0,
+                        cursor: 'pointer',
+                        fontWeight: 900,
+                        fontSize: '1rem',
+                        textTransform: 'uppercase',
+                        textAlign: 'left',
+                        font: 'inherit',
+                        padding: '16px 20px',
                       }}
                     >
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                  </button>
+                      <span>{q}</span>
+                      <svg
+                        width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke={isOpen ? 'var(--neon-cyan)' : 'var(--text-muted)'}
+                        strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                        style={{
+                          flexShrink: 0,
+                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.25s ease, stroke 0.2s ease',
+                        }}
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </button>
 
-                  {isOpen && (
-                    <p style={{
-                      margin: '0.85rem 0 0', color: 'var(--text-muted)',
-                      fontSize: '0.9rem', lineHeight: '1.7',
-                    }}>
-                      {a}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+                    {isOpen && (
+                      <div
+                        id={`accuracy-faq-answer-${idx}`}
+                        role="region"
+                        aria-labelledby={`accuracy-faq-question-${idx}`}
+                        style={{ padding: '16px 20px 18px' }}
+                      >
+                        <p style={{
+                          margin: 0,
+                          fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500,
+                        }}>
+                          {a}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </article>
       </div>

@@ -1414,19 +1414,26 @@ const FaqAccordion = ({ items }: { items: { q: string; a: string }[] }) => {
           <div
             key={i}
             role="listitem"
-            style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', background: '#FFFFFF', overflow: 'hidden', marginBottom: '8px' }}
+            style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', overflow: 'hidden', marginBottom: '8px' }}
           >
             <button
               aria-expanded={isOpen}
+              id={`space-faq-question-${i}`}
+              aria-controls={`space-faq-answer-${i}`}
               onClick={() => setOpenIndex(isOpen ? null : i)}
-              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', background: isOpen ? '#FFF6D6' : '#FFFFFF', border: 'none', borderBottom: isOpen ? '3px solid #000000' : 'none', cursor: 'pointer', color: '#000000', fontWeight: 900, fontSize: '1rem', textTransform: 'uppercase', textAlign: 'left', gap: '12px' }}
+              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', border: 'none', cursor: 'pointer', fontWeight: 900, fontSize: '1rem', textTransform: 'uppercase', textAlign: 'left', gap: '12px' }}
             >
               <span>{item.q}</span>
               {isOpen ? <ChevronUp size={16} color="var(--neon-cyan)" /> : <ChevronDown size={16} color="#6b7280" />}
             </button>
             {isOpen && (
-              <div style={{ padding: '16px 20px 18px', backgroundColor: '#FFFFFF' }}>
-                <p style={{ color: '#2D3436', margin: 0, lineHeight: '1.7', fontSize: '0.95rem' }}>{item.a}</p>
+              <div
+                id={`space-faq-answer-${i}`}
+                role="region"
+                aria-labelledby={`space-faq-question-${i}`}
+                style={{ padding: '16px 20px 18px' }}
+              >
+                <p style={{ margin: 0, lineHeight: '1.7', fontSize: '0.96rem', fontWeight: 500 }}>{item.a}</p>
               </div>
             )}
           </div>

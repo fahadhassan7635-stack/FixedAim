@@ -2060,14 +2060,16 @@ function FaqAccordionRow({
   entry, isOpen, onToggle, accentColor,
 }: { entry: FaqEntry; isOpen: boolean; onToggle: () => void; accentColor: string }) {
   return (
-    <div style={{
-      background: '#FFFFFF',
-      border: '3px solid #000000',
-      borderRadius: '0px',
-      boxShadow: '4px 4px 0 0 #000000',
-      overflow: 'hidden',
-      marginBottom: '8px',
-    }}>
+    <div
+      role="listitem"
+      style={{
+        border: '3px solid #000000',
+        borderRadius: '0px',
+        boxShadow: '4px 4px 0 0 #000000',
+        overflow: 'hidden',
+        marginBottom: '8px',
+      }}
+    >
       <h2 style={{ margin: 0 }}>
         <button
           type="button"
@@ -2077,9 +2079,8 @@ function FaqAccordionRow({
           id={`${entry.id}-button`}
           style={{
             width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            gap: '1rem', padding: '16px 20px', background: isOpen ? '#FFF6D6' : '#FFFFFF', border: 'none',
-            borderBottom: isOpen ? '3px solid #000000' : 'none',
-            cursor: 'pointer', textAlign: 'left', color: '#000000', fontWeight: 900, fontSize: '1rem',
+            gap: '1rem', padding: '16px 20px', border: 'none',
+            cursor: 'pointer', textAlign: 'left', fontWeight: 900, fontSize: '1rem',
             fontFamily: 'inherit', textTransform: 'uppercase',
           }}
         >
@@ -2100,7 +2101,7 @@ function FaqAccordionRow({
         aria-labelledby={`${entry.id}-button`}
         style={{ maxHeight: isOpen ? '400px' : '0px', transition: 'max-height 0.25s ease', overflow: 'hidden' }}
       >
-        <div style={{ padding: '16px 20px 18px', color: '#2D3436', fontSize: '0.96rem', lineHeight: 1.7, fontWeight: 500, background: '#FFFFFF' }}>
+        <div style={{ padding: '16px 20px 18px', fontSize: '0.96rem', lineHeight: 1.7, fontWeight: 500 }}>
           {entry.answer}
         </div>
       </div>

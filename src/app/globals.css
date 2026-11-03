@@ -676,8 +676,22 @@ table td:first-child {
 
 /* ── 2. UNIVERSAL FAQ ACCORDION STYLING (MATCHING INTERNET SPEED TEST) ── */
 
+/* FAQ Outer Box Wrapper */
+.faq-wrapper,
+.faq-box,
+div[aria-label*="Frequently Asked"],
+section[aria-label*="Frequently Asked"] {
+  background: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #000000 !important;
+}
+
 /* FAQ Section Heading */
 .faq-h,
+.faq-wrapper h2,
+.faq-box h2,
+#faq h2,
+.faq-section h2,
 section[aria-label*="Frequently Asked"] h2,
 div[aria-label*="Frequently Asked"] h2,
 section[aria-labelledby*="faq"] h2,
@@ -699,6 +713,9 @@ section h2:has(+ div div[role="listitem"]) {
 }
 
 .faq-h svg,
+.faq-wrapper h2 svg,
+.faq-box h2 svg,
+#faq h2 svg,
 section[aria-label*="Frequently Asked"] h2 svg,
 div[aria-label*="Frequently Asked"] h2 svg {
   stroke: #000000 !important;
@@ -707,15 +724,21 @@ div[aria-label*="Frequently Asked"] h2 svg {
 
 /* FAQ Box Container (Each Accordion Item) */
 .faq details,
+#faq details,
+.faq-section details,
+[role="listitem"]:has(button),
 section[aria-label*="Frequently Asked"] [role="listitem"],
 section[aria-label*="Frequently Asked"] div[role="list"] > div,
 div[aria-label*="Frequently Asked"] [role="listitem"],
 div[aria-label*="Frequently Asked"] div[role="list"] > div,
 .sw-faq-item,
-div:has(> button[aria-expanded][id*="faq"]),
-div:has(> button[aria-expanded][aria-controls*="faq"]),
-div:has(> button[aria-expanded][aria-controls$="-panel"]),
-div:has(> h2 > button[aria-expanded]) {
+div:has(> button[aria-expanded]),
+div:has(> button[id*="faq"]),
+div:has(> button[aria-controls*="faq"]),
+div:has(> button[aria-controls$="-panel"]),
+div:has(> h2 > button[aria-expanded]),
+div:has(> [id*="faq-answer"]),
+div:has(> [role="region"][aria-labelledby*="faq"]) {
   background: #FFFFFF !important;
   border: 3px solid #000000 !important;
   border-radius: 0px !important;
@@ -727,12 +750,15 @@ div:has(> h2 > button[aria-expanded]) {
 
 /* FAQ Question Button */
 .faq summary,
-button[aria-expanded][id*="faq"],
-button[aria-expanded][aria-controls*="faq"],
-button[aria-expanded][aria-controls$="-panel"],
+#faq summary,
+.faq-section summary,
+button[aria-expanded],
+button[id*="faq"],
+button[aria-controls*="faq"],
+button[aria-controls$="-panel"],
 button.sw-faq-question,
-section[aria-label*="Frequently Asked"] button[aria-expanded],
-div[aria-label*="Frequently Asked"] button[aria-expanded] {
+section[aria-label*="Frequently Asked"] button,
+div[aria-label*="Frequently Asked"] button {
   width: 100% !important;
   background: #FFFFFF !important;
   color: #000000 !important;
@@ -755,6 +781,10 @@ div[aria-label*="Frequently Asked"] button[aria-expanded] {
 /* FAQ Question Button When OPEN */
 .faq details[open],
 .faq details[open] summary,
+#faq details[open],
+#faq details[open] summary,
+.faq-section details[open],
+.faq-section details[open] summary,
 button[aria-expanded="true"],
 button.sw-faq-question.open,
 .sw-faq-item.open button {
@@ -766,18 +796,24 @@ button.sw-faq-question.open,
 /* FAQ Question Text inside button */
 .faq summary,
 .faq summary *,
-button[aria-expanded][id*="faq"],
-button[aria-expanded][id*="faq"] *,
-button[aria-expanded][aria-controls*="faq"],
-button[aria-expanded][aria-controls*="faq"] *,
-button[aria-expanded][aria-controls$="-panel"],
-button[aria-expanded][aria-controls$="-panel"] *,
+#faq summary,
+#faq summary *,
+.faq-section summary,
+.faq-section summary *,
+button[aria-expanded],
+button[aria-expanded] *,
+button[id*="faq"],
+button[id*="faq"] *,
+button[aria-controls*="faq"],
+button[aria-controls*="faq"] *,
+button[aria-controls$="-panel"],
+button[aria-controls$="-panel"] *,
 button.sw-faq-question,
 button.sw-faq-question *,
-section[aria-label*="Frequently Asked"] button[aria-expanded],
-section[aria-label*="Frequently Asked"] button[aria-expanded] *,
-div[aria-label*="Frequently Asked"] button[aria-expanded],
-div[aria-label*="Frequently Asked"] button[aria-expanded] * {
+section[aria-label*="Frequently Asked"] button,
+section[aria-label*="Frequently Asked"] button *,
+div[aria-label*="Frequently Asked"] button,
+div[aria-label*="Frequently Asked"] button * {
   color: #000000 !important;
   font-weight: 900 !important;
   font-size: 1rem !important;
@@ -787,7 +823,10 @@ div[aria-label*="Frequently Asked"] button[aria-expanded] * {
 
 /* FAQ Chevron / Icons */
 .faq summary svg,
+#faq summary svg,
+.faq-section summary svg,
 button[aria-expanded] svg,
+button[id*="faq"] svg,
 button.sw-faq-question svg,
 .sw-faq-chevron {
   stroke: #000000 !important;
@@ -797,6 +836,8 @@ button.sw-faq-question svg,
 
 /* FAQ Answer Panel */
 .faq .a,
+#faq .a,
+.faq-section .a,
 div[id*="faq-answer"],
 div[id$="-panel"],
 div[role="region"][aria-labelledby*="faq"],
@@ -811,16 +852,20 @@ div[aria-label*="Frequently Asked"] div[role="region"] {
 
 .faq .a,
 .faq .a *,
-div[id*="faq-answer"] p,
+#faq .a,
+#faq .a *,
+.faq-section .a,
+.faq-section .a *,
+div[id*="faq-answer"],
 div[id*="faq-answer"] *,
-div[id$="-panel"] p,
+div[id$="-panel"],
 div[id$="-panel"] *,
-div[role="region"][aria-labelledby*="faq"] p,
+div[role="region"][aria-labelledby*="faq"],
 div[role="region"][aria-labelledby*="faq"] *,
 p.sw-faq-answer,
-section[aria-label*="Frequently Asked"] div[role="region"] p,
+section[aria-label*="Frequently Asked"] div[role="region"],
 section[aria-label*="Frequently Asked"] div[role="region"] *,
-div[aria-label*="Frequently Asked"] div[role="region"] p,
+div[aria-label*="Frequently Asked"] div[role="region"],
 div[aria-label*="Frequently Asked"] div[role="region"] * {
   color: #111111 !important;
   font-size: 0.96rem !important;
@@ -828,6 +873,7 @@ div[aria-label*="Frequently Asked"] div[role="region"] * {
   font-weight: 600 !important;
   margin: 0 !important;
 }
+
 
 /* "Show All FAQs" Button */
 section[aria-label*="Frequently Asked"] button:not([aria-expanded]),
@@ -1625,14 +1671,31 @@ html[data-theme="dark"] table td:first-child {
 }
 
 /* Dark mode FAQs */
+html[data-theme="dark"] .faq-wrapper,
+html[data-theme="dark"] .faq-box,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"],
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] {
+  background: #181A20 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0 0 #FFE033 !important;
+}
+
 html[data-theme="dark"] .faq-h,
+html[data-theme="dark"] .faq-wrapper h2,
+html[data-theme="dark"] .faq-box h2,
+html[data-theme="dark"] #faq h2,
+html[data-theme="dark"] .faq-section h2,
 html[data-theme="dark"] section[aria-label*="Frequently Asked"] h2,
-html[data-theme="dark"] div[aria-label*="Frequently Asked"] h2 {
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] h2,
+html[data-theme="dark"] section[aria-labelledby*="faq"] h2 {
   color: #FFFFFF !important;
   border-bottom: 3px solid #000000 !important;
 }
 
 html[data-theme="dark"] .faq-h svg,
+html[data-theme="dark"] .faq-wrapper h2 svg,
+html[data-theme="dark"] .faq-box h2 svg,
+html[data-theme="dark"] #faq h2 svg,
 html[data-theme="dark"] section[aria-label*="Frequently Asked"] h2 svg,
 html[data-theme="dark"] div[aria-label*="Frequently Asked"] h2 svg {
   stroke: #FFE033 !important;
@@ -1640,33 +1703,46 @@ html[data-theme="dark"] div[aria-label*="Frequently Asked"] h2 svg {
 }
 
 html[data-theme="dark"] .faq details,
+html[data-theme="dark"] #faq details,
+html[data-theme="dark"] .faq-section details,
+html[data-theme="dark"] [role="listitem"]:has(button),
 html[data-theme="dark"] section[aria-label*="Frequently Asked"] [role="listitem"],
 html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="list"] > div,
 html[data-theme="dark"] div[aria-label*="Frequently Asked"] [role="listitem"],
 html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="list"] > div,
 html[data-theme="dark"] .sw-faq-item,
-html[data-theme="dark"] div:has(> button[aria-expanded][id*="faq"]),
-html[data-theme="dark"] div:has(> button[aria-expanded][aria-controls*="faq"]),
-html[data-theme="dark"] div:has(> button[aria-expanded][aria-controls$="-panel"]),
-html[data-theme="dark"] div:has(> h2 > button[aria-expanded]) {
+html[data-theme="dark"] div:has(> button[aria-expanded]),
+html[data-theme="dark"] div:has(> button[id*="faq"]),
+html[data-theme="dark"] div:has(> button[aria-controls*="faq"]),
+html[data-theme="dark"] div:has(> button[aria-controls$="-panel"]),
+html[data-theme="dark"] div:has(> h2 > button[aria-expanded]),
+html[data-theme="dark"] div:has(> [id*="faq-answer"]),
+html[data-theme="dark"] div:has(> [role="region"][aria-labelledby*="faq"]) {
   background: #181A20 !important;
   border: 3px solid #000000 !important;
   box-shadow: 4px 4px 0 0 #FFE033 !important;
 }
 
 html[data-theme="dark"] .faq summary,
-html[data-theme="dark"] button[aria-expanded][id*="faq"],
-html[data-theme="dark"] button[aria-expanded][aria-controls*="faq"],
-html[data-theme="dark"] button[aria-expanded][aria-controls$="-panel"],
+html[data-theme="dark"] #faq summary,
+html[data-theme="dark"] .faq-section summary,
+html[data-theme="dark"] button[aria-expanded],
+html[data-theme="dark"] button[id*="faq"],
+html[data-theme="dark"] button[aria-controls*="faq"],
+html[data-theme="dark"] button[aria-controls$="-panel"],
 html[data-theme="dark"] button.sw-faq-question,
-html[data-theme="dark"] section[aria-label*="Frequently Asked"] button[aria-expanded],
-html[data-theme="dark"] div[aria-label*="Frequently Asked"] button[aria-expanded] {
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] button,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] button {
   background: #181A20 !important;
   color: #FFFFFF !important;
 }
 
 html[data-theme="dark"] .faq details[open],
 html[data-theme="dark"] .faq details[open] summary,
+html[data-theme="dark"] #faq details[open],
+html[data-theme="dark"] #faq details[open] summary,
+html[data-theme="dark"] .faq-section details[open],
+html[data-theme="dark"] .faq-section details[open] summary,
 html[data-theme="dark"] button[aria-expanded="true"],
 html[data-theme="dark"] button.sw-faq-question.open,
 html[data-theme="dark"] .sw-faq-item.open button {
@@ -1675,19 +1751,47 @@ html[data-theme="dark"] .sw-faq-item.open button {
   border-bottom: 3px solid #000000 !important;
 }
 
-html[data-theme="dark"] .faq summary span,
-html[data-theme="dark"] button[aria-expanded] span,
-html[data-theme="dark"] button.sw-faq-question span {
+html[data-theme="dark"] .faq summary,
+html[data-theme="dark"] .faq summary *,
+html[data-theme="dark"] #faq summary,
+html[data-theme="dark"] #faq summary *,
+html[data-theme="dark"] .faq-section summary,
+html[data-theme="dark"] .faq-section summary *,
+html[data-theme="dark"] button[aria-expanded],
+html[data-theme="dark"] button[aria-expanded] *,
+html[data-theme="dark"] button[id*="faq"],
+html[data-theme="dark"] button[id*="faq"] *,
+html[data-theme="dark"] button[aria-controls*="faq"],
+html[data-theme="dark"] button[aria-controls*="faq"] *,
+html[data-theme="dark"] button[aria-controls$="-panel"],
+html[data-theme="dark"] button[aria-controls$="-panel"] *,
+html[data-theme="dark"] button.sw-faq-question,
+html[data-theme="dark"] button.sw-faq-question *,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] button,
+html[data-theme="dark"] section[aria-label*="Frequently Asked"] button *,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] button,
+html[data-theme="dark"] div[aria-label*="Frequently Asked"] button * {
   color: #FFFFFF !important;
 }
 
-html[data-theme="dark"] .faq details[open] summary span,
-html[data-theme="dark"] button[aria-expanded="true"] span {
+html[data-theme="dark"] .faq details[open] summary,
+html[data-theme="dark"] .faq details[open] summary *,
+html[data-theme="dark"] #faq details[open] summary,
+html[data-theme="dark"] #faq details[open] summary *,
+html[data-theme="dark"] .faq-section details[open] summary,
+html[data-theme="dark"] .faq-section details[open] summary *,
+html[data-theme="dark"] button[aria-expanded="true"],
+html[data-theme="dark"] button[aria-expanded="true"] *,
+html[data-theme="dark"] button.sw-faq-question.open,
+html[data-theme="dark"] button.sw-faq-question.open * {
   color: #FFE033 !important;
 }
 
 html[data-theme="dark"] .faq summary svg,
+html[data-theme="dark"] #faq summary svg,
+html[data-theme="dark"] .faq-section summary svg,
 html[data-theme="dark"] button[aria-expanded] svg,
+html[data-theme="dark"] button[id*="faq"] svg,
 html[data-theme="dark"] button.sw-faq-question svg,
 html[data-theme="dark"] .sw-faq-chevron {
   stroke: #FFFFFF !important;
@@ -1695,12 +1799,18 @@ html[data-theme="dark"] .sw-faq-chevron {
 }
 
 html[data-theme="dark"] .faq details[open] summary svg,
-html[data-theme="dark"] button[aria-expanded="true"] svg {
+html[data-theme="dark"] #faq details[open] summary svg,
+html[data-theme="dark"] .faq-section details[open] summary svg,
+html[data-theme="dark"] button[aria-expanded="true"] svg,
+html[data-theme="dark"] button.sw-faq-question.open svg,
+html[data-theme="dark"] .sw-faq-chevron.open {
   stroke: #FFE033 !important;
   color: #FFE033 !important;
 }
 
 html[data-theme="dark"] .faq .a,
+html[data-theme="dark"] #faq .a,
+html[data-theme="dark"] .faq-section .a,
 html[data-theme="dark"] div[id*="faq-answer"],
 html[data-theme="dark"] div[id$="-panel"],
 html[data-theme="dark"] div[role="region"][aria-labelledby*="faq"],
@@ -1712,6 +1822,10 @@ html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] {
 
 html[data-theme="dark"] .faq .a,
 html[data-theme="dark"] .faq .a *,
+html[data-theme="dark"] #faq .a,
+html[data-theme="dark"] #faq .a *,
+html[data-theme="dark"] .faq-section .a,
+html[data-theme="dark"] .faq-section .a *,
 html[data-theme="dark"] div[id*="faq-answer"],
 html[data-theme="dark"] div[id*="faq-answer"] *,
 html[data-theme="dark"] div[id$="-panel"],
@@ -1724,6 +1838,12 @@ html[data-theme="dark"] section[aria-label*="Frequently Asked"] div[role="region
 html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"],
 html[data-theme="dark"] div[aria-label*="Frequently Asked"] div[role="region"] * {
   color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .faq .a strong,
+html[data-theme="dark"] div[id*="faq-answer"] strong,
+html[data-theme="dark"] div[id$="-panel"] strong {
+  color: #FFE033 !important;
 }
 
 /* Modals & Keyboard keys in dark mode */

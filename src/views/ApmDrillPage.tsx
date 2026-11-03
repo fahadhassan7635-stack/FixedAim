@@ -1375,40 +1375,46 @@ export default function ApmDrillPage() {
             return (
               <div
                 key={idx}
+                role="listitem"
                 style={{
-                  background: '#FFFFFF',
-                border: '3px solid #000000',
-                borderRadius: '0px',
-                boxShadow: '4px 4px 0 0 #000000',
-                overflow: 'hidden',
-                marginBottom: '8px'
+                  border: '3px solid #000000',
+                  borderRadius: '0px',
+                  boxShadow: '4px 4px 0 0 #000000',
+                  overflow: 'hidden',
+                  marginBottom: '8px'
                 }}
               >
                 <button
                   type="button"
                   onClick={() => setFaqOpen((prev) => ({ ...prev, [idx]: !prev[idx] }))}
+                  aria-expanded={isOpen}
+                  id={`apm-faq-question-${idx}`}
+                  aria-controls={`apm-faq-answer-${idx}`}
                   style={{
                     width: '100%',
-                    padding: '16px 18px',
+                    padding: '16px 20px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: '12px',
-                    background: 'transparent',
                     border: 0,
-                    color: '#000000',
-                  fontSize: '1rem',
-                  fontWeight: 900,
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  textAlign: 'left'
+                    fontSize: '1rem',
+                    fontWeight: 900,
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                    textAlign: 'left'
                   }}
                 >
                   <span>{faq.q}</span>
                   {isOpen ? <ChevronUp size={18} color="var(--neon-cyan)" /> : <ChevronDown size={18} />}
                 </button>
                 {isOpen && (
-                  <div style={{ padding: '16px 20px 18px', color: '#2D3436', fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500, backgroundColor: '#FFFFFF' }}>
+                  <div
+                    id={`apm-faq-answer-${idx}`}
+                    role="region"
+                    aria-labelledby={`apm-faq-question-${idx}`}
+                    style={{ padding: '16px 20px 18px', fontSize: '0.96rem', lineHeight: '1.7', fontWeight: 500 }}
+                  >
                     {faq.a}
                   </div>
                 )}
