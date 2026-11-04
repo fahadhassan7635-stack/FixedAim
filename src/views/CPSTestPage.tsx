@@ -7,6 +7,7 @@ import React, {
   useEffect,
   memo,
 } from 'react';
+import { createPortal } from 'react-dom';
 import type { CSSProperties, ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { Maximize2, Minimize2, ExternalLink } from 'lucide-react';
@@ -1224,6 +1225,8 @@ export default function CPSTestPage() {
   const [duration, setDuration] = useState<number>(5);
   const [customTime, setCustomTime] = useState<string>(''); 
   const [phase, setPhase] = useState<Phase>('idle');
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
   const [clicks, setClicks] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(5);
   const [cps, setCps] = useState<number>(0);
@@ -1232,6 +1235,10 @@ export default function CPSTestPage() {
   const [ripples, setRipples] = useState<RippleItem[]>([]);
   const [graphData, setGraphData] = useState<GraphPoint[]>([]);
   const graphRef = useRef<GraphPoint[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // 🖱️ Click Mode: 'left' or 'right'
   const [clickMode, setClickMode] = useState<ClickMode>('left');
@@ -1358,6 +1365,7 @@ export default function CPSTestPage() {
           timerRef.current = null;
         }
         setPhase('done');
+        setShowModal(true);
         lastEndTimeRef.current = Date.now();
         playSound('complete');
         return;
@@ -1384,6 +1392,7 @@ export default function CPSTestPage() {
     setCps(finalCps);
     setClicks(totalClicks);
     setPhase('done');
+    setShowModal(true);
     setTimeLeft(0);
     lastEndTimeRef.current = Date.now();
     
@@ -1399,6 +1408,7 @@ export default function CPSTestPage() {
     phaseRef.current = 'running';
 
     const dur = durationRef.current;
+    setShowModal(false);
     setPhase('running');
     setClicks(0);
     setCps(0);
@@ -1437,15 +1447,12 @@ export default function CPSTestPage() {
   }, [endTest]);
 
   const resetTest = useCallback(() => {
-    if (phaseRef.current === 'done' && Date.now() - lastEndTimeRef.current < 800) {
-      return;
-    }
-    
     phaseRef.current = 'idle';
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
+    setShowModal(false);
     setPhase('idle');
     setClicks(0);
     setCps(0);
@@ -1456,6 +1463,10 @@ export default function CPSTestPage() {
     setTimeLeft(durationRef.current);
     clickEvents.current = [];
     // NOTE: graph data intentionally NOT cleared here — persists until next test starts
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setShowModal(false);
   }, []);
 
   const handleCustomTimeSet = (): void => {
@@ -1552,21 +1563,28 @@ export default function CPSTestPage() {
   };
 
   useEffect(() => {
-    if (phase === 'done') {
+    if (showModal) {
       document.body.style.overflow = 'hidden';
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setShowModal(false);
+      };
+      window.addEventListener('keydown', onKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', onKeyDown);
+      };
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
-  }, [phase]);
+  }, [showModal]);
 
   useEffect(() => () => { if (timerRef.current) clearInterval(timerRef.current); }, []);
 
   const progress: number = phase === 'running' ? ((duration - timeLeft) / duration) * 100 : phase === 'done' ? 100 : 0;
   
-  const finalCpsValue: number = phase === 'done' ? parseFloat((clicks / duration).toFixed(2)) : cps;
+  const finalCpsValue: number = (phase === 'done' || showModal) ? parseFloat((clicks / duration).toFixed(2)) : cps;
   
-  const finalRating: (RatingResult & { stars: number }) | null = phase === 'done' ? (isBot ? {
+  const finalRating: (RatingResult & { stars: number }) | null = (phase === 'done' || showModal) ? (isBot ? {
     label: 'Bot Detected',
     emoji: '🚫',
     color: 'var(--neon-red, #ff3838)',
@@ -1860,125 +1878,168 @@ export default function CPSTestPage() {
           </>
         )}
 
-        {/* ── RESULT MODAL ── */}
-        {phase === 'done' && finalRating && (
-          <>
-            <div style={{
-              position: 'fixed', inset: 0,
-              background: 'rgba(0, 0, 0, 0.75)',
-              zIndex: 999, animation: 'fadeIn 0.3s ease-out forwards',
-            }} />
+      </div>
 
-            <div
-              className="cps-modal-inner"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="modal-title"
-              onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+      {/* ── RESULT MODAL (Portal to body: immune to parent transform & overflow) ── */}
+      {mounted && showModal && finalRating && createPortal(
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+            }}
+            aria-hidden="true"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              background: 'rgba(0, 0, 0, 0.75)',
+              backdropFilter: 'blur(3px)',
+              WebkitBackdropFilter: 'blur(3px)',
+              zIndex: 99999,
+              animation: 'fadeIn 0.2s ease-out forwards',
+              cursor: 'pointer',
+            }}
+          />
+
+          {/* Modal Box */}
+          <div
+            className="cps-modal-inner"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '95%',
+              maxWidth: '540px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              border: '3px solid #000000',
+              borderRadius: '0px',
+              boxShadow: '8px 8px 0 0 #000000',
+              padding: '2rem 1.75rem',
+              textAlign: 'center',
+              zIndex: 100000,
+              animation: 'modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+            }}
+          >
+            {/* Close button [X] */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+              aria-label="Close modal"
               style={{
-                position: 'fixed', top: '50%', left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '95%',
-                maxWidth: '540px',
-                maxHeight: '90vh',
-                overflowY: 'auto',
-                border: '3px solid #000000',
+                position: 'absolute',
+                top: '0.75rem',
+                right: '0.75rem',
+                background: '#FFE033',
+                border: '2px solid #000000',
+                boxShadow: '2px 2px 0 0 #000000',
+                color: '#000000',
+                width: '32px',
+                height: '32px',
                 borderRadius: '0px',
-                boxShadow: '8px 8px 0 0 #000000',
-                padding: '2rem 1.75rem',
-                textAlign: 'center',
-                zIndex: 1000,
-                animation: 'modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                cursor: 'pointer',
+                fontSize: '0.95rem',
+                fontWeight: 900,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              {/* Close button */}
-              <button
-                onClick={resetTest}
-                aria-label="Close modal"
-                style={{
-                  position: 'absolute', top: '0.75rem', right: '0.75rem',
-                  background: '#FFE033',
-                  border: '2px solid #000000',
-                  boxShadow: '2px 2px 0 0 #000000',
-                  color: '#000000', width: '32px', height: '32px',
-                  borderRadius: '0px', cursor: 'pointer', fontSize: '0.95rem',
-                  fontWeight: 900,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}
-              >✕</button>
+              ✕
+            </button>
 
+            <div
+              className="cps-modal-split"
+              style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.25rem', alignItems: 'center', minHeight: '130px', marginBottom: '1.25rem' }}
+            >
               <div
-                className="cps-modal-split"
-                style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.25rem', alignItems: 'center', minHeight: '130px', marginBottom: '1.25rem' }}
+                className="cps-modal-left"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '2px solid #000000', paddingRight: '1rem', height: '100%' }}
               >
+                <span
+                  className="cps-modal-emoji"
+                  style={{ fontSize: '4.5rem', lineHeight: '1' }}
+                >{finalRating.emoji}</span>
+              </div>
+              <div style={{ textAlign: 'left' }}>
+                <div id="modal-title" className="cps-modal-sub" style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>YOUR RANK IS</div>
                 <div
-                  className="cps-modal-left"
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '2px solid #000000', paddingRight: '1rem', height: '100%' }}
-                >
-                  <span
-                    className="cps-modal-emoji"
-                    style={{ fontSize: '4.5rem', lineHeight: '1' }}
-                  >{finalRating.emoji}</span>
+                  className="cps-modal-rank"
+                  style={{ fontSize: '2.4rem', fontWeight: 900, color: finalRating.color, textTransform: 'uppercase', margin: '0.1rem 0', lineHeight: 1.1 }}
+                >{finalRating.label}!</div>
+                <div style={{ display: 'flex', gap: '3px', marginBottom: '0.5rem' }}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i} style={{ fontSize: '1.2rem', color: i < finalRating.stars ? '#F59E0B' : '#D1D5DB' }}>★</span>
+                  ))}
                 </div>
-                <div style={{ textAlign: 'left' }}>
-                  <div id="modal-title" className="cps-modal-sub" style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>YOUR RANK IS</div>
-                  <div
-                    className="cps-modal-rank"
-                    style={{ fontSize: '2.4rem', fontWeight: 900, color: finalRating.color, textTransform: 'uppercase', margin: '0.1rem 0', lineHeight: 1.1 }}
-                  >{finalRating.label}!</div>
-                  <div style={{ display: 'flex', gap: '3px', marginBottom: '0.5rem' }}>
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <span key={i} style={{ fontSize: '1.2rem', color: i < finalRating.stars ? '#F59E0B' : '#D1D5DB' }}>★</span>
-                    ))}
-                  </div>
-                  <div className="cps-modal-speed-text" style={{ fontSize: '0.92rem', fontWeight: 700 }}>
-                    You clicked with a speed of <strong className="cps-score-num" style={{ fontSize: '1.4rem', fontVariantNumeric: 'tabular-nums', fontWeight: 900, margin: '0 4px' }}>{finalCpsValue}</strong> CPS
-                  </div>
+                <div className="cps-modal-speed-text" style={{ fontSize: '0.92rem', fontWeight: 700 }}>
+                  You clicked with a speed of <strong className="cps-score-num" style={{ fontSize: '1.4rem', fontVariantNumeric: 'tabular-nums', fontWeight: 900, margin: '0 4px' }}>{finalCpsValue}</strong> CPS
                 </div>
-              </div>
-
-              <div className="cps-modal-quote" style={{ padding: '0.85rem 1rem', border: '2px solid #000000', borderLeft: `5px solid ${finalRating.color}`, fontStyle: 'italic', fontSize: '0.88rem', fontWeight: 600, textAlign: 'left', marginBottom: '1.25rem', lineHeight: '1.5' }}>
-                "{finalRating.desc}"
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem', marginBottom: '1.5rem' }}>
-                {[
-                  { value: clicks, label: 'Total Clicks' },
-                  { value: maxCps, label: 'Peak (1s)' },
-                  { value: `${duration}s`, label: 'Duration' },
-                ].map(s => (
-                  <div key={s.label} className="cps-modal-stat-card" style={{ border: '2px solid #000000', padding: '0.65rem 0.25rem' }}>
-                    <div className="cps-modal-stat-val" style={{ fontSize: '1.3rem', fontWeight: 900 }}>{s.value}</div>
-                    <div className="cps-modal-stat-lbl" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px', fontWeight: 800 }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
-                <button
-                  onClick={resetTest}
-                  className="btn"
-                  style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', background: '#FFFFFF', color: '#000000', fontWeight: 800, textTransform: 'uppercase' }}
-                >
-                  🔄 Reset
-                </button>
-                <button
-                  onClick={() => {
-                    if (Date.now() - lastEndTimeRef.current >= 800) {
-                      resetTest();
-                      startTest();
-                    }
-                  }}
-                  className="btn"
-                  style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', backgroundColor: '#55EFC4', color: '#000000', fontWeight: 900, textTransform: 'uppercase' }}
-                >
-                  ▶ Try Again
-                </button>
               </div>
             </div>
-          </>
-        )}
-      </div>
+
+            <div className="cps-modal-quote" style={{ padding: '0.85rem 1rem', border: '2px solid #000000', borderLeft: `5px solid ${finalRating.color}`, fontStyle: 'italic', fontSize: '0.88rem', fontWeight: 600, textAlign: 'left', marginBottom: '1.25rem', lineHeight: '1.5' }}>
+              "{finalRating.desc}"
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem', marginBottom: '1.5rem' }}>
+              {[
+                { value: clicks, label: 'Total Clicks' },
+                { value: maxCps, label: 'Peak (1s)' },
+                { value: `${duration}s`, label: 'Duration' },
+              ].map(s => (
+                <div key={s.label} className="cps-modal-stat-card" style={{ border: '2px solid #000000', padding: '0.65rem 0.25rem' }}>
+                  <div className="cps-modal-stat-val" style={{ fontSize: '1.3rem', fontWeight: 900 }}>{s.value}</div>
+                  <div className="cps-modal-stat-lbl" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px', fontWeight: 800 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  resetTest();
+                }}
+                className="btn"
+                style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', background: '#FFFFFF', color: '#000000', fontWeight: 800, textTransform: 'uppercase' }}
+              >
+                🔄 Reset
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  resetTest();
+                  setTimeout(() => {
+                    startTest();
+                  }, 50);
+                }}
+                className="btn"
+                style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', backgroundColor: '#55EFC4', color: '#000000', fontWeight: 900, textTransform: 'uppercase' }}
+              >
+                ▶ Try Again
+              </button>
+            </div>
+          </div>
+        </>,
+        document.body
+      )}
 
       {/* ── RESET BUTTON (while running) ── */}
       {phase === 'running' && (
