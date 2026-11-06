@@ -1467,6 +1467,9 @@ export default function CPSTestPage() {
 
   const closeModal = useCallback(() => {
     setShowModal(false);
+    phaseRef.current = 'idle';
+    setPhase('idle');
+    setTimeLeft(durationRef.current);
   }, []);
 
   const handleCustomTimeSet = (): void => {
