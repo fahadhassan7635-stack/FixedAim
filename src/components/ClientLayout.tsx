@@ -49,6 +49,7 @@ const TOOLS_LIST: (ToolItem & { icon: string })[] = [
   { to: '/blog', label: 'Blog', category: 'misc', icon: '📝' },
   { to: '/benchmark', label: 'Benchmark Hub', category: 'benchmark', icon: '📊' },
   { to: '/internet-speed', label: 'Internet Speed Test', category: 'benchmark', icon: '🌐' },
+  { to: '/speaker-test', label: 'Speaker Test', category: 'benchmark', icon: '🔊' },
 ];
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {

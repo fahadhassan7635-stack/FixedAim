@@ -312,6 +312,7 @@ export default function HomePage() {
               pills: [
                 { to: '/benchmark', label: 'Benchmark Hub' },
                 { to: '/internet-speed', label: 'Speed Test' },
+                { to: '/speaker-test', label: 'Speaker Test' },
               ],
             },
             {

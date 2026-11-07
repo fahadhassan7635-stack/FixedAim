@@ -8,6 +8,13 @@ const benchmarks = [
     color: '#00f5ff',
     tag: 'BENCHMARK'
   },
+  {
+    to: '/speaker-test',
+    title: 'Speaker Test Online',
+    desc: 'Test stereo left & right channels, bass response, frequency sweep, pink noise, and phase polarity in seconds.',
+    color: '#2B4EDB',
+    tag: 'AUDIO TEST'
+  },
 ];
 
 export default function BenchmarkPage() {

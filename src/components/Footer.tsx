@@ -112,6 +112,7 @@ export default function Footer() {
               { to: '/apm-drill', label: '⚡ APM Drill' },
               { to: '/benchmark', label: '📊 Benchmark Hub' },
               { to: '/internet-speed', label: '🌐 Internet Speed Test' },
+              { to: '/speaker-test', label: '🔊 Speaker Test Online' },
               { to: '/blog', label: '📖 Gaming Blog' }
             ].map(l => (
               <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
