@@ -313,6 +313,7 @@ export default function HomePage() {
                 { to: '/benchmark', label: 'Benchmark Hub' },
                 { to: '/internet-speed', label: 'Speed Test' },
                 { to: '/speaker-test', label: 'Speaker Test' },
+                { to: '/dead-pixel-test', label: 'Dead Pixel Test' },
               ],
             },
             {

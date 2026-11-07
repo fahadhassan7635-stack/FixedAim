@@ -15,6 +15,13 @@ const benchmarks = [
     color: '#2B4EDB',
     tag: 'AUDIO TEST'
   },
+  {
+    to: '/dead-pixel-test',
+    title: 'Dead Pixel Test',
+    desc: 'Detect stuck, hot, and dead pixels across 22 solid colors and subpixel matrices with built-in pixel fixer.',
+    color: '#FF6B6B',
+    tag: 'DISPLAY TEST'
+  },
 ];
 
 export default function BenchmarkPage() {
