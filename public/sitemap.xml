@@ -4,7 +4,6 @@
   <!-- Homepage -->
   <url>
     <loc>https://fixedaim.com/</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,77 +11,66 @@
   <!-- Tool Pages -->
   <url>
     <loc>https://fixedaim.com/cps-test</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/typing-test</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/reaction-time</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/aim-trainer</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/3d-aim-trainer</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/key-visualizer</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/spacebar</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/double-click</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/scroll-test</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/mouse-accuracy</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/accuracy</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -90,41 +78,35 @@
   <!-- Game Pages -->
   <url>
     <loc>https://fixedaim.com/space-defense</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/voyager-game</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/f1-reaction</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/cps-rush</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/apm-drill</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fixedaim.com/space-waves</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -132,28 +114,24 @@
   <!-- Category / Hub Pages -->
   <url>
     <loc>https://fixedaim.com/mouse</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/keyboard</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/aim</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/games</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -162,13 +140,11 @@
 
   <url>
     <loc>https://fixedaim.com/internet-speed</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fixedaim.com/benchmark</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -176,7 +152,6 @@
   <!-- Blog -->
   <url>
     <loc>https://fixedaim.com/blog</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -184,21 +159,18 @@
   <!-- Static / Legal Pages -->
   <url>
     <loc>https://fixedaim.com/privacy-policy</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/terms</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://fixedaim.com/contact</loc>
-    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
