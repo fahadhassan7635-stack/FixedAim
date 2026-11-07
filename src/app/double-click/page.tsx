@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import DoubleClickPage from '@/views/DoubleClickPage';
 
 export const metadata: Metadata = {
-  title: "Double Click Test - Mouse Switch Health Checker | FixedAim",
-  description: "Diagnose double-click issues from worn mouse switches. Detects accidental double clicks in real time.",
+  title: "Mouse Double Click Test - Detect Switch Chatter | FixedAim",
+  description: "Test your mouse switches for accidental double-clicking defects. Detect faulty microswitches in real time and verify debounce timings with live diagnostics.",
   alternates: {
     canonical: "https://fixedaim.com/double-click",
   },
   openGraph: {
-    title: "Double Click Test - Mouse Switch Health Checker | FixedAim",
-    description: "Diagnose double-click issues from worn mouse switches. Detects accidental double clicks in real time.",
+    title: "Mouse Double Click Test - Detect Switch Chatter | FixedAim",
+    description: "Test your mouse switches for accidental double-clicking defects. Detect faulty microswitches in real time and verify debounce timings with live diagnostics.",
     url: "https://fixedaim.com/double-click",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Double Click Test - Mouse Switch Health Checker | FixedAim",
-    description: "Diagnose double-click issues from worn mouse switches. Detects accidental double clicks in real time.",
+    title: "Mouse Double Click Test - Detect Switch Chatter | FixedAim",
+    description: "Test your mouse switches for accidental double-clicking defects. Detect faulty microswitches in real time and verify debounce timings with live diagnostics.",
     images: ["/og-image.jpg"],
   },
 };

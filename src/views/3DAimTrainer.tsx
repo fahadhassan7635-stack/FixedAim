@@ -1092,9 +1092,9 @@ export default function SniperModePage() {
           title="3D Aim Trainer"
         />
           <div style={{ position: 'absolute', top: '16px', left: '20px', zIndex: 100, pointerEvents: 'none' }}>
-            <h1 style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+            <span style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
               3D Aim Trainer
-            </h1>
+            </span>
           </div>
         <div style={{ position: 'absolute', top: '14px', right: '14px', display: 'flex', gap: '8px', zIndex: 100 }}>
           <button onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'} style={{ background: 'rgba(4,9,20,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '7px', color: '#2D3436', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
@@ -1174,7 +1174,7 @@ export default function SniperModePage() {
           </ul>
         </nav>
 
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2.5rem', color: '#000000', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>The Ultimate Guide to FPS Aim Training</h1>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2.5rem', color: '#000000', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>3D Aim Trainer — The Ultimate Guide to FPS Aim Training</h1>
         
         <section id="introduction" style={{ marginBottom: '3rem' }}>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Introduction to FPS Aim Training</h2>

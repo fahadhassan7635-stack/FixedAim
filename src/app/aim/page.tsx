@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import AimPage from '@/views/AimPage';
 
 export const metadata: Metadata = {
-  title: "Aim & Reaction Tools - Browser Trainers | FixedAim",
-  description: "Browse all free aim and reaction tools on FixedAim.",
+  title: "Aim & Reaction Tools - Free Reflex Trainers | FixedAim",
+  description: "Improve your flicking, tracking, and reaction times with free browser aim trainers. Benchmark your FPS reflexes and motor precision with zero download.",
   alternates: {
     canonical: "https://fixedaim.com/aim",
   },
   openGraph: {
-    title: "Aim & Reaction Tools - Browser Trainers | FixedAim",
-    description: "Browse all free aim and reaction tools on FixedAim.",
+    title: "Aim & Reaction Tools - Free Reflex Trainers | FixedAim",
+    description: "Improve your flicking, tracking, and reaction times with free browser aim trainers. Benchmark your FPS reflexes and motor precision with zero download.",
     url: "https://fixedaim.com/aim",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aim & Reaction Tools - Browser Trainers | FixedAim",
-    description: "Browse all free aim and reaction tools on FixedAim.",
+    title: "Aim & Reaction Tools - Free Reflex Trainers | FixedAim",
+    description: "Improve your flicking, tracking, and reaction times with free browser aim trainers. Benchmark your FPS reflexes and motor precision with zero download.",
     images: ["/og-image.jpg"],
   },
 };

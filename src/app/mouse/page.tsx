@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import MousePage from '@/views/MousePage';
 
 export const metadata: Metadata = {
-  title: "Mouse Tools - CPS, Accuracy & Scroll Tests | FixedAim",
-  description: "Browse all free mouse testing tools on FixedAim.",
+  title: "Mouse Testing Tools - CPS, Scroll & Double-Click | FixedAim",
+  description: "Test your mouse switch latency, double-click chatter, scroll wheel speed, and clicking speed (CPS). Free browser diagnostics for competitive gamers.",
   alternates: {
     canonical: "https://fixedaim.com/mouse",
   },
   openGraph: {
-    title: "Mouse Tools - CPS, Accuracy & Scroll Tests | FixedAim",
-    description: "Browse all free mouse testing tools on FixedAim.",
+    title: "Mouse Testing Tools - CPS, Scroll & Double-Click | FixedAim",
+    description: "Test your mouse switch latency, double-click chatter, scroll wheel speed, and clicking speed (CPS). Free browser diagnostics for competitive gamers.",
     url: "https://fixedaim.com/mouse",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mouse Tools - CPS, Accuracy & Scroll Tests | FixedAim",
-    description: "Browse all free mouse testing tools on FixedAim.",
+    title: "Mouse Testing Tools - CPS, Scroll & Double-Click | FixedAim",
+    description: "Test your mouse switch latency, double-click chatter, scroll wheel speed, and clicking speed (CPS). Free browser diagnostics for competitive gamers.",
     images: ["/og-image.jpg"],
   },
 };

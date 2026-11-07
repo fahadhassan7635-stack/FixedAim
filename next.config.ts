@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  async redirects() {
+    return [
+      {
+        source: '/hall-of-fame',
+        destination: '/benchmark',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

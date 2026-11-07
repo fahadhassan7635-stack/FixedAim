@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import BlogPage from '@/views/BlogPage';
 
 export const metadata: Metadata = {
-  title: "Blog - Tips, Guides & Updates | FixedAim",
-  description: "Read the latest tips, improvement guides, and platform updates from the FixedAim team.",
+  title: "FixedAim Blog - Gaming Guides, Reflex Tips & Benchmark Updates",
+  description: "Explore pro gaming guides, reflex improvement strategies, hardware calibration tips, and benchmark updates from the esports engineering team at FixedAim.",
   alternates: {
     canonical: "https://fixedaim.com/blog",
   },
   openGraph: {
-    title: "Blog - Tips, Guides & Updates | FixedAim",
-    description: "Read the latest tips, improvement guides, and platform updates from the FixedAim team.",
+    title: "FixedAim Blog - Gaming Guides, Reflex Tips & Benchmark Updates",
+    description: "Explore pro gaming guides, reflex improvement strategies, hardware calibration tips, and benchmark updates from the esports engineering team at FixedAim.",
     url: "https://fixedaim.com/blog",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog - Tips, Guides & Updates | FixedAim",
-    description: "Read the latest tips, improvement guides, and platform updates from the FixedAim team.",
+    title: "FixedAim Blog - Gaming Guides, Reflex Tips & Benchmark Updates",
+    description: "Explore pro gaming guides, reflex improvement strategies, hardware calibration tips, and benchmark updates from the esports engineering team at FixedAim.",
     images: ["/og-image.jpg"],
   },
 };

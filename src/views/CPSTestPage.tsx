@@ -1569,7 +1569,7 @@ export default function CPSTestPage() {
     if (showModal) {
       document.body.style.overflow = 'hidden';
       const onKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') setShowModal(false);
+        if (e.key === 'Escape') closeModal();
       };
       window.addEventListener('keydown', onKeyDown);
       return () => {

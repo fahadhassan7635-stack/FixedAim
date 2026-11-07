@@ -3,7 +3,7 @@ import CPSTestPage from '@/views/CPSTestPage';
 
 export const metadata: Metadata = {
   title: "CPS Test - Free Click Speed Test Online | FixedAim",
-  description: "Test your CPS (Clicks Per Second) online. Master Left Click, Right Click, Butterfly Clicking, Jitter Clicking, and Drag Clicking with custom timers, live graph, and instant ranks.",
+  description: "Test your CPS (Clicks Per Second) online. Master Left Click, Butterfly, Jitter, and Drag Clicking with custom timers, live analytics graph, and ranks.",
   keywords: [
     "CPS test",
     "click speed test",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "CPS Test - Free Click Speed Test Online | FixedAim",
-    description: "Test your CPS (Clicks Per Second) online. Master Right Click, Butterfly Clicking, Jitter Clicking, and Drag Clicking with custom timers, live graph, and instant ranks.",
+    description: "Test your CPS (Clicks Per Second) online. Master Left Click, Butterfly, Jitter, and Drag Clicking with custom timers, live analytics graph, and ranks.",
     url: "https://fixedaim.com/cps-test",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "CPS Test - Free Click Speed Test Online | FixedAim",
-    description: "Test your CPS (Clicks Per Second) online. Master Right Click, Butterfly Clicking, Jitter Clicking, and Drag Clicking with custom timers, live graph, and instant ranks.",
+    description: "Test your CPS (Clicks Per Second) online. Master Left Click, Butterfly, Jitter, and Drag Clicking with custom timers, live analytics graph, and ranks.",
     images: ["/og-image.jpg"],
   },
 };

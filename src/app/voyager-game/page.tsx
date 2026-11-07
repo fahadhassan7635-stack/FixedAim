@@ -3,7 +3,7 @@ import VoyagerGame from '@/views/VoyagerGame';
 
 export const metadata: Metadata = {
   title: "Voyager Game - Space Endurance Arcade & CPS Trainer | FixedAim",
-  description: "Guide the Voyager ship through an endless asteroid field. Improve your CPS with this free space endurance arcade game — track Peak CPS, survive boss asteroids, collect power-ups, and unlock achievements.",
+  description: "Navigate the Voyager spaceship through cosmic asteroid fields. Boost your CPS and reflex endurance with power-ups, boss battles, and unlockable achievements.",
   keywords: [
     "voyager game", "voyager space game", "asteroid dodge game", "space endurance game",
     "cps trainer game", "clicks per second game", "spacebar cps game", "mouse clicking game",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Voyager Game - Space Endurance Arcade & CPS Trainer | FixedAim",
-    description: "Guide the Voyager ship through an endless asteroid field. Improve your CPS with this free space endurance arcade game — track Peak CPS, survive boss asteroids, collect power-ups, and unlock achievements.",
+    description: "Navigate the Voyager spaceship through cosmic asteroid fields. Boost your CPS and reflex endurance with power-ups, boss battles, and unlockable achievements.",
     url: "https://fixedaim.com/voyager-game",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Voyager Game - Space Endurance Arcade & CPS Trainer | FixedAim",
-    description: "Guide the Voyager ship through an endless asteroid field. Improve your CPS with this free space endurance arcade game.",
+    description: "Navigate the Voyager spaceship through cosmic asteroid fields. Boost your CPS and reflex endurance with power-ups, boss battles, and unlockable achievements.",
     images: ["/og-image.jpg"],
   },
 };

@@ -3,7 +3,7 @@ import SpaceDefensePage from '@/views/SpaceDefensePage';
 
 export const metadata: Metadata = {
   title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
-  description: "Defend your ship from incoming meteor waves in this free space shooter arcade. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and difficulty modes.",
+  description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
   keywords: [
     "space defense",
     "space defense game",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
-    description: "Defend your ship from incoming meteor waves in this free space shooter arcade. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and difficulty modes.",
+    description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
     url: "https://fixedaim.com/space-defense",
     siteName: "FixedAim",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
-    description: "Defend your ship from incoming meteor waves in this free space shooter arcade. Train your CPS, flick aim, and reflexes.",
+    description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
     images: ["/og-image.jpg"],
   },
 };
