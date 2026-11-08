@@ -22,6 +22,13 @@ const benchmarks = [
     color: '#FF6B6B',
     tag: 'DISPLAY TEST'
   },
+  {
+    to: '/hz-test',
+    title: 'Screen Refresh Rate (Hz) & Page Speed',
+    desc: 'Measure your monitor refresh rate (Hz), frame time jitter, UFO motion smoothness, FPS, Core Web Vitals, and CPU performance.',
+    color: '#00F5FF',
+    tag: 'HARDWARE TEST'
+  },
 ];
 
 export default function BenchmarkPage() {

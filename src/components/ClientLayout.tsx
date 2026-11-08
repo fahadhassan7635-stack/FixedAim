@@ -51,6 +51,8 @@ const TOOLS_LIST: (ToolItem & { icon: string })[] = [
   { to: '/internet-speed', label: 'Internet Speed Test', category: 'benchmark', icon: '🌐' },
   { to: '/speaker-test', label: 'Speaker Test', category: 'benchmark', icon: '🔊' },
   { to: '/dead-pixel-test', label: 'Dead Pixel Test', category: 'benchmark', icon: '🖥️' },
+  { to: '/hz-test', label: 'Hz & Speed Test', category: 'benchmark', icon: '⚡' },
+  { to: '/device', label: 'Device Test Hub', category: 'benchmark', icon: '🛠️' },
 ];
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -171,15 +173,15 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             );
           })}
           <li>
-            <Link href="/cps-test" style={{
+            <Link href="/device" style={{
               padding: '0.48rem 1.15rem',
               textDecoration: 'none',
               fontSize: '0.88rem',
               fontWeight: 900,
               color: '#000000',
-              background: '#FF6B6B',
-              border: '3px solid #000000',
-              boxShadow: '3px 3px 0 0 #FFE033',
+              background: '#FFE033',
+              border: '2px solid #000000',
+              boxShadow: '3px 3px 0 0 #FFFFFF',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.35rem',
@@ -191,13 +193,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             }}
             onMouseEnter={e => {
               e.currentTarget.style.transform = 'translate(-2px, -2px)';
-              e.currentTarget.style.boxShadow = '5px 5px 0 0 #FFE033';
+              e.currentTarget.style.boxShadow = '5px 5px 0 0 #FFFFFF';
             }}
             onMouseLeave={e => {
               e.currentTarget.style.transform = 'translate(0, 0)';
-              e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFE033';
+              e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFFFFF';
             }}
-            >⚡ CPS TEST</Link>
+            >🖥️ DEVICE TEST</Link>
           </li>
         </ul>
 
@@ -261,21 +263,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             );
           })}
           <Link
-            href="/cps-test" onClick={() => setMenuOpen(false)}
+            href="/device" onClick={() => setMenuOpen(false)}
             style={{
               padding: '0.85rem 1rem',
               textDecoration: 'none',
               fontSize: '1rem',
               fontWeight: 900,
               color: '#000000',
-              background: '#FF6B6B',
+              background: '#FFE033',
               border: '3px solid #000000',
-              boxShadow: '4px 4px 0 0 #FFE033',
+              boxShadow: '4px 4px 0 0 #FFFFFF',
               textAlign: 'center',
               marginTop: '0.5rem',
               textTransform: 'uppercase',
             }}
-          >⚡ Start CPS Test</Link>
+          >🖥️ Device Test Hub</Link>
         </div>
       )}
 

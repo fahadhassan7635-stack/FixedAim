@@ -114,6 +114,8 @@ export default function Footer() {
               { to: '/internet-speed', label: '🌐 Internet Speed Test' },
               { to: '/speaker-test', label: '🔊 Speaker Test Online' },
               { to: '/dead-pixel-test', label: '🖥️ Dead Pixel Test' },
+              { to: '/hz-test', label: '⚡ Screen Refresh Rate (Hz)' },
+              { to: '/device', label: '🛠️ Device Test Hub' },
               { to: '/blog', label: '📖 Gaming Blog' }
             ].map(l => (
               <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>

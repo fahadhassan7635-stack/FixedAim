@@ -17,6 +17,16 @@ const nextConfig: NextConfig = {
         destination: '/benchmark',
         permanent: true,
       },
+      {
+        source: '/device-test',
+        destination: '/device',
+        permanent: true,
+      },
+      {
+        source: '/page-speed',
+        destination: '/hz-test',
+        permanent: true,
+      },
     ];
   },
   async headers() {

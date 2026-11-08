@@ -314,6 +314,8 @@ export default function HomePage() {
                 { to: '/internet-speed', label: 'Speed Test' },
                 { to: '/speaker-test', label: 'Speaker Test' },
                 { to: '/dead-pixel-test', label: 'Dead Pixel Test' },
+                { to: '/hz-test', label: 'Hz & Speed Test' },
+                { to: '/device', label: 'Device Test Hub' },
               ],
             },
             {
