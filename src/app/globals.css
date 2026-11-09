@@ -1736,6 +1736,17 @@ html[data-theme="dark"] .cod-hub-card p {
   color: #CBD5E1 !important;
 }
 
+/* Key Visualizer Sound & Input Controls Dark Mode */
+html[data-theme="dark"] div[role="group"][aria-label="Keyboard sound and repeat settings"] > div {
+  background: #181A20 !important;
+  box-shadow: 4px 4px 0 0 #FFE033 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] div[role="group"][aria-label="Keyboard sound and repeat settings"] span {
+  color: #FFFFFF !important;
+}
+
 /* Homepage Quick Launch tool cards */
 html[data-theme="dark"] section a[href^="/"]:has(span) {
   background: #181A20 !important;

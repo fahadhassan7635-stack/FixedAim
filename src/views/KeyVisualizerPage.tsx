@@ -370,8 +370,8 @@ function nextId(): number {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const _soundEngine = (() => {
-  let _enabled: boolean = false;
-  let _volume:  number  = 0.4;
+  let _enabled: boolean = true;
+  let _volume:  number  = 0.5;
   let _ctx:     AudioContext | null = null;
   let _initialised = false;
 
@@ -1113,18 +1113,63 @@ interface SoundControlsProps {
 
 interface NeonToggleProps { checked: boolean; onChange: (v: boolean) => void; color?: string; id: string }
 
-const NeonToggle = memo(function NeonToggle({ checked, onChange, color = '#00f5ff', id }: NeonToggleProps) {
-  const trackOn:  CSSProperties = { background: `linear-gradient(135deg, ${color}33, ${color}22)`, border: `1px solid ${color}`, boxShadow: `0 0 8px ${color}55, inset 0 0 6px ${color}22` };
-  const trackOff: CSSProperties = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' };
-  const thumbOn:  CSSProperties = { transform: 'translateX(20px)', background: color, boxShadow: `0 0 10px ${color}cc` };
-  const thumbOff: CSSProperties = { transform: 'translateX(2px)', background: 'rgba(255,255,255,0.35)', boxShadow: 'none' };
+const NeonToggle = memo(function NeonToggle({ checked, onChange, color = '#FFE033', id }: NeonToggleProps) {
   return (
-    <button id={id} role="switch" aria-checked={checked}
-      onClick={() => { try { onChange(!checked); } catch { /* ignore */ } }}
-      style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', width: '44px', height: '24px', borderRadius: '12px', cursor: 'pointer', flexShrink: 0, transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s', outline: 'none', padding: 0, ...(checked ? trackOn : trackOff) }}
-    >
-      <span style={{ position: 'absolute', top: '2px', width: '18px', height: '18px', borderRadius: '50%', transition: 'transform 0.2s cubic-bezier(.4,0,.2,1), background 0.2s, box-shadow 0.2s', ...(checked ? thumbOn : thumbOff) }} />
-    </button>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+      <button
+        id={id}
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        onClick={() => { try { onChange(!checked); } catch { /* ignore */ } }}
+        style={{
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'center',
+          width: '52px',
+          height: '28px',
+          borderRadius: '999px',
+          background: checked ? color : '#E2E8F0',
+          border: '2.5px solid #000000',
+          boxShadow: '2px 2px 0 0 #000000',
+          cursor: 'pointer',
+          padding: 0,
+          transition: 'background 0.15s ease',
+          outline: 'none',
+          flexShrink: 0
+        }}
+      >
+        <span
+          style={{
+            position: 'absolute',
+            top: '2px',
+            left: '2px',
+            width: '19px',
+            height: '19px',
+            borderRadius: '50%',
+            background: '#FFFFFF',
+            border: '2px solid #000000',
+            boxShadow: '1px 1px 0 0 #000000',
+            transform: checked ? 'translateX(24px)' : 'translateX(0px)',
+            transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+        />
+      </button>
+      <span
+        style={{
+          fontSize: '0.75rem',
+          fontWeight: 900,
+          padding: '2px 8px',
+          border: '2px solid #000000',
+          background: checked ? '#10B981' : '#CBD5E1',
+          color: checked ? '#FFFFFF' : '#000000',
+          letterSpacing: '0.04em',
+          userSelect: 'none'
+        }}
+      >
+        {checked ? 'ON' : 'OFF'}
+      </span>
+    </div>
   );
 });
 
@@ -1133,20 +1178,105 @@ interface VolumeBarProps { value: number; disabled: boolean; onChange: (v: numbe
 const VolumeBar = memo(function VolumeBar({ value, disabled, onChange }: VolumeBarProps) {
   const pct = Math.round(clamp(value, 0, 1) * 100);
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', opacity: disabled ? 0.35 : 1, transition: 'opacity 0.2s' }}>
-      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', userSelect: 'none' }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.75rem',
+        opacity: disabled ? 0.45 : 1,
+        background: 'rgba(0,0,0,0.03)',
+        padding: '8px 12px',
+        border: '2px solid #000000',
+        marginTop: '2px',
+      }}
+    >
+      <span style={{ fontSize: '1.1rem', userSelect: 'none' }}>
         {pct === 0 ? '🔇' : pct < 50 ? '🔉' : '🔊'}
       </span>
-      <div style={{ position: 'relative', width: '110px', height: '20px', display: 'flex', alignItems: 'center' }}>
-        <div style={{ position: 'absolute', left: 0, right: 0, height: '4px', borderRadius: '2px', background: 'rgba(255,255,255,0.1)' }} />
-        <div style={{ position: 'absolute', left: 0, height: '4px', width: `${pct}%`, borderRadius: '2px', background: disabled ? 'rgba(255,255,255,0.2)' : `linear-gradient(90deg, rgba(0,245,255,0.5), var(--neon-cyan))`, transition: 'width 0.05s' }} />
-        <input type="range" min={0} max={1} step={0.05} value={clamp(value, 0, 1)} disabled={disabled} aria-label={`Sound volume: ${pct}%`}
-          onChange={e => { try { const raw = parseFloat(e.target.value); onChange(clamp(isFinite(raw) ? raw : 0.4, 0, 1)); } catch { /* ignore */ } }}
-          style={{ position: 'absolute', left: 0, right: 0, width: '100%', margin: 0, opacity: 0, height: '20px', cursor: disabled ? 'not-allowed' : 'pointer' }}
+      <div style={{ position: 'relative', flex: 1, height: '24px', display: 'flex', alignItems: 'center' }}>
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            height: '8px',
+            background: '#E2E8F0',
+            border: '2px solid #000000',
+            borderRadius: '4px',
+          }}
         />
-        <div style={{ position: 'absolute', left: `calc(${pct}% - 8px)`, width: '16px', height: '16px', borderRadius: '50%', background: disabled ? 'rgba(255,255,255,0.25)' : 'var(--neon-cyan)', boxShadow: disabled ? 'none' : '0 0 8px rgba(0,245,255,0.7)', transition: 'left 0.05s, box-shadow 0.15s', pointerEvents: 'none' }} />
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            height: '8px',
+            width: `${pct}%`,
+            background: disabled ? '#94A3B8' : '#00F5FF',
+            border: '2px solid #000000',
+            borderRadius: '4px',
+            transition: 'width 0.05s',
+          }}
+        />
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.05}
+          value={clamp(value, 0, 1)}
+          disabled={disabled}
+          aria-label={`Sound volume: ${pct}%`}
+          onChange={e => {
+            try {
+              const raw = parseFloat(e.target.value);
+              onChange(clamp(isFinite(raw) ? raw : 0.5, 0, 1));
+            } catch {
+              /* ignore */
+            }
+          }}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            width: '100%',
+            height: '24px',
+            margin: 0,
+            opacity: 0,
+            cursor: disabled ? 'not-allowed' : 'pointer',
+            zIndex: 2,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: `calc(${pct}% - 9px)`,
+            width: '18px',
+            height: '18px',
+            borderRadius: '50%',
+            background: disabled ? '#CBD5E1' : '#FFE033',
+            border: '2px solid #000000',
+            boxShadow: '1px 1px 0 0 #000000',
+            pointerEvents: 'none',
+            transition: 'left 0.05s',
+            zIndex: 1,
+          }}
+        />
       </div>
-      <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: 700, color: disabled ? 'var(--text-muted)' : 'var(--neon-cyan)', minWidth: '34px' }}>{pct}%</span>
+      <span
+        style={{
+          fontFamily: 'monospace',
+          fontSize: '0.8rem',
+          fontWeight: 900,
+          color: '#000000',
+          background: '#FFE033',
+          border: '2px solid #000000',
+          padding: '2px 8px',
+          minWidth: '44px',
+          textAlign: 'center',
+          userSelect: 'none'
+        }}
+      >
+        {pct}%
+      </span>
     </div>
   );
 });
@@ -1157,29 +1287,63 @@ const SoundControls = memo(function SoundControls({ sound, repeat, onSound, onRe
   const handleRepeatChange  = useCallback((v: boolean) => { try { onRepeat({ blockRepeats: v }); } catch { /* ignore */ } }, [onRepeat]);
 
   const cardBase: CSSProperties = {
-    display: 'flex', flexDirection: 'column', gap: '0.6rem',
-    background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: '14px', padding: '1rem 1.25rem', flex: '1 1 160px', minWidth: '160px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+    background: '#FFFFFF',
+    border: '3px solid #000000',
+    boxShadow: '4px 4px 0 0 #000000',
+    padding: '1.15rem 1.35rem',
+    flex: '1 1 280px',
+    minWidth: '260px',
   };
 
   return (
-    <div role="group" aria-label="Keyboard sound and repeat settings" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.5rem' }}>
+    <div role="group" aria-label="Keyboard sound and repeat settings" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
+      {/* SOUND CARD */}
       <div style={cardBase}>
-        <div style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,245,255,0.5)' }}>Sound</div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 600, color: sound.enabled ? '#fff' : 'var(--text-muted)', transition: 'color 0.2s' }}>Click Sounds</span>
-          <NeonToggle id="toggle-sound" checked={sound.enabled} onChange={handleEnabledChange} color="var(--neon-cyan, #00f5ff)" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.08em', textTransform: 'uppercase', background: '#00F5FF', color: '#000', border: '2px solid #000', padding: '2px 8px' }}>
+            SOUND FX
+          </span>
+          <NeonToggle id="toggle-sound" checked={sound.enabled} onChange={handleEnabledChange} color="#00F5FF" />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: '1rem', fontWeight: 900, color: '#000000' }}>
+            Click Sounds
+          </span>
+          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#555' }}>
+            {sound.enabled ? 'Audio Active' : 'Muted'}
+          </span>
         </div>
         <VolumeBar value={sound.volume} disabled={!sound.enabled} onChange={handleVolumeChange} />
       </div>
+
+      {/* INPUT REPEAT CARD */}
       <div style={cardBase}>
-        <div style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,160,0,0.5)' }}>Input</div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.85rem', fontWeight: 600, color: repeat.blockRepeats ? '#fff' : 'var(--text-muted)', transition: 'color 0.2s' }}>Block Key Repeat</span>
-          <NeonToggle id="toggle-repeat" checked={repeat.blockRepeats} onChange={handleRepeatChange} color="#ffa000" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.08em', textTransform: 'uppercase', background: '#FF9F43', color: '#000', border: '2px solid #000', padding: '2px 8px' }}>
+            INPUT FILTER
+          </span>
+          <NeonToggle id="toggle-repeat" checked={repeat.blockRepeats} onChange={handleRepeatChange} color="#FF9F43" />
         </div>
-        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
-          {repeat.blockRepeats ? 'Held keys fire once only' : 'Held keys repeat continuously'}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: '1rem', fontWeight: 900, color: '#000000' }}>
+            Block Key Repeat
+          </span>
+        </div>
+        <div
+          style={{
+            fontSize: '0.82rem',
+            fontWeight: 700,
+            padding: '8px 12px',
+            border: '2px solid #000000',
+            background: repeat.blockRepeats ? '#FEF3C7' : '#F1F5F9',
+            color: '#000000',
+            lineHeight: 1.45,
+          }}
+        >
+          {repeat.blockRepeats ? '🔒 Held keys fire once only (repeat suppressed)' : '🔁 Held keys repeat continuously (OS default)'}
         </div>
       </div>
     </div>
@@ -1954,7 +2118,7 @@ const ArticleSection = lazy(() =>
 export default function KeyVisualizerPage() {
   useDocumentMeta();
 
-  const [sound, setSound]   = useState<SoundSettings>({ enabled: false, volume: 0.4 });
+  const [sound, setSound]   = useState<SoundSettings>({ enabled: true, volume: 0.5 });
   const [repeat, setRepeat] = useState<RepeatSettings>({ blockRepeats: false });
 
   const { state, reset } = useKeyVisualizer(sound, repeat);
