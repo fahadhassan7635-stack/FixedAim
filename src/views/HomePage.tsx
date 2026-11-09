@@ -307,16 +307,23 @@ export default function HomePage() {
             },
             {
               to: '/benchmark', title: 'Benchmark Hub',
-              desc: 'Benchmark your network speed, real-time ping latency, jitter variation, and packet loss with live telemetry.',
+              desc: 'Benchmark your network speed, real-time ping latency, jitter variation, and cognitive memory performance.',
               color: '#FFE033',
               pills: [
                 { to: '/benchmark', label: 'Benchmark Hub' },
                 { to: '/internet-speed', label: 'Speed Test' },
-                { to: '/speaker-test', label: 'Speaker Test' },
-                { to: '/dead-pixel-test', label: 'Dead Pixel Test' },
-                { to: '/hz-test', label: 'Hz & Speed Test' },
                 { to: '/memory-test', label: 'Memory Test' },
+              ],
+            },
+            {
+              to: '/device', title: 'Device Test Hub',
+              desc: 'Inspect and test your monitor refresh rate (Hz), stereo audio output, and screen dead pixel defects.',
+              color: '#00F5FF',
+              pills: [
                 { to: '/device', label: 'Device Test Hub' },
+                { to: '/hz-test', label: 'Hz & Speed' },
+                { to: '/speaker-test', label: 'Speaker Test' },
+                { to: '/dead-pixel-test', label: 'Dead Pixel' },
               ],
             },
             {
@@ -324,9 +331,11 @@ export default function HomePage() {
               desc: 'Challenge yourself with interactive reflex arcade games to develop your reaction time and clicking endurance.',
               color: '#A29BFE',
               pills: [
+                { to: '/games', label: 'All Games' },
                 { to: '/space-defense', label: 'Space Defense' },
                 { to: '/voyager-game', label: 'Voyager Game' },
                 { to: '/space-waves', label: 'Space Waves' },
+                { to: '/apm-drill', label: 'APM Drill' },
               ],
             },
           ].map(cat => (

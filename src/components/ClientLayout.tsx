@@ -200,7 +200,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               e.currentTarget.style.transform = 'translate(0, 0)';
               e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFFFFF';
             }}
-            >🖥️ DEVICE TEST</Link>
+            >DEVICE TEST</Link>
           </li>
         </ul>
 
@@ -278,7 +278,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               marginTop: '0.5rem',
               textTransform: 'uppercase',
             }}
-          >🖥️ Device Test Hub</Link>
+          >Device Test Hub</Link>
         </div>
       )}
 
