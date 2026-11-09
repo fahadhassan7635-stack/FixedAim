@@ -52,6 +52,7 @@ const TOOLS_LIST: (ToolItem & { icon: string })[] = [
   { to: '/speaker-test', label: 'Speaker Test', category: 'benchmark', icon: '🔊' },
   { to: '/dead-pixel-test', label: 'Dead Pixel Test', category: 'benchmark', icon: '🖥️' },
   { to: '/hz-test', label: 'Hz & Speed Test', category: 'benchmark', icon: '⚡' },
+  { to: '/memory-test', label: 'Memory Test', category: 'benchmark', icon: '🧠' },
   { to: '/device', label: 'Device Test Hub', category: 'benchmark', icon: '🛠️' },
 ];
 

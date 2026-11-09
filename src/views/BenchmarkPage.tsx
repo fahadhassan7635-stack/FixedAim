@@ -29,6 +29,13 @@ const benchmarks = [
     color: '#00F5FF',
     tag: 'HARDWARE TEST'
   },
+  {
+    to: '/memory-test',
+    title: 'Memory Test: 4 Brain Games',
+    desc: 'Train and measure your visual, sequence, short-term, and spatial recall across 4 cognitive memory games with difficulty modes.',
+    color: '#6C4AB6',
+    tag: 'COGNITIVE TEST'
+  },
 ];
 
 export default function BenchmarkPage() {

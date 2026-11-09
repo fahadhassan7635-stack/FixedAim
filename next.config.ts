@@ -27,6 +27,11 @@ const nextConfig: NextConfig = {
         destination: '/hz-test',
         permanent: true,
       },
+      {
+        source: '/memory-game',
+        destination: '/memory-test',
+        permanent: true,
+      },
     ];
   },
   async headers() {

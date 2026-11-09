@@ -115,6 +115,7 @@ export default function Footer() {
               { to: '/speaker-test', label: '🔊 Speaker Test Online' },
               { to: '/dead-pixel-test', label: '🖥️ Dead Pixel Test' },
               { to: '/hz-test', label: '⚡ Screen Refresh Rate (Hz)' },
+              { to: '/memory-test', label: '🧠 Memory Test' },
               { to: '/device', label: '🛠️ Device Test Hub' },
               { to: '/blog', label: '📖 Gaming Blog' }
             ].map(l => (

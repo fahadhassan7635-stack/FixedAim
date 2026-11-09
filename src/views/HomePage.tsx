@@ -315,6 +315,7 @@ export default function HomePage() {
                 { to: '/speaker-test', label: 'Speaker Test' },
                 { to: '/dead-pixel-test', label: 'Dead Pixel Test' },
                 { to: '/hz-test', label: 'Hz & Speed Test' },
+                { to: '/memory-test', label: 'Memory Test' },
                 { to: '/device', label: 'Device Test Hub' },
               ],
             },
