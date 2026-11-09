@@ -6,42 +6,36 @@ const deviceTools = [
     title: 'Screen Refresh Rate (Hz) & Speed Test',
     desc: 'Measure your monitor refresh rate (Hz), frame time jitter, UFO motion smoothness, FPS, Core Web Vitals, and CPU performance.',
     color: '#2B4EDB',
-    tag: 'DISPLAY & CPU'
   },
   {
     to: '/dead-pixel-test',
     title: 'Dead Pixel Test',
     desc: 'Inspect your monitor, laptop, or phone screen for dead, stuck, or hot pixels across 22 patterns with a built-in pixel fixer.',
     color: '#FF6B6B',
-    tag: 'SCREEN TEST'
   },
   {
     to: '/speaker-test',
     title: 'Speaker & Audio Test',
     desc: 'Check stereo left & right channels, bass depth, frequency sweep, pink noise, and phase polarity in seconds.',
     color: '#FFE033',
-    tag: 'AUDIO TEST'
   },
   {
     to: '/internet-speed',
     title: 'Internet Speed Test',
     desc: 'Measure your real-time download bandwidth, upload speed, ping latency, jitter variation, and packet loss in seconds.',
     color: '#00F5FF',
-    tag: 'NETWORK TEST'
   },
   {
     to: '/double-click',
     title: 'Mouse Double Click Test',
     desc: 'Diagnose mouse microswitch chatter, register accidental double-clicks, and measure switch debounce timing in real time.',
-    color: '#55EFC4',
-    tag: 'MOUSE TEST'
+    color: '#10B981',
   },
   {
     to: '/key-visualizer',
     title: 'Keyboard Visualizer & Matrix Test',
     desc: 'Test 104-key rollover (NKRO), ghosting, dead keys, and view live keystroke overlays without downloading software.',
     color: '#A29BFE',
-    tag: 'KEYBOARD TEST'
   },
 ];
 
@@ -83,36 +77,36 @@ export default function DevicePage() {
           box-shadow: 7px 7px 0 0 #000000;
           border-color: #000000;
         }
+        html[data-theme="dark"] .cod-hub-card {
+          background: #181A20 !important;
+          border: 3px solid #000000 !important;
+          box-shadow: 5px 5px 0 0 #FFE033 !important;
+        }
+        html[data-theme="dark"] .cod-hub-card:hover {
+          box-shadow: 7px 7px 0 0 #FFE033 !important;
+        }
         .cod-hub-title {
           font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
           font-size: 1.35rem;
           font-weight: 900;
           letter-spacing: -0.01em;
           text-transform: uppercase;
-          line-height: 1.15;
-          margin-bottom: 0.5rem;
+          line-height: 1.2;
+          margin-bottom: 0.65rem;
           color: #000000;
         }
-        .cod-hub-tag {
-          position: absolute;
-          top: 1rem; right: 1rem;
-          padding: 0.25rem 0.65rem;
-          border-radius: 0;
-          font-size: 0.72rem;
-          font-weight: 900;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          background: #FFE033;
-          border: 2px solid #000000;
-          box-shadow: 2px 2px 0 0 #000000;
-          color: #000000;
+        html[data-theme="dark"] .cod-hub-title {
+          color: #FFFFFF !important;
         }
         .cod-hub-desc {
-          color: #2D3436;
-          font-size: 0.9rem;
+          color: #4A5568;
+          font-size: 0.92rem;
           line-height: 1.55;
           margin-bottom: 1.25rem;
           font-weight: 500;
+        }
+        html[data-theme="dark"] .cod-hub-desc {
+          color: #94A3B8 !important;
         }
         .cod-hub-cta {
           font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
@@ -120,7 +114,6 @@ export default function DevicePage() {
           font-size: 0.95rem;
           letter-spacing: 0.04em;
           text-transform: uppercase;
-          color: #000000;
         }
         .cod-tip-box {
           background: #FFFFFF;
@@ -129,6 +122,12 @@ export default function DevicePage() {
           border-radius: 0;
           padding: 2rem;
           margin-top: 3rem;
+          color: #000000;
+        }
+        html[data-theme="dark"] .cod-tip-box {
+          background: #181A20 !important;
+          box-shadow: 6px 6px 0 0 #FFE033 !important;
+          color: #FFFFFF !important;
         }
         .cod-tip-title {
           font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
@@ -139,12 +138,29 @@ export default function DevicePage() {
           color: #000000;
           margin-bottom: 0.75rem;
         }
+        html[data-theme="dark"] .cod-tip-title {
+          color: #FFFFFF !important;
+        }
+        .cod-tip-intro {
+          color: #4A5568;
+          font-size: 0.92rem;
+          line-height: 1.7;
+          margin-bottom: 1.5rem;
+          font-weight: 600;
+        }
+        html[data-theme="dark"] .cod-tip-intro {
+          color: #CBD5E1 !important;
+        }
         .cod-tip-item {
           background: #FFFDF5;
           border: 2px solid #000000;
           box-shadow: 3px 3px 0 0 #000000;
           border-radius: 0;
           padding: 1.1rem;
+        }
+        html[data-theme="dark"] .cod-tip-item {
+          background: #232730 !important;
+          box-shadow: 3px 3px 0 0 #FFE033 !important;
         }
         .cod-tip-item-title {
           font-family: 'Public Sans', 'Barlow Condensed', sans-serif;
@@ -154,6 +170,18 @@ export default function DevicePage() {
           text-transform: uppercase;
           color: #000000;
           margin-bottom: 0.4rem;
+        }
+        html[data-theme="dark"] .cod-tip-item-title {
+          color: #FFFFFF !important;
+        }
+        .cod-tip-item-desc {
+          color: #4A5568;
+          font-size: 0.85rem;
+          line-height: 1.55;
+          font-weight: 500;
+        }
+        html[data-theme="dark"] .cod-tip-item-desc {
+          color: #94A3B8 !important;
         }
       `}</style>
 
@@ -171,14 +199,9 @@ export default function DevicePage() {
       {/* TOOLS GRID */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {deviceTools.map((tool) => (
-          <Link key={tool.to} href={tool.to} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
-            {tool.tag && (
-              <span className="cod-hub-tag" style={{ background: tool.color + '25', borderColor: '#000' }}>
-                {tool.tag}
-              </span>
-            )}
+          <Link key={tool.to} href={tool.to} className="cod-hub-card">
             <div>
-              <div className="cod-hub-title" style={{ color: '#000000' }}>{tool.title}</div>
+              <div className="cod-hub-title">{tool.title}</div>
               <p className="cod-hub-desc">{tool.desc}</p>
             </div>
             <span className="cod-hub-cta" style={{ color: tool.color }}>Launch Diagnostics →</span>
@@ -189,7 +212,7 @@ export default function DevicePage() {
       {/* HARDWARE DIAGNOSTICS TIPS */}
       <div className="cod-tip-box">
         <div className="cod-tip-title">Hardware Calibration &amp; Optimization Tips</div>
-        <p style={{ color: '#2D3436', fontSize: '0.92rem', lineHeight: '1.7', marginBottom: '1.5rem', fontWeight: 600 }}>
+        <p className="cod-tip-intro">
           Accurate hardware testing requires zero interference. Follow these calibration tips before diagnosing your peripherals:
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -201,7 +224,7 @@ export default function DevicePage() {
           ].map((tip) => (
             <div key={tip.t} className="cod-tip-item">
               <div className="cod-tip-item-title">{tip.t}</div>
-              <div style={{ color: '#2D3436', fontSize: '0.85rem', lineHeight: '1.55', fontWeight: 500 }}>{tip.d}</div>
+              <div className="cod-tip-item-desc">{tip.d}</div>
             </div>
           ))}
         </div>

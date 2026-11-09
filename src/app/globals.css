@@ -1727,6 +1727,15 @@ html[data-theme="dark"] .cps-stat-card {
   box-shadow: 5px 5px 0 0 #FFE033 !important;
 }
 
+html[data-theme="dark"] .cod-hub-card .cod-hub-title {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .cod-hub-card .cod-hub-desc,
+html[data-theme="dark"] .cod-hub-card p {
+  color: #CBD5E1 !important;
+}
+
 /* Homepage Quick Launch tool cards */
 html[data-theme="dark"] section a[href^="/"]:has(span) {
   background: #181A20 !important;

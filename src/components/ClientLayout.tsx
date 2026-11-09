@@ -22,6 +22,7 @@ const NAV_ITEMS = [
   { to: '/benchmark', label: 'Benchmark' },
   { to: '/games', label: 'Games' },
   { to: '/blog', label: 'Blog' },
+  { to: '/device', label: 'Device Test' },
 ];
 
 const TOOLS_LIST: (ToolItem & { icon: string })[] = [
@@ -173,35 +174,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               </li>
             );
           })}
-          <li>
-            <Link href="/device" style={{
-              padding: '0.48rem 1.15rem',
-              textDecoration: 'none',
-              fontSize: '0.88rem',
-              fontWeight: 900,
-              color: '#000000',
-              background: '#FFE033',
-              border: '2px solid #000000',
-              boxShadow: '3px 3px 0 0 #FFFFFF',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              whiteSpace: 'nowrap',
-              marginLeft: '8px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.04em',
-              transition: 'transform 0.1s ease, box-shadow 0.1s ease'
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.transform = 'translate(-2px, -2px)';
-              e.currentTarget.style.boxShadow = '5px 5px 0 0 #FFFFFF';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.transform = 'translate(0, 0)';
-              e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFFFFF';
-            }}
-            >DEVICE TEST</Link>
-          </li>
         </ul>
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -263,22 +235,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               >{item.label}</Link>
             );
           })}
-          <Link
-            href="/device" onClick={() => setMenuOpen(false)}
-            style={{
-              padding: '0.85rem 1rem',
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: 900,
-              color: '#000000',
-              background: '#FFE033',
-              border: '3px solid #000000',
-              boxShadow: '4px 4px 0 0 #FFFFFF',
-              textAlign: 'center',
-              marginTop: '0.5rem',
-              textTransform: 'uppercase',
-            }}
-          >Device Test Hub</Link>
         </div>
       )}
 

@@ -124,7 +124,6 @@ export default function GamesPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {games.map((game) => (
           <Link key={game.to} href={game.to} className="cod-hub-card" style={{ ['--ch-accent' as string]: game.color }}>
-            {game.badge && <span className="cod-hub-tag" style={{ background: game.color + '18', color: game.color, borderColor: game.color + '40' }}>{game.badge}</span>}
             <div>
               <div className="cod-hub-title" style={{ color: game.color }}>{game.title}</div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{game.desc}</p>
