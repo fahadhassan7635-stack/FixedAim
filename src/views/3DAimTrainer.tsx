@@ -176,7 +176,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     background: rgba(6,6,8,0.96);
     backdrop-filter: blur(12px);
   }
-  /* â”€â”€ Crosshair settings â”€â”€ */
+  /* Crosshair settings */
   .ch-panel {
     width: min(340px, 88vw); margin-bottom: 20px;
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
@@ -334,7 +334,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     transition: opacity 0.04s;
   }
   #muzzle-overlay.flash { opacity: 1; }
-  /* â”€â”€ Sniper Scope â”€â”€ */
+  /* Sniper Scope */
   #scope-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     display: none; pointer-events: none; z-index: 1;
@@ -360,7 +360,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     position: absolute; left: 50%; top: calc(50% + 31vmin); transform: translateX(-50%);
     font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.45);
   }
-  /* â”€â”€ Weapon HUD â”€â”€ */
+  /* Weapon HUD */
   #weapon-hud {
     position: absolute; right: 18px; bottom: 22px;
     display: flex; flex-direction: column; gap: 6px; align-items: flex-end; z-index: 3;
@@ -388,7 +388,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     position: absolute; right: 18px; bottom: 150px; font-size: 10px; letter-spacing: 0.12em;
     text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: right; z-index: 3; line-height: 1.7;
   }
-  /* â”€â”€ Challenge Mode â”€â”€ */
+  /* Challenge Mode */
   .mode-tabs { display: flex; gap: 10px; margin-bottom: 22px; }
   .mode-tab {
     flex: 1; padding: 10px 0; border-radius: 8px; cursor: pointer;
@@ -419,7 +419,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
   #timer-panel.challenge-mode #timer-value { color: #ff9800; }
   #timer-panel.challenge-mode.urgent #timer-value { color: #ff4444; animation: pulse-red 0.5s ease-in-out infinite; }
   @keyframes pulse-red { 0%,100% { opacity:1; } 50% { opacity:0.55; } }
-  /* â”€â”€ Result Popup â”€â”€ */
+  /* Result Popup */
   #result-popup {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex; align-items: center; justify-content: center;
@@ -473,7 +473,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     transition: background 0.15s;
   }
   .rp-btn-secondary:hover { background: rgba(255,255,255,0.12); }
-  /* â”€â”€ Mobile / cross-browser â”€â”€ */
+  /* Mobile / cross-browser */
   html, body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; touch-action: manipulation; }
   #canvas, #hud, .screen, #result-popup { height: 100vh; height: 100dvh; }
   .screen { -webkit-backdrop-filter: blur(12px); -webkit-overflow-scrolling: touch; padding-left: 12px; padding-right: 12px; }
@@ -531,7 +531,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
 </head>
 <body>
 <canvas id="canvas"></canvas>
-<div id="rotate-hint">â†» Rotate your phone to landscape for the best experience</div>
+<div id="rotate-hint">Rotate your phone to landscape for the best experience</div>
 <div id="hud">
   <div id="crosshair"></div>
   <div id="hitmarker"></div>
@@ -542,7 +542,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     <div class="sl-v"></div>
     <div class="sl-gap"></div>
     <div class="sl-dot"></div>
-    <div class="sl-zoom">SNIPER Â· 4.4x</div>
+    <div class="sl-zoom">SNIPER &bull; 4.4x</div>
   </div>
   <div id="stats">
     <div class="stat-row"><span class="stat-label">Score</span><span class="stat-value accent" id="s-score">0</span></div>
@@ -558,13 +558,13 @@ const aimTrainerHTML = `<!DOCTYPE html>
     <div id="touch-look"></div>
     <div class="tbtn" id="t-fire">Fire</div>
     <div class="tbtn" id="t-scope">Scope</div>
-    <div class="tbtn" id="t-pause">âšâš</div>
+    <div class="tbtn" id="t-pause">PAUSE</div>
   </div>
   <div id="fps">60 FPS</div>
   <div id="scope-hint">Right click = Scope (Sniper)<br>Hold left click = Auto fire</div>
   <div id="weapon-hud">
     <div class="wslot active" id="ws-pistol"><span class="wkey">1</span><span class="wname">Pistol</span><span class="wtag">Semi</span><div class="wbar"><div class="wbar-fill" id="wf-pistol"></div></div></div>
-    <div class="wslot" id="ws-sniper"><span class="wkey">2</span><span class="wname">Sniper</span><span class="wtag">Bolt Â· Scope</span><div class="wbar"><div class="wbar-fill" id="wf-sniper"></div></div></div>
+    <div class="wslot" id="ws-sniper"><span class="wkey">2</span><span class="wname">Sniper</span><span class="wtag">Bolt &bull; Scope</span><div class="wbar"><div class="wbar-fill" id="wf-sniper"></div></div></div>
     <div class="wslot" id="ws-auto"><span class="wkey">3</span><span class="wname">Auto Rifle</span><span class="wtag">Full Auto</span><div class="wbar"><div class="wbar-fill" id="wf-auto"></div></div></div>
   </div>
 </div>
@@ -573,8 +573,8 @@ const aimTrainerHTML = `<!DOCTYPE html>
   <div class="title">SHARPEN YOUR <span>AIM</span></div>
   <div class="subtitle">First-Person Precision Training</div>
   <div class="mode-tabs">
-    <button class="mode-tab active" id="tab-infinite">âˆž Infinite</button>
-    <button class="mode-tab" id="tab-challenge">â± Challenge</button>
+    <button class="mode-tab active" id="tab-infinite">Infinite</button>
+    <button class="mode-tab" id="tab-challenge">Challenge</button>
   </div>
   <div id="challenge-options">
     <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Select Duration</div>
@@ -588,9 +588,9 @@ const aimTrainerHTML = `<!DOCTYPE html>
   </div>
   <div class="info-grid" id="info-grid-infinite">
     <div class="info-card"><div class="ic-label">Mode</div><div class="ic-val" style="font-size:13px;color:#fff;">Infinite</div></div>
-    <div class="info-card"><div class="ic-label">Targets</div><div class="ic-val">âˆž</div></div>
+    <div class="info-card"><div class="ic-label">Targets</div><div class="ic-val">&infin;</div></div>
     <div class="info-card"><div class="ic-label">Spawn</div><div class="ic-val" style="font-size:13px;">50ms</div></div>
-    <div class="info-card"><div class="ic-label">Ammo</div><div class="ic-val" style="font-size:13px;color:#cbd5e1;padding-top:2px;">âˆž</div></div>
+    <div class="info-card"><div class="ic-label">Ammo</div><div class="ic-val" style="font-size:13px;color:#cbd5e1;padding-top:2px;">&infin;</div></div>
     <div class="info-card"><div class="ic-label">Weapons</div><div class="ic-val" style="font-size:13px;">3</div></div>
   </div>
   <div class="sens-control">
@@ -598,10 +598,10 @@ const aimTrainerHTML = `<!DOCTYPE html>
       <input type="range" min="0.1" max="5.0" step="0.1" value="1.0" class="sens-slider" id="sens-slider-start">
       <div class="sens-value" id="sens-val-start">1.0x</div>
     </div>
-  <details class="ch-panel"><summary>âŒ– Crosshair Settings</summary><div class="ch-body" data-ch-ui></div></details>
-    <button class="btn-primary" id="btn-start">â–¶ Start Training</button>
-  <div class="hint hint-desktop">ESC pause Â· Left click shoot Â· 1 / 2 / 3 or Scroll = switch weapon<br>Right click = Sniper scope Â· Hold left click = Auto rifle</div>
-  <div class="hint hint-touch">Drag anywhere to aim Â· FIRE button to shoot (hold for auto)<br>Tap a weapon to switch Â· SCOPE button for sniper Â· âšâš to pause</div>
+  <details class="ch-panel"><summary>CROSSHAIR SETTINGS</summary><div class="ch-body" data-ch-ui></div></details>
+    <button class="btn-primary" id="btn-start">START TRAINING</button>
+  <div class="hint hint-desktop">ESC = pause &bull; Left click = shoot &bull; 1 / 2 / 3 or Scroll = switch weapon<br>Right click = Sniper scope &bull; Hold left click = Auto rifle</div>
+  <div class="hint hint-touch">Drag anywhere to aim &bull; FIRE button to shoot (hold for auto)<br>Tap weapon to switch &bull; SCOPE button for sniper &bull; PAUSE to pause</div>
 </div>
 <div id="result-popup" class="hidden">
   <div class="rp-card">
@@ -615,8 +615,8 @@ const aimTrainerHTML = `<!DOCTYPE html>
       <div class="rp-stat"><div class="rp-stat-label">Accuracy</div><div class="rp-stat-val acc" id="rp-acc">-</div></div>
     </div>
     <div class="rp-btns">
-      <button class="rp-btn-primary" id="rp-play-again">â–¶ Play Again</button>
-      <button class="rp-btn-secondary" id="rp-menu">â†© Menu</button>
+      <button class="rp-btn-primary" id="rp-play-again">PLAY AGAIN</button>
+      <button class="rp-btn-secondary" id="rp-menu">MENU</button>
     </div>
   </div>
 </div>
@@ -634,10 +634,10 @@ const aimTrainerHTML = `<!DOCTYPE html>
       <input type="range" min="0.1" max="5.0" step="0.1" value="1.0" class="sens-slider" id="sens-slider-pause">
       <div class="sens-value" id="sens-val-pause">1.0x</div>
     </div>
-  <details class="ch-panel"><summary>âŒ– Crosshair Settings</summary><div class="ch-body" data-ch-ui></div></details>
-    <button class="btn-primary" id="btn-resume">â–¶ Resume</button>
+  <details class="ch-panel"><summary>CROSSHAIR SETTINGS</summary><div class="ch-body" data-ch-ui></div></details>
+    <button class="btn-primary" id="btn-resume">RESUME</button>
   <button class="btn-secondary" id="btn-restart">Restart</button>
-  <button class="btn-secondary" id="btn-pause-menu" style="margin-top: 14px;">â†© Menu</button>
+  <button class="btn-secondary" id="btn-pause-menu" style="margin-top: 14px;">MENU</button>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -647,331 +647,376 @@ if (IS_TOUCH) document.body.classList.add('touch');
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx = null;
 let noiseBuf = null;
+
 function ensureAudio() {
   try {
-    if (!audioCtx) audioCtx = new AudioCtx();
+    if (!audioCtx) {
+      audioCtx = new AudioCtx();
+    }
     if (audioCtx.state === 'suspended') {
       const p = audioCtx.resume();
-      if (p && p.catch) p.catch(e => console.warn("Audio resume blocked", e));
+      if (p && p.catch) p.catch(() => {});
     }
   } catch (err) {
     console.warn("Audio init failed", err);
   }
 }
+
+// Pre-render a 1-second stereo high-density noise buffer for transients, blast and echo
 function getNoise() {
-  if (!noiseBuf) {
-    noiseBuf = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * 0.5), audioCtx.sampleRate);
-    const d = noiseBuf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1);
+  if (!noiseBuf && audioCtx) {
+    const sr = audioCtx.sampleRate;
+    noiseBuf = audioCtx.createBuffer(2, sr, sr);
+    for (let c = 0; c < 2; c++) {
+      const d = noiseBuf.getChannelData(c);
+      for (let i = 0; i < sr; i++) {
+        d[i] = (Math.random() * 2 - 1) * 0.95;
+      }
+    }
   }
   return noiseBuf;
 }
-const GUN_SND = {
-  pistol: { len: 0.12, gain: 1.2, ftype: 'bandpass', freq: 420, q: 0.6, oF0: 140, oF1: 40, oLen: 0.10, oGain: 0.8 },
-  sniper: { len: 0.45, gain: 1.9, ftype: 'lowpass', freq: 900, q: 0.7, oF0: 110, oF1: 28, oLen: 0.40, oGain: 1.1 },
-  auto:   { len: 0.07, gain: 0.9, ftype: 'bandpass', freq: 650, q: 0.7, oF0: 190, oF1: 60, oLen: 0.06, oGain: 0.6 }
-};
-function playClick(at, freq) {
-  if (!audioCtx) return;
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  o.type = 'square';
-  o.frequency.setValueAtTime(freq, at);
-  g.gain.setValueAtTime(0.1, at);
-  g.gain.exponentialRampToValueAtTime(0.001, at + 0.03);
-  o.connect(g); g.connect(audioCtx.destination);
-  o.start(at); o.stop(at + 0.04);
+
+// Distortion waveshaper for realistic gunpowder blast saturation
+let distortionCurve = null;
+function getDistortionCurve() {
+  if (!distortionCurve) {
+    const samples = 44100;
+    distortionCurve = new Float32Array(samples);
+    const deg = Math.PI / 180;
+    const k = 45;
+    for (let i = 0; i < samples; ++i) {
+      const x = (i * 2) / samples - 1;
+      distortionCurve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+    }
+  }
+  return distortionCurve;
 }
+
+// Master compressor/limiter to prevent clipping while keeping gunshots punchy & loud
+let masterCompressor = null;
+function getMasterNode() {
+  if (!masterCompressor && audioCtx) {
+    masterCompressor = audioCtx.createDynamicsCompressor();
+    masterCompressor.threshold.setValueAtTime(-10, audioCtx.currentTime);
+    masterCompressor.knee.setValueAtTime(6, audioCtx.currentTime);
+    masterCompressor.ratio.setValueAtTime(10, audioCtx.currentTime);
+    masterCompressor.attack.setValueAtTime(0.001, audioCtx.currentTime);
+    masterCompressor.release.setValueAtTime(0.06, audioCtx.currentTime);
+    masterCompressor.connect(audioCtx.destination);
+  }
+  return masterCompressor || audioCtx.destination;
+}
+
+// Mechanical click/slide sound for weapon action (bolt, slide, casing)
+function playMechanicalClick(at, freq, duration, gainVal = 0.2) {
+  if (!audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  osc.type = 'triangle';
+  osc.frequency.setValueAtTime(freq, at);
+  osc.frequency.exponentialRampToValueAtTime(freq * 0.35, at + duration);
+
+  filter.type = 'bandpass';
+  filter.frequency.setValueAtTime(freq, at);
+  filter.Q.setValueAtTime(3.5, at);
+
+  gain.gain.setValueAtTime(gainVal, at);
+  gain.gain.exponentialRampToValueAtTime(0.0001, at + duration);
+
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(getMasterNode());
+
+  osc.start(at);
+  osc.stop(at + duration + 0.01);
+}
+
+// REAL GUNSHOT SOUND GENERATOR
 function playGunshot(type) {
   if (!audioCtx) return;
-  const s = GUN_SND[type] || GUN_SND.pistol;
   const t = audioCtx.currentTime;
-  const src = audioCtx.createBufferSource();
-  src.buffer = getNoise();
-  const gain = audioCtx.createGain();
-  gain.gain.setValueAtTime(s.gain, t);
-  gain.gain.exponentialRampToValueAtTime(0.001, t + s.len - 0.01);
-  const filter = audioCtx.createBiquadFilter();
-  filter.type = s.ftype;
-  filter.frequency.value = s.freq;
-  filter.Q.value = s.q;
-  src.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
-  src.start(t); src.stop(t + s.len);
-  const osc = audioCtx.createOscillator();
-  const og = audioCtx.createGain();
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(s.oF0, t);
-  osc.frequency.exponentialRampToValueAtTime(s.oF1, t + s.oLen);
-  og.gain.setValueAtTime(s.oGain, t);
-  og.gain.exponentialRampToValueAtTime(0.001, t + s.oLen);
-  osc.connect(og); og.connect(audioCtx.destination);
-  osc.start(t); osc.stop(t + s.oLen);
-  if (type === 'sniper') {
-    // sharp supersonic crack + bolt-action clicks
-    const crack = audioCtx.createBufferSource();
-    crack.buffer = getNoise();
-    const cg = audioCtx.createGain();
-    cg.gain.setValueAtTime(0.9, t);
-    cg.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
-    const hp = audioCtx.createBiquadFilter();
-    hp.type = 'highpass'; hp.frequency.value = 2500;
-    crack.connect(hp); hp.connect(cg); cg.connect(audioCtx.destination);
-    crack.start(t); crack.stop(t + 0.07);
-    playClick(t + 0.5, 1800);
-    playClick(t + 0.63, 1200);
+  const master = getMasterNode();
+  const noise = getNoise();
+
+  if (type === 'pistol') {
+    // ----------------------------------------------------
+    // REAL 9MM TACTICAL HANDGUN
+    // 1. Initial supersonic muzzle crack (sharp transient)
+    // ----------------------------------------------------
+    const crackSrc = audioCtx.createBufferSource();
+    crackSrc.buffer = noise;
+    const crackFilter = audioCtx.createBiquadFilter();
+    crackFilter.type = 'bandpass';
+    crackFilter.frequency.setValueAtTime(2600, t);
+    crackFilter.Q.setValueAtTime(1.3, t);
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.setValueAtTime(2.2, t);
+    crackGain.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+    crackSrc.connect(crackFilter);
+    crackFilter.connect(crackGain);
+    crackGain.connect(master);
+    crackSrc.start(t);
+    crackSrc.stop(t + 0.05);
+
+    // 2. Punchy body explosion thump (sub-bass drop with distortion)
+    const thump = audioCtx.createOscillator();
+    const thumpGain = audioCtx.createGain();
+    thump.type = 'sine';
+    thump.frequency.setValueAtTime(270, t);
+    thump.frequency.exponentialRampToValueAtTime(42, t + 0.075);
+    thumpGain.gain.setValueAtTime(1.8, t);
+    thumpGain.gain.exponentialRampToValueAtTime(0.001, t + 0.085);
+
+    const shaper = audioCtx.createWaveShaper();
+    shaper.curve = getDistortionCurve();
+    thump.connect(shaper);
+    shaper.connect(thumpGain);
+    thumpGain.connect(master);
+    thump.start(t);
+    thump.stop(t + 0.09);
+
+    // 3. Gunpowder blast acoustic tail
+    const tailSrc = audioCtx.createBufferSource();
+    tailSrc.buffer = noise;
+    const tailFilter = audioCtx.createBiquadFilter();
+    tailFilter.type = 'lowpass';
+    tailFilter.frequency.setValueAtTime(850, t);
+    const tailGain = audioCtx.createGain();
+    tailGain.gain.setValueAtTime(0.8, t);
+    tailGain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+    tailSrc.connect(tailFilter);
+    tailFilter.connect(tailGain);
+    tailGain.connect(master);
+    tailSrc.start(t);
+    tailSrc.stop(t + 0.24);
+
+    // 4. Slide blowback mechanical snap
+    playMechanicalClick(t + 0.038, 2000, 0.022, 0.28);
+
+  } else if (type === 'sniper') {
+    // ----------------------------------------------------
+    // REAL HEAVY .50 CAL BOLT-ACTION SNIPER (AWP)
+    // 1. Massive supersonic sonic boom & muzzle blast
+    // ----------------------------------------------------
+    const crackSrc = audioCtx.createBufferSource();
+    crackSrc.buffer = noise;
+    const crackFilter = audioCtx.createBiquadFilter();
+    crackFilter.type = 'highpass';
+    crackFilter.frequency.setValueAtTime(1600, t);
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.setValueAtTime(3.2, t);
+    crackGain.gain.exponentialRampToValueAtTime(0.001, t + 0.10);
+    crackSrc.connect(crackFilter);
+    crackFilter.connect(crackGain);
+    crackGain.connect(master);
+    crackSrc.start(t);
+    crackSrc.stop(t + 0.11);
+
+    // 2. Earth-shattering sub-bass boom
+    const boom = audioCtx.createOscillator();
+    const boomGain = audioCtx.createGain();
+    boom.type = 'triangle';
+    boom.frequency.setValueAtTime(195, t);
+    boom.frequency.exponentialRampToValueAtTime(24, t + 0.28);
+    boomGain.gain.setValueAtTime(2.6, t);
+    boomGain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+
+    const shaper = audioCtx.createWaveShaper();
+    shaper.curve = getDistortionCurve();
+    boom.connect(shaper);
+    shaper.connect(boomGain);
+    boomGain.connect(master);
+    boom.start(t);
+    boom.stop(t + 0.38);
+
+    // 3. Huge explosive blast body
+    const blastSrc = audioCtx.createBufferSource();
+    blastSrc.buffer = noise;
+    const blastFilter = audioCtx.createBiquadFilter();
+    blastFilter.type = 'bandpass';
+    blastFilter.frequency.setValueAtTime(420, t);
+    blastFilter.Q.setValueAtTime(0.65, t);
+    const blastGain = audioCtx.createGain();
+    blastGain.gain.setValueAtTime(2.2, t);
+    blastGain.gain.exponentialRampToValueAtTime(0.001, t + 0.48);
+    blastSrc.connect(blastFilter);
+    blastFilter.connect(blastGain);
+    blastGain.connect(master);
+    blastSrc.start(t);
+    blastSrc.stop(t + 0.52);
+
+    // 4. Long distant reverberation tail
+    const tailSrc = audioCtx.createBufferSource();
+    tailSrc.buffer = noise;
+    const tailFilter = audioCtx.createBiquadFilter();
+    tailFilter.type = 'lowpass';
+    tailFilter.frequency.setValueAtTime(600, t);
+    const tailGain = audioCtx.createGain();
+    tailGain.gain.setValueAtTime(1.1, t);
+    tailGain.gain.exponentialRampToValueAtTime(0.001, t + 0.72);
+    tailSrc.connect(tailFilter);
+    tailFilter.connect(tailGain);
+    tailGain.connect(master);
+    tailSrc.start(t);
+    tailSrc.stop(t + 0.75);
+
+    // 5. Authentic 3-stage bolt-action cycle:
+    // Bolt handle up & pulled back
+    playMechanicalClick(t + 0.20, 1500, 0.035, 0.45);
+    playMechanicalClick(t + 0.25, 900, 0.045, 0.35);
+    // Heavy brass shell casing eject ping
+    playMechanicalClick(t + 0.38, 3400, 0.03, 0.3);
+    // New round chambered & bolt locked down
+    playMechanicalClick(t + 0.50, 1200, 0.04, 0.45);
+    playMechanicalClick(t + 0.58, 680, 0.05, 0.5);
+
+  } else {
+    // ----------------------------------------------------
+    // REAL ASSAULT RIFLE (AUTO RIFLE)
+    // Aggressive, tight, rapid, punchy military bark
+    // ----------------------------------------------------
+    // 1. Sharp muzzle crack
+    const crackSrc = audioCtx.createBufferSource();
+    crackSrc.buffer = noise;
+    const crackFilter = audioCtx.createBiquadFilter();
+    crackFilter.type = 'bandpass';
+    crackFilter.frequency.setValueAtTime(2300, t);
+    crackFilter.Q.setValueAtTime(1.3, t);
+    const crackGain = audioCtx.createGain();
+    crackGain.gain.setValueAtTime(2.0, t);
+    crackGain.gain.exponentialRampToValueAtTime(0.001, t + 0.042);
+    crackSrc.connect(crackFilter);
+    crackFilter.connect(crackGain);
+    crackGain.connect(master);
+    crackSrc.start(t);
+    crackSrc.stop(t + 0.05);
+
+    // 2. Punchy punch oscillator with crunch
+    const thump = audioCtx.createOscillator();
+    const thumpGain = audioCtx.createGain();
+    thump.type = 'sawtooth';
+    thump.frequency.setValueAtTime(200, t);
+    thump.frequency.exponentialRampToValueAtTime(45, t + 0.065);
+    thumpGain.gain.setValueAtTime(1.2, t);
+    thumpGain.gain.exponentialRampToValueAtTime(0.001, t + 0.075);
+
+    const shaper = audioCtx.createWaveShaper();
+    shaper.curve = getDistortionCurve();
+    thump.connect(shaper);
+    shaper.connect(thumpGain);
+    thumpGain.connect(master);
+    thump.start(t);
+    thump.stop(t + 0.08);
+
+    // 3. Receiver chamber snap & brass echo
+    const cycleSrc = audioCtx.createBufferSource();
+    cycleSrc.buffer = noise;
+    const cycleFilter = audioCtx.createBiquadFilter();
+    cycleFilter.type = 'bandpass';
+    cycleFilter.frequency.setValueAtTime(3400, t);
+    cycleFilter.Q.setValueAtTime(2.2, t);
+    const cycleGain = audioCtx.createGain();
+    cycleGain.gain.setValueAtTime(0.8, t + 0.02);
+    cycleGain.gain.exponentialRampToValueAtTime(0.001, t + 0.065);
+    cycleSrc.connect(cycleFilter);
+    cycleFilter.connect(cycleGain);
+    cycleGain.connect(master);
+    cycleSrc.start(t + 0.02);
+    cycleSrc.stop(t + 0.07);
+
+    // 4. Tight acoustic decay
+    const tailSrc = audioCtx.createBufferSource();
+    tailSrc.buffer = noise;
+    const tailFilter = audioCtx.createBiquadFilter();
+    tailFilter.type = 'lowpass';
+    tailFilter.frequency.setValueAtTime(1200, t);
+    const tailGain = audioCtx.createGain();
+    tailGain.gain.setValueAtTime(0.65, t);
+    tailGain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+    tailSrc.connect(tailFilter);
+    tailFilter.connect(tailGain);
+    tailGain.connect(master);
+    tailSrc.start(t);
+    tailSrc.stop(t + 0.15);
   }
 }
+
+// Tactical weapon switch sound (holster / unholster click)
 function playSwitch() {
   if (!audioCtx) return;
   const t = audioCtx.currentTime;
-  playClick(t, 900);
-  playClick(t + 0.07, 1300);
+  playMechanicalClick(t, 1050, 0.03, 0.35);
+  playMechanicalClick(t + 0.065, 1850, 0.025, 0.4);
 }
+
+// Satisfying Valorant/Apex style hitmarker "DINK"
 function playHit() {
   if (!audioCtx) return;
   const t = audioCtx.currentTime;
-  const osc = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(900, t);
-  osc.frequency.exponentialRampToValueAtTime(400, t + 0.06);
-  g.gain.setValueAtTime(0.35, t);
-  g.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
-  osc.connect(g); g.connect(audioCtx.destination);
-  osc.start(t); osc.stop(t + 0.07);
+  const master = getMasterNode();
+
+  // Dual resonant high frequency chime
+  const o1 = audioCtx.createOscillator();
+  const g1 = audioCtx.createGain();
+  o1.type = 'sine';
+  o1.frequency.setValueAtTime(2800, t);
+  g1.gain.setValueAtTime(0.4, t);
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+  o1.connect(g1);
+  g1.connect(master);
+  o1.start(t);
+  o1.stop(t + 0.05);
+
+  const o2 = audioCtx.createOscillator();
+  const g2 = audioCtx.createGain();
+  o2.type = 'sine';
+  o2.frequency.setValueAtTime(3600, t);
+  g2.gain.setValueAtTime(0.3, t);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
+  o2.connect(g2);
+  g2.connect(master);
+  o2.start(t);
+  o2.stop(t + 0.04);
 }
+
+// Target Shatter / Explosion
 function playDestroy() {
   if (!audioCtx) return;
   const t = audioCtx.currentTime;
-  [600, 800, 1100].forEach((freq, i) => {
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.type = 'sine';
-    o.frequency.setValueAtTime(freq, t + i * 0.018);
-    g.gain.setValueAtTime(0.22, t + i * 0.018);
-    g.gain.exponentialRampToValueAtTime(0.001, t + i * 0.018 + 0.08);
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start(t + i * 0.018); o.stop(t + i * 0.018 + 0.09);
-  });
-}
-const state = { running: false, paused: false, hits: 0, misses: 0, score: 0, startTime: 0, pauseAccum: 0, pauseStart: 0 };
-function resetState() { state.running=false; state.paused=false; state.hits=0; state.misses=0; state.score=0; state.startTime=0; state.pauseAccum=0; state.pauseStart=0; }
-// â”€â”€ Challenge Mode State â”€â”€
-const challenge = { active: false, duration: 10, remaining: 10 };
-let selectedDuration = 10;
-let isChallengeMode = false;
-const canvas = document.getElementById('canvas');
-let renderer;
-try {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_TOUCH ? 1.5 : 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = false;
-  renderer.setClearColor(0x1a1a1e, 1);
-  canvas.addEventListener("webglcontextlost", (e) => { 
-    e.preventDefault(); 
-    if (state.running) pauseGame(); 
-  }, false);
-} catch (e) {
-  console.error("WebGL failed to init", e);
-  document.getElementById('start-screen').innerHTML = '<div style="color:#ff5252;padding:20px;text-align:center;max-width:400px;margin:0 auto;line-height:1.5;">WebGL is not supported or failed to initialize on your device. Please ensure hardware acceleration is enabled in your browser settings.</div>';
-}
-const BASE_FOV = 75;
-const SCOPE_FOV = 17;
-const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x1a1a1e, 18, 38);
-const camera = new THREE.PerspectiveCamera(BASE_FOV, window.innerWidth / window.innerHeight, 0.01, 80);
-camera.position.set(0, 1.65, 0);
-const euler = new THREE.Euler(0, 0, 0, 'YXZ');
-const PI_2 = Math.PI / 2;
-const baseLookSensitivity = 0.0018;
-let userSensMultiplier = parseFloat(localStorage.getItem('aimTrainerSens')) || 1.0;
-function applyMouseMove(dx, dy) {
-  // scale sensitivity with zoom so scoped movement stays consistent
-  const finalSens = baseLookSensitivity * userSensMultiplier * (camera.fov / BASE_FOV);
-  euler.setFromQuaternion(camera.quaternion);
-  euler.y -= dx * finalSens;
-  euler.x -= dy * finalSens;
-  euler.x = Math.max(-PI_2 * 0.88, Math.min(PI_2 * 0.88, euler.x));
-  camera.quaternion.setFromEuler(euler);
-}
-const setupSensUI = (idBase) => {
-    const slider = document.getElementById('sens-slider-' + idBase);
-    const valText = document.getElementById('sens-val-' + idBase);
-    if (slider && valText) {
-      slider.value = userSensMultiplier;
-      valText.textContent = userSensMultiplier.toFixed(1) + 'x';
-      slider.addEventListener('input', (e) => {
-        userSensMultiplier = parseFloat(e.target.value);
-        valText.textContent = userSensMultiplier.toFixed(1) + 'x';
-        localStorage.setItem('aimTrainerSens', userSensMultiplier);
-        const otherBase = idBase === 'start' ? 'pause' : 'start';
-        const otherSlider = document.getElementById('sens-slider-' + otherBase);
-        const otherVal = document.getElementById('sens-val-' + otherBase);
-        if (otherSlider && otherVal) {
-          otherSlider.value = userSensMultiplier;
-          otherVal.textContent = userSensMultiplier.toFixed(1) + 'x';
-        }
-      });
-    }
-  };
-  setupSensUI('start');
-  setupSensUI('pause');
+  const master = getMasterNode();
+  const noise = getNoise();
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CROSSHAIR CUSTOMIZER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-const CH_DEFAULT = { style: 'cross', color: '#ffffff', size: 24, thickness: 2, gap: 3, outline: true };
-const CH_STYLES = [['cross','Cross'],['crossdot','Cross + Dot'],['dot','Dot'],['circle','Circle'],['circledot','Circle + Dot'],['tshape','T-Shape']];
-const CH_COLORS = ['#ffffff','#00ff66','#ffee00','#00e5ff','#ff3b3b','#ff4dff'];
-let ch = Object.assign({}, CH_DEFAULT);
-try {
-  const sv = JSON.parse(localStorage.getItem('aimTrainerCrosshair') || 'null');
-  if (sv && typeof sv === 'object') ch = Object.assign({}, CH_DEFAULT, sv);
-} catch (e) {}
-function saveCH() { try { localStorage.setItem('aimTrainerCrosshair', JSON.stringify(ch)); } catch (e) {} }
-function crosshairSVG(c) {
-  const S = c.size, h = S / 2, t = c.thickness;
-  const g = Math.min(c.gap, h - 2);
-  const arm = Math.max(1, h - g);
-  const hasArms = c.style === 'cross' || c.style === 'crossdot' || c.style === 'tshape';
-  const hasDot = c.style === 'crossdot' || c.style === 'dot' || c.style === 'circledot';
-  const hasRing = c.style === 'circle' || c.style === 'circledot';
-  function pass(pad, col) {
-    let s = '';
-    const r = function (x, y, w, hh) {
-      return '<rect x="' + (x - pad) + '" y="' + (y - pad) + '" width="' + (w + pad * 2) + '" height="' + (hh + pad * 2) + '" fill="' + col + '"/>';
-    };
-    if (hasArms) {
-      if (c.style !== 'tshape') s += r(h - t / 2, 0, t, arm);
-      s += r(h - t / 2, h + g, t, arm);
-      s += r(0, h - t / 2, arm, t);
-      s += r(h + g, h - t / 2, arm, t);
-    }
-    if (hasRing) {
-      const rr = Math.max(1, h - 1 - t / 2);
-      s += '<circle cx="' + h + '" cy="' + h + '" r="' + rr + '" fill="none" stroke="' + col + '" stroke-width="' + (t + pad * 2) + '"/>';
-    }
-    if (hasDot) s += '<circle cx="' + h + '" cy="' + h + '" r="' + (Math.max(1, t * 0.75) + pad) + '" fill="' + col + '"/>';
-    return s;
-  }
-  return '<svg xmlns="http://www.w3.org/2000/svg" width="' + S + '" height="' + S + '" viewBox="0 0 ' + S + ' ' + S + '">' +
-    (c.outline ? pass(1, '#000000') : '') + pass(0, c.color) + '</svg>';
-}
-function applyCrosshair() {
-  const el = document.getElementById('crosshair');
-  el.style.width = ch.size + 'px';
-  el.style.height = ch.size + 'px';
-  el.innerHTML = crosshairSVG(ch);
-  document.querySelectorAll('.ch-preview').forEach(function (p) { p.innerHTML = crosshairSVG(ch); });
-}
-function syncCH() {
-  document.querySelectorAll('[data-ch-ui]').forEach(function (root) {
-    root.querySelectorAll('[data-k]').forEach(function (inp) {
-      const v = ch[inp.getAttribute('data-k')];
-      if (inp.type === 'checkbox') inp.checked = !!v;
-      else if (inp.value !== String(v)) inp.value = v;
-    });
-    root.querySelectorAll('[data-v]').forEach(function (s) { s.textContent = ch[s.getAttribute('data-v')]; });
-  });
-  applyCrosshair();
-}
-function buildCrosshairUI(root) {
-  let html = '<div class="ch-preview"></div>';
-  html += '<div class="ch-row"><label>Style</label><select data-k="style">' +
-    CH_STYLES.map(function (s) { return '<option value="' + s[0] + '">' + s[1] + '</option>'; }).join('') + '</select></div>';
-  html += '<div class="ch-row"><label>Color</label><input type="color" data-k="color"><div class="ch-swatches">' +
-    CH_COLORS.map(function (c) { return '<button type="button" class="ch-sw" data-sw="' + c + '" style="background:' + c + '"></button>'; }).join('') + '</div></div>';
-  [['size','Size',8,60],['thickness','Thickness',1,8],['gap','Gap',0,16]].forEach(function (d) {
-    html += '<div class="ch-row"><label>' + d[1] + '</label><input type="range" data-k="' + d[0] + '" min="' + d[2] + '" max="' + d[3] + '" step="1"><span class="ch-val" data-v="' + d[0] + '"></span></div>';
-  });
-  html += '<div class="ch-row"><label>Outline</label><input type="checkbox" data-k="outline"></div>';
-  html += '<button type="button" class="ch-reset">Reset</button>';
-  root.innerHTML = html;
-  root.querySelectorAll('[data-k]').forEach(function (inp) {
-    const evt = (inp.tagName === 'SELECT' || inp.type === 'checkbox') ? 'change' : 'input';
-    inp.addEventListener(evt, function () {
-      const k = inp.getAttribute('data-k');
-      ch[k] = inp.type === 'checkbox' ? inp.checked : (inp.type === 'range' ? parseInt(inp.value, 10) : inp.value);
-      saveCH(); syncCH();
-    });
-  });
-  root.querySelectorAll('.ch-sw').forEach(function (b) {
-    b.addEventListener('click', function () { ch.color = b.getAttribute('data-sw'); saveCH(); syncCH(); });
-  });
-  root.querySelector('.ch-reset').addEventListener('click', function () {
-    ch = Object.assign({}, CH_DEFAULT); saveCH(); syncCH();
-  });
-}
-document.querySelectorAll('[data-ch-ui]').forEach(buildCrosshairUI);
-syncCH();
+  // Low breakup thump
+  const thump = audioCtx.createOscillator();
+  const thumpGain = audioCtx.createGain();
+  thump.type = 'sine';
+  thump.frequency.setValueAtTime(140, t);
+  thump.frequency.exponentialRampToValueAtTime(35, t + 0.12);
+  thumpGain.gain.setValueAtTime(0.7, t);
+  thumpGain.gain.exponentialRampToValueAtTime(0.001, t + 0.13);
+  thump.connect(thumpGain);
+  thumpGain.connect(master);
+  thump.start(t);
+  thump.stop(t + 0.14);
 
-  window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  if (renderer) renderer.setSize(window.innerWidth, window.innerHeight);
-});
-const roomMeshes = [];
-(function buildRoom() {
-  const wallMat = new THREE.MeshLambertMaterial({ color: 0x2e2e35 });
-  const floorMat = new THREE.MeshLambertMaterial({ color: 0x252528 });
-  const ceilMat = new THREE.MeshLambertMaterial({ color: 0x202023 });
-  const W = 22, H = 6, D = 32;
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(W, D), floorMat);
-  floor.rotation.x = -Math.PI / 2; floor.position.set(0, 0, -D/2 + 2); scene.add(floor); roomMeshes.push(floor);
-  const ceil = new THREE.Mesh(new THREE.PlaneGeometry(W, D), ceilMat);
-  ceil.rotation.x = Math.PI / 2; ceil.position.set(0, H, -D/2 + 2); scene.add(ceil); roomMeshes.push(ceil);
-  const bwall = new THREE.Mesh(new THREE.PlaneGeometry(W, H), wallMat);
-  bwall.position.set(0, H/2, -D + 2); scene.add(bwall); roomMeshes.push(bwall);
-  const lwall = new THREE.Mesh(new THREE.PlaneGeometry(D, H), wallMat);
-  lwall.rotation.y = Math.PI / 2; lwall.position.set(-W/2, H/2, -D/2 + 2); scene.add(lwall); roomMeshes.push(lwall);
-  const rwall = new THREE.Mesh(new THREE.PlaneGeometry(D, H), wallMat);
-  rwall.rotation.y = -Math.PI / 2; rwall.position.set(W/2, H/2, -D/2 + 2); scene.add(rwall); roomMeshes.push(rwall);
-  const gridHelper = new THREE.GridHelper(W, 22, 0x333338, 0x2a2a30);
-  gridHelper.position.set(0, 0.002, -D/2 + 2); scene.add(gridHelper);
-  const markerMat = new THREE.MeshBasicMaterial({ color: 0x3a3a45 });
-  for (let i = 0; i < 3; i++) {
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(5, 3.5), markerMat);
-    m.position.set((i - 1) * 6, 2.5, -D + 2.01); scene.add(m);
-  }
-  const baseMat = new THREE.MeshBasicMaterial({ color: 0x1a1a1f });
-  const baseboard = new THREE.Mesh(new THREE.BoxGeometry(W, 0.12, 0.06), baseMat);
-  baseboard.position.set(0, 0.06, -D + 2.04); scene.add(baseboard);
-  const lightMat = new THREE.MeshBasicMaterial({ color: 0xfff8e8 });
-  const lightGeom = new THREE.PlaneGeometry(0.8, 3);
-  [-6, 0, 6].forEach(x => {
-    [-4, -14, -24].forEach(z => {
-      const l = new THREE.Mesh(lightGeom, lightMat);
-      l.rotation.x = Math.PI / 2; l.position.set(x, H - 0.01, z); scene.add(l);
-    });
-  });
-})();
-const ambient = new THREE.AmbientLight(0xffffff, 0.55); scene.add(ambient);
-const dirLight = new THREE.DirectionalLight(0xfff8f0, 0.9); dirLight.position.set(2, 8, 4); scene.add(dirLight);
-const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.35); fillLight.position.set(-4, 3, -8); scene.add(fillLight);
-
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• WEAPONS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-const WEAPON_ORDER = ['pistol', 'sniper', 'auto'];
-const WEAPONS = {
-  pistol: {
-    label: 'Pistol', cooldown: 0.08, auto: false, spread: 0, kick: 0,
-    recoilSpeed: 14, rotKick: 0.07, flash: 1,
-    rest: new THREE.Vector3(0.14, -0.14, -0.32),
-    recoilOff: new THREE.Vector3(0, 0.04, 0.04),
-    muzzle: new THREE.Vector3(0.14, -0.13, -0.71)
-  },
-  sniper: {
-    label: 'Sniper', cooldown: 0.95, auto: false, spread: 0.09, kick: 0.014,
-    recoilSpeed: 4.5, rotKick: 0.12, flash: 1.9,
-    rest: new THREE.Vector3(0.16, -0.17, -0.40),
-    recoilOff: new THREE.Vector3(0, 0.03, 0.12),
-    muzzle: new THREE.Vector3(0.16, -0.16, -1.4)
-  },
-  auto: {
-    label: 'Auto Rifle', cooldown: 0.075, auto: true, spread: 0.008, kick: 0.004,
-    recoilSpeed: 24, rotKick: 0.035, flash: 0.85,
-    rest: new THREE.Vector3(0.15, -0.16, -0.36),
-    recoilOff: new THREE.Vector3(0, 0.012, 0.05),
-    muzzle: new THREE.Vector3(0.15, -0.15, -0.98)
-  }
+  // High glass/metal shatter scatter
+  const shatterSrc = audioCtx.createBufferSource();
+  shatterSrc.buffer = noise;
+  const shatterFilter = audioCtx.createBiquadFilter();
+  shatterFilter.type = 'bandpass';
+  shatterFilter.frequency.setValueAtTime(2200, t);
+  shatterFilter.Q.setValueAtTime(1.8, t);
+  const shatterGain = audioCtx.createGain();
+  shatterGain.gain.setValueAtTime(0.65, t);
+  shatterGain.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+  shatterSrc.connect(shatterFilter);
+  shatterFilter.connect(shatterGain);
+  shatterGain.connect(master);
+  shatterSrc.start(t);
+  shatterSrc.stop(t + 0.18);
 };
 Object.keys(WEAPONS).forEach(k => { WEAPONS[k].recoilPos = WEAPONS[k].rest.clone().add(WEAPONS[k].recoilOff); });
 
@@ -1187,7 +1232,7 @@ function updateWeaponBar() {
   f.style.transform = 'scaleX(' + r.toFixed(3) + ')';
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TARGETS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// TARGETS
 const TARGET_RADIUS = 0.28, TARGET_MIN_Z = -6, TARGET_MAX_Z = -26;
 const TARGET_Y_MIN = 0.8, TARGET_Y_MAX = 3.8, TARGET_X_RANGE = 7.5;
 const SPEED_BASE = 1.4, SPEED_RANGE = 2.2;
@@ -1279,11 +1324,11 @@ function updateImpacts(dt) {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SHOOTING â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// SHOOTING
 const raycaster = new THREE.Raycaster();
 const shotNDC = new THREE.Vector2(0, 0);
 let canShoot = true, shootCooldown = 0;
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• BULLET EFFECTS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// BULLET EFFECTS
 const TRACER_STYLE = {
   pistol: { color: 0xffd27a, radius: 0.007, tail: 2.2, speed: 160, opacity: 0.85 },
   sniper: { color: 0xbfe8ff, radius: 0.012, tail: 6.0, speed: 320, opacity: 0.9 },
@@ -1454,10 +1499,10 @@ function updateHUD() {
 function formatTime(ms) { const s=Math.floor(ms/1000), m=Math.floor(s/60); return m+':'+String(s%60).padStart(2,'0'); }
 function formatCountdown(sec) { const m=Math.floor(sec/60); return m > 0 ? m+':'+String(Math.ceil(sec%60)).padStart(2,'0') : Math.ceil(sec).toString(); }
 function getRank(hits, acc) {
-  if (acc >= 80 && hits >= 15) return 'ðŸŽ¯ Sharpshooter!';
-  if (acc >= 60 && hits >= 10) return 'âœ… Good Aim!';
-  if (hits === 0) return 'ðŸ˜¬ Keep Practicing';
-  return 'ðŸ’ª Not Bad!';
+  if (acc >= 80 && hits >= 15) return 'Sharpshooter!';
+  if (acc >= 60 && hits >= 10) return 'Good Aim!';
+  if (hits === 0) return 'Keep Practicing';
+  return 'Not Bad!';
 }
 function showResultPopup() {
   if (activeTarget) { scene.remove(activeTarget); activeTarget = null; }
@@ -1541,7 +1586,7 @@ document.addEventListener('wheel', (e) => {
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && state.running && !state.paused) pauseGame();
 });
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TOUCH CONTROLS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// TOUCH CONTROLS
 (function setupTouch() {
   if (!IS_TOUCH) return;
   const look = document.getElementById('touch-look');
@@ -1893,7 +1938,7 @@ export default function SniperModePage() {
           </ul>
         </nav>
 
-        <h1 style={{ fontSize: 'clamp(1.6rem, 6vw, 2.5rem)', fontWeight: 900, marginBottom: '2.5rem', color: '#000000', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>3D Aim Trainer â€” The Ultimate Guide to FPS Aim Training</h1>
+        <h1 style={{ fontSize: 'clamp(1.6rem, 6vw, 2.5rem)', fontWeight: 900, marginBottom: '2.5rem', color: '#000000', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>3D Aim Trainer - The Ultimate Guide to FPS Aim Training</h1>
         
         <section id="introduction" style={{ marginBottom: '3rem' }}>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '4px solid rgba(0,245,255,0.7)', lineHeight: '1.2' }}>Introduction to FPS Aim Training</h2>
