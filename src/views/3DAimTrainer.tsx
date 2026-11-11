@@ -568,7 +568,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     <div class="tbtn" id="t-pause">PAUSE</div>
   </div>
   <div id="fps">60 FPS</div>
-  <div id="scope-hint">Right click = Scope (Sniper)<br>Hold left click = Auto fire</div>
+  <div id="scope-hint">Hold Right Click = Scope (Sniper)<br>Hold left click = Auto fire</div>
   <div id="weapon-hud">
     <div class="wslot active" id="ws-pistol"><span class="wkey">1</span><span class="wname">Pistol</span><span class="wtag">Semi</span><div class="wbar"><div class="wbar-fill" id="wf-pistol"></div></div></div>
     <div class="wslot" id="ws-sniper"><span class="wkey">2</span><span class="wname">Sniper</span><span class="wtag">Bolt &bull; Scope</span><div class="wbar"><div class="wbar-fill" id="wf-sniper"></div></div></div>
@@ -1359,7 +1359,7 @@ function refreshWeaponHUD() {
   });
   const hint = document.getElementById('scope-hint');
   if (hint) hint.style.opacity = curWeapon === 'sniper' || curWeapon === 'auto' ? '1' : '0';
-  if (hint) hint.innerHTML = curWeapon === 'sniper' ? 'Right click = Scope' : curWeapon === 'auto' ? 'Hold left click = Auto fire' : '';
+  if (hint) hint.innerHTML = curWeapon === 'sniper' ? 'Hold Right Click = Scope' : curWeapon === 'auto' ? 'Hold left click = Auto fire' : '';
 }
 function updateScopeVisuals() {
   const showScope = scoped && camera.fov < 45;
@@ -1768,7 +1768,10 @@ let pointerLocked = false;
 document.addEventListener('pointerlockchange', () => {
   if (IS_TOUCH) return;
   pointerLocked = document.pointerLockElement === canvas;
-  if (!pointerLocked && state.running && !state.paused) pauseGame();
+  if (!pointerLocked) {
+    if (scoped) setScoped(false);
+    if (state.running && !state.paused) pauseGame();
+  }
 });
 document.addEventListener('mousemove', (e) => {
   if (!pointerLocked || !state.running || state.paused) return;
@@ -1780,15 +1783,22 @@ document.addEventListener('mousedown', (e) => {
     if (WEAPONS[curWeapon].auto) mouseHeld = true;
     shoot();
   } else if (e.button === 2) {
-    // right click: toggle sniper scope
-    if (curWeapon === 'sniper') setScoped(!scoped);
+    // right click: hold sniper scope
+    if (curWeapon === 'sniper') setScoped(true);
   }
 });
 document.addEventListener('mouseup', (e) => {
-  if (e.button === 0) mouseHeld = false;
+  if (e.button === 0) {
+    mouseHeld = false;
+  } else if (e.button === 2) {
+    if (curWeapon === 'sniper') setScoped(false);
+  }
 });
 document.addEventListener('contextmenu', (e) => e.preventDefault());
-window.addEventListener('blur', () => { mouseHeld = false; });
+window.addEventListener('blur', () => {
+  mouseHeld = false;
+  if (scoped) setScoped(false);
+});
 document.addEventListener('keydown', (e) => {
   if (!state.running || state.paused) return;
   if (e.code === 'Digit1' || e.code === 'Numpad1') setWeapon('pistol');
@@ -1847,7 +1857,15 @@ document.addEventListener('visibilitychange', () => {
   fire.addEventListener('touchcancel', endFire, { passive: false });
   scopeBtn.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    if (live() && curWeapon === 'sniper') setScoped(!scoped);
+    if (live() && curWeapon === 'sniper') setScoped(true);
+  }, { passive: false });
+  scopeBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    if (curWeapon === 'sniper') setScoped(false);
+  }, { passive: false });
+  scopeBtn.addEventListener('touchcancel', (e) => {
+    e.preventDefault();
+    if (curWeapon === 'sniper') setScoped(false);
   }, { passive: false });
   pauseBtn.addEventListener('touchstart', (e) => { e.preventDefault(); pauseGame(); }, { passive: false });
   WEAPON_ORDER.forEach((id) => {
@@ -2472,7 +2490,7 @@ export default function SniperModePage() {
               { q: 'What is crosshair placement?', a: 'Crosshair placement is pre-aiming your crosshair at the exact height and angle where an enemy is likely to appear, significantly reducing the distance you need to flick.' },
               { q: 'Is higher FOV better for aiming?', a: 'Higher FOV makes targets appear smaller and slower, while lower FOV makes them appear larger but faster. Your aim trainer FOV should exactly match your primary game for accurate muscle memory transfer.' },
               { q: 'Do heavier mice make aiming harder?', a: 'Heavier mice have more inertia, making them harder to start and stop quickly. The competitive standard has largely shifted to lightweight mice (under 70g) for optimal control.' },
-              { q: 'How do I use the sniper scope?', a: 'Press 2 to equip the sniper, then right-click to toggle the scope. Scoped shots are perfectly accurate, while hip-firing the sniper is deliberately inaccurate. Your sensitivity is scaled automatically while zoomed in.' },
+              { q: 'How do I use the sniper scope?', a: 'Press 2 to equip the sniper, then hold right-click to zoom in with the scope. Release right-click to exit scope view. Your sensitivity is scaled automatically while zoomed in.' },
               { q: 'How does the auto rifle work?', a: 'Press 3 to equip the auto rifle, then hold the left mouse button to fire continuously. It has light recoil and slight spread, so short controlled bursts are more accurate than spraying.' }
             ].map(({ q, a }, i) => (
               <details key={i} style={{ border: '3px solid #000000', borderRadius: '0px', boxShadow: '4px 4px 0 0 #000000', padding: '1rem', marginBottom: '8px' }}>
