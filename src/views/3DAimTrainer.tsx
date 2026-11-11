@@ -2031,13 +2031,18 @@ export default function SniperModePage() {
     const d = document as any;
     setFsSupported(!!(d.fullscreenEnabled || d.webkitFullscreenEnabled));
     const handleFsChange = () => {
-      setIsFullscreen(!!(d.fullscreenElement || d.webkitFullscreenElement));
+      const inFs = !!(d.fullscreenElement || d.webkitFullscreenElement);
+      setIsFullscreen(inFs);
+      // Fullscreen e outer page scroll bondo, normal mode e scroll cholbe
+      document.body.style.overflow = inFs ? 'hidden' : '';
     };
     document.addEventListener('fullscreenchange', handleFsChange);
     document.addEventListener('webkitfullscreenchange', handleFsChange);
     return () => {
       document.removeEventListener('fullscreenchange', handleFsChange);
       document.removeEventListener('webkitfullscreenchange', handleFsChange);
+      // Cleanup: scroll restore koro jodi component unmount hoy fullscreen e
+      document.body.style.overflow = '';
     };
   }, []);
 
