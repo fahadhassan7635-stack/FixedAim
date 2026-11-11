@@ -18,7 +18,11 @@ const aimTrainerHTML = `<!DOCTYPE html>
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
+    scrollbar-width: none;
   }
+  body::-webkit-scrollbar { display: none; }
+  html { overflow: hidden; scrollbar-width: none; }
+  html::-webkit-scrollbar { display: none; }
   #canvas {
     position: fixed;
     top: 0; left: 0;
@@ -170,7 +174,7 @@ const aimTrainerHTML = `<!DOCTYPE html>
     align-items: center;
     justify-content: center;
     justify-content: safe center;
-    overflow-y: auto;
+    overflow: hidden;
     padding: 20px 0;
     z-index: 100;
     background: rgba(6,6,8,0.96);
@@ -2061,7 +2065,9 @@ export default function SniperModePage() {
             height: '100%',
             border: 'none',
             display: 'block',
+            overflow: 'hidden',
           }}
+          scrolling="no"
           allow="fullscreen; autoplay"
           title="3D Aim Trainer"
         />
