@@ -1645,9 +1645,8 @@ function shoot() {
   const W = WEAPONS[curWeapon];
   ensureAudio(); canShoot = false; shootCooldown = W.cooldown;
   playGunshot(curWeapon); triggerMuzzleFlash(); triggerRecoil(); applyKick(W.kick);
-  // spread: sniper is only accurate when scoped
-  let sp = W.spread;
-  if (curWeapon === 'sniper' && scoped) sp = 0;
+  // spread: sniper always shoots straight (spread=0), only auto/pistol have spread
+  let sp = curWeapon === 'sniper' ? 0 : W.spread;
   shotNDC.set((Math.random() * 2 - 1) * sp, (Math.random() * 2 - 1) * sp);
   raycaster.setFromCamera(shotNDC, camera);
   // where does the bullet end up? (target first, otherwise the room walls)
