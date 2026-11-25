@@ -229,6 +229,18 @@ export default function DevicePage() {
           ))}
         </div>
       </div>
+
+      <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
+        <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
+          Instant Browser Hardware Diagnostics — Zero Downloads
+        </h2>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+          Before blaming your aim or blaming game servers, verify that your monitor, audio gear, and peripherals are operating at full specification. Our <Link href="/hz-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Screen Refresh Rate (Hz) &amp; Speed Test</Link> measures true browser frame pacing and UFO motion smoothness to confirm your 144Hz, 240Hz, or 360Hz panel isn&apos;t stuck at 60Hz.
+        </p>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
+          Just bought a new laptop or monitor? Use the <Link href="/dead-pixel-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Dead Pixel Test</Link> to inspect solid color patterns for stuck subpixels, and run the <Link href="/speaker-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Speaker &amp; Audio Test</Link> to check left/right stereo imaging, bass response, and phase polarity in seconds.
+        </p>
+      </article>
     </div>
   );
 }

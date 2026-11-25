@@ -57,18 +57,18 @@ export default function HomePage() {
             </div>
 
             <h1 style={{
-              fontSize: 'clamp(2.75rem, 7.5vw, 5.8rem)',
+              fontSize: 'clamp(2.1rem, 4.5vw, 3.45rem)',
               fontWeight: 900,
-              lineHeight: 0.95,
+              lineHeight: 1.05,
               letterSpacing: '-0.03em',
               textTransform: 'uppercase',
               color: '#000000',
               marginBottom: '1.25rem',
               fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif"
             }}>
-              TEST.<br />
-              TRAIN.<br />
-              DOMINATE.
+              FREE CPS TEST,<br />
+              TYPING SPEED TEST<br />
+              <span style={{ background: '#FFE033', padding: '0 8px', border: '3px solid #000000', display: 'inline-block', marginTop: '4px' }}>&amp; AIM TRAINER</span>
             </h1>
 
             <p style={{
@@ -583,6 +583,34 @@ export default function HomePage() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* ── 5. PLATFORM INTRO & BENCHMARK GUIDE (SEO CONTENT) ── */}
+      <section style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+        <div className="why-matter-card" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
+          <div className="section-label">ABOUT FIXED AIM</div>
+          <h2 style={{ fontSize: 'clamp(1.6rem, 3.2vw, 2.2rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.25rem', lineHeight: 1.15 }}>
+            BROWSER-BASED GAMING BENCHMARKS, TYPING DRILLS &amp; HARDWARE DIAGNOSTICS
+          </h2>
+          <div className="why-matter-desc" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', fontSize: '0.95rem', fontWeight: 600, lineHeight: 1.7 }}>
+            <div>
+              <p style={{ marginTop: 0 }}>
+                <strong>FixedAim</strong> is a free, zero-signup browser benchmark suite built for competitive FPS players, Minecraft PvP specialists, speed typists, and everyday PC users who want accurate, real-time performance measurements without installing heavy desktop software. Every tool runs natively in your browser using high-resolution JavaScript timing APIs so your clicks, keystrokes, and reaction intervals are recorded down to the millisecond.
+              </p>
+              <p style={{ marginBottom: 0 }}>
+                Whether you are testing raw clicking endurance on our <Link href="/cps-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>CPS Test</Link> with 1-second to 100-second timers, diagnosing mouse microswitch chatter in the <Link href="/double-click" style={{ textDecoration: 'underline', fontWeight: 800 }}>Double Click Test</Link>, or building muscle memory in our <Link href="/3d-aim-trainer" style={{ textDecoration: 'underline', fontWeight: 800 }}>3D Aim Trainer</Link>, your browser becomes a complete training arena.
+              </p>
+            </div>
+            <div>
+              <p style={{ marginTop: 0 }}>
+                For keyboard players and writers, the <Link href="/typing-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Typing Speed Test</Link> measures net WPM, raw WPM, and character accuracy across customizable drills, while the <Link href="/key-visualizer" style={{ textDecoration: 'underline', fontWeight: 800 }}>Key Visualizer</Link> verifies full N-key rollover (NKRO) and detects ghosting across a live 104-key matrix.
+              </p>
+              <p style={{ marginBottom: 0 }}>
+                Beyond mouse and keyboard training, FixedAim includes hardware and network diagnostics: verify your monitor&apos;s true refresh rate with the <Link href="/hz-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Screen Hz Test</Link>, inspect panels for stuck subpixels on the <Link href="/dead-pixel-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Dead Pixel Test</Link>, check stereo channel separation with the <Link href="/speaker-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Speaker Test</Link>, and measure download throughput, ping, and jitter with the <Link href="/internet-speed" style={{ textDecoration: 'underline', fontWeight: 800 }}>Internet Speed Test</Link>. No accounts, no paywalls, and no downloads required.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

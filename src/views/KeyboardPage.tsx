@@ -146,6 +146,18 @@ export default function KeyboardPage() {
           ))}
         </div>
       </div>
+
+      <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
+        <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
+          Why Benchmark Your Keyboard Performance Online?
+        </h2>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+          Your keyboard is your primary input device for both competitive gaming and daily productivity. Whether you are trying to break past 100 WPM on a <Link href="/typing-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Typing Speed Test</Link>, verify N-key rollover (NKRO) and switch actuation with our <Link href="/key-visualizer" style={{ textDecoration: 'underline', fontWeight: 800 }}>Key Visualizer</Link>, or drill rapid thumb presses in the <Link href="/spacebar" style={{ textDecoration: 'underline', fontWeight: 800 }}>Spacebar Counter</Link>, measuring real-time input accuracy exposes hidden bottlenecks before they cost you in matches or work.
+        </p>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
+          Every FixedAim keyboard tool runs locally in your browser with sub-millisecond JavaScript event timing. No downloads or accounts are required—simply pick a test above to measure net WPM, raw character accuracy, key rollover, and sustained actuation consistency across mechanical, optical, or laptop keyboards.
+        </p>
+      </article>
     </div>
   );
 }

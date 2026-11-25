@@ -4,22 +4,6 @@ import CPSTestPage from '@/views/CPSTestPage';
 export const metadata: Metadata = {
   title: "CPS Test - Free Click Speed Test Online | FixedAim",
   description: "Test your CPS (Clicks Per Second) online. Master Left Click, Butterfly, Jitter, and Drag Clicking with custom timers, live analytics graph, and ranks.",
-  keywords: [
-    "CPS test",
-    "click speed test",
-    "what is left click test",
-    "left click cps test",
-    "what is right click test",
-    "what is butterfly click test",
-    "what is jitter click test",
-    "what is drag click test",
-    "butterfly clicking",
-    "jitter clicking",
-    "drag click test",
-    "right click cps test",
-    "kohi click test",
-    "minecraft pvp click speed",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/cps-test",
   },

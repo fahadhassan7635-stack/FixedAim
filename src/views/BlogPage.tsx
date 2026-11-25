@@ -54,6 +54,9 @@ const posts = [
     title: 'WPM Typing Test Guide: How to Actually Hit 120+ WPM',
     excerpt: 'Stuck at 60 WPM? Stop randomly smashing keys. Here is the exact typing practice routine used by competitive typists to double their speed without hand pain.',
     readTime: '8 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'May 12, 2026',
+    updatedAt: 'Nov 10, 2026',
     sources: [
       { label: 'Words per minute — Wikipedia', url: 'https://en.wikipedia.org/wiki/Words_per_minute' },
       { label: 'Touch typing — Wikipedia', url: 'https://en.wikipedia.org/wiki/Touch_typing' },
@@ -119,6 +122,9 @@ A high WPM typing test score is built from muscle memory and accuracy, not brute
     title: 'CPS Test Secrets: How to Increase Your Clicks Per Second',
     excerpt: 'Want to take less knockback in Minecraft PvP? Here is the truth about jitter clicking, butterfly clicking, and getting a higher score on a CPS test.',
     readTime: '7 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'May 24, 2026',
+    updatedAt: 'Nov 12, 2026',
     sources: [
       { label: 'Contact bounce (switch debounce) — Wikipedia', url: 'https://en.wikipedia.org/wiki/Switch#Contact_bounce' },
     ],
@@ -184,6 +190,9 @@ A high CPS test score comes from technique first and hardware second. Master jit
     title: 'Reaction Time Test: Average Scores and How to Get Faster',
     excerpt: 'Dying before you even see the enemy in Valorant or CS2? Here is the science behind gaming reaction times and the setup tweaks that actually make you faster.',
     readTime: '8 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Jun 04, 2026',
+    updatedAt: 'Nov 08, 2026',
     sources: [
       { label: 'Mental chronometry — Wikipedia', url: 'https://en.wikipedia.org/wiki/Mental_chronometry' },
       { label: 'Refresh rate — Wikipedia', url: 'https://en.wikipedia.org/wiki/Refresh_rate' },
@@ -249,6 +258,9 @@ Your reaction time test score is a mix of biology and system latency, and the la
     title: 'Aim Trainer Guide: How to Build Elite FPS Aim From Scratch',
     excerpt: 'Stop mindlessly shooting at dots. Learn the structured routine that FPS coaches use to build god-tier mouse control and tracking.',
     readTime: '10 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Jun 18, 2026',
+    updatedAt: 'Nov 14, 2026',
     sources: [
       { label: 'Muscle memory — Wikipedia', url: 'https://en.wikipedia.org/wiki/Muscle_memory' },
     ],
@@ -315,6 +327,9 @@ An aim trainer only pays off when it is practiced with structure. Lock your sens
     title: 'Spacebar Counter: How to Maximize Your Spacebar CPS Test Score',
     excerpt: 'From Geometry Dash timings to CS2 movement tech, the spacebar is your most abused key. Here is how to tap it faster and score higher on a spacebar counter.',
     readTime: '5 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Jul 02, 2026',
+    updatedAt: 'Nov 05, 2026',
     sources: [
       { label: 'Rhythm game — Wikipedia', url: 'https://en.wikipedia.org/wiki/Rhythm_game' },
     ],
@@ -377,6 +392,9 @@ A good spacebar counter score comes down to thumb technique and switch type, not
     title: 'Key Visualizer: How to Test Keyboard Ghosting and NKRO',
     excerpt: 'Is your budget gaming keyboard dropping inputs during intense fights? Learn how to use a keyboard visualizer to test your hardware limits.',
     readTime: '6 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Jul 15, 2026',
+    updatedAt: 'Nov 11, 2026',
     sources: [
       { label: 'Rollover (key rollover, ghosting, NKRO) — Wikipedia', url: 'https://en.wikipedia.org/wiki/Rollover_(key)' },
     ],
@@ -440,6 +458,9 @@ A key visualizer is the fastest way to prove whether ghosting or missing NKRO is
     title: 'Double Click Test: How to Diagnose Dying Mouse Switches',
     excerpt: 'Is your mouse firing twice when you only clicked once? Here is how to use a double click test to diagnose switch bounce and save your hardware.',
     readTime: '6 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Jul 29, 2026',
+    updatedAt: 'Nov 15, 2026',
     sources: [
       { label: 'Contact bounce — Wikipedia', url: 'https://en.wikipedia.org/wiki/Switch#Contact_bounce' },
     ],
@@ -505,6 +526,9 @@ A double click test is the quickest way to prove switch bounce before it costs y
     title: 'Keyboard Accuracy Test: Why Precision Beats Raw Speed',
     excerpt: 'A 100 WPM typist with bad accuracy is vastly slower than an 80 WPM typist. Here is why the backspace key is your worst enemy.',
     readTime: '7 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Aug 10, 2026',
+    updatedAt: 'Nov 09, 2026',
     sources: [
       { label: 'Typing — Wikipedia', url: 'https://en.wikipedia.org/wiki/Typing' },
     ],
@@ -571,6 +595,9 @@ A keyboard accuracy test score matters more than a flashy WPM number, because ev
     title: 'Scroll Test: Measure Your Mouse Wheel Speed and Health',
     excerpt: 'From bunny-hopping in Apex Legends to scrolling giant codebases. Check if your mouse scroll wheel encoder is skipping ticks or dying.',
     readTime: '5 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Aug 22, 2026',
+    updatedAt: 'Nov 16, 2026',
     sources: [
       { label: 'Rotary encoder — Wikipedia', url: 'https://en.wikipedia.org/wiki/Rotary_encoder' },
     ],
@@ -633,6 +660,9 @@ A scroll test exposes encoder skipping long before it ruins a scroll-jump in a r
     title: 'Mouse Accuracy Test: Find Your Perfect Gaming DPI',
     excerpt: 'Higher DPI does not mean better aim. Learn how to track your cursor path and find the exact sensitivity that fits your muscle memory.',
     readTime: '7 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Sep 03, 2026',
+    updatedAt: 'Nov 18, 2026',
     sources: [
       { label: 'Dots per inch — Wikipedia', url: 'https://en.wikipedia.org/wiki/Dots_per_inch' },
       { label: 'Pointer acceleration — Wikipedia', url: 'https://en.wikipedia.org/wiki/Pointer_acceleration' },
@@ -699,6 +729,9 @@ A mouse accuracy test reveals your true optimal DPI far better than any marketin
     title: '3D Aim Trainer: Master Your FPS Mechanics',
     excerpt: 'Move beyond 2D clicker games. Discover how training in a true 3D spatial environment can drastically improve your crosshair placement, tracking, and flick speed.',
     readTime: '8 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Sep 19, 2026',
+    updatedAt: 'Nov 19, 2026',
     sources: [
       { label: 'Motor learning — Wikipedia', url: 'https://en.wikipedia.org/wiki/Motor_learning' },
     ],
@@ -749,6 +782,9 @@ A 3D Aim Trainer is the ultimate tool for isolating and perfecting your FPS mech
     title: 'Space Defense Game: Master Aiming Under High Pressure',
     excerpt: 'Raw aim is useless if you panic when things get chaotic on screen. Learn how to prioritize targets and maintain high CPS with actual accuracy.',
     readTime: '6 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Oct 01, 2026',
+    updatedAt: 'Nov 14, 2026',
     sources: [
       { label: 'Visual search — Wikipedia', url: 'https://en.wikipedia.org/wiki/Visual_search' },
     ],
@@ -811,6 +847,9 @@ Space Defense punishes panic clicking and rewards deliberate target prioritizati
     title: 'Voyager Game: Evasion, Flow State, and Smooth Mouse Control',
     excerpt: 'Standard aim trainers teach you to hit targets. Voyager teaches you how to maneuver smoothly around obstacles without crashing and burning.',
     readTime: '7 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Oct 14, 2026',
+    updatedAt: 'Nov 17, 2026',
     sources: [
       { label: 'Flow (psychology) — Wikipedia', url: 'https://en.wikipedia.org/wiki/Flow_(psychology)' },
     ],
@@ -874,6 +913,9 @@ Voyager builds smooth, anticipatory mouse control instead of raw click speed, wh
     title: 'CPS Rush: The Ultimate Burst Speed CPS Challenge',
     excerpt: 'A standard 60-second test measures stamina. CPS Rush measures your absolute peak 1-rep max clicking speed. Can you survive 10 rounds of hell?',
     readTime: '6 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Oct 27, 2026',
+    updatedAt: 'Nov 20, 2026',
     sources: [
       { label: 'Muscle fatigue — Wikipedia', url: 'https://en.wikipedia.org/wiki/Muscle_fatigue' },
     ],
@@ -936,9 +978,12 @@ CPS Rush measures peak burst speed rather than endurance, so a flat round-by-rou
     emoji: '🖱️',
     tag: 'Mouse',
     tagColor: 'var(--neon-green)',
-    title: 'Best Gaming Mice for High CPS and Aim — 2025 Tier List',
+    title: 'Best Gaming Mice for High CPS and Aim — 2026 Tier List',
     excerpt: 'Your hardware absolutely matters. We break down the top mice used by pros for maximizing click speed, CPS tests, and maintaining perfect tracking.',
     readTime: '6 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Nov 02, 2026',
+    updatedAt: 'Nov 24, 2026',
     sources: [
       { label: 'Computer mouse — Wikipedia', url: 'https://en.wikipedia.org/wiki/Computer_mouse' },
     ],
@@ -1003,6 +1048,9 @@ The best gaming mouse for CPS and aim is light, uses optical switches, and fits 
     title: 'System Tweaks to Instantly Improve PC Reaction Time',
     excerpt: 'Stop blaming your reflexes. Your PC setup might be adding 30ms of hidden input lag. Here is how to optimize Windows and your gaming gear.',
     readTime: '7 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Nov 08, 2026',
+    updatedAt: 'Nov 22, 2026',
     sources: [
       { label: 'Input lag — Wikipedia', url: 'https://en.wikipedia.org/wiki/Input_lag' },
       { label: 'Refresh rate — Wikipedia', url: 'https://en.wikipedia.org/wiki/Refresh_rate' },
@@ -1072,6 +1120,9 @@ Most "slow reflexes" are actually hidden system latency stacking up across your 
     title: 'Space Waves Game: Master Timing-Based Hold-and-Release Control',
     excerpt: 'One button, zero excuses. Learn how to read gaps, blocks, tunnels, and spinning hazards in Space Waves to post your longest run yet.',
     readTime: '7 min read',
+    author: 'FixedAim Editorial Team',
+    publishedAt: 'Nov 15, 2026',
+    updatedAt: 'Nov 25, 2026',
     sources: [
       { label: 'Mental chronometry — Wikipedia', url: 'https://en.wikipedia.org/wiki/Mental_chronometry' },
       { label: 'Hand–eye coordination — Wikipedia', url: 'https://en.wikipedia.org/wiki/Hand%E2%80%93eye_coordination' },
@@ -1203,6 +1254,9 @@ export default function BlogPage() {
             {post.tag}
           </span>
           <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>📖 {post.readTime}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>✍️ {post.author}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>📅 Published: {post.publishedAt}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700 }}>🔄 Last updated: {post.updatedAt}</span>
         </div>
 
         <h1
@@ -1296,7 +1350,7 @@ export default function BlogPage() {
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <div className="section-label">Knowledge Base</div>
-        <h1 className="tool-title">SkillTest Blog</h1>
+        <h1 className="tool-title">FixedAim Blog</h1>
         <p className="tool-subtitle">
           Guides, tips, and insights to level up your gaming and typing skills
         </p>
@@ -1420,6 +1474,11 @@ export default function BlogPage() {
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#485460' }}>
                   {p.readTime}
                 </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#485460', marginBottom: '0.6rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem 0.75rem' }}>
+                <span>By {p.author}</span>
+                <span>•</span>
+                <span>Updated {p.updatedAt}</span>
               </div>
               <h3
                 style={{

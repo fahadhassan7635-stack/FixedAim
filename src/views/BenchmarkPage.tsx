@@ -199,6 +199,18 @@ export default function BenchmarkPage() {
           ))}
         </div>
       </div>
+
+      <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
+        <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
+          Evaluate Connection Stability &amp; Cognitive Recall Together
+        </h2>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+          Peak gaming and productivity performance requires both a rock-solid internet connection and sharp mental recall. Run the <Link href="/internet-speed" style={{ textDecoration: 'underline', fontWeight: 800 }}>Internet Speed Test</Link> to measure real-time download and upload throughput alongside ping latency, jitter, and packet loss—critical numbers for eliminating rubberbanding and hit-registration delays.
+        </p>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
+          Alongside network diagnostics, challenge your short-term visual and sequence recall in our <Link href="/memory-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Memory Test</Link> suite featuring card match, pattern echo, number span, and spatial recall modes. Looking for hardware checks? Visit the <Link href="/device" style={{ textDecoration: 'underline', fontWeight: 800 }}>Device Test Hub</Link> for screen and audio tools.
+        </p>
+      </article>
     </div>
   );
 }

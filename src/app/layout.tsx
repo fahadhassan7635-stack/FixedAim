@@ -19,12 +19,6 @@ export const metadata: Metadata = {
   },
   description:
     "The ultimate free platform to test clicking speed, typing WPM, reaction time, and aim precision. No signup needed. Play, test, and improve instantly.",
-  keywords: [
-    "CPS test", "click speed test", "typing speed test", "WPM test",
-    "reaction time test", "aim trainer", "spacebar counter",
-    "key visualizer", "mouse accuracy", "double click test",
-    "scroll test", "free gaming tools",
-  ],
   authors: [{ name: "FixedAim" }],
   creator: "FixedAim",
   publisher: "FixedAim",

@@ -4,22 +4,6 @@ import MemoryTestPage from '@/views/MemoryTestPage';
 export const metadata: Metadata = {
   title: "Free Online Memory Test: 4 Brain Games to Train Memory | FixedAim",
   description: "Take the free memory test on FixedAim. Play four online memory games: card match, pattern echo, number span and spatial recall. Track your best scores and train your focus.",
-  keywords: [
-    "memory test",
-    "online memory test",
-    "free memory test",
-    "brain games",
-    "memory games",
-    "short term memory test",
-    "visual memory test",
-    "pattern echo game",
-    "number span test",
-    "spatial recall test",
-    "card match game",
-    "working memory test",
-    "focus trainer",
-    "brain test"
-  ],
   alternates: {
     canonical: "https://fixedaim.com/memory-test",
   },

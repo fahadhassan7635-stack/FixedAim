@@ -146,6 +146,18 @@ export default function MousePage() {
           ))}
         </div>
       </div>
+
+      <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
+        <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
+          Complete Mouse Speed, Switch Health &amp; Precision Testing
+        </h2>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+          Competitive mouse performance depends on more than raw click speed. Use the <Link href="/cps-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>CPS Test</Link> to measure your clicks per second across 1-second to 100-second intervals using regular, jitter, or butterfly clicking. If you suspect worn mechanical switches or accidental multi-registration, run the <Link href="/double-click" style={{ textDecoration: 'underline', fontWeight: 800 }}>Double Click Test</Link> to inspect microswitch chatter down to the millisecond.
+        </p>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
+          For FPS and MOBA players, pair your click speed drills with the <Link href="/mouse-accuracy" style={{ textDecoration: 'underline', fontWeight: 800 }}>Mouse Accuracy Test</Link> and <Link href="/scroll-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Scroll Wheel Test</Link> to evaluate cursor tracking, encoder steps, and overall sensor consistency directly in your browser.
+        </p>
+      </article>
     </div>
   );
 }

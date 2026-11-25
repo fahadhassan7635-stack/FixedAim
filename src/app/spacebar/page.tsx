@@ -4,19 +4,6 @@ import SpacebarPage from '@/views/SpacebarPage';
 export const metadata: Metadata = {
   title: "Spacebar Counter - Free Spacebar Speed Test Online | FixedAim",
   description: "Test your spacebar speed online. Master butterfly spacebar tapping, jitter click counter on spacebar, and train for Minecraft, rhythm games, and FPS.",
-  keywords: [
-    "spacebar counter",
-    "spacebar test",
-    "butterfly spacebar test",
-    "jitter click counter spacebar",
-    "spacebar clicker",
-    "spacebar cps test",
-    "where to use spacebar counter",
-    "minecraft spacebar test",
-    "spacebar speed test",
-    "space bar clicker",
-    "geometry dash spacebar",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/spacebar",
   },

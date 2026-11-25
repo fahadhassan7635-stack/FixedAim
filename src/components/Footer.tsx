@@ -60,10 +60,10 @@ export default function Footer() {
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <a href="#" className="social-btn" aria-label="Twitter">𝕏</a>
-          <a href="#" className="social-btn" aria-label="Discord">💬</a>
-          <a href="#" className="social-btn" aria-label="YouTube">▶</a>
-          <a href="#" className="social-btn" aria-label="Bot">🤖</a>
+          <a href="https://x.com/fixedaim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="FixedAim on X">𝕏</a>
+          <a href="https://discord.gg/fixedaim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="FixedAim Discord">💬</a>
+          <a href="https://youtube.com/@fixedaim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="FixedAim YouTube">▶</a>
+          <Link href="/contact" className="social-btn" aria-label="Contact FixedAim">✉️</Link>
         </div>
       </div>
 
@@ -163,32 +163,6 @@ export default function Footer() {
               <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
-        </div>
-      </div>
-
-      {/* SEO Gaming Links */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto 2rem auto', borderTop: '2px solid #000000', paddingTop: '1.75rem', textAlign: 'center' }}>
-        <h4 style={{ color: '#000000', fontSize: '0.95rem', marginBottom: '0.75rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-          🔥 POPULAR GAMES &amp; GAMING PLATFORMS
-        </h4>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 0.85rem', fontSize: '0.88rem', fontWeight: 700, color: '#1E272E' }}>
-          <a href="https://www.counter-strike.net/" target="_blank" rel="noopener noreferrer" className="footer-link">CS2</a>
-          <span>·</span>
-          <a href="https://playvalorant.com/" target="_blank" rel="noopener noreferrer" className="footer-link">VALORANT</a>
-          <span>·</span>
-          <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer" className="footer-link">Minecraft</a>
-          <span>·</span>
-          <a href="https://pubg.com/" target="_blank" rel="noopener noreferrer" className="footer-link">PUBG</a>
-          <span>·</span>
-          <a href="https://www.callofduty.com/warzone" target="_blank" rel="noopener noreferrer" className="footer-link">Warzone</a>
-          <span>·</span>
-          <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer" className="footer-link">GTA VI</a>
-          <span>·</span>
-          <a href="https://www.crazygames.com/" target="_blank" rel="noopener noreferrer" className="footer-link">CrazyGames</a>
-          <span>·</span>
-          <a href="https://zone.msn.com/" target="_blank" rel="noopener noreferrer" className="footer-link">MSN Games</a>
-          <span>·</span>
-          <a href="https://geometrydash.io/" target="_blank" rel="noopener noreferrer" className="footer-link">Geometry Dash</a>
         </div>
       </div>
 

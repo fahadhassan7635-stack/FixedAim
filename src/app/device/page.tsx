@@ -4,18 +4,6 @@ import DevicePage from '@/views/DevicePage';
 export const metadata: Metadata = {
   title: "Device Test & Hardware Diagnostics Hub | FixedAim",
   description: "Test your PC, monitor, laptop, and smartphone hardware online. Free tests for screen refresh rate (Hz), dead pixels, speakers, mic, mouse, and keyboard.",
-  keywords: [
-    "device test",
-    "hardware test",
-    "screen test",
-    "monitor test",
-    "hz test",
-    "speaker test",
-    "mouse test",
-    "keyboard test",
-    "pc diagnostics online",
-    "hardware diagnostics",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/device",
   },

@@ -4,12 +4,6 @@ import VoyagerGame from '@/views/VoyagerGame';
 export const metadata: Metadata = {
   title: "Voyager Game - Space Endurance Arcade & CPS Trainer | FixedAim",
   description: "Navigate the Voyager spaceship through cosmic asteroid fields. Boost your CPS and reflex endurance with power-ups, boss battles, and unlockable achievements.",
-  keywords: [
-    "voyager game", "voyager space game", "asteroid dodge game", "space endurance game",
-    "cps trainer game", "clicks per second game", "spacebar cps game", "mouse clicking game",
-    "online space arcade", "free browser game", "endurance clicker game", "fixedaim voyager",
-    "boost clicking game", "peak cps tracker", "dodge asteroid game", "cps improvement game",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/voyager-game",
   },

@@ -152,6 +152,18 @@ export default function GamesPage() {
           ))}
         </div>
       </div>
+
+      <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
+        <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
+          Skill-Based Arcade Games Built for Mechanical Warm-Ups
+        </h2>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+          Repetitive drills work, but interactive skill games keep your focus sharp while training the exact same hand-eye coordination, mouse control, and APM endurance required in competitive esports. Challenge your rapid targeting in <Link href="/space-defense" style={{ textDecoration: 'underline', fontWeight: 800 }}>Space Defense</Link>, test micro-timing and obstacle dodging in <Link href="/space-waves" style={{ textDecoration: 'underline', fontWeight: 800 }}>Space Waves</Link>, or push your actions per minute in the <Link href="/apm-drill" style={{ textDecoration: 'underline', fontWeight: 800 }}>APM Drill</Link>.
+        </p>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
+          Every game in the FixedAim Arcade runs smoothly in your browser at native monitor refresh rates with instant restarts and zero signups, making them ideal for quick 5-minute warm-ups between ranked queues or relaxing reflex sessions.
+        </p>
+      </article>
     </div>
   );
 }

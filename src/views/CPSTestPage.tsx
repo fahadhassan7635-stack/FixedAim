@@ -11,7 +11,7 @@ import { createPortal } from 'react-dom';
 import type { CSSProperties, ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { Maximize2, Minimize2, ExternalLink } from 'lucide-react';
-import { ContextPill, DiscoverMoreCard } from '../components/AIContextualAssistant';
+import { ContextPill } from '../components/AIContextualAssistant';
 
 const ContextSidebar = dynamic(
   () => import('../components/AIContextualAssistant').then((m) => m.ContextSidebar),
@@ -149,7 +149,7 @@ const FAQ_DATA = [
   },
   {
     q: "What is a Right Click Test?",
-    a: "A Right Click Test measures how many times you can click your secondary right mouse button (RMB) in one second (Right CPS). It is essential for measuring block placement speed in Minecraft (especially god-bridging and breezily-bridging), aiming down sights (ADS) in tactical shooters, and kiting/movement commands in MOBAs.",
+    a: "A Right Click Test measures how many times you can click your secondary right mouse button (RMB) in one second (Right CPS). It is essential for measuring block placement speed in Minecraft (especially god-bridging and Breezily bridging), aiming down sights (ADS) in tactical shooters, and kiting/movement commands in MOBAs.",
   },
   {
     q: "What is Butterfly Clicking?",
@@ -561,9 +561,6 @@ const SeoArticle = memo(() => (
         competitive. Hardware, grip style, and technique all affect your score.
       </p>
 
-      {/* ── DISCOVER MORE / CONTEXT GUIDES (MATCHING USER REFERENCE) ── */}
-      <DiscoverMoreCard />
-
       {/* ── CONTEXTUAL SPEED BENCHMARKS & PILL BADGES ── */}
       <p style={pStyle}>
         The average CPS score in this mode is between 5 and 7. Players using techniques like jitter or butterfly clicking can reach up to 10-12 clicks per second. Beyond that, scores of 13+ are typically seen in highly trained users using gaming-grade mice.{' '}
@@ -846,7 +843,7 @@ const SeoArticle = memo(() => (
               <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>2 / 10 (Very Poor)</td>
               <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Low - Moderate</td>
               <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>Restricted / Banned</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>God-bridging, breezily bridging</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>God-bridging, Breezily bridging</td>
             </tr>
           </tbody>
         </table>

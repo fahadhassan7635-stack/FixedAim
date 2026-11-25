@@ -769,50 +769,7 @@ export const DiscoverMoreCard = memo(() => {
         <span>Discover more</span>
       </div>
 
-      {/* Quick Topic Links */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '1.25rem' }}>
-        {[
-          { label: 'Try Web Tools', topicId: 'web-tools' },
-          { label: 'Clean Your PC', topicId: 'pc-cleanup' },
-          { label: 'Track Web Traffic', topicId: 'track-traffic' },
-        ].map(item => (
-          <button
-            key={item.topicId}
-            type="button"
-            onClick={() => openContextSidebar({ topicId: item.topicId, title: item.label })}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '0.65rem 0.9rem',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              borderRadius: '10px',
-              color: '#e2e8f0',
-              fontSize: '0.92rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              textAlign: 'left',
-              transition: 'all 0.15s ease',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-              e.currentTarget.style.transform = 'translateX(3px)';
-              e.currentTarget.style.borderColor = 'rgba(0, 255, 136, 0.3)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
-              e.currentTarget.style.transform = 'translateX(0)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
-            }}
-          >
-            <span>{item.label}</span>
-            <ArrowRight size={15} style={{ opacity: 0.6 }} />
-          </button>
-        ))}
-      </div>
-
-      {/* Contextual Color Pills (matching screenshot) */}
+      {/* Contextual Color Pills */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
         <ContextPill
           label="Clicks Per Second"
@@ -821,7 +778,7 @@ export const DiscoverMoreCard = memo(() => {
           icon="none"
         />
         <ContextPill
-          label="Kohl Click Test"
+          label="Kohi Click Test"
           variant="amber"
           topicId="kohl-test"
           icon="none"

@@ -150,6 +150,18 @@ export default function AimPage() {
           ))}
         </div>
       </div>
+
+      <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
+        <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
+          Train FPS Flicks, Tracking &amp; Sub-200ms Reflexes
+        </h2>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+          Consistent aim in tactical shooters like Valorant, CS2, and Apex Legends combines fast visual processing with clean mouse muscle memory. Start your warm-up with the <Link href="/reaction-time" style={{ textDecoration: 'underline', fontWeight: 800 }}>Reaction Time Test</Link> or <Link href="/f1-reaction" style={{ textDecoration: 'underline', fontWeight: 800 }}>F1 Reaction Test</Link> to establish your baseline visual reflex speed in milliseconds.
+        </p>
+        <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
+          Once warmed up, move into the <Link href="/aim-trainer" style={{ textDecoration: 'underline', fontWeight: 800 }}>2D Aim Trainer</Link> for rapid target acquisition and click timing, or launch the full-screen <Link href="/3d-aim-trainer" style={{ textDecoration: 'underline', fontWeight: 800 }}>3D Aim Trainer</Link> to practice 360-degree crosshair placement, pistol flicks, sniper scoping, and tracking without installing large game clients.
+        </p>
+      </article>
     </div>
   );
 }

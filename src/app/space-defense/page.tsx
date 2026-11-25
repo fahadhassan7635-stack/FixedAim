@@ -4,20 +4,6 @@ import SpaceDefensePage from '@/views/SpaceDefensePage';
 export const metadata: Metadata = {
   title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
   description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
-  keywords: [
-    "space defense",
-    "space defense game",
-    "meteor shooter game",
-    "asteroid shooter online",
-    "cps shooter game",
-    "aim training space game",
-    "free space shooter browser",
-    "click speed arcade",
-    "space defense high score",
-    "flick aim trainer game",
-    "space arcade game",
-    "fixedaim space defense",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/space-defense",
   },

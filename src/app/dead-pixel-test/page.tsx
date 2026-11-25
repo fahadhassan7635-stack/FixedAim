@@ -4,18 +4,6 @@ import DeadPixelTestPage from '@/views/DeadPixelTestPage';
 export const metadata: Metadata = {
   title: "Dead Pixel Test - Check Stuck, Hot & Dead Screen Pixels | FixedAim",
   description: "Free online dead pixel test for monitors, laptops, and phones. Inspect stuck, hot, and dead pixels with solid color screens and a built-in pixel fixer.",
-  keywords: [
-    "dead pixel test",
-    "stuck pixel test",
-    "screen pixel test",
-    "monitor test",
-    "dead pixel checker",
-    "hot pixel test",
-    "pixel fixer online",
-    "oled dead pixel test",
-    "display test",
-    "screen color test",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/dead-pixel-test",
   },

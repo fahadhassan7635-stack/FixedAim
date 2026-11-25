@@ -4,21 +4,6 @@ import SpeakerTestPage from '@/views/SpeakerTestPage';
 export const metadata: Metadata = {
   title: "Speaker Test Online – Left, Right, Bass & Frequency Check | FixedAim",
   description: "Free online speaker test. Check left and right channels, bass, frequency sweep, pink noise and phase in seconds. Works for speakers and headphones.",
-  keywords: [
-    "speaker test",
-    "online speaker test",
-    "left right speaker test",
-    "stereo test",
-    "headphone test",
-    "bass test",
-    "subwoofer test",
-    "sound test",
-    "frequency test",
-    "tone generator",
-    "pink noise",
-    "phase test",
-    "free audio test",
-  ],
   alternates: {
     canonical: "https://fixedaim.com/speaker-test",
   },
