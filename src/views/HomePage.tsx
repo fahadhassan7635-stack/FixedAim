@@ -23,6 +23,11 @@ const tools = [
   { to: '/space-waves', icon: '🌊', name: 'Space Waves', tag: 'Dodge Game', accent: 'var(--neon-cyan)' },
   { to: '/apm-drill', icon: '⚡', name: 'APM Drill', tag: 'Speed Drill', accent: 'var(--neon-cyan)' },
   { to: '/f1-reaction', icon: '🏎️', name: 'F1 Reaction Test', tag: 'Racing Reflex', accent: 'var(--neon-orange)' },
+  { to: '/hz-test', icon: '🖥️', name: 'Screen Hz Test', tag: 'Refresh Rate', accent: 'var(--neon-cyan)' },
+  { to: '/speaker-test', icon: '🔊', name: 'Speaker Test', tag: 'Audio Check', accent: 'var(--neon-yellow)' },
+  { to: '/dead-pixel-test', icon: '🟦', name: 'Dead Pixel Test', tag: 'Screen Check', accent: 'var(--neon-red)' },
+  { to: '/internet-speed', icon: '🌐', name: 'Internet Speed', tag: 'Ping & Mbps', accent: 'var(--neon-green)' },
+  { to: '/memory-test', icon: '🧠', name: 'Memory Test', tag: 'Brain Games', accent: 'var(--neon-purple)' },
 ];
 
 export default function HomePage() {
@@ -79,7 +84,7 @@ export default function HomePage() {
               lineHeight: 1.6,
               marginBottom: '2rem',
             }}>
-              The definitive gaming benchmark platform that refuses to be invisible. 17 high-precision tools. Zero sign-up. Pure raw performance.
+              The definitive gaming benchmark platform that refuses to be invisible. 22 high-precision tools. Zero sign-up. Pure raw performance.
             </p>
 
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -124,7 +129,7 @@ export default function HomePage() {
                   fontWeight: 800,
                 }}
               >
-                VIEW ALL 17 TOOLS ↓
+                VIEW ALL 22 TOOLS ↓
               </button>
             </div>
           </div>

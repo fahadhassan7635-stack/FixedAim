@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.fixedaim.com' }],
+        destination: 'https://fixedaim.com/:path*',
+        permanent: true,
+      },
+      {
         source: '/hall-of-fame',
         destination: '/benchmark',
         permanent: true,
