@@ -59,7 +59,7 @@ export default function Footer() {
               FIXED AIM.
             </span>
           </Link>
-          <p style={{ color: '#1E272E', fontSize: '0.95rem', fontWeight: 600, lineHeight: '1.6', margin: 0 }}>
+          <p translate="no" style={{ color: '#1E272E', fontSize: '0.95rem', fontWeight: 600, lineHeight: '1.6', margin: 0 }}>
             {t.footer.tagline}
           </p>
         </div>
@@ -171,7 +171,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div style={{ borderTop: '2px solid #000000', paddingTop: '1.25rem', maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontWeight: 700, fontSize: '0.88rem' }}>
+      <div translate="no" style={{ borderTop: '2px solid #000000', paddingTop: '1.25rem', maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontWeight: 700, fontSize: '0.88rem' }}>
         <p style={{ margin: 0, color: '#000000' }}>© FixedAim — {t.footer.rights}</p>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <Link href="/privacy-policy" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.privacy}</Link>

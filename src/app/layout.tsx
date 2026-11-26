@@ -3,6 +3,7 @@ import "./globals.css";
 import ClientLayout from "../components/ClientLayout";
 import Footer from "../components/Footer";
 import { LanguageProvider } from "../contexts/LanguageContext";
+import AutoPageTranslator from "../components/AutoPageTranslator";
 
 const SITE_URL = "https://fixedaim.com";
 
@@ -84,6 +85,7 @@ export default function RootLayout({
       </head>
       <body>
         <LanguageProvider>
+          <AutoPageTranslator />
           <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%' }}>
             <ClientLayout>{children}</ClientLayout>
             <Footer />

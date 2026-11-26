@@ -239,10 +239,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </Link>
         </div>
 
-        {/* Desktop Navigation — compact */}
+        {/* Desktop Navigation — balanced */}
         <ul style={{
           display: 'flex', alignItems: 'center',
-          gap: '0.2rem',
+          gap: '0.3rem',
           listStyle: 'none', margin: 0, padding: 0,
           flex: 1, justifyContent: 'center',
           overflow: 'hidden',
@@ -255,16 +255,16 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                   href={item.to}
                   className="top-nav-link"
                   style={{
-                    padding: '0.35rem 0.65rem',
+                    padding: '0.42rem 0.8rem',
                     textDecoration: 'none',
-                    fontSize: '0.76rem',
+                    fontSize: '0.84rem',
                     fontWeight: 800,
                     letterSpacing: '0.03em',
                     textTransform: 'uppercase',
                     color: isActive ? '#000000' : '#FFFFFF',
                     background: isActive ? '#FFE033' : 'transparent',
                     border: isActive ? '2px solid #000000' : '2px solid transparent',
-                    boxShadow: isActive ? '2px 2px 0 0 #FFE033' : 'none',
+                    boxShadow: isActive ? '3px 3px 0 0 #FFE033' : 'none',
                     transition: 'all 0.15s ease',
                     display: 'block',
                     whiteSpace: 'nowrap',
@@ -391,7 +391,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             paddingRight: sidebarOpen ? '0.5rem' : '0',
           }}>
             {sidebarOpen && (
-              <div style={{
+              <div translate="no" style={{
                 background: '#FFE033',
                 color: '#000000',
                 fontSize: '0.9rem',

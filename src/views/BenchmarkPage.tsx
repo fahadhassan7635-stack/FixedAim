@@ -166,8 +166,8 @@ export default function BenchmarkPage() {
 
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">{t.hubs.benchmark.h1}</h1>
-        <p className="tool-subtitle">
+        <h1 translate="no" className="tool-title">{t.hubs.benchmark.h1}</h1>
+        <p translate="no" className="tool-subtitle">
           {t.hubs.benchmark.sub}
         </p>
       </div>

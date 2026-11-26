@@ -42,7 +42,7 @@ export default function HomePage() {
         <div className="hero-grid">
           
           {/* Left Hero Column */}
-          <div>
+          <div translate="no">
             <div style={{
               display: 'inline-flex',
               alignItems: 'center',

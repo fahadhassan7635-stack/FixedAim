@@ -192,10 +192,10 @@ export default function DevicePage() {
       {/* HEADER */}
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)' }}>
+        <h1 translate="no" className="tool-title" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)' }}>
           {t.hubs.device.h1}
         </h1>
-        <p className="tool-subtitle">
+        <p translate="no" className="tool-subtitle">
           {t.hubs.device.sub}
         </p>
       </div>

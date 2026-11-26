@@ -119,8 +119,8 @@ export default function AimPage() {
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">{t.hubs.aim.h1}</h1>
-        <p className="tool-subtitle">{t.hubs.aim.sub}</p>
+        <h1 translate="no" className="tool-title">{t.hubs.aim.h1}</h1>
+        <p translate="no" className="tool-subtitle">{t.hubs.aim.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
