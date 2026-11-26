@@ -1,8 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-
-import { useEffect, useState } from 'react';
+import { useLang } from '../contexts/LanguageContext';
 
 
 const tools = [
@@ -31,6 +30,8 @@ const tools = [
 ];
 
 export default function HomePage() {
+  const { t } = useLang();
+
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 0.5rem', paddingBottom: '3rem' }}>
 
@@ -58,7 +59,7 @@ export default function HomePage() {
               marginBottom: '1.5rem',
             }}>
               <span className="hero-pulse-dot" style={{ background: '#000000', boxShadow: 'none' }} />
-              EST. 2026 // FIXED AIM 2.0
+              {t.hero.badge}
             </div>
 
             <h1 style={{
@@ -71,9 +72,9 @@ export default function HomePage() {
               marginBottom: '1.25rem',
               fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif"
             }}>
-              FREE CPS TEST,<br />
-              TYPING SPEED TEST<br />
-              <span style={{ background: '#FFE033', padding: '0 8px', border: '3px solid #000000', display: 'inline-block', marginTop: '4px' }}>&amp; AIM TRAINER</span>
+              {t.hero.h1Line1}<br />
+              {t.hero.h1Line2}<br />
+              <span style={{ background: '#FFE033', padding: '0 8px', border: '3px solid #000000', display: 'inline-block', marginTop: '4px' }}>{t.hero.h1Line3}</span>
             </h1>
 
             <p style={{
@@ -84,7 +85,7 @@ export default function HomePage() {
               lineHeight: 1.6,
               marginBottom: '2rem',
             }}>
-              The definitive gaming benchmark platform that refuses to be invisible. 22 high-precision tools. Zero sign-up. Pure raw performance.
+              {t.hero.desc}
             </p>
 
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -97,7 +98,7 @@ export default function HomePage() {
                 padding: '14px 28px',
                 fontWeight: 900,
               }}>
-                ⚡ START CPS TEST
+                {t.hero.ctaCps}
               </Link>
               <Link href="/typing-test" className="btn btn-secondary" style={{
                 background: '#74B9FF',
@@ -108,7 +109,7 @@ export default function HomePage() {
                 padding: '14px 28px',
                 fontWeight: 900,
               }}>
-                ⌨️ TYPING SPEED
+                {t.hero.ctaTyping}
               </Link>
               <button 
                 onClick={() => {
@@ -129,7 +130,7 @@ export default function HomePage() {
                   fontWeight: 800,
                 }}
               >
-                VIEW ALL 22 TOOLS ↓
+                {t.hero.ctaTools}
               </button>
             </div>
           </div>

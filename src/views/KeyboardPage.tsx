@@ -1,4 +1,7 @@
+"use client";
+
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 const tools = [
   { to: '/typing-test', title: 'Typing Speed Test', desc: 'Measure your WPM across multiple difficulties and durations. Track your improvement over time.', color: '#00f5ff', tag: 'Most Popular' },
   { to: '/key-visualizer', title: 'Key Visualizer', desc: 'See every keystroke light up on a real-time keyboard display. Track your key usage patterns.', color: '#a855f7', tag: '' },
@@ -7,6 +10,7 @@ const tools = [
 ];
 
 export default function KeyboardPage() {
+  const { t } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <script
@@ -114,8 +118,8 @@ export default function KeyboardPage() {
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">Keyboard Tools</h1>
-        <p className="tool-subtitle">Master your typing speed, accuracy, and keyboard skills</p>
+        <h1 className="tool-title">{t.hubs.keyboard.h1}</h1>
+        <p className="tool-subtitle">{t.hubs.keyboard.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>

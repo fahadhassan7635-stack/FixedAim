@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import { useLang } from '../contexts/LanguageContext';
+import type { Lang } from '../lib/i18n';
 
 const mouseIcon = '/gun-pfp.png';
 
@@ -14,55 +16,162 @@ interface ToolItem {
   category: 'mouse' | 'keyboard' | 'aim' | 'benchmark' | 'games' | 'misc';
 }
 
-const NAV_ITEMS = [
-  { to: '/', label: 'Home', exact: true },
-  { to: '/keyboard', label: 'Keyboard' },
-  { to: '/mouse', label: 'Mouse' },
-  { to: '/aim', label: 'Aim & Reaction' },
-  { to: '/benchmark', label: 'Benchmark' },
-  { to: '/games', label: 'Games' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/device', label: 'Device Test' },
-];
+// ─── NAV items (translated labels come from the hook) ───────────────────────
+const NAV_ITEM_KEYS = [
+  { to: '/', key: 'home',      exact: true },
+  { to: '/keyboard', key: 'keyboard' },
+  { to: '/mouse',    key: 'mouse' },
+  { to: '/aim',      key: 'aim' },
+  { to: '/benchmark',key: 'benchmark' },
+  { to: '/games',    key: 'games' },
+  { to: '/blog',     key: 'blog' },
+  { to: '/device',   key: 'device' },
+] as const;
+
+type NavKey = typeof NAV_ITEM_KEYS[number]['key'];
 
 const TOOLS_LIST: (ToolItem & { icon: string })[] = [
-  { to: '/cps-test', label: 'CPS Test', category: 'mouse', icon: '⚡' },
-  { to: '/double-click', label: 'Double Click Test', category: 'mouse', icon: '🖱️' },
-  { to: '/scroll-test', label: 'Scroll Wheel Test', category: 'mouse', icon: '📜' },
-  { to: '/mouse-accuracy', label: 'Mouse Accuracy', category: 'mouse', icon: '🎯' },
-  { to: '/cps-rush', label: 'CPS Rush', category: 'mouse', icon: '🔥' },
-
-  { to: '/typing-test', label: 'Typing Speed Test', category: 'keyboard', icon: '⌨️' },
-  { to: '/key-visualizer', label: 'Key Visual', category: 'keyboard', icon: '🖥️' },
-  { to: '/spacebar', label: 'Spacebar Counter', category: 'keyboard', icon: '➖' },
-  { to: '/accuracy', label: 'Accuracy Test', category: 'keyboard', icon: '✔️' },
-
-  { to: '/reaction-time', label: 'Reaction Time Test', category: 'aim', icon: '⏱️' },
-  { to: '/aim-trainer', label: '2D Aim Trainer', category: 'aim', icon: '🎯' },
-  { to: '/3d-aim-trainer', label: '3D Aim Trainer', category: 'aim', icon: '🎯' },
-  { to: '/f1-reaction', label: 'F1 Reaction', category: 'aim', icon: '🏎️' },
-
-  { to: '/space-defense', label: 'Space Defense', category: 'games', icon: '🚀' },
-  { to: '/voyager-game', label: 'Voyager Game', category: 'games', icon: '🛸' },
-  { to: '/space-waves', label: 'Space Waves', category: 'games', icon: '🌊' },
-  { to: '/apm-drill', label: 'APM Drill', category: 'games', icon: '⚡' },
-
-  { to: '/blog', label: 'Blog', category: 'misc', icon: '📝' },
-  { to: '/benchmark', label: 'Benchmark Hub', category: 'benchmark', icon: '📊' },
-  { to: '/internet-speed', label: 'Internet Speed Test', category: 'benchmark', icon: '🌐' },
-  { to: '/speaker-test', label: 'Speaker Test', category: 'benchmark', icon: '🔊' },
-  { to: '/dead-pixel-test', label: 'Dead Pixel Test', category: 'benchmark', icon: '🖥️' },
-  { to: '/hz-test', label: 'Hz & Speed Test', category: 'benchmark', icon: '⚡' },
-  { to: '/memory-test', label: 'Memory Test', category: 'benchmark', icon: '🧠' },
-  { to: '/device', label: 'Device Test Hub', category: 'benchmark', icon: '🛠️' },
+  { to: '/cps-test',       label: 'CPS Test',          category: 'mouse',     icon: '⚡' },
+  { to: '/double-click',   label: 'Double Click Test',  category: 'mouse',     icon: '🖱️' },
+  { to: '/scroll-test',    label: 'Scroll Wheel Test',  category: 'mouse',     icon: '📜' },
+  { to: '/mouse-accuracy', label: 'Mouse Accuracy',     category: 'mouse',     icon: '🎯' },
+  { to: '/cps-rush',       label: 'CPS Rush',           category: 'mouse',     icon: '🔥' },
+  { to: '/typing-test',    label: 'Typing Speed Test',  category: 'keyboard',  icon: '⌨️' },
+  { to: '/key-visualizer', label: 'Key Visual',         category: 'keyboard',  icon: '🖥️' },
+  { to: '/spacebar',       label: 'Spacebar Counter',   category: 'keyboard',  icon: '➖' },
+  { to: '/accuracy',       label: 'Accuracy Test',      category: 'keyboard',  icon: '✔️' },
+  { to: '/reaction-time',  label: 'Reaction Time Test', category: 'aim',       icon: '⏱️' },
+  { to: '/aim-trainer',    label: '2D Aim Trainer',     category: 'aim',       icon: '🎯' },
+  { to: '/3d-aim-trainer', label: '3D Aim Trainer',     category: 'aim',       icon: '🎯' },
+  { to: '/f1-reaction',    label: 'F1 Reaction',        category: 'aim',       icon: '🏎️' },
+  { to: '/space-defense',  label: 'Space Defense',      category: 'games',     icon: '🚀' },
+  { to: '/voyager-game',   label: 'Voyager Game',       category: 'games',     icon: '🛸' },
+  { to: '/space-waves',    label: 'Space Waves',        category: 'games',     icon: '🌊' },
+  { to: '/apm-drill',      label: 'APM Drill',          category: 'games',     icon: '⚡' },
+  { to: '/blog',           label: 'Blog',               category: 'misc',      icon: '📝' },
+  { to: '/benchmark',      label: 'Benchmark Hub',      category: 'benchmark', icon: '📊' },
+  { to: '/internet-speed', label: 'Internet Speed Test',category: 'benchmark', icon: '🌐' },
+  { to: '/speaker-test',   label: 'Speaker Test',       category: 'benchmark', icon: '🔊' },
+  { to: '/dead-pixel-test',label: 'Dead Pixel Test',    category: 'benchmark', icon: '🖥️' },
+  { to: '/hz-test',        label: 'Hz & Speed Test',    category: 'benchmark', icon: '⚡' },
+  { to: '/memory-test',    label: 'Memory Test',        category: 'benchmark', icon: '🧠' },
+  { to: '/device',         label: 'Device Test Hub',    category: 'benchmark', icon: '🛠️' },
 ];
 
+// ─── Language Switcher ───────────────────────────────────────────────────────
+function LanguageSwitcher() {
+  const { lang, setLang, langs } = useLang();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // close on outside click
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const current = langs.find(l => l.code === lang) ?? langs[0];
+
+  return (
+    <div ref={ref} style={{ position: 'relative', marginLeft: '0.4rem' }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-label="Switch language"
+        style={{
+          display: 'flex', alignItems: 'center', gap: '4px',
+          background: open ? '#FFE033' : 'transparent',
+          border: '2px solid',
+          borderColor: open ? '#000' : '#555',
+          color: open ? '#000' : '#fff',
+          cursor: 'pointer',
+          padding: '4px 8px',
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
+          transition: 'all 0.15s ease',
+          whiteSpace: 'nowrap',
+          lineHeight: 1,
+        }}
+        onMouseEnter={e => {
+          if (!open) {
+            e.currentTarget.style.background = '#FFE033';
+            e.currentTarget.style.color = '#000';
+            e.currentTarget.style.borderColor = '#000';
+          }
+        }}
+        onMouseLeave={e => {
+          if (!open) {
+            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.color = '#fff';
+            e.currentTarget.style.borderColor = '#555';
+          }
+        }}
+      >
+        <span style={{ fontSize: '0.9rem' }}>🌐</span>
+        <span>{current.flag}</span>
+        <span>{current.code.toUpperCase()}</span>
+        <span style={{ fontSize: '0.6rem', marginLeft: '1px' }}>{open ? '▲' : '▼'}</span>
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'absolute', top: 'calc(100% + 4px)', right: 0,
+          background: '#000', border: '2px solid #FFE033',
+          boxShadow: '4px 4px 0 0 #FFE033',
+          zIndex: 300, minWidth: '150px',
+          maxHeight: '340px', overflowY: 'auto',
+        }}>
+          {langs.map(l => (
+            <button
+              key={l.code}
+              onClick={() => { setLang(l.code as Lang); setOpen(false); }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '8px',
+                width: '100%', padding: '8px 12px',
+                background: l.code === lang ? '#FFE033' : 'transparent',
+                color: l.code === lang ? '#000' : '#fff',
+                border: 'none', cursor: 'pointer',
+                fontSize: '0.78rem', fontWeight: 800,
+                letterSpacing: '0.04em', textTransform: 'uppercase',
+                textAlign: 'left',
+                transition: 'background 0.1s',
+              }}
+              onMouseEnter={e => {
+                if (l.code !== lang) {
+                  e.currentTarget.style.background = 'rgba(255,224,51,0.15)';
+                  e.currentTarget.style.color = '#FFE033';
+                }
+              }}
+              onMouseLeave={e => {
+                if (l.code !== lang) {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = '#fff';
+                }
+              }}
+            >
+              <span style={{ fontSize: '1rem' }}>{l.flag}</span>
+              <span>{l.nativeLabel}</span>
+              {l.code === lang && <span style={{ marginLeft: 'auto', fontSize: '0.7rem' }}>✓</span>}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Main Layout ─────────────────────────────────────────────────────────────
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [hoveredTool, setHoveredTool] = useState<{ label: string; top: number; left: number } | null>(null);
   const pathname = usePathname();
+  const { t } = useLang();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -72,11 +181,16 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     return TOOLS_LIST.filter(tool => tool.category === selectedCategory);
   }, [selectedCategory]);
 
+  // Map nav key → translated label
+  const navLabel = (key: NavKey): string => {
+    return (t.nav as Record<NavKey, string>)[key];
+  };
+
   return (
     <>
       <div className="grid-bg" />
 
-      {/* TOP NAVIGATION BAR — NEUBRUTALISM BLACK & YELLOW */}
+      {/* TOP NAVIGATION BAR */}
       <nav className="top-nav" style={{
         position: 'sticky', top: 0, zIndex: 100,
         background: '#000000',
@@ -85,20 +199,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         justifyContent: 'space-between',
         height: '66px',
         width: '100%',
-        padding: '0 0.85rem',
-        boxSizing: 'border-box'
+        padding: '0 0.75rem',
+        boxSizing: 'border-box',
       }}>
-        {/* LOGO BOX — CANONICAL NEUBRUTALISM */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* LOGO */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           <Link href="/" style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.6rem',
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             textDecoration: 'none',
             background: '#FFE033',
             border: '3px solid #000000',
             boxShadow: '4px 4px 0 0 #FFFFFF',
-            padding: '6px 14px 6px 10px',
+            padding: '5px 10px 5px 8px',
             transition: 'transform 0.1s ease, box-shadow 0.1s ease',
           }}
           onMouseEnter={e => {
@@ -110,16 +222,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             e.currentTarget.style.boxShadow = '4px 4px 0 0 #FFFFFF';
           }}
           >
-            <div style={{
-              width: '32px', height: '32px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Image src={mouseIcon} alt="Logo" width={32} height={32} style={{ width: '100%', height: '100%', objectFit: 'contain' }} priority />
+            <div style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Image src={mouseIcon} alt="Logo" width={28} height={28} style={{ width: '100%', height: '100%', objectFit: 'contain' }} priority />
             </div>
             <span style={{
               fontFamily: "'Public Sans', 'Barlow Condensed', 'Arial Black', sans-serif",
               fontWeight: 900,
-              fontSize: '1.45rem',
+              fontSize: '1.3rem',
               color: '#000000',
               letterSpacing: '-0.02em',
               textTransform: 'uppercase',
@@ -130,36 +239,42 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <ul style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', listStyle: 'none', margin: 0, padding: 0 }} className="desktop-nav">
-          {NAV_ITEMS.map(item => {
-            const isActive = item.exact ? pathname === item.to : pathname?.startsWith(item.to);
+        {/* Desktop Navigation — compact */}
+        <ul style={{
+          display: 'flex', alignItems: 'center',
+          gap: '0.2rem',
+          listStyle: 'none', margin: 0, padding: 0,
+          flex: 1, justifyContent: 'center',
+          overflow: 'hidden',
+        }} className="desktop-nav">
+          {NAV_ITEM_KEYS.map(item => {
+            const isActive = ('exact' in item && item.exact) ? pathname === item.to : pathname?.startsWith(item.to);
             return (
-              <li key={item.to}>
+              <li key={item.to} style={{ flexShrink: 0 }}>
                 <Link
                   href={item.to}
                   className="top-nav-link"
                   style={{
-                    padding: '0.45rem 0.95rem',
+                    padding: '0.35rem 0.65rem',
                     textDecoration: 'none',
-                    fontSize: '0.88rem',
+                    fontSize: '0.76rem',
                     fontWeight: 800,
-                    letterSpacing: '0.04em',
+                    letterSpacing: '0.03em',
                     textTransform: 'uppercase',
                     color: isActive ? '#000000' : '#FFFFFF',
                     background: isActive ? '#FFE033' : 'transparent',
                     border: isActive ? '2px solid #000000' : '2px solid transparent',
-                    boxShadow: isActive ? '3px 3px 0 0 #FFE033' : 'none',
+                    boxShadow: isActive ? '2px 2px 0 0 #FFE033' : 'none',
                     transition: 'all 0.15s ease',
                     display: 'block',
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'nowrap',
                   }}
                   onMouseEnter={e => {
                     if (!isActive) {
                       e.currentTarget.style.background = '#FFE033';
                       e.currentTarget.style.color = '#000000';
                       e.currentTarget.style.border = '2px solid #000000';
-                      e.currentTarget.style.boxShadow = '3px 3px 0 0 #FFE033';
+                      e.currentTarget.style.boxShadow = '2px 2px 0 0 #FFE033';
                     }
                   }}
                   onMouseLeave={e => {
@@ -170,16 +285,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                       e.currentTarget.style.boxShadow = 'none';
                     }
                   }}
-                >{item.label}</Link>
+                >{navLabel(item.key)}</Link>
               </li>
             );
           })}
         </ul>
 
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        {/* Right side: ThemeToggle + Language Switcher + Hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
           <ThemeToggle />
+          {mounted && <LanguageSwitcher />}
 
-          {/* Hamburger Menu Button */}
+          {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
@@ -213,10 +330,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           display: 'flex', flexDirection: 'column', gap: '0.5rem',
           padding: '1.25rem',
           maxHeight: 'calc(100vh - 66px)', overflowY: 'auto',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         }}>
-          {NAV_ITEMS.map(item => {
-            const isActive = item.exact ? pathname === item.to : pathname?.startsWith(item.to);
+          {NAV_ITEM_KEYS.map(item => {
+            const isActive = ('exact' in item && item.exact) ? pathname === item.to : pathname?.startsWith(item.to);
             return (
               <Link
                 key={item.to} href={item.to}
@@ -232,16 +349,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                   border: '2px solid #000000',
                   boxShadow: isActive ? '3px 3px 0 0 #FFFFFF' : 'none',
                 }}
-              >{item.label}</Link>
+              >{navLabel(item.key)}</Link>
             );
           })}
+
+          {/* Language options in mobile menu */}
+          <div style={{ marginTop: '0.5rem', borderTop: '2px solid #333', paddingTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <MobileLangButtons />
+          </div>
         </div>
       )}
 
       {/* BODY SECTION */}
       <div style={{ display: 'flex', flex: 1, position: 'relative', width: '100%', alignItems: 'flex-start' }}>
 
-        {/* SIDEBAR PANEL — NEUBRUTALISM */}
+        {/* SIDEBAR */}
         <aside className="sidebar-pannel" style={{
           width: sidebarOpen ? '280px' : '85px',
           opacity: 1,
@@ -257,7 +379,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           padding: sidebarOpen ? '1.25rem' : '1.25rem 0.5rem',
           transition: 'width 0.2s ease, padding 0.2s ease',
           overflow: 'visible',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         }}>
 
           {/* IN-SIDEBAR HEADER */}
@@ -266,7 +388,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             justifyContent: sidebarOpen ? 'space-between' : 'center',
             alignItems: 'center',
             marginBottom: '1rem',
-            paddingRight: sidebarOpen ? '0.5rem' : '0'
+            paddingRight: sidebarOpen ? '0.5rem' : '0',
           }}>
             {sidebarOpen && (
               <div style={{
@@ -279,9 +401,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 boxShadow: '3px 3px 0 0 #000000',
                 letterSpacing: '0.05em',
                 textTransform: 'uppercase',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
               }}>
-                🛠️ ALL TOOLS
+                {t.sidebar.allTools}
               </div>
             )}
 
@@ -330,23 +452,23 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 outline: 'none',
                 cursor: 'pointer',
                 letterSpacing: '0.04em',
-                textTransform: 'uppercase'
+                textTransform: 'uppercase',
               }}
             >
-              <option value="all">⚡ ALL TOOLS (17)</option>
-              <option value="mouse">🖱️ MOUSE TOOLS</option>
-              <option value="keyboard">⌨️ KEYBOARD TOOLS</option>
-              <option value="aim">🎯 AIM & REACTION</option>
-              <option value="benchmark">🌐 BENCHMARKS</option>
-              <option value="games">🎮 ARCADE GAMES</option>
-              <option value="misc">📝 OTHER SECTIONS</option>
+              <option value="all">{t.sidebar.filterAll}</option>
+              <option value="mouse">{t.sidebar.filterMouse}</option>
+              <option value="keyboard">{t.sidebar.filterKeyboard}</option>
+              <option value="aim">{t.sidebar.filterAim}</option>
+              <option value="benchmark">{t.sidebar.filterBenchmark}</option>
+              <option value="games">{t.sidebar.filterGames}</option>
+              <option value="misc">{t.sidebar.filterMisc}</option>
             </select>
           </div>
 
           {/* SCROLLABLE TOOLS LIST */}
           <div className="sidebar-scroll" style={{
             flex: 1, overflowY: 'auto', overflowX: 'hidden',
-            display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingRight: '4px'
+            display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingRight: '4px',
           }}>
             {filteredTools.map((tool) => {
               const isCurrentActive = pathname === tool.to;
@@ -375,9 +497,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                         }
                       }
                     }}
-                    onMouseLeave={() => {
-                      setHoveredTool(null);
-                    }}
+                    onMouseLeave={() => { setHoveredTool(null); }}
                   >
                     <span style={{ fontSize: '1.1rem' }}>{tool.icon}</span>
                     <span style={{
@@ -388,7 +508,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                       letterSpacing: '0.02em',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
-                      textOverflow: 'ellipsis'
+                      textOverflow: 'ellipsis',
                     }}>
                       {tool.label}
                     </span>
@@ -399,37 +519,62 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </div>
         </aside>
 
-        {/* FIXED GLOBAL TOOLTIP */}
-        <span
-          style={{
-            position: 'fixed',
-            top: hoveredTool ? hoveredTool.top : 0,
-            left: hoveredTool ? hoveredTool.left : 0,
-            transform: hoveredTool ? 'translateY(-50%) translateX(0)' : 'translateY(-50%) translateX(-6px)',
-            background: '#FFE033',
-            border: '2px solid #000000',
-            boxShadow: '3px 3px 0 0 #000000',
-            color: '#000000',
-            fontSize: '0.78rem',
-            fontWeight: 800,
-            padding: '6px 10px',
-            whiteSpace: 'nowrap',
-            opacity: hoveredTool ? 1 : 0,
-            visibility: hoveredTool ? 'visible' : 'hidden',
-            pointerEvents: 'none',
-            zIndex: 200,
-            textTransform: 'uppercase'
-          }}
-        >
+        {/* GLOBAL TOOLTIP */}
+        <span style={{
+          position: 'fixed',
+          top: hoveredTool ? hoveredTool.top : 0,
+          left: hoveredTool ? hoveredTool.left : 0,
+          transform: hoveredTool ? 'translateY(-50%) translateX(0)' : 'translateY(-50%) translateX(-6px)',
+          background: '#FFE033',
+          border: '2px solid #000000',
+          boxShadow: '3px 3px 0 0 #000000',
+          color: '#000000',
+          fontSize: '0.78rem',
+          fontWeight: 800,
+          padding: '6px 10px',
+          whiteSpace: 'nowrap',
+          opacity: hoveredTool ? 1 : 0,
+          visibility: hoveredTool ? 'visible' : 'hidden',
+          pointerEvents: 'none',
+          zIndex: 200,
+          textTransform: 'uppercase',
+        }}>
           {hoveredTool ? hoveredTool.label : ''}
         </span>
 
-        {/* MAIN BODY CONTENT */}
+        {/* MAIN CONTENT */}
         <main className="main-content" style={{ flex: 1, minWidth: 0, padding: '2rem 1.5rem', width: '100%', boxSizing: 'border-box' }}>
           {children}
         </main>
-
       </div>
+    </>
+  );
+}
+
+// ─── Mobile language buttons (needs hook so separate component) ──────────────
+function MobileLangButtons() {
+  const { lang, setLang, langs } = useLang();
+  return (
+    <>
+      {langs.map(l => (
+        <button
+          key={l.code}
+          onClick={() => setLang(l.code as Lang)}
+          style={{
+            display: 'flex', alignItems: 'center', gap: '6px',
+            padding: '0.5rem 0.9rem',
+            background: l.code === lang ? '#FFE033' : 'rgba(255,255,255,0.08)',
+            color: l.code === lang ? '#000' : '#fff',
+            border: `2px solid ${l.code === lang ? '#000' : '#555'}`,
+            cursor: 'pointer',
+            fontSize: '0.82rem', fontWeight: 800,
+            letterSpacing: '0.04em', textTransform: 'uppercase',
+          }}
+        >
+          <span>{l.flag}</span>
+          <span>{l.nativeLabel}</span>
+        </button>
+      ))}
     </>
   );
 }

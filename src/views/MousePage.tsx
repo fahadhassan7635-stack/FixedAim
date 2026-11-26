@@ -1,4 +1,7 @@
+"use client";
+
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 const tools = [
   { to: '/cps-test', title: 'CPS Test', desc: 'Click as fast as possible. Measure your Clicks Per Second over multiple duration options.', color: '#4ade80', tag: 'Most Popular' },
   { to: '/double-click', title: 'Double Click Test', desc: 'Measure the interval between double-clicks. Test your mouse double-click speed.', color: '#00f5ff', tag: '' },
@@ -7,6 +10,7 @@ const tools = [
 ];
 
 export default function MousePage() {
+  const { t } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <style>{`
@@ -111,8 +115,8 @@ export default function MousePage() {
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">Mouse Tools</h1>
-        <p className="tool-subtitle">Test and measure every aspect of your mouse performance</p>
+        <h1 className="tool-title">{t.hubs.mouse.h1}</h1>
+        <p className="tool-subtitle">{t.hubs.mouse.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>

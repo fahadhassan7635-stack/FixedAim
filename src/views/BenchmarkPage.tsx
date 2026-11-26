@@ -1,4 +1,7 @@
+"use client";
+
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 
 const benchmarks = [
   {
@@ -34,6 +37,7 @@ const benchmarks = [
 ];
 
 export default function BenchmarkPage() {
+  const { t } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem', minHeight: '80vh' }}>
       <script
@@ -162,9 +166,9 @@ export default function BenchmarkPage() {
 
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">Benchmark <span style={{ color: '#00f5ff' }}>Hub</span></h1>
+        <h1 className="tool-title">{t.hubs.benchmark.h1}</h1>
         <p className="tool-subtitle">
-          Benchmark your network speed, ping latency, jitter, audio, screen, and cognitive memory with real-time analytics.
+          {t.hubs.benchmark.sub}
         </p>
       </div>
 

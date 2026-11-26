@@ -1,4 +1,7 @@
+"use client";
+
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 
 const tools = [
   { to: '/reaction-time', title: 'Reaction Time Test', desc: 'Click when the screen turns green. Measure your average reaction time across 5 rounds.', color: '#fb923c', tag: 'Most Popular' },
@@ -8,6 +11,7 @@ const tools = [
 ];
 
 export default function AimPage() {
+  const { t } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <script
@@ -115,8 +119,8 @@ export default function AimPage() {
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">Aim &amp; Reaction</h1>
-        <p className="tool-subtitle">Sharpen your reflexes and precision for competitive gaming</p>
+        <h1 className="tool-title">{t.hubs.aim.h1}</h1>
+        <p className="tool-subtitle">{t.hubs.aim.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>

@@ -1,6 +1,10 @@
+"use client";
+
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 
 export default function GamesPage() {
+  const { t } = useLang();
   const games = [
     { to: '/space-defense', title: 'Space Defense', desc: 'Defend your base from incoming asteroids. Trains tracking precision, reaction time, and clicking speed in high-pressure scenarios.', color: '#ff6b35', badge: 'SKILL BUILDER' },
     { to: '/voyager-game', title: 'Voyager Game', desc: 'Navigate through the asteroid field using your spacebar or clicking speed. Test your endurance and boost your reflexes.', color: '#a855f7', badge: 'MOST POPULAR' },
@@ -117,8 +121,8 @@ export default function GamesPage() {
 
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
-        <h1 className="tool-title">Arcade <span style={{ color: '#ff6b35' }}>Games</span></h1>
-        <p className="tool-subtitle">Play interactive skill games to improve your reaction time, clicking speed, and keyboard accuracy.</p>
+        <h1 className="tool-title">{t.hubs.games.h1}</h1>
+        <p className="tool-subtitle">{t.hubs.games.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>

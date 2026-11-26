@@ -1,4 +1,7 @@
+"use client";
+
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 
 const deviceTools = [
   {
@@ -40,6 +43,7 @@ const deviceTools = [
 ];
 
 export default function DevicePage() {
+  const { t } = useLang();
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1.5rem', minHeight: '80vh' }}>
       <script
@@ -189,10 +193,10 @@ export default function DevicePage() {
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div className="section-label">Category</div>
         <h1 className="tool-title" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)' }}>
-          Device &amp; Hardware <span style={{ color: '#2B4EDB' }}>Diagnostics</span>
+          {t.hubs.device.h1}
         </h1>
         <p className="tool-subtitle">
-          Test, benchmark, and calibrate your monitor refresh rate, screen pixels, audio channels, network, keyboard, and mouse online without downloading any software.
+          {t.hubs.device.sub}
         </p>
       </div>
 

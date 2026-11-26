@@ -1,9 +1,14 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useLang } from '../contexts/LanguageContext';
 
 const mouseIcon = '/gun-pfp.png';
 
 export default function Footer() {
+  const { t } = useLang();
+
   return (
     <footer className="main-footer" style={{
       background: '#FFE033',
@@ -55,7 +60,7 @@ export default function Footer() {
             </span>
           </Link>
           <p style={{ color: '#1E272E', fontSize: '0.95rem', fontWeight: 600, lineHeight: '1.6', margin: 0 }}>
-            The ultimate free platform for competitive gamers and typists to test, train, and dominate. Zero signup required.
+            {t.footer.tagline}
           </p>
         </div>
 
@@ -167,13 +172,13 @@ export default function Footer() {
       </div>
 
       <div style={{ borderTop: '2px solid #000000', paddingTop: '1.25rem', maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontWeight: 700, fontSize: '0.88rem' }}>
-        <p style={{ margin: 0, color: '#000000' }}>© FixedAim — All rights reserved.</p>
+        <p style={{ margin: 0, color: '#000000' }}>© FixedAim — {t.footer.rights}</p>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
-          <Link href="/privacy-policy" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">Privacy Policy</Link>
-          <Link href="/terms" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">Terms of Service</Link>
-          <Link href="/contact" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">Contact</Link>
+          <Link href="/privacy-policy" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.privacy}</Link>
+          <Link href="/terms" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.terms}</Link>
+          <Link href="/contact" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.contact}</Link>
         </div>
-        <p style={{ margin: 0, color: '#000000' }}>Built for gamers, by gamers. ⚡</p>
+        <p style={{ margin: 0, color: '#000000' }}>{t.footer.builtFor}</p>
       </div>
     </footer>
   );
