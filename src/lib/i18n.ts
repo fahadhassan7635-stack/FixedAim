@@ -35,6 +35,34 @@ export const LANGS: LangMeta[] = [
   { code: 'ko', label: 'Korean',     flag: '🇰🇷', nativeLabel: '한국어' },
 ];
 
+export const NON_DEFAULT_LANGS: Lang[] = ['es', 'pt', 'de', 'fr', 'ja', 'id', 'ru', 'ar', 'ko'];
+
+export function getLangFromPathname(pathname: string | null | undefined): Lang {
+  if (!pathname) return 'en';
+  const seg = pathname.split('/')[1] as Lang | undefined;
+  if (seg && seg !== 'en' && (NON_DEFAULT_LANGS as string[]).includes(seg)) {
+    return seg;
+  }
+  return 'en';
+}
+
+export function stripLocale(pathname: string | null | undefined): string {
+  if (!pathname) return '/';
+  const parts = pathname.split('/');
+  const seg = parts[1] as Lang | undefined;
+  if (seg && (seg === 'en' || (NON_DEFAULT_LANGS as string[]).includes(seg))) {
+    const rest = '/' + parts.slice(2).join('/');
+    return rest === '' ? '/' : rest;
+  }
+  return pathname;
+}
+
+export function withLangPath(path: string, lang: Lang): string {
+  const clean = stripLocale(path.startsWith('/') ? path : `/${path}`);
+  if (lang === 'en') return clean;
+  return clean === '/' ? `/${lang}` : `/${lang}${clean}`;
+}
+
 export interface TranslationDict {
   nav: {
     home: string;

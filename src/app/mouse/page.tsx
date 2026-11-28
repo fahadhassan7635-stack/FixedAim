@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import MousePage from '@/views/MousePage';
+import { buildHreflangLanguages } from '@/lib/seo-i18n';
 
 export const metadata: Metadata = {
   title: "Mouse Testing Tools - CPS, Scroll & Double-Click | FixedAim",
   description: "Test your mouse switch latency, double-click chatter, scroll wheel speed, and clicking speed (CPS). Free browser diagnostics for competitive gamers.",
   alternates: {
     canonical: "https://fixedaim.com/mouse",
+    languages: buildHreflangLanguages('/mouse'),
   },
   openGraph: {
     title: "Mouse Testing Tools - CPS, Scroll & Double-Click | FixedAim",

@@ -1,7 +1,10 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/SpeakerTestPage.json';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import { Home, ChevronRight, Volume2, Square, Play, RotateCcw, Activity } from 'lucide-react';
 
 const SITE_URL = 'https://fixedaim.com/speaker-test';
@@ -34,6 +37,8 @@ const FAQS = [
 ];
 
 export default function SpeakerTestPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -741,27 +746,24 @@ export default function SpeakerTestPage() {
       `}</style>
 
       {/* BREADCRUMB */}
-      <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 600 }}>
-        <Link href="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-          <Home size={14} /> Home
-        </Link>
+      <nav aria-label={tr("Breadcrumb")} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 600 }}>
+        <Link href={localeHref("/")} style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+          <Home size={14} /> {tr("Home\n        ")}</Link>
         <ChevronRight size={13} />
-        <Link href="/benchmark" style={{ color: 'inherit', textDecoration: 'none' }}>Benchmark</Link>
+        <Link href={localeHref("/benchmark")} style={{ color: 'inherit', textDecoration: 'none' }}>{tr("Benchmark")}</Link>
         <ChevronRight size={13} />
-        <span style={{ color: '#2B4EDB', fontWeight: 800 }}>Speaker Test</span>
+        <span style={{ color: '#2B4EDB', fontWeight: 800 }}>{tr("Speaker Test")}</span>
       </nav>
 
       {/* HEADER SECTION */}
       <header style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'inline-block', padding: '0.3rem 0.8rem', background: '#FFE033', border: '2px solid #000000', boxShadow: '2px 2px 0 0 #000000', fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>
-          Audio Diagnostics · 100% Free · No Sign-Up
-        </div>
+          {tr("Audio Diagnostics · 100% Free · No Sign-Up\n        ")}</div>
         <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '0 0 10px', lineHeight: 1.1 }}>
-          Speaker Test <span style={{ color: '#2B4EDB' }}>Online</span>
+          {tr("Speaker Test ")}<span style={{ color: '#2B4EDB' }}>{tr("Online")}</span>
         </h1>
         <p style={{ maxWidth: '75ch', color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.6', margin: 0 }}>
-          Run a free online speaker test to check your left and right stereo channels, bass response, frequency range, stereo pan balance, and phase polarity. Works for desktop speakers, studio monitors, laptops, phones, soundbars, and headphones.
-        </p>
+          {tr("Run a free online speaker test to check your left and right stereo channels, bass response, frequency range, stereo pan balance, and phase polarity. Works for desktop speakers, studio monitors, laptops, phones, soundbars, and headphones.\n        ")}</p>
       </header>
 
       {/* STAGE: LEFT & RIGHT SPEAKERS */}
@@ -777,39 +779,37 @@ export default function SpeakerTestPage() {
       </div>
 
       {/* MASTER CONTROL BAR */}
-      <div className="spk-bar" role="group" aria-label="Master controls">
+      <div className="spk-bar" role="group" aria-label={tr("Master controls")}>
         <div className="spk-fld">
-          <label htmlFor="vol">Volume</label>
+          <label htmlFor="vol">{tr("Volume")}</label>
           <input id="vol" type="range" min="0" max="100" defaultValue="50" style={{ width: '130px', accentColor: '#2B4EDB', cursor: 'pointer' }} />
           <output id="volOut" style={{ minWidth: '40px', fontWeight: 800 }}>50%</output>
         </div>
 
         <div className="spk-fld">
-          <label id="outLbl">Output</label>
+          <label id="outLbl">{tr("Output")}</label>
           <div className="spk-seg" role="group" aria-labelledby="outLbl">
-            <button data-out="left" type="button">Left</button>
-            <button data-out="both" type="button" aria-pressed="true">Both</button>
-            <button data-out="right" type="button">Right</button>
-            <button data-out="alt" type="button">Alternate</button>
+            <button data-out="left" type="button">{tr("Left")}</button>
+            <button data-out="both" type="button" aria-pressed="true">{tr("Both")}</button>
+            <button data-out="right" type="button">{tr("Right")}</button>
+            <button data-out="alt" type="button">{tr("Alternate")}</button>
           </div>
         </div>
 
         <span id="status" style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2B4EDB', minWidth: '15ch' }}>
-          Silent
-        </span>
+          {tr("Silent\n        ")}</span>
 
         <button className="btn-neo btn-stop" id="stopBtn" type="button">
-          ⏹ Stop All
-        </button>
+          {tr("⏹ Stop All\n        ")}</button>
       </div>
 
       {/* VISUALIZER & SPECTRUM */}
       <div className="vis-card">
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#CBD5E1', marginBottom: '8px', fontWeight: 700, textTransform: 'uppercase' }}>
-          <span>Live Waveform & Spectrum Visualizer</span>
-          <span id="freqOut" style={{ color: '#FFE033' }}>No sound</span>
+          <span>{tr("Live Waveform & Spectrum Visualizer")}</span>
+          <span id="freqOut" style={{ color: '#FFE033' }}>{tr("No sound")}</span>
         </div>
-        <canvas id="cv" role="img" aria-label="Live waveform and spectrum visualizer" style={{ display: 'block', width: '100%', height: '140px' }}></canvas>
+        <canvas id="cv" role="img" aria-label={tr("Live waveform and spectrum visualizer")} style={{ display: 'block', width: '100%', height: '140px' }}></canvas>
       </div>
 
       {/* CONTROL GRID */}
@@ -817,46 +817,46 @@ export default function SpeakerTestPage() {
         {/* Card 1: Tone generator */}
         <section className="spk-card">
           <div>
-            <h2>Tone Generator</h2>
-            <p className="spk-sub">Play any frequency from 20 Hz to 20 kHz. Adjust frequency in real time.</p>
+            <h2>{tr("Tone Generator")}</h2>
+            <p className="spk-sub">{tr("Play any frequency from 20 Hz to 20 kHz. Adjust frequency in real time.")}</p>
             <div className="spk-row">
-              <input id="fSlide" type="range" min="0" max="1000" defaultValue="400" aria-label="Frequency slider" style={{ flex: 1, minWidth: '130px', accentColor: '#2B4EDB' }} />
-              <input id="fNum" type="number" min="20" max="20000" defaultValue="440" aria-label="Frequency in hertz" style={{ width: '90px', padding: '6px 8px', border: '2px solid #000', fontWeight: 800 }} />
+              <input id="fSlide" type="range" min="0" max="1000" defaultValue="400" aria-label={tr("Frequency slider")} style={{ flex: 1, minWidth: '130px', accentColor: '#2B4EDB' }} />
+              <input id="fNum" type="number" min="20" max="20000" defaultValue="440" aria-label={tr("Frequency in hertz")} style={{ width: '90px', padding: '6px 8px', border: '2px solid #000', fontWeight: 800 }} />
               <span style={{ fontWeight: 800 }}>Hz</span>
             </div>
             <div className="spk-row" style={{ marginTop: '12px' }}>
               <select id="wave" style={{ padding: '6px 10px', border: '2px solid #000', fontWeight: 800, background: '#FFF' }}>
-                <option value="sine">Sine Wave</option>
-                <option value="square">Square Wave</option>
-                <option value="triangle">Triangle Wave</option>
-                <option value="sawtooth">Sawtooth Wave</option>
+                <option value="sine">{tr("Sine Wave")}</option>
+                <option value="square">{tr("Square Wave")}</option>
+                <option value="triangle">{tr("Triangle Wave")}</option>
+                <option value="sawtooth">{tr("Sawtooth Wave")}</option>
               </select>
-              <button className="btn-neo" data-play="tone" type="button">▶ Play Tone</button>
+              <button className="btn-neo" data-play="tone" type="button">{tr("▶ Play Tone")}</button>
             </div>
           </div>
           <div className="spk-row" style={{ marginTop: '14px', paddingTop: '10px', borderTop: '2px solid #E2E8F0' }}>
-            <button className="btn-neo" data-play="h100" data-hz="100" type="button">100 Hz</button>
-            <button className="btn-neo" data-play="h440" data-hz="440" type="button">440 Hz</button>
-            <button className="btn-neo" data-play="h1k" data-hz="1000" type="button">1 kHz</button>
-            <button className="btn-neo" data-play="h5k" data-hz="5000" type="button">5 kHz</button>
-            <button className="btn-neo" data-play="h10k" data-hz="10000" type="button">10 kHz</button>
-            <button className="btn-neo" data-play="h15k" data-hz="15000" type="button">15 kHz</button>
+            <button className="btn-neo" data-play="h100" data-hz="100" type="button">{tr("100 Hz")}</button>
+            <button className="btn-neo" data-play="h440" data-hz="440" type="button">{tr("440 Hz")}</button>
+            <button className="btn-neo" data-play="h1k" data-hz="1000" type="button">{tr("1 kHz")}</button>
+            <button className="btn-neo" data-play="h5k" data-hz="5000" type="button">{tr("5 kHz")}</button>
+            <button className="btn-neo" data-play="h10k" data-hz="10000" type="button">{tr("10 kHz")}</button>
+            <button className="btn-neo" data-play="h15k" data-hz="15000" type="button">{tr("15 kHz")}</button>
           </div>
         </section>
 
         {/* Card 2: Frequency sweep */}
         <section className="spk-card">
           <div>
-            <h2>Frequency Sweep</h2>
-            <p className="spk-sub">Smooth logarithmic sweep from 20 Hz to 20 kHz. Listen for buzzes or dead zones.</p>
+            <h2>{tr("Frequency Sweep")}</h2>
+            <p className="spk-sub">{tr("Smooth logarithmic sweep from 20 Hz to 20 kHz. Listen for buzzes or dead zones.")}</p>
             <div className="spk-row">
-              <label htmlFor="sweepDur" style={{ fontWeight: 700, fontSize: '0.85rem' }}>Duration:</label>
+              <label htmlFor="sweepDur" style={{ fontWeight: 700, fontSize: '0.85rem' }}>{tr("Duration:")}</label>
               <select id="sweepDur" style={{ padding: '6px 10px', border: '2px solid #000', fontWeight: 800, background: '#FFF' }}>
-                <option value="10">10 Seconds</option>
-                <option value="20">20 Seconds</option>
-                <option value="40">40 Seconds</option>
+                <option value="10">{tr("10 Seconds")}</option>
+                <option value="20">{tr("20 Seconds")}</option>
+                <option value="40">{tr("40 Seconds")}</option>
               </select>
-              <button className="btn-neo" data-play="sweep" type="button" style={{ background: '#74B9FF' }}>▶ Play Sweep</button>
+              <button className="btn-neo" data-play="sweep" type="button" style={{ background: '#74B9FF' }}>{tr("▶ Play Sweep")}</button>
             </div>
             <div className="spk-prog"><i id="prog"></i></div>
           </div>
@@ -865,12 +865,12 @@ export default function SpeakerTestPage() {
         {/* Card 3: Noise Generator */}
         <section className="spk-card">
           <div>
-            <h2>Noise Generator</h2>
-            <p className="spk-sub">Pink noise sounds balanced. White noise is bright. Brown noise produces heavy deep rumble.</p>
+            <h2>{tr("Noise Generator")}</h2>
+            <p className="spk-sub">{tr("Pink noise sounds balanced. White noise is bright. Brown noise produces heavy deep rumble.")}</p>
             <div className="spk-row">
-              <button className="btn-neo" data-play="pink" type="button">Pink Noise</button>
-              <button className="btn-neo" data-play="white" type="button">White Noise</button>
-              <button className="btn-neo" data-play="brown" type="button">Brown Noise</button>
+              <button className="btn-neo" data-play="pink" type="button">{tr("Pink Noise")}</button>
+              <button className="btn-neo" data-play="white" type="button">{tr("White Noise")}</button>
+              <button className="btn-neo" data-play="brown" type="button">{tr("Brown Noise")}</button>
             </div>
           </div>
         </section>
@@ -878,15 +878,15 @@ export default function SpeakerTestPage() {
         {/* Card 4: Bass & Subwoofer Test */}
         <section className="spk-card">
           <div>
-            <h2>Bass & Subwoofer Test</h2>
-            <p className="spk-sub">Low pure sine tones. Laptops/phones usually fade below 50 Hz. Subwoofers play down to 20 Hz.</p>
+            <h2>{tr("Bass & Subwoofer Test")}</h2>
+            <p className="spk-sub">{tr("Low pure sine tones. Laptops/phones usually fade below 50 Hz. Subwoofers play down to 20 Hz.")}</p>
             <div className="spk-row">
-              <button className="btn-neo" data-play="b20" data-hz="20" type="button">20 Hz</button>
-              <button className="btn-neo" data-play="b30" data-hz="30" type="button">30 Hz</button>
-              <button className="btn-neo" data-play="b40" data-hz="40" type="button">40 Hz</button>
-              <button className="btn-neo" data-play="b50" data-hz="50" type="button">50 Hz</button>
-              <button className="btn-neo" data-play="b63" data-hz="63" type="button">63 Hz</button>
-              <button className="btn-neo" data-play="b80" data-hz="80" type="button">80 Hz</button>
+              <button className="btn-neo" data-play="b20" data-hz="20" type="button">{tr("20 Hz")}</button>
+              <button className="btn-neo" data-play="b30" data-hz="30" type="button">{tr("30 Hz")}</button>
+              <button className="btn-neo" data-play="b40" data-hz="40" type="button">{tr("40 Hz")}</button>
+              <button className="btn-neo" data-play="b50" data-hz="50" type="button">{tr("50 Hz")}</button>
+              <button className="btn-neo" data-play="b63" data-hz="63" type="button">{tr("63 Hz")}</button>
+              <button className="btn-neo" data-play="b80" data-hz="80" type="button">{tr("80 Hz")}</button>
             </div>
           </div>
         </section>
@@ -894,10 +894,10 @@ export default function SpeakerTestPage() {
         {/* Card 5: Stereo Pan Sweep */}
         <section className="spk-card">
           <div>
-            <h2>Stereo Pan Sweep</h2>
-            <p className="spk-sub">A smooth tone traveling from far-left to far-right and back with no dip in the center.</p>
+            <h2>{tr("Stereo Pan Sweep")}</h2>
+            <p className="spk-sub">{tr("A smooth tone traveling from far-left to far-right and back with no dip in the center.")}</p>
             <div className="spk-row">
-              <button className="btn-neo" data-play="pan" type="button" style={{ background: '#A29BFE' }}>▶ Play Pan Sweep</button>
+              <button className="btn-neo" data-play="pan" type="button" style={{ background: '#A29BFE' }}>{tr("▶ Play Pan Sweep")}</button>
             </div>
           </div>
         </section>
@@ -905,15 +905,14 @@ export default function SpeakerTestPage() {
         {/* Card 6: Phase Check */}
         <section className="spk-card">
           <div>
-            <h2>Speaker Phase Check</h2>
-            <p className="spk-sub">Both speakers play a 200 Hz tone. In-phase should sound focused and solid in center.</p>
+            <h2>{tr("Speaker Phase Check")}</h2>
+            <p className="spk-sub">{tr("Both speakers play a 200 Hz tone. In-phase should sound focused and solid in center.")}</p>
             <div className="spk-row">
-              <button className="btn-neo" data-play="inph" type="button" style={{ background: '#55EFC4' }}>✔ In Phase</button>
-              <button className="btn-neo" data-play="outph" type="button" style={{ background: '#FF9F43' }}>✖ Out of Phase</button>
+              <button className="btn-neo" data-play="inph" type="button" style={{ background: '#55EFC4' }}>{tr("✔ In Phase")}</button>
+              <button className="btn-neo" data-play="outph" type="button" style={{ background: '#FF9F43' }}>{tr("✖ Out of Phase")}</button>
             </div>
             <p className="spk-sub" style={{ marginTop: '10px' }}>
-              If in-phase sounds hollower or quieter than out-of-phase, one speaker is wired with reversed polarity (+/-).
-            </p>
+              {tr("If in-phase sounds hollower or quieter than out-of-phase, one speaker is wired with reversed polarity (+/-).\n            ")}</p>
           </div>
         </section>
       </div>
@@ -921,99 +920,86 @@ export default function SpeakerTestPage() {
       {/* SEO ARTICLE & DIAGNOSTIC GUIDE */}
       <article style={{ marginTop: '3.5rem' }}>
         <h2 style={{ fontSize: '1.8rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '0 0 1rem' }}>
-          How to Use This Online Speaker & Audio Test
-        </h2>
+          {tr("How to Use This Online Speaker & Audio Test\n        ")}</h2>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          Select an output channel from the top control bar (Left, Both, Right, or Alternate) and press any of the diagnostic sound generators. The interactive 3D speaker cones at the top will illuminate and oscillate in real time according to the acoustic waveform. Here is how to perform a full acoustic calibration:
-        </p>
+          {tr("Select an output channel from the top control bar (Left, Both, Right, or Alternate) and press any of the diagnostic sound generators. The interactive 3D speaker cones at the top will illuminate and oscillate in real time according to the acoustic waveform. Here is how to perform a full acoustic calibration:\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', margin: '1.5rem 0 0.5rem' }}>
-          1. Left & Right Stereo Channel Check
-        </h3>
+          {tr("1. Left & Right Stereo Channel Check\n        ")}</h3>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          Set the output to Left, then Right. Sound should emerge exclusively from the corresponding driver. Clicking <strong>Alternate</strong> switches the stereo feed automatically once per second—the fastest way to identify swapped RCA/AUX cables or misconfigured Windows audio balance.
-        </p>
+          {tr("Set the output to Left, then Right. Sound should emerge exclusively from the corresponding driver. Clicking ")}<strong>{tr("Alternate")}</strong> {tr("switches the stereo feed automatically once per second—the fastest way to identify swapped RCA/AUX cables or misconfigured Windows audio balance.\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', margin: '1.5rem 0 0.5rem' }}>
-          2. Frequency Sweep & Tone Generator
-        </h3>
+          {tr("2. Frequency Sweep & Tone Generator\n        ")}</h3>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          The frequency sweep generates a continuous logarithmic sweep from 20 Hz to 20,000 Hz. Pay close attention to cabinet rattles, vibrating objects in your room, or frequency dropout zones where sound vanishes abruptly. Use the single-frequency tone generator to isolate specific resonance frequencies.
-        </p>
+          {tr("The frequency sweep generates a continuous logarithmic sweep from 20 Hz to 20,000 Hz. Pay close attention to cabinet rattles, vibrating objects in your room, or frequency dropout zones where sound vanishes abruptly. Use the single-frequency tone generator to isolate specific resonance frequencies.\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', margin: '1.5rem 0 0.5rem' }}>
-          3. Subwoofer & Low-Frequency Bass Test
-        </h3>
+          {tr("3. Subwoofer & Low-Frequency Bass Test\n        ")}</h3>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          Pure sine waves from 20 Hz to 80 Hz stress-test the lower limits of your audio system. While high-end subwoofers and floor-standing studio monitors comfortably reproduce 20–30 Hz, typical laptop and mobile phone speakers roll off below 80–100 Hz due to physical driver constraints.
-        </p>
+          {tr("Pure sine waves from 20 Hz to 80 Hz stress-test the lower limits of your audio system. While high-end subwoofers and floor-standing studio monitors comfortably reproduce 20–30 Hz, typical laptop and mobile phone speakers roll off below 80–100 Hz due to physical driver constraints.\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', margin: '1.5rem 0 0.5rem' }}>
-          4. Pink, White & Brown Acoustic Noise
-        </h3>
+          {tr("4. Pink, White & Brown Acoustic Noise\n        ")}</h3>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          Noise signals evaluate the full frequency spectrum simultaneously. <strong>Pink noise</strong> offers equal energy per octave, mirroring human psychoacoustic perception—making it the gold standard for judging frequency flatness and room acoustics. <strong>White noise</strong> stresses high-frequency tweeters, while <strong>Brown noise</strong> isolates low-end bass rumble.
-        </p>
+          {tr("Noise signals evaluate the full frequency spectrum simultaneously. ")}<strong>{tr("Pink noise")}</strong> {tr("offers equal energy per octave, mirroring human psychoacoustic perception—making it the gold standard for judging frequency flatness and room acoustics. ")}<strong>{tr("White noise")}</strong> {tr("stresses high-frequency tweeters, while ")}<strong>{tr("Brown noise")}</strong> {tr("isolates low-end bass rumble.\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', margin: '1.5rem 0 0.5rem' }}>
-          5. Stereo Imaging & Phase Polarity Check
-        </h3>
+          {tr("5. Stereo Imaging & Phase Polarity Check\n        ")}</h3>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          Stereo panning ensures your acoustic soundstage transitions seamlessly without an artificial "hole" in the center. The phase test sends identical 200 Hz tones to both channels: an in-phase signal will feel centered right between your ears, whereas an out-of-phase signal creates a hollow, diffused sensation indicating reversed polarity wiring (+/-).
-        </p>
+          {tr("Stereo panning ensures your acoustic soundstage transitions seamlessly without an artificial \"hole\" in the center. The phase test sends identical 200 Hz tones to both channels: an in-phase signal will feel centered right between your ears, whereas an out-of-phase signal creates a hollow, diffused sensation indicating reversed polarity wiring (+/-).\n        ")}</p>
 
         <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '2.5rem 0 1rem' }}>
-          Diagnostic Reference: What Should You Hear?
-        </h2>
+          {tr("Diagnostic Reference: What Should You Hear?\n        ")}</h2>
         <div className="tw-table">
           <table>
             <thead>
               <tr>
-                <th>Test</th>
-                <th>Expected Sound Profile</th>
-                <th>Troubleshooting & Common Defects</th>
+                <th>{tr("Test")}</th>
+                <th>{tr("Expected Sound Profile")}</th>
+                <th>{tr("Troubleshooting & Common Defects")}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Left Channel</td>
-                <td>Audio emerges strictly from the left speaker/earcup</td>
-                <td>Sound on right indicates swapped audio channels. Silence indicates a broken driver or bad jack.</td>
+                <td>{tr("Left Channel")}</td>
+                <td>{tr("Audio emerges strictly from the left speaker/earcup")}</td>
+                <td>{tr("Sound on right indicates swapped audio channels. Silence indicates a broken driver or bad jack.")}</td>
               </tr>
               <tr>
-                <td>Right Channel</td>
-                <td>Audio emerges strictly from the right speaker/earcup</td>
-                <td>Verify balance sliders in OS sound settings, inspect 3.5mm plug for oxidation.</td>
+                <td>{tr("Right Channel")}</td>
+                <td>{tr("Audio emerges strictly from the right speaker/earcup")}</td>
+                <td>{tr("Verify balance sliders in OS sound settings, inspect 3.5mm plug for oxidation.")}</td>
               </tr>
               <tr>
-                <td>Alternate Mode</td>
-                <td>Audio rapidly ping-pongs left, right, left, right</td>
-                <td>Uneven volume reveals channel imbalance, acoustic room reflections, or deaf ear fatigue.</td>
+                <td>{tr("Alternate Mode")}</td>
+                <td>{tr("Audio rapidly ping-pongs left, right, left, right")}</td>
+                <td>{tr("Uneven volume reveals channel imbalance, acoustic room reflections, or deaf ear fatigue.")}</td>
               </tr>
               <tr>
-                <td>Sweep 20Hz–20kHz</td>
-                <td>One uninterrupted smooth glide with no sudden dropouts</td>
-                <td>Chassis rattles or harsh crackles indicate blown voice coils or loose screws.</td>
+                <td>{tr("Sweep 20Hz–20kHz")}</td>
+                <td>{tr("One uninterrupted smooth glide with no sudden dropouts")}</td>
+                <td>{tr("Chassis rattles or harsh crackles indicate blown voice coils or loose screws.")}</td>
               </tr>
               <tr>
-                <td>Bass 20–80 Hz</td>
-                <td>Deep visceral rumble, gradually attenuating near 20 Hz</td>
-                <td>Total silence indicates subwoofer crossover is set too low or lack of sub-bass support.</td>
+                <td>{tr("Bass 20–80 Hz")}</td>
+                <td>{tr("Deep visceral rumble, gradually attenuating near 20 Hz")}</td>
+                <td>{tr("Total silence indicates subwoofer crossover is set too low or lack of sub-bass support.")}</td>
               </tr>
               <tr>
-                <td>Pink Noise</td>
-                <td>Warm, smooth, waterfall-like balanced hiss</td>
-                <td>Harsh shrill noise indicates aggressive EQ treble boost; muffled noise indicates dead tweeters.</td>
+                <td>{tr("Pink Noise")}</td>
+                <td>{tr("Warm, smooth, waterfall-like balanced hiss")}</td>
+                <td>{tr("Harsh shrill noise indicates aggressive EQ treble boost; muffled noise indicates dead tweeters.")}</td>
               </tr>
               <tr>
-                <td>Stereo Pan</td>
-                <td>Fluid travel from left to right without central volume dip</td>
-                <td>Jumps across the center imply narrow soundstage placement or mono downmixing.</td>
+                <td>{tr("Stereo Pan")}</td>
+                <td>{tr("Fluid travel from left to right without central volume dip")}</td>
+                <td>{tr("Jumps across the center imply narrow soundstage placement or mono downmixing.")}</td>
               </tr>
               <tr>
-                <td>Phase Check</td>
-                <td>In-phase sounds dense and centered; out-of-phase sounds wide & hollow</td>
-                <td>If in-phase sounds quieter and thinner, speaker wire terminals (+ and -) are inverted.</td>
+                <td>{tr("Phase Check")}</td>
+                <td>{tr("In-phase sounds dense and centered; out-of-phase sounds wide & hollow")}</td>
+                <td>{tr("If in-phase sounds quieter and thinner, speaker wire terminals (+ and -) are inverted.")}</td>
               </tr>
             </tbody>
           </table>
@@ -1021,8 +1007,7 @@ export default function SpeakerTestPage() {
 
         {/* FREQUENTLY ASKED QUESTIONS */}
         <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '2.5rem 0 1rem' }}>
-          Frequently Asked Questions (FAQs)
-        </h2>
+          {tr("Frequently Asked Questions (FAQs)\n        ")}</h2>
         <div className="spk-faq">
           {FAQS.map((faq, idx) => (
             <details key={idx}>
@@ -1034,8 +1019,7 @@ export default function SpeakerTestPage() {
 
         {/* MORE BENCHMARK & GAMING TOOLS */}
         <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '3rem 0 1.25rem' }}>
-          Explore More Tools
-        </h2>
+          {tr("Explore More Tools\n        ")}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
           {MORE_TOOLS.map((t) => (
             <Link

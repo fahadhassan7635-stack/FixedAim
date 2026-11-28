@@ -7,7 +7,7 @@ import { useLang } from '../contexts/LanguageContext';
 const mouseIcon = '/gun-pfp.png';
 
 export default function Footer() {
-  const { t } = useLang();
+  const { t, localeHref } = useLang();
 
   return (
     <footer className="main-footer" style={{
@@ -34,7 +34,7 @@ export default function Footer() {
         paddingBottom: '1.75rem'
       }}>
         <div style={{ maxWidth: '580px' }}>
-          <Link href="/" style={{
+          <Link href={localeHref('/')} style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.6rem',
@@ -68,7 +68,7 @@ export default function Footer() {
           <a href="https://x.com/fixedaim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="FixedAim on X">𝕏</a>
           <a href="https://discord.gg/fixedaim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="FixedAim Discord">💬</a>
           <a href="https://youtube.com/@fixedaim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="FixedAim YouTube">▶</a>
-          <Link href="/contact" className="social-btn" aria-label="Contact FixedAim">✉️</Link>
+          <Link href={localeHref('/contact')} className="social-btn" aria-label="Contact FixedAim">✉️</Link>
         </div>
       </div>
 
@@ -86,7 +86,7 @@ export default function Footer() {
               { to: '/spacebar', label: 'Spacebar Counter' },
               { to: '/accuracy', label: 'Accuracy Test' }
             ].map(l => (
-              <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
+              <li key={l.to}><Link href={localeHref(l.to)} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -103,7 +103,7 @@ export default function Footer() {
               { to: '/mouse-accuracy', label: 'Mouse Accuracy' },
               { to: '/cps-rush', label: 'CPS Rush' }
             ].map(l => (
-              <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
+              <li key={l.to}><Link href={localeHref(l.to)} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -119,7 +119,7 @@ export default function Footer() {
               { to: '/reaction-time', label: 'Reaction Time Test' },
               { to: '/f1-reaction', label: 'F1 Reaction Test' }
             ].map(l => (
-              <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
+              <li key={l.to}><Link href={localeHref(l.to)} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -135,7 +135,7 @@ export default function Footer() {
               { to: '/space-waves', label: 'Space Waves' },
               { to: '/apm-drill', label: 'APM Drill' }
             ].map(l => (
-              <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
+              <li key={l.to}><Link href={localeHref(l.to)} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -150,7 +150,7 @@ export default function Footer() {
               { to: '/memory-test', label: 'Memory Test' },
               { to: '/blog', label: 'Gaming Blog' }
             ].map(l => (
-              <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
+              <li key={l.to}><Link href={localeHref(l.to)} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -165,7 +165,7 @@ export default function Footer() {
               { to: '/speaker-test', label: 'Speaker Test Online' },
               { to: '/dead-pixel-test', label: 'Dead Pixel Test' }
             ].map(l => (
-              <li key={l.to}><Link href={l.to} className="footer-link">{l.label}</Link></li>
+              <li key={l.to}><Link href={localeHref(l.to)} className="footer-link">{l.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -174,9 +174,9 @@ export default function Footer() {
       <div translate="no" style={{ borderTop: '2px solid #000000', paddingTop: '1.25rem', maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontWeight: 700, fontSize: '0.88rem' }}>
         <p style={{ margin: 0, color: '#000000' }}>© FixedAim — {t.footer.rights}</p>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
-          <Link href="/privacy-policy" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.privacy}</Link>
-          <Link href="/terms" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.terms}</Link>
-          <Link href="/contact" style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.contact}</Link>
+          <Link href={localeHref('/privacy-policy')} style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.privacy}</Link>
+          <Link href={localeHref('/terms')} style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.terms}</Link>
+          <Link href={localeHref('/contact')} style={{ color: '#000000', textDecoration: 'none' }} className="footer-link">{t.footer.contact}</Link>
         </div>
         <p style={{ margin: 0, color: '#000000' }}>{t.footer.builtFor}</p>
       </div>

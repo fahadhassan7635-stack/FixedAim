@@ -1,5 +1,7 @@
-﻿"use client";
-
+"use client";
+import { usePageI18n } from '../lib/page-i18n';
+import { useLang } from '../contexts/LanguageContext';
+import pageDict from '../locales/pages/BlogPage.json';
 import { useState } from 'react';
 
 function ResearchLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -1184,6 +1186,8 @@ Space Waves rewards anticipation and short, controlled taps far more than raw re
 ];
 
 export default function BlogPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const [selected, setSelected] = useState<number | null>(null);
   const [filter, setFilter] = useState('All');
 
@@ -1199,8 +1203,7 @@ export default function BlogPage() {
           className="btn btn-secondary"
           style={{ marginBottom: '2rem', fontSize: '0.875rem' }}
         >
-          ← Back to Blog
-        </button>
+          {tr("← Back to Blog\n        ")}</button>
 
         <div
           style={{
@@ -1225,10 +1228,9 @@ export default function BlogPage() {
               letterSpacing: '0.06em',
             }}
           >
-            {post.tag} GUIDE
-          </span>
+            {tr(post.tag)} {tr("GUIDE\n          ")}</span>
           <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#000000' }}>
-            {post.readTime}
+            {tr(post.readTime)}
           </span>
         </div>
 
@@ -1251,12 +1253,12 @@ export default function BlogPage() {
               color: post.tagColor,
             }}
           >
-            {post.tag}
+            {tr(post.tag)}
           </span>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>📖 {post.readTime}</span>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>✍️ {post.author}</span>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>📅 Published: {post.publishedAt}</span>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700 }}>🔄 Last updated: {post.updatedAt}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>📖 {tr(post.readTime)}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>✍️ {tr(post.author)}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>{tr("📅 Published: ")}{post.publishedAt}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700 }}>{tr("🔄 Last updated: ")}{post.updatedAt}</span>
         </div>
 
         <h1
@@ -1267,7 +1269,7 @@ export default function BlogPage() {
             lineHeight: '1.3',
           }}
         >
-          {post.title}
+          {tr(post.title)}
         </h1>
 
         <div style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.9' }}>
@@ -1276,7 +1278,7 @@ export default function BlogPage() {
               {para.split('\n').map((line, j) => (
                 <span key={j}>
                   {line.startsWith('**') && line.endsWith('**') ? (
-                    <strong style={{ color: 'var(--text-primary)' }}>{line.slice(2, -2)}</strong>
+                    <strong style={{ color: 'var(--text-primary)' }}>{tr(line.slice(2, -2))}</strong>
                   ) : line.startsWith('- ') ? (
                     <span
                       style={{
@@ -1287,10 +1289,10 @@ export default function BlogPage() {
                         color: 'var(--text-primary)',
                       }}
                     >
-                      {line.slice(2)}
+                      {tr(line.slice(2))}
                     </span>
                   ) : (
-                    line
+                    tr(line)
                   )}
                   {j < para.split('\n').length - 1 && <br />}
                 </span>
@@ -1317,8 +1319,7 @@ export default function BlogPage() {
                 marginBottom: '0.75rem',
               }}
             >
-              Sources & Further Reading
-            </h3>
+              {tr("Sources & Further Reading\n            ")}</h3>
             <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
               {post.sources.map((s, i) => (
                 <li key={i} style={{ marginBottom: '0.4rem' }}>
@@ -1332,13 +1333,13 @@ export default function BlogPage() {
           {/* DYNAMIC CTA BUTTON */}
           {getCtaDetails(post.id) && (
             <div style={{ margin: '3.5rem 0 0', background: `linear-gradient(135deg, ${post.tagColor}15 0%, rgba(0,255,136,0.06) 100%)`, border: `1px solid ${post.tagColor}40`, borderRadius: '16px', padding: '1.75rem', textAlign: 'center' }}>
-              <h2 style={{ color: '#fff', fontWeight: '900', fontSize: '1.4rem', margin: '0 0 0.4rem' }}>{getCtaDetails(post.id).title}</h2>
-              <p style={{ color: '#9ca3af', margin: '0 0 1.1rem', fontSize: '0.9rem' }}>{getCtaDetails(post.id).desc}</p>
+              <h2 style={{ color: '#fff', fontWeight: '900', fontSize: '1.4rem', margin: '0 0 0.4rem' }}>{tr(getCtaDetails(post.id).title)}</h2>
+              <p style={{ color: '#9ca3af', margin: '0 0 1.1rem', fontSize: '0.9rem' }}>{tr(getCtaDetails(post.id).desc)}</p>
               <a
-                href={getCtaDetails(post.id).url}
+                href={localeHref(getCtaDetails(post.id).url)}
                 style={{ display: 'inline-block', background: 'var(--neon-green, #00ff88)', color: '#000', border: 'none', borderRadius: '10px', padding: '0.65rem 1.75rem', fontWeight: '800', fontSize: '0.95rem', cursor: 'pointer', textDecoration: 'none' }}
               >
-                {'\u25b6'} {getCtaDetails(post.id).cta}
+                {'\u25b6'} {tr(getCtaDetails(post.id).cta)}
               </a>
             </div>
           )}
@@ -1349,11 +1350,10 @@ export default function BlogPage() {
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <div className="section-label">Knowledge Base</div>
-        <h1 className="tool-title">FixedAim Blog</h1>
+        <div className="section-label">{tr("Knowledge Base")}</div>
+        <h1 className="tool-title">{tr("FixedAim Blog")}</h1>
         <p className="tool-subtitle">
-          Guides, tips, and insights to level up your gaming and typing skills
-        </p>
+          {tr("Guides, tips, and insights to level up your gaming and typing skills\n        ")}</p>
       </div>
 
       {/* Filter tabs */}
@@ -1476,9 +1476,9 @@ export default function BlogPage() {
                 </span>
               </div>
               <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#485460', marginBottom: '0.6rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem 0.75rem' }}>
-                <span>By {p.author}</span>
+                <span>{tr("By ")}{p.author}</span>
                 <span>•</span>
-                <span>Updated {p.updatedAt}</span>
+                <span>{tr("Updated ")}{p.updatedAt}</span>
               </div>
               <h3
                 style={{
@@ -1504,8 +1504,7 @@ export default function BlogPage() {
                   textTransform: 'uppercase',
                 }}
               >
-                READ ARTICLE →
-              </div>
+                {tr("READ ARTICLE →\n              ")}</div>
             </div>
           </div>
         ))}

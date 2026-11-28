@@ -1,5 +1,9 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/CPSTestPage.json';
+import { useLang } from '../contexts/LanguageContext';
+
 import React, {
   useState,
   useRef,
@@ -294,8 +298,8 @@ const StatCard = memo(({ value, label, color }: { value: string | number; label:
 StatCard.displayName = 'StatCard';
 
 /** Breadcrumb navigation */
-const Breadcrumb = memo(() => (
-  <nav aria-label="Breadcrumb" style={{ marginBottom: '1rem' }}>
+const Breadcrumb = memo(() => { const { tr } = usePageI18n(pageDict); return ((
+  <nav aria-label={tr("Breadcrumb")} style={{ marginBottom: '1rem' }}>
     <ol
       style={{
         display: 'flex',
@@ -328,7 +332,7 @@ const Breadcrumb = memo(() => (
       ))}
     </ol>
   </nav>
-));
+)); });
 Breadcrumb.displayName = 'Breadcrumb';
 
 /** Skeleton placeholder for lazy sections */
@@ -352,7 +356,7 @@ SectionSkeleton.displayName = 'SectionSkeleton';
 // ─────────────────────────────────────────────
 // SESSION HISTORY (memoised heavy component)
 // ─────────────────────────────────────────────
-const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => (
+const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => { const { tr } = usePageI18n(pageDict); return ((
   <section
     style={{
       background: 'var(--bg-card,#1e2235)',
@@ -361,7 +365,7 @@ const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => (
       overflow: 'hidden',
       marginBottom: '2rem',
     }}
-    aria-label="Session History"
+    aria-label={tr("Session History")}
   >
     <h2
       style={{
@@ -373,9 +377,8 @@ const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => (
         margin: '0',
       }}
     >
-      📊 Session History Table
-    </h2>
-    <div role="table" aria-label="Recent Test Runs">
+      {tr("📊 Session History Table\n    ")}</h2>
+    <div role="table" aria-label={tr("Recent Test Runs")}>
       {history.map((h, i) => {
         const rating = getRating(h.cps);
         return (
@@ -394,27 +397,28 @@ const SessionHistory = memo(({ history }: { history: HistoryItem[] }) => (
           >
             <span style={{ color: 'var(--text-muted,#8395a7)' }}>#{history.length - i}</span>
             <span style={{ color: '#000000', fontWeight: '700' }}>{h.cps} CPS</span>
-            <span style={{ color: '#2D3436' }}>{h.clicks} clicks</span>
-            <span style={{ color: 'var(--text-muted,#8395a7)' }}>{h.duration}s test</span>
+            <span style={{ color: '#2D3436' }}>{h.clicks} {tr("clicks")}</span>
+            <span style={{ color: 'var(--text-muted,#8395a7)' }}>{h.duration}{tr("s test")}</span>
             <span style={{ color: rating.color, fontWeight: '600' }}>{rating.label}</span>
           </div>
         );
       })}
     </div>
   </section>
-));
+)); });
 SessionHistory.displayName = 'SessionHistory';
 
 // ─────────────────────────────────────────────
 // FAQ ACCORDION (memoised heavy component)
 // ─────────────────────────────────────────────
 const FaqSection = memo(() => {
+  const { tr } = usePageI18n(pageDict);
   const [open, setOpen] = useState<number | null>(null);
   const [showAll, setShowAll] = useState<boolean>(false);
   const visibleFaqs = showAll ? FAQ_DATA : FAQ_DATA.slice(0, 8);
 
   return (
-    <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2rem' }}>
+    <section aria-label={tr("Frequently Asked Questions")} style={{ marginBottom: '3rem', marginTop: '2rem' }}>
       <h2
         style={{
           fontWeight: 900,
@@ -432,8 +436,7 @@ const FaqSection = memo(() => {
         }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-        Frequently Asked Questions
-      </h2>
+        {tr("Frequently Asked Questions\n      ")}</h2>
       <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {visibleFaqs.map((faq, i) => {
           const isOpen = open === i;
@@ -514,8 +517,7 @@ const FaqSection = memo(() => {
               transition: 'all 0.2s',
             }}
           >
-            Show all {FAQ_DATA.length} FAQs ↓
-          </button>
+            {tr("Show all ")}{FAQ_DATA.length} {tr("FAQs ↓\n          ")}</button>
         </div>
       )}
     </section>
@@ -526,22 +528,20 @@ FaqSection.displayName = 'FaqSection';
 // ─────────────────────────────────────────────
 // SEO ARTICLE (memoised heavy component — ~3000 words)
 // ─────────────────────────────────────────────
-const SeoArticle = memo(() => (
+const SeoArticle = memo(() => {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
+  return (
   <>
     <hr style={{ border: 0, borderTop: '1px solid var(--border)', margin: '3rem 0' }} />
     <article className="cps-article" style={{ color: '#2D3436', fontSize: '0.95rem', lineHeight: '1.8' }}>
 
       <h2 style={{ fontWeight: '800', fontSize: '1.75rem', marginBottom: '1rem', color: '#000000', marginTop: '0' }}>
-        CPS Test — Click Speed Testing Guide
-      </h2>
+        {tr("CPS Test — Click Speed Testing Guide\n      ")}</h2>
       <p style={pStyle}>
-        A <strong>CPS Test</strong> (Clicks Per Second) measures how many times you can click your mouse
-        per second. Used by Minecraft PvP players, FPS gamers, and hardware enthusiasts to benchmark
-        click speed and track improvement. Our tool is modeled after the Kohi Click Test format, with
-        added right click mode, live graph, and anti-cheat detection.
-      </p>
+        A <strong>{tr("CPS Test")}</strong> {tr("(Clicks Per Second) measures how many times you can click your mouse\n        per second. Used by Minecraft PvP players, FPS gamers, and hardware enthusiasts to benchmark\n        click speed and track improvement. Our tool is modeled after the Kohi Click Test format, with\n        added right click mode, live graph, and anti-cheat detection.\n      ")}</p>
 
-      <h2 style={h2Style}>What is a Good CPS Score?</h2>
+      <h2 style={h2Style}>{tr("What is a Good CPS Score?")}</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(130px,1fr))', gap: '0.6rem', margin: '0.75rem 0 1.25rem' }}>
         {[
           { range: '1–4', label: '🐌 Beginner', color: '#8395a7' },
@@ -557,13 +557,11 @@ const SeoArticle = memo(() => (
         ))}
       </div>
       <p style={pStyle}>
-        These are approximate community benchmarks. 6–8 CPS is normal for casual players; 10+ CPS is
-        competitive. Hardware, grip style, and technique all affect your score.
-      </p>
+        {tr("These are approximate community benchmarks. 6–8 CPS is normal for casual players; 10+ CPS is\n        competitive. Hardware, grip style, and technique all affect your score.\n      ")}</p>
 
       {/* ── CONTEXTUAL SPEED BENCHMARKS & PILL BADGES ── */}
       <p style={pStyle}>
-        The average CPS score in this mode is between 5 and 7. Players using techniques like jitter or butterfly clicking can reach up to 10-12 clicks per second. Beyond that, scores of 13+ are typically seen in highly trained users using gaming-grade mice.{' '}
+        {tr("The average CPS score in this mode is between 5 and 7. Players using techniques like jitter or butterfly clicking can reach up to 10-12 clicks per second. Beyond that, scores of 13+ are typically seen in highly trained users using gaming-grade mice.")}{' '}
         <ContextPill
           label="Click speed tester"
           variant="blue"
@@ -572,10 +570,10 @@ const SeoArticle = memo(() => (
         />
       </p>
 
-      <h2 style={h2Style}>How to Improve Your Clicking Speed?</h2>
+      <h2 style={h2Style}>{tr("How to Improve Your Clicking Speed?")}</h2>
       <ul style={ulStyle}>
         <li>
-          <strong>Master advanced techniques:</strong> Try{' '}
+          <strong>{tr("Master advanced techniques:")}</strong> {tr("Try")}{' '}
           <ContextPill
             label="jitter clicking"
             variant="green"
@@ -583,10 +581,9 @@ const SeoArticle = memo(() => (
             topicId="jitter-clicking"
             query="How does jitter clicking work and how can I master it safely?"
           />
-          , butterfly clicking, or drag clicking.
-        </li>
+          {tr(", butterfly clicking, or drag clicking.\n        ")}</li>
         <li>
-          <strong>Use a{' '}
+          <strong>{tr("Use a")}{' '}
           <ContextPill
             label="gaming"
             variant="green"
@@ -594,19 +591,16 @@ const SeoArticle = memo(() => (
             topicId="gaming-mouse"
             query="What are the best gaming mouse brands like Razer, Logitech, or Glorious for high CPS?"
           />
-          {' '}mouse:</strong> Brands like Razer, Logitech, or Glorious offer responsive click rates.
-        </li>
+          {' '}{tr("mouse:")}</strong> {tr("Brands like Razer, Logitech, or Glorious offer responsive click rates.\n        ")}</li>
         <li>
-          <strong>Avoid trackpads:</strong> Trackpads are slower and limit finger placement and speed.
-        </li>
+          <strong>{tr("Avoid trackpads:")}</strong> {tr("Trackpads are slower and limit finger placement and speed.\n        ")}</li>
         <li>
-          <strong>Stay consistent:</strong> Practicing daily builds muscle memory and click rhythm.
-        </li>
+          <strong>{tr("Stay consistent:")}</strong> {tr("Practicing daily builds muscle memory and click rhythm.\n        ")}</li>
       </ul>
 
-      <h2 style={h2Style}>Start Practicing Now</h2>
+      <h2 style={h2Style}>{tr("Start Practicing Now")}</h2>
       <p style={pStyle}>
-        Take the 5-second CPS Test below and track your performance. Want to try different durations? Go back to the{' '}
+        {tr("Take the 5-second CPS Test below and track your performance. Want to try different durations? Go back to the")}{' '}
         <ContextPill
           label="Click Test"
           variant="green"
@@ -614,35 +608,27 @@ const SeoArticle = memo(() => (
           topicId="click-test"
           query="What are the different click test durations like 1s, 2s, 10s, and more on FixedAim?"
         />
-        {' '}homepage to explore all modes like 1s, 2s, 10s, and more.
-      </p>
+        {' '}{tr("homepage to explore all modes like 1s, 2s, 10s, and more.\n      ")}</p>
 
       {/* ── 0. WHAT IS LEFT CLICK CPS TEST? ── */}
-      <h2 style={h2Style}>What is a Left Click CPS Test? (Primary Click Speed)</h2>
+      <h2 style={h2Style}>{tr("What is a Left Click CPS Test? (Primary Click Speed)")}</h2>
       <p style={pStyle}>
-        A <strong>Left Click CPS Test</strong> measures the raw clicking speed of your primary left mouse button (LMB)
-        using your index finger within a chosen timeframe. As the primary input across virtually every desktop game and application,
-        your left click CPS directly impacts your weapon fire rate in tactical shooters, hit registration and knockback in Minecraft PvP,
-        and action execution speed in fast-paced MOBAs.
-      </p>
+        A <strong>{tr("Left Click CPS Test")}</strong> {tr("measures the raw clicking speed of your primary left mouse button (LMB)\n        using your index finger within a chosen timeframe. As the primary input across virtually every desktop game and application,\n        your left click CPS directly impacts your weapon fire rate in tactical shooters, hit registration and knockback in Minecraft PvP,\n        and action execution speed in fast-paced MOBAs.\n      ")}</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1rem 0 1.5rem' }}>
         <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
-          <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⚔️ Combat &amp; Knockback Reduction</h3>
+          <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("⚔️ Combat &amp; Knockback Reduction")}</h3>
           <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-            In Minecraft 1.8 PvP, higher left-click CPS registers more attacks, reduces incoming knockback, and allows you to combo-lock opponents before they can retaliate.
-          </p>
+            {tr("In Minecraft 1.8 PvP, higher left-click CPS registers more attacks, reduces incoming knockback, and allows you to combo-lock opponents before they can retaliate.\n          ")}</p>
         </div>
         <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
-          <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🔫 Semi-Auto &amp; Single-Tap Fire</h3>
+          <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🔫 Semi-Auto &amp; Single-Tap Fire")}</h3>
           <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-            In shooters like CS2, Valorant, and PUBG, rapid left click actuation allows semi-automatic rifles, DMRs, and pistols to reach their maximum cyclic fire caps without delay.
-          </p>
+            {tr("In shooters like CS2, Valorant, and PUBG, rapid left click actuation allows semi-automatic rifles, DMRs, and pistols to reach their maximum cyclic fire caps without delay.\n          ")}</p>
         </div>
         <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
-          <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🖱️ Universal Technique Compatibility</h3>
+          <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🖱️ Universal Technique Compatibility")}</h3>
           <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-            Left click is the natural home for all core techniques—Normal Clicking (6–9 CPS), Jitter Clicking (10–14 CPS), and Butterfly Clicking (15–25+ CPS).
-          </p>
+            {tr("Left click is the natural home for all core techniques—Normal Clicking (6–9 CPS), Jitter Clicking (10–14 CPS), and Butterfly Clicking (15–25+ CPS).\n          ")}</p>
         </div>
       </div>
 
@@ -656,8 +642,7 @@ const SeoArticle = memo(() => (
         textAlign: 'center'
       }}>
         <h3 style={{ color: '#fff', fontSize: '1.15rem', fontWeight: '700', marginBottom: '1rem' }}>
-          📹 Watch: Left Click CPS Test &amp; Click Speed Guide
-        </h3>
+          {tr("📹 Watch: Left Click CPS Test &amp; Click Speed Guide\n        ")}</h3>
         <div style={{
           position: 'relative',
           paddingBottom: '56.25%',
@@ -677,7 +662,7 @@ const SeoArticle = memo(() => (
               borderRadius: '12px'
             }}
             src="https://www.youtube.com/embed/mpkH7MphzQY?si=5E9kEB52e4RwR5uB"
-            title="YouTube video player"
+            title={tr("YouTube video player")}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
@@ -686,225 +671,196 @@ const SeoArticle = memo(() => (
       </div>
 
       {/* ── 1. WHAT IS RIGHT CLICK TEST? ── */}
-      <h2 style={h2Style}>What is a Right Click Test? (Right CPS)</h2>
+      <h2 style={h2Style}>{tr("What is a Right Click Test? (Right CPS)")}</h2>
       <p style={pStyle}>
-        A <strong>Right Click Test</strong> (also referred to as a Right CPS Test) measures how many times you can actuate your
-        secondary right mouse button (RMB) within a set duration. While most gamers benchmark their primary left click for standard
-        attacks, right-click speed and stamina are just as vital in modern competitive gaming:
-      </p>
+        A <strong>{tr("Right Click Test")}</strong> {tr("(also referred to as a Right CPS Test) measures how many times you can actuate your\n        secondary right mouse button (RMB) within a set duration. While most gamers benchmark their primary left click for standard\n        attacks, right-click speed and stamina are just as vital in modern competitive gaming:\n      ")}</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1rem 0 1.5rem' }}>
         <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
-          <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🧱 Minecraft Bridging &amp; Defense</h3>
+          <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🧱 Minecraft Bridging &amp; Defense")}</h3>
           <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-            Placing blocks while speed-bridging, god-bridging, or clutching over the void relies entirely on right-click output. Reaching 12–20+ Right CPS ensures uninterrupted block placement directly under your player model.
-          </p>
+            {tr("Placing blocks while speed-bridging, god-bridging, or clutching over the void relies entirely on right-click output. Reaching 12–20+ Right CPS ensures uninterrupted block placement directly under your player model.\n          ")}</p>
         </div>
         <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
-          <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🎯 Tactical FPS Scoping &amp; ADS</h3>
+          <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🎯 Tactical FPS Scoping &amp; ADS")}</h3>
           <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-            In CS2, Valorant, Apex Legends, and Call of Duty, right click governs Aim Down Sights (ADS), secondary fire modes (like the Valorant Classic right-click burst), sniper zoom adjustments, and weapon attachments.
-          </p>
+            {tr("In CS2, Valorant, Apex Legends, and Call of Duty, right click governs Aim Down Sights (ADS), secondary fire modes (like the Valorant Classic right-click burst), sniper zoom adjustments, and weapon attachments.\n          ")}</p>
         </div>
         <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
-          <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⚔️ MOBA Navigation &amp; Kiting</h3>
+          <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("⚔️ MOBA Navigation &amp; Kiting")}</h3>
           <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-            In League of Legends and Dota 2, virtually every movement order, micro-pathfinding tap, and stutter-stepping (orb-walking) command is executed via right click. Higher right-click APM directly improves positioning precision.
-          </p>
+            {tr("In League of Legends and Dota 2, virtually every movement order, micro-pathfinding tap, and stutter-stepping (orb-walking) command is executed via right click. Higher right-click APM directly improves positioning precision.\n          ")}</p>
         </div>
       </div>
       <p style={pStyle}>
-        <strong>Right Click vs Left Click CPS:</strong> Most players score <strong>1 to 3 CPS lower</strong> on right click than on left click.
-        This discrepancy happens because the human middle finger typically has slightly less isolated motor conditioning than the index finger.
-        You can test and train your middle finger reflexes by toggling the <strong style={{ color: 'var(--neon-cyan, #00f5ff)' }}>Right Click</strong> mode button above the test zone.
-      </p>
+        <strong>{tr("Right Click vs Left Click CPS:")}</strong> {tr("Most players score ")}<strong>{tr("1 to 3 CPS lower")}</strong> {tr("on right click than on left click.\n        This discrepancy happens because the human middle finger typically has slightly less isolated motor conditioning than the index finger.\n        You can test and train your middle finger reflexes by toggling the ")}<strong style={{ color: 'var(--neon-cyan, #00f5ff)' }}>{tr("Right Click")}</strong> {tr("mode button above the test zone.\n      ")}</p>
 
       {/* ── 2. WHAT IS BUTTERFLY CLICK TEST? ── */}
-      <h2 style={h2Style}>What is Butterfly Click Test? (The Dual-Finger Flutter)</h2>
+      <h2 style={h2Style}>{tr("What is Butterfly Click Test? (The Dual-Finger Flutter)")}</h2>
       <p style={pStyle}>
-        A <strong>Butterfly Click Test</strong> benchmarks the butterfly clicking technique—an advanced clicking method where a gamer positions
-        two fingers (usually the index and middle finger) on the same mouse button and rapidly alternates tapping it in a fluid, see-saw motion
-        resembling a butterfly fluttering its wings.
-      </p>
+        A <strong>{tr("Butterfly Click Test")}</strong> {tr("benchmarks the butterfly clicking technique—an advanced clicking method where a gamer positions\n        two fingers (usually the index and middle finger) on the same mouse button and rapidly alternates tapping it in a fluid, see-saw motion\n        resembling a butterfly fluttering its wings.\n      ")}</p>
       <ul style={ulStyle}>
-        <li><strong>Typical CPS Range:</strong> <span style={{ color: 'var(--neon-cyan, #00f5ff)', fontWeight: 700 }}>15 to 25+ CPS</span> (and up to 30 CPS on mice with tunable debounce time).</li>
-        <li><strong>Aim Precision:</strong> <span style={{ color: 'var(--neon-green, #00ff88)', fontWeight: 700 }}>High (8/10)</span> — because the palm and base of the hand rest comfortably on the mouse shell, tracking targets remains relatively smooth.</li>
-        <li><strong>Physical Strain:</strong> <span style={{ color: '#ff9f43', fontWeight: 700 }}>Moderate</span> — relies on finger tendon agility rather than intense full-arm contractions.</li>
+        <li><strong>{tr("Typical CPS Range:")}</strong> <span style={{ color: 'var(--neon-cyan, #00f5ff)', fontWeight: 700 }}>{tr("15 to 25+ CPS")}</span> {tr("(and up to 30 CPS on mice with tunable debounce time).")}</li>
+        <li><strong>{tr("Aim Precision:")}</strong> <span style={{ color: 'var(--neon-green, #00ff88)', fontWeight: 700 }}>{tr("High (8/10)")}</span> {tr("— because the palm and base of the hand rest comfortably on the mouse shell, tracking targets remains relatively smooth.")}</li>
+        <li><strong>{tr("Physical Strain:")}</strong> <span style={{ color: '#ff9f43', fontWeight: 700 }}>{tr("Moderate")}</span> {tr("— relies on finger tendon agility rather than intense full-arm contractions.")}</li>
       </ul>
-      <h3 style={h3Style}>The Double-Clicking Switch Secret</h3>
+      <h3 style={h3Style}>{tr("The Double-Clicking Switch Secret")}</h3>
       <p style={pStyle}>
-        The true power of butterfly clicking stems from mechanical switch debounce behavior. On popular gaming mice such as the <em>Glorious Model O/D</em>,
-        <em>Roccat Kain 100/120</em>, and <em>Bloody A70</em>, players can configure software debounce delays down to 0–4ms. As each finger strikes and rebounds,
-        the electrical contacts bounce, registering <strong>two distinct click signals per individual tap</strong>.
+        {tr("The true power of butterfly clicking stems from mechanical switch debounce behavior. On popular gaming mice such as the ")}<em>{tr("Glorious Model O/D")}</em>,
+        <em>{tr("Roccat Kain 100/120")}</em>{tr(", and ")}<em>{tr("Bloody A70")}</em>{tr(", players can configure software debounce delays down to 0–4ms. As each finger strikes and rebounds,\n        the electrical contacts bounce, registering ")}<strong>{tr("two distinct click signals per individual tap")}</strong>.
       </p>
       <div style={{ background: 'rgba(255,56,56,0.06)', borderLeft: '4px solid #ff3838', padding: '0.9rem 1.25rem', borderRadius: '0 8px 8px 0', margin: '1rem 0 1.5rem' }}>
-        <strong style={{ color: '#ff3838', display: 'block', marginBottom: '0.3rem' }}>⚠️ Server Anti-Cheat &amp; Click Caps:</strong>
+        <strong style={{ color: '#ff3838', display: 'block', marginBottom: '0.3rem' }}>{tr("⚠️ Server Anti-Cheat &amp; Click Caps:")}</strong>
         <p style={{ margin: 0, fontSize: '0.88rem', color: '#2D3436', lineHeight: '1.6' }}>
-          Because butterfly clicking with double clicks closely mimics automated click macros, strict competitive servers (Hypixel, Minemen Club, Badlion)
-          enforce hit registration caps (often 15–20 CPS) or utilize anti-cheat monitors (Watchdog/Karhu). Always check your server's rules regarding debounce modification.
-        </p>
+          {tr("Because butterfly clicking with double clicks closely mimics automated click macros, strict competitive servers (Hypixel, Minemen Club, Badlion)\n          enforce hit registration caps (often 15–20 CPS) or utilize anti-cheat monitors (Watchdog/Karhu). Always check your server's rules regarding debounce modification.\n        ")}</p>
       </div>
 
       {/* ── 3. WHAT IS JITTER CLICK TEST? ── */}
-      <h2 style={h2Style}>What is Jitter Click Test? (Forearm Muscle Vibration)</h2>
+      <h2 style={h2Style}>{tr("What is Jitter Click Test? (Forearm Muscle Vibration)")}</h2>
       <p style={pStyle}>
-        A <strong>Jitter Click Test</strong> evaluates your speed and endurance when using the jitter clicking technique. In jitter clicking, you
-        deliberately tense and stiffen the muscles throughout your forearm, wrist, and hand to trigger rapid, involuntary-like tremors and micro-spasms.
-        These high-frequency physical vibrations are channeled directly into your index fingertip to strike the mouse button repeatedly.
-      </p>
+        A <strong>{tr("Jitter Click Test")}</strong> {tr("evaluates your speed and endurance when using the jitter clicking technique. In jitter clicking, you\n        deliberately tense and stiffen the muscles throughout your forearm, wrist, and hand to trigger rapid, involuntary-like tremors and micro-spasms.\n        These high-frequency physical vibrations are channeled directly into your index fingertip to strike the mouse button repeatedly.\n      ")}</p>
       <ul style={ulStyle}>
-        <li><strong>Typical CPS Range:</strong> <span style={{ color: 'var(--neon-cyan, #00f5ff)', fontWeight: 700 }}>10 to 14+ CPS</span> reliably with a single finger.</li>
-        <li><strong>Aim Precision:</strong> <span style={{ color: '#ff9f43', fontWeight: 700 }}>Difficult (5/10)</span> — because your entire arm vibrates, steadying the crosshair requires a firm claw or fingertip grip with high thumb/pinky anchoring.</li>
-        <li><strong>Hardware Independence:</strong> Jitter clicking works on virtually any mouse (office or gaming) since it relies entirely on biological muscle frequency rather than switch bounce.</li>
+        <li><strong>{tr("Typical CPS Range:")}</strong> <span style={{ color: 'var(--neon-cyan, #00f5ff)', fontWeight: 700 }}>{tr("10 to 14+ CPS")}</span> {tr("reliably with a single finger.")}</li>
+        <li><strong>{tr("Aim Precision:")}</strong> <span style={{ color: '#ff9f43', fontWeight: 700 }}>{tr("Difficult (5/10)")}</span> {tr("— because your entire arm vibrates, steadying the crosshair requires a firm claw or fingertip grip with high thumb/pinky anchoring.")}</li>
+        <li><strong>{tr("Hardware Independence:")}</strong> {tr("Jitter clicking works on virtually any mouse (office or gaming) since it relies entirely on biological muscle frequency rather than switch bounce.")}</li>
       </ul>
-      <h3 style={h3Style}>Ergonomics &amp; Health Guidelines</h3>
+      <h3 style={h3Style}>{tr("Ergonomics &amp; Health Guidelines")}</h3>
       <p style={pStyle}>
-        Sustained isometric forearm contraction places significant mechanical load on your flexor tendons and the median nerve in your carpal tunnel.
-        To practice jitter clicking safely:
-      </p>
+        {tr("Sustained isometric forearm contraction places significant mechanical load on your flexor tendons and the median nerve in your carpal tunnel.\n        To practice jitter clicking safely:\n      ")}</p>
       <ul style={ulStyle}>
-        <li><strong>Keep Bursts Short:</strong> Limit jitter clicking to quick 5–10 second combat bursts rather than shaking your arm constantly throughout a match.</li>
-        <li><strong>Stretch and Warm Up:</strong> Perform wrist rotations and finger extensor stretches before competitive PvP sessions.</li>
-        <li><strong>Heed Warning Signs:</strong> If you feel burning sensations, joint pain, or finger numbness, stop immediately and rest (see the{' '}
-        <ArticleLink href="https://my.clevelandclinic.org/health/diseases/17424-repetitive-strain-injury">Cleveland Clinic RSI guide</ArticleLink>).</li>
+        <li><strong>{tr("Keep Bursts Short:")}</strong> {tr("Limit jitter clicking to quick 5–10 second combat bursts rather than shaking your arm constantly throughout a match.")}</li>
+        <li><strong>{tr("Stretch and Warm Up:")}</strong> {tr("Perform wrist rotations and finger extensor stretches before competitive PvP sessions.")}</li>
+        <li><strong>{tr("Heed Warning Signs:")}</strong> {tr("If you feel burning sensations, joint pain, or finger numbness, stop immediately and rest (see the")}{' '}
+        <ArticleLink href="https://my.clevelandclinic.org/health/diseases/17424-repetitive-strain-injury">{tr("Cleveland Clinic RSI guide")}</ArticleLink>).</li>
       </ul>
 
       {/* ── 4. WHAT IS DRAG CLICK TEST? ── */}
-      <h2 style={h2Style}>What is Drag Click Test? (Surface Friction Gliding)</h2>
+      <h2 style={h2Style}>{tr("What is Drag Click Test? (Surface Friction Gliding)")}</h2>
       <p style={pStyle}>
-        A <strong>Drag Click Test</strong> measures the most mechanically extreme clicking technique in gaming. Rather than tapping downward, a player
-        gently pulls or drags their finger across the mouse button at a shallow angle. The dynamic friction between your skin and the textured matte plastic
-        causes your finger to stick and slip rapidly, sending a continuous wave of micro-bounces into the switch.
-      </p>
+        A <strong>{tr("Drag Click Test")}</strong> {tr("measures the most mechanically extreme clicking technique in gaming. Rather than tapping downward, a player\n        gently pulls or drags their finger across the mouse button at a shallow angle. The dynamic friction between your skin and the textured matte plastic\n        causes your finger to stick and slip rapidly, sending a continuous wave of micro-bounces into the switch.\n      ")}</p>
       <ul style={ulStyle}>
-        <li><strong>Typical CPS Range:</strong> <span style={{ color: '#ff3838', fontWeight: 700 }}>25 to 60+ CPS</span> in short drags; over <strong>80 to 100+ CPS</strong> on long continuous drags with grip tape!</li>
-        <li><strong>Primary Application:</strong> <span style={{ color: 'var(--neon-green, #00ff88)', fontWeight: 700 }}>Minecraft God-Bridging</span> — laying down a bridge of blocks while sprinting backwards without sneaking.</li>
-        <li><strong>Aim Control:</strong> <span style={{ color: '#ff3838', fontWeight: 700 }}>Very Low (2/10)</span> — dragging moves your hand across the shell, making enemy crosshair tracking during melee combat nearly impossible.</li>
+        <li><strong>{tr("Typical CPS Range:")}</strong> <span style={{ color: '#ff3838', fontWeight: 700 }}>{tr("25 to 60+ CPS")}</span> {tr("in short drags; over ")}<strong>{tr("80 to 100+ CPS")}</strong> {tr("on long continuous drags with grip tape!")}</li>
+        <li><strong>{tr("Primary Application:")}</strong> <span style={{ color: 'var(--neon-green, #00ff88)', fontWeight: 700 }}>{tr("Minecraft God-Bridging")}</span> {tr("— laying down a bridge of blocks while sprinting backwards without sneaking.")}</li>
+        <li><strong>{tr("Aim Control:")}</strong> <span style={{ color: '#ff3838', fontWeight: 700 }}>{tr("Very Low (2/10)")}</span> {tr("— dragging moves your hand across the shell, making enemy crosshair tracking during melee combat nearly impossible.")}</li>
       </ul>
-      <h3 style={h3Style}>Hardware Requirements for Drag Clicking</h3>
+      <h3 style={h3Style}>{tr("Hardware Requirements for Drag Clicking")}</h3>
       <p style={pStyle}>
-        Drag clicking cannot be performed on every mouse. Optical switches (common in newer Razer and Logitech mice) eliminate switch bounce and will not register drag clicks properly. To achieve high drag CPS:
-      </p>
+        {tr("Drag clicking cannot be performed on every mouse. Optical switches (common in newer Razer and Logitech mice) eliminate switch bounce and will not register drag clicks properly. To achieve high drag CPS:\n      ")}</p>
       <ul style={ulStyle}>
-        <li><strong>Matte or Textured Surface:</strong> You need a textured matte shell or grip tape (electrical tape, Razer grip tape, or masking tape) to maximize skin friction.</li>
-        <li><strong>Mechanical Switches with Low Debounce:</strong> Mice like the <em>A4Tech Bloody A60 / A70</em>, <em>Roccat Kone Pro / AIMO</em>, and <em>Glorious Model O</em> are community benchmarks for drag clicking.</li>
-        <li><strong>Server Warning:</strong> Because drag clicking produces 30–80+ CPS, virtually all competitive PvP servers (Hypixel, Minemen, Lunar) ban drag clicking, and automated anti-cheat watchdogs will immediately ban you for macro exploitation. Only use drag clicking on dedicated bridging practice servers.</li>
+        <li><strong>{tr("Matte or Textured Surface:")}</strong> {tr("You need a textured matte shell or grip tape (electrical tape, Razer grip tape, or masking tape) to maximize skin friction.")}</li>
+        <li><strong>{tr("Mechanical Switches with Low Debounce:")}</strong> {tr("Mice like the ")}<em>{tr("A4Tech Bloody A60 / A70")}</em>, <em>{tr("Roccat Kone Pro / AIMO")}</em>{tr(", and ")}<em>{tr("Glorious Model O")}</em> {tr("are community benchmarks for drag clicking.")}</li>
+        <li><strong>{tr("Server Warning:")}</strong> {tr("Because drag clicking produces 30–80+ CPS, virtually all competitive PvP servers (Hypixel, Minemen, Lunar) ban drag clicking, and automated anti-cheat watchdogs will immediately ban you for macro exploitation. Only use drag clicking on dedicated bridging practice servers.")}</li>
       </ul>
 
       {/* ── 5. COMPARISON TABLE ── */}
-      <h2 style={h2Style}>Clicking Techniques Comparison Table</h2>
+      <h2 style={h2Style}>{tr("Clicking Techniques Comparison Table")}</h2>
       <div style={{ overflowX: 'auto', margin: '1.25rem 0 2rem' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left', minWidth: '640px' }}>
           <thead>
             <tr style={{ borderBottom: '2px solid rgba(0,245,255,0.3)', color: '#fff', background: 'rgba(0,245,255,0.06)' }}>
-              <th style={{ padding: '0.75rem 0.85rem' }}>Technique</th>
-              <th style={{ padding: '0.75rem 0.85rem' }}>Average CPS</th>
-              <th style={{ padding: '0.75rem 0.85rem' }}>Aim Control</th>
-              <th style={{ padding: '0.75rem 0.85rem' }}>Strain Risk</th>
-              <th style={{ padding: '0.75rem 0.85rem' }}>Server Status</th>
-              <th style={{ padding: '0.75rem 0.85rem' }}>Best Used For</th>
+              <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Technique")}</th>
+              <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Average CPS")}</th>
+              <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Aim Control")}</th>
+              <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Strain Risk")}</th>
+              <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Server Status")}</th>
+              <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Best Used For")}</th>
             </tr>
           </thead>
           <tbody>
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-green, #00ff88)' }}>Normal Click</td>
-              <td style={{ padding: '0.7rem 0.85rem' }}>6 – 9 CPS</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>10 / 10 (Perfect)</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Very Low</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>100% Allowed</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>All games, daily browsing</td>
+              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-green, #00ff88)' }}>{tr("Normal Click")}</td>
+              <td style={{ padding: '0.7rem 0.85rem' }}>{tr("6 – 9 CPS")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("10 / 10 (Perfect)")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Very Low")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("100% Allowed")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>{tr("All games, daily browsing")}</td>
             </tr>
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-cyan, #00f5ff)' }}>Right Click</td>
-              <td style={{ padding: '0.7rem 0.85rem' }}>5 – 8 CPS</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>9 / 10 (High)</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Low</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>100% Allowed</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>Fast-bridging, FPS ADS, MOBA kiting</td>
+              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-cyan, #00f5ff)' }}>{tr("Right Click")}</td>
+              <td style={{ padding: '0.7rem 0.85rem' }}>{tr("5 – 8 CPS")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("9 / 10 (High)")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Low")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("100% Allowed")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>{tr("Fast-bridging, FPS ADS, MOBA kiting")}</td>
             </tr>
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-orange, #ff9f43)' }}>Jitter Click</td>
-              <td style={{ padding: '0.7rem 0.85rem' }}>10 – 14 CPS</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>5 / 10 (Difficult)</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>High (RSI Risk)</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>100% Allowed</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>Minecraft 1.8 PvP bursts</td>
+              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-orange, #ff9f43)' }}>{tr("Jitter Click")}</td>
+              <td style={{ padding: '0.7rem 0.85rem' }}>{tr("10 – 14 CPS")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>{tr("5 / 10 (Difficult)")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>{tr("High (RSI Risk)")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("100% Allowed")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>{tr("Minecraft 1.8 PvP bursts")}</td>
             </tr>
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#38bdf8' }}>Butterfly Click</td>
-              <td style={{ padding: '0.7rem 0.85rem' }}>15 – 25+ CPS</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>8 / 10 (Good)</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>Moderate</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>Watch Click Caps</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>PvP knockback reduction, combos</td>
+              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#38bdf8' }}>{tr("Butterfly Click")}</td>
+              <td style={{ padding: '0.7rem 0.85rem' }}>{tr("15 – 25+ CPS")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("8 / 10 (Good)")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>{tr("Moderate")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>{tr("Watch Click Caps")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>{tr("PvP knockback reduction, combos")}</td>
             </tr>
             <tr>
-              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#ff3838' }}>Drag Click</td>
-              <td style={{ padding: '0.7rem 0.85rem' }}>25 – 60+ CPS</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>2 / 10 (Very Poor)</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Low - Moderate</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>Restricted / Banned</td>
-              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>God-bridging, Breezily bridging</td>
+              <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#ff3838' }}>{tr("Drag Click")}</td>
+              <td style={{ padding: '0.7rem 0.85rem' }}>{tr("25 – 60+ CPS")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>{tr("2 / 10 (Very Poor)")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Low - Moderate")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>{tr("Restricted / Banned")}</td>
+              <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted, #9ca3af)' }}>{tr("God-bridging, Breezily bridging")}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 style={h2Style}>CPS in Gaming</h2>
+      <h2 style={h2Style}>{tr("CPS in Gaming")}</h2>
       <p style={pStyle}>
-        In <strong>Minecraft 1.8 PvP</strong>, higher CPS means more knockback and hit registration. Practice on{' '}
-        <ArticleLink href="https://minemen.club/">Minemen Club</ArticleLink>,{' '}
-        <ArticleLink href="https://hypixel.net/">Hypixel</ArticleLink>, or{' '}
-        <ArticleLink href="https://donutsmp.net/">DonutSMP</ArticleLink>.
-        In <strong>FPS games</strong> (Valorant, PUBG, CS2), 7–10 CPS maximizes semi-auto fire rate.
-        In <strong>MOBAs</strong>, faster clicking improves last-hits and APM. Right click speed affects
-        ADS, blocking, and movement commands across all genres.
-      </p>
+        {tr("In ")}<strong>{tr("Minecraft 1.8 PvP")}</strong>{tr(", higher CPS means more knockback and hit registration. Practice on")}{' '}
+        <ArticleLink href="https://minemen.club/">{tr("Minemen Club")}</ArticleLink>,{' '}
+        <ArticleLink href="https://hypixel.net/">{tr("Hypixel")}</ArticleLink>{tr(", or")}{' '}
+        <ArticleLink href="https://donutsmp.net/">{tr("DonutSMP")}</ArticleLink>{tr(".\n        In ")}<strong>{tr("FPS games")}</strong> {tr("(Valorant, PUBG, CS2), 7–10 CPS maximizes semi-auto fire rate.\n        In ")}<strong>{tr("MOBAs")}</strong>{tr(", faster clicking improves last-hits and APM. Right click speed affects\n        ADS, blocking, and movement commands across all genres.\n      ")}</p>
 
-      <h2 style={h2Style}>How to Improve Your CPS</h2>
+      <h2 style={h2Style}>{tr("How to Improve Your CPS")}</h2>
       <ul style={ulStyle}>
-        <li><strong>Sprint intervals:</strong> 10 × 1-second max-effort tests with 30-second rest periods.</li>
-        <li><strong>Grip:</strong> Claw or fingertip grip is faster than palm grip for most players.</li>
-        <li><strong>Hardware:</strong> Lightweight mice (&lt;80g) with optical switches and 1000 Hz polling remove mechanical bottlenecks.</li>
-        <li><strong>Warm up:</strong> 60 seconds of gentle finger taps before testing noticeably improves results.</li>
-        <li><strong>Recovery:</strong> Stop if you feel forearm pain. Consistent injury-free practice delivers the best long-term gains.</li>
+        <li><strong>{tr("Sprint intervals:")}</strong> {tr("10 × 1-second max-effort tests with 30-second rest periods.")}</li>
+        <li><strong>{tr("Grip:")}</strong> {tr("Claw or fingertip grip is faster than palm grip for most players.")}</li>
+        <li><strong>{tr("Hardware:")}</strong> {tr("Lightweight mice (&lt;80g) with optical switches and 1000 Hz polling remove mechanical bottlenecks.")}</li>
+        <li><strong>{tr("Warm up:")}</strong> {tr("60 seconds of gentle finger taps before testing noticeably improves results.")}</li>
+        <li><strong>{tr("Recovery:")}</strong> {tr("Stop if you feel forearm pain. Consistent injury-free practice delivers the best long-term gains.")}</li>
       </ul>
 
-      <h2 style={h2Style}>Resources &amp; Practice Servers</h2>
+      <h2 style={h2Style}>{tr("Resources &amp; Practice Servers")}</h2>
       <ul style={ulStyle}>
-        <li><ArticleLink href="https://www.lunarclient.com/tools/kohi-click-test">Lunar Client — Kohi Click Test</ArticleLink> — the original Minecraft CPS benchmark</li>
-        <li><ArticleLink href="https://minemen.club/">Minemen Club</ArticleLink> — leading Minecraft practice PvP server</li>
-        <li><ArticleLink href="https://donutsmp.net/">DonutSMP</ArticleLink> — Dr Donut's hardcore survival PvP (35,000 players)</li>
-        <li><ArticleLink href="https://mcpvp.com/">McPvP / McTiers</ArticleLink> — ranked competitive Minecraft PvP</li>
-        <li><ArticleLink href="https://na.badlion.net/">Badlion Network</ArticleLink> — ArenaPvP and UHC with strict anti-cheat</li>
-        <li><ArticleLink href="https://hypixel.net/">Hypixel</ArticleLink> — world's largest Minecraft server</li>
-        <li><ArticleLink href="https://minecraft.wiki/w/Melee_attack">Minecraft Wiki — Melee Attack</ArticleLink> — how CPS translates to combat advantage</li>
-        <li><ArticleLink href="https://playvalorant.com/en-us/">Valorant</ArticleLink> &amp; <ArticleLink href="https://pubg.com/en">PUBG</ArticleLink> — official weapon stats and patch notes</li>
+        <li><ArticleLink href="https://www.lunarclient.com/tools/kohi-click-test">{tr("Lunar Client — Kohi Click Test")}</ArticleLink> {tr("— the original Minecraft CPS benchmark")}</li>
+        <li><ArticleLink href="https://minemen.club/">{tr("Minemen Club")}</ArticleLink> {tr("— leading Minecraft practice PvP server")}</li>
+        <li><ArticleLink href="https://donutsmp.net/">{tr("DonutSMP")}</ArticleLink> {tr("— Dr Donut's hardcore survival PvP (35,000 players)")}</li>
+        <li><ArticleLink href="https://mcpvp.com/">{tr("McPvP / McTiers")}</ArticleLink> {tr("— ranked competitive Minecraft PvP")}</li>
+        <li><ArticleLink href="https://na.badlion.net/">{tr("Badlion Network")}</ArticleLink> {tr("— ArenaPvP and UHC with strict anti-cheat")}</li>
+        <li><ArticleLink href="https://hypixel.net/">{tr("Hypixel")}</ArticleLink> {tr("— world's largest Minecraft server")}</li>
+        <li><ArticleLink href="https://minecraft.wiki/w/Melee_attack">{tr("Minecraft Wiki — Melee Attack")}</ArticleLink> {tr("— how CPS translates to combat advantage")}</li>
+        <li><ArticleLink href="https://playvalorant.com/en-us/">{tr("Valorant")}</ArticleLink> {tr("&amp; ")}<ArticleLink href="https://pubg.com/en">{tr("PUBG")}</ArticleLink> {tr("— official weapon stats and patch notes")}</li>
       </ul>
 
-      <h2 style={h2Style}>More Free Tests on FixedAim</h2>
+      <h2 style={h2Style}>{tr("More Free Tests on FixedAim")}</h2>
       <p style={pStyle}>
-        <a href="/reaction-time" style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>Reaction Time</a>{' · '}
-        <a href="/aim-trainer" style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>Aim Trainer</a>{' · '}
-        <a href="/mouse-accuracy" style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>Mouse Accuracy</a>{' · '}
-        <a href="/double-click" style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>Double Click</a>{' · '}
-        <a href="/scroll-test" style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>Scroll Speed</a>
-        {' '} — all free, no download.
-      </p>
+        <a href={localeHref("/reaction-time")} style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>{tr("Reaction Time")}</a>{' · '}
+        <a href={localeHref("/aim-trainer")} style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>{tr("Aim Trainer")}</a>{' · '}
+        <a href={localeHref("/mouse-accuracy")} style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>{tr("Mouse Accuracy")}</a>{' · '}
+        <a href={localeHref("/double-click")} style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>{tr("Double Click")}</a>{' · '}
+        <a href={localeHref("/scroll-test")} style={{color:'var(--neon-cyan,#00f5ff)',textDecoration:'none',fontWeight:700,borderBottom:'1px dashed rgba(0,245,255,0.4)'}}>{tr("Scroll Speed")}</a>
+        {' '} {tr("— all free, no download.\n      ")}</p>
 
       <div style={{ margin: '2.5rem 0 0', background: 'linear-gradient(135deg, rgba(0,245,255,0.06) 0%, rgba(0,255,136,0.06) 100%)', border: '1px solid rgba(0,245,255,0.2)', borderRadius: '16px', padding: '1.75rem', textAlign: 'center' }}>
-        <h2 style={{ color: '#fff', fontWeight: '900', fontSize: '1.4rem', margin: '0 0 0.4rem' }}>Ready to Improve Your CPS?</h2>
-        <p style={{ color: '#2D3436', margin: '0 0 1.1rem', fontSize: '0.9rem' }}>Free 5-second test — no account, no download, instant results.</p>
+        <h2 style={{ color: '#fff', fontWeight: '900', fontSize: '1.4rem', margin: '0 0 0.4rem' }}>{tr("Ready to Improve Your CPS?")}</h2>
+        <p style={{ color: '#2D3436', margin: '0 0 1.1rem', fontSize: '0.9rem' }}>{tr("Free 5-second test — no account, no download, instant results.")}</p>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           style={{ background: 'var(--neon-green, #00ff88)', color: '#000', border: 'none', borderRadius: '10px', padding: '0.65rem 1.75rem', fontWeight: '800', fontSize: '0.95rem', cursor: 'pointer' }}
         >
-          ▶ Take the CPS Test Now
-        </button>
+          {tr("▶ Take the CPS Test Now\n        ")}</button>
       </div>
 
     </article>
   </>
-));
+  );
+});
 SeoArticle.displayName = 'SeoArticle';
 
 
@@ -912,6 +868,7 @@ SeoArticle.displayName = 'SeoArticle';
 // REAL-TIME CPS GRAPH (SVG-based, zero deps)
 // ─────────────────────────────────────────────
 const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[]; duration: number; clickMode: ClickMode; phase: Phase }) => {
+  const { tr } = usePageI18n(pageDict);
   const [tooltip, setTooltip] = useState<TooltipData | null>(null);
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
@@ -1004,7 +961,7 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
       borderRadius: '16px',
       overflow: 'hidden',
       marginBottom: '1.5rem',
-    }} aria-label="Real-time CPS Graph">
+    }} aria-label={tr("Real-time CPS Graph")}>
 
       {/* Header */}
       <div style={{
@@ -1013,14 +970,13 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       }}>
         <span style={{ fontWeight: '700', fontSize: '0.85rem', color: lineColor, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          📈 CPS Graph
-          {phase === 'running' && (
+          {tr("📈 CPS Graph\n          ")}{phase === 'running' && (
             <span style={{
               fontSize: '0.65rem', fontWeight: '700', padding: '2px 7px',
               borderRadius: '20px', background: 'rgba(0,255,136,0.15)',
               color: '#00ff88', border: '1px solid rgba(0,255,136,0.35)',
               letterSpacing: '0.06em', textTransform: 'uppercase',
-            }}>● LIVE</span>
+            }}>{tr("● LIVE")}</span>
           )}
           {phase === 'done' && (
             <span style={{
@@ -1028,7 +984,7 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
               borderRadius: '20px', background: 'rgba(255,159,67,0.12)',
               color: '#ff9f43', border: '1px solid rgba(255,159,67,0.3)',
               letterSpacing: '0.06em', textTransform: 'uppercase',
-            }}>FINAL</span>
+            }}>{tr("FINAL")}</span>
           )}
           {phase === 'idle' && (
             <span style={{
@@ -1036,7 +992,7 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
               borderRadius: '20px', background: 'rgba(255,255,255,0.06)',
               color: '#8395a7', border: '1px solid rgba(255,255,255,0.1)',
               letterSpacing: '0.06em', textTransform: 'uppercase',
-            }}>LAST RUN</span>
+            }}>{tr("LAST RUN")}</span>
           )}
         </span>
 
@@ -1044,12 +1000,10 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', color: '#2D3436' }}>
             <span style={{ display: 'inline-block', width: '20px', height: '3px', background: lineColor, borderRadius: '2px' }} />
-            Real-time CPS
-          </span>
+            {tr("Real-time CPS\n          ")}</span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.75rem', color: '#2D3436' }}>
             <span style={{ display: 'inline-block', width: '20px', height: '2px', background: avgColor, borderRadius: '2px', opacity: 0.8 }} />
-            Average CPS
-          </span>
+            {tr("Average CPS\n          ")}</span>
           {last && (
             <span style={{ fontWeight: '800', fontSize: '1rem', color: dotColor, fontVariantNumeric: 'tabular-nums' }}>
               {last.cps} CPS
@@ -1178,11 +1132,11 @@ const CpsGraph = memo(({ data, duration, clickMode, phase }: { data: GraphPoint[
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#2D3436', marginBottom: '4px' }}>
               <span style={{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '3px', background: lineColor, flexShrink: 0 }} />
-              Real-time CPS: <strong style={{ color: '#fff', marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{tooltip.rtCps}</strong>
+              {tr("Real-time CPS: ")}<strong style={{ color: '#fff', marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{tooltip.rtCps}</strong>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '0.8rem', color: '#2D3436' }}>
               <span style={{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '3px', background: avgColor, flexShrink: 0 }} />
-              Average CPS: <strong style={{ color: '#fff', marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{tooltip.avgCps}</strong>
+              {tr("Average CPS: ")}<strong style={{ color: '#fff', marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{tooltip.avgCps}</strong>
             </div>
           </div>
         )}
@@ -1196,6 +1150,8 @@ CpsGraph.displayName = 'CpsGraph';
 // MAIN PAGE COMPONENT
 // ─────────────────────────────────────────────
 export default function CPSTestPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const areaRef = useRef<HTMLDivElement>(null);
 
@@ -1596,14 +1552,14 @@ export default function CPSTestPage() {
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       {/* ── HEADER ── */}
       <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <div className="section-label" style={{ fontSize: '0.85rem', color: 'var(--neon-cyan, #00f5ff)', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 'bold' }}>CPS Test</div>
-        <h1 className="tool-title" style={{ fontSize: '2.5rem', fontWeight: '900', margin: '0.5rem 0 0.2rem', color: '#fff' }}>CPS Test — Free Click Speed Test &amp; CPS Counter Online</h1>
-        <p className="tool-subtitle" style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1rem', margin: '0' }}>Free <strong style={{color:'#fff'}}>CPS Test</strong> — measure your <strong style={{color:'#fff'}}>clicks per second</strong> with left &amp; right click modes. Kohi click test, jitter click test, drag click test, butterfly click — all in one <strong style={{color:'#fff'}}>click speed tester</strong>. No download required.</p>
+        <div className="section-label" style={{ fontSize: '0.85rem', color: 'var(--neon-cyan, #00f5ff)', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 'bold' }}>{tr("CPS Test")}</div>
+        <h1 className="tool-title" style={{ fontSize: '2.5rem', fontWeight: '900', margin: '0.5rem 0 0.2rem', color: '#fff' }}>{tr("CPS Test — Free Click Speed Test &amp; CPS Counter Online")}</h1>
+        <p className="tool-subtitle" style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1rem', margin: '0' }}>{tr("Free ")}<strong style={{color:'#fff'}}>{tr("CPS Test")}</strong> {tr("— measure your ")}<strong style={{color:'#fff'}}>{tr("clicks per second")}</strong> {tr("with left &amp; right click modes. Kohi click test, jitter click test, drag click test, butterfly click — all in one ")}<strong style={{color:'#fff'}}>{tr("click speed tester")}</strong>{tr(". No download required.")}</p>
       </header>
 
       {/* ── DURATION SELECTOR & CONTROLS ── */}
       <nav
-        aria-label="Test Duration and Audio Selector"
+        aria-label={tr("Test Duration and Audio Selector")}
         className="cps-duration-row"
         style={{
           display: 'flex',
@@ -1640,14 +1596,14 @@ export default function CPSTestPage() {
             borderRadius: '8px', padding: '0.2rem 0.2rem 0.2rem 0.6rem',
           }}
         >
-          <label htmlFor="custom-sec-input" style={{ fontSize: '0.85rem', color: 'var(--text-secondary, #cbd5e1)', fontWeight: '600' }}>Custom:</label>
+          <label htmlFor="custom-sec-input" style={{ fontSize: '0.85rem', color: 'var(--text-secondary, #cbd5e1)', fontWeight: '600' }}>{tr("Custom:")}</label>
           <input 
             id="custom-sec-input"
             type="number" 
             value={customTime}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomTime(e.target.value)}
             disabled={phase === 'running'}
-            placeholder="sec"
+            placeholder={tr("sec")}
             min="1"
             max="300"
             style={{ 
@@ -1665,7 +1621,7 @@ export default function CPSTestPage() {
               color: 'var(--neon-cyan, #00f5ff)', fontWeight: '700', cursor: phase === 'running' || !customTime ? 'not-allowed' : 'pointer',
               fontSize: '0.8rem', transition: 'all 0.2s',
             }}
-          >Set</button>
+          >{tr("Set")}</button>
         </div>
 
         {/* Audio Toggle Control Button */}
@@ -1735,7 +1691,7 @@ export default function CPSTestPage() {
       {/* ── STATS CARDS ── */}
       <section
         className="cps-stats-grid"
-        aria-label="Live Test Results"
+        aria-label={tr("Live Test Results")}
         style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}
       >
         {[
@@ -1757,7 +1713,7 @@ export default function CPSTestPage() {
         ref={areaRef}
         role="button"
         tabIndex={0}
-        aria-label="Click area to start CPS test"
+        aria-label={tr("Click area to start CPS test")}
         onClick={handleClick}
         onTouchStart={handleTouchStart}
         onContextMenu={handleRightClick}
@@ -1797,7 +1753,7 @@ export default function CPSTestPage() {
             justifyContent: 'center',
             transition: 'transform 0.1s ease',
           }}
-          title="Toggle Fullscreen"
+          title={tr("Toggle Fullscreen")}
         >
           {isFullscreen ? <Minimize2 size={20} color="#000000" /> : <Maximize2 size={20} color="#000000" />}
         </button>
@@ -1860,21 +1816,21 @@ export default function CPSTestPage() {
         {phase === 'idle' && (
           <>
             <span style={{ fontSize: '3.2rem' }}>🖱️</span>
-            <span className="cps-click-prompt" style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase' }}>Click to Start!</span>
-            <span className="cps-click-sub" style={{ fontSize: '0.95rem', fontWeight: 700 }}>Click anywhere in this area to begin the test</span>
+            <span className="cps-click-prompt" style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase' }}>{tr("Click to Start!")}</span>
+            <span className="cps-click-sub" style={{ fontSize: '0.95rem', fontWeight: 700 }}>{tr("Click anywhere in this area to begin the test")}</span>
           </>
         )}
         {phase === 'running' && (
           <>
             <span className="cps-click-counter" style={{ fontSize: '4.8rem', fontWeight: 900, fontVariantNumeric: 'tabular-nums', zIndex: 10, lineHeight: 1 }}>{clicks}</span>
-            <span className="cps-click-prompt" style={{ fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase', zIndex: 10 }}>Keep clicking! 🔥</span>
-            <span style={{ color: '#D63031', fontWeight: 900, fontSize: '1rem', zIndex: 10 }}>{timeLeft.toFixed(1)}s remaining</span>
+            <span className="cps-click-prompt" style={{ fontSize: '1.2rem', fontWeight: 900, textTransform: 'uppercase', zIndex: 10 }}>{tr("Keep clicking! 🔥")}</span>
+            <span style={{ color: '#D63031', fontWeight: 900, fontSize: '1rem', zIndex: 10 }}>{timeLeft.toFixed(1)}{tr("s remaining")}</span>
           </>
         )}
         {phase === 'done' && (
           <>
             <span style={{ fontSize: '3rem' }}>🏁</span>
-            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: '#D63031', textTransform: 'uppercase' }}>Test Complete!</span>
+            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: '#D63031', textTransform: 'uppercase' }}>{tr("Test Complete!")}</span>
           </>
         )}
 
@@ -1939,7 +1895,7 @@ export default function CPSTestPage() {
                 e.stopPropagation();
                 closeModal();
               }}
-              aria-label="Close modal"
+              aria-label={tr("Close modal")}
               style={{
                 position: 'absolute',
                 top: '0.75rem',
@@ -1976,7 +1932,7 @@ export default function CPSTestPage() {
                 >{finalRating.emoji}</span>
               </div>
               <div style={{ textAlign: 'left' }}>
-                <div id="modal-title" className="cps-modal-sub" style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>YOUR RANK IS</div>
+                <div id="modal-title" className="cps-modal-sub" style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>{tr("YOUR RANK IS")}</div>
                 <div
                   className="cps-modal-rank"
                   style={{ fontSize: '2.4rem', fontWeight: 900, color: finalRating.color, textTransform: 'uppercase', margin: '0.1rem 0', lineHeight: 1.1 }}
@@ -1987,7 +1943,7 @@ export default function CPSTestPage() {
                   ))}
                 </div>
                 <div className="cps-modal-speed-text" style={{ fontSize: '0.92rem', fontWeight: 700 }}>
-                  You clicked with a speed of <strong className="cps-score-num" style={{ fontSize: '1.4rem', fontVariantNumeric: 'tabular-nums', fontWeight: 900, margin: '0 4px' }}>{finalCpsValue}</strong> CPS
+                  {tr("You clicked with a speed of ")}<strong className="cps-score-num" style={{ fontSize: '1.4rem', fontVariantNumeric: 'tabular-nums', fontWeight: 900, margin: '0 4px' }}>{finalCpsValue}</strong> CPS
                 </div>
               </div>
             </div>
@@ -2019,8 +1975,7 @@ export default function CPSTestPage() {
                 className="btn"
                 style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', background: '#FFFFFF', color: '#000000', fontWeight: 800, textTransform: 'uppercase' }}
               >
-                🔄 Reset
-              </button>
+                {tr("🔄 Reset\n              ")}</button>
               <button
                 type="button"
                 onClick={(e) => {
@@ -2033,8 +1988,7 @@ export default function CPSTestPage() {
                 className="btn"
                 style={{ padding: '0.65rem 1.2rem', fontSize: '0.9rem', flex: 1, maxWidth: '160px', height: '42px', border: '2px solid #000000', boxShadow: '3px 3px 0 0 #000000', cursor: 'pointer', backgroundColor: '#55EFC4', color: '#000000', fontWeight: 900, textTransform: 'uppercase' }}
               >
-                ▶ Try Again
-              </button>
+                {tr("▶ Try Again\n              ")}</button>
             </div>
           </div>
         </>,
@@ -2066,8 +2020,7 @@ export default function CPSTestPage() {
                 <path d="M3 3v5h5"></path>
               </svg>
             </div>
-            Reset
-          </button>
+            {tr("Reset\n          ")}</button>
         </div>
       )}
 
@@ -2080,12 +2033,12 @@ export default function CPSTestPage() {
       {history.length > 0 && <SessionHistory history={history} />}
 
       {/* ── MORE TOOLS GRID ── */}
-      <section aria-label="More Tools" style={{ marginTop: '3rem', marginBottom: '2.5rem' }}>
+      <section aria-label={tr("More Tools")} style={{ marginTop: '3rem', marginBottom: '2.5rem' }}>
         <h2 style={{
           fontWeight: 800, fontSize: '1.5rem', color: '#fff',
           marginBottom: '1.5rem', textAlign: 'center',
           letterSpacing: '-0.3px',
-        }}>More Tools</h2>
+        }}>{tr("More Tools")}</h2>
         <div
           className="cps-games-grid"
           style={{
@@ -2156,8 +2109,7 @@ export default function CPSTestPage() {
       {/* ── WHY FIXEDAIM ── */}
       <section style={{ marginBottom: '2.5rem', background: 'var(--bg-card, #1e2235)', border: '1px solid var(--border, #2a3047)', borderRadius: '16px', padding: '1.75rem 1.5rem' }}>
         <h2 style={{ fontWeight: 800, fontSize: '1.3rem', color: 'var(--neon-cyan, #00f5ff)', margin: '0 0 1rem' }}>
-          Why Use FixedAim's CPS Test?
-        </h2>
+          {tr("Why Use FixedAim's CPS Test?\n        ")}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { icon: '📈', title: 'Real-time Graph', desc: 'Live CPS graph with hover tooltip — see exactly when your speed peaks or drops.' },

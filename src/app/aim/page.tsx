@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import AimPage from '@/views/AimPage';
+import { buildHreflangLanguages } from '@/lib/seo-i18n';
 
 export const metadata: Metadata = {
   title: "Aim & Reaction Tools - Free Reflex Trainers | FixedAim",
   description: "Improve your flicking, tracking, and reaction times with free browser aim trainers. Benchmark your FPS reflexes and motor precision with zero download.",
   alternates: {
     canonical: "https://fixedaim.com/aim",
+    languages: buildHreflangLanguages('/aim'),
   },
   openGraph: {
     title: "Aim & Reaction Tools - Free Reflex Trainers | FixedAim",

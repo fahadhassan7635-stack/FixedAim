@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/DevicePage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 
@@ -43,7 +45,8 @@ const deviceTools = [
 ];
 
 export default function DevicePage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1.5rem', minHeight: '80vh' }}>
       <script
@@ -191,7 +194,7 @@ export default function DevicePage() {
 
       {/* HEADER */}
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div className="section-label">Category</div>
+        <div className="section-label">{tr("Category")}</div>
         <h1 translate="no" className="tool-title" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)' }}>
           {t.hubs.device.h1}
         </h1>
@@ -203,22 +206,21 @@ export default function DevicePage() {
       {/* TOOLS GRID */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {deviceTools.map((tool) => (
-          <Link key={tool.to} href={tool.to} className="cod-hub-card">
+          <Link key={tool.to} href={localeHref(tool.to)} className="cod-hub-card">
             <div>
-              <div className="cod-hub-title">{tool.title}</div>
-              <p className="cod-hub-desc">{tool.desc}</p>
+              <div className="cod-hub-title">{tr(tool.title)}</div>
+              <p className="cod-hub-desc">{tr(tool.desc)}</p>
             </div>
-            <span className="cod-hub-cta" style={{ color: tool.color }}>Launch Diagnostics →</span>
+            <span className="cod-hub-cta" style={{ color: tool.color }}>{tr("Launch Diagnostics →")}</span>
           </Link>
         ))}
       </div>
 
       {/* HARDWARE DIAGNOSTICS TIPS */}
       <div className="cod-tip-box">
-        <div className="cod-tip-title">Hardware Calibration &amp; Optimization Tips</div>
+        <div className="cod-tip-title">{tr("Hardware Calibration &amp; Optimization Tips")}</div>
         <p className="cod-tip-intro">
-          Accurate hardware testing requires zero interference. Follow these calibration tips before diagnosing your peripherals:
-        </p>
+          {tr("Accurate hardware testing requires zero interference. Follow these calibration tips before diagnosing your peripherals:\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { t: 'DisplayPort vs HDMI', d: 'Use DisplayPort 1.4 or HDMI 2.1 to enable 144Hz+ without color compression.' },
@@ -226,9 +228,9 @@ export default function DevicePage() {
             { t: 'Disable Sound Enhancements', d: 'Turn off Windows Sonic or Dolby Atmos when testing stereo channels & phase.' },
             { t: 'Close GPU Overlays', d: 'Third-party capture overlays can cap frame pacing or cause false stutter in UFO tests.' },
           ].map((tip) => (
-            <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title">{tip.t}</div>
-              <div className="cod-tip-item-desc">{tip.d}</div>
+            <div key={tr(tip.t)} className="cod-tip-item">
+              <div className="cod-tip-item-title">{tr(tip.t)}</div>
+              <div className="cod-tip-item-desc">{tr(tip.d)}</div>
             </div>
           ))}
         </div>
@@ -236,14 +238,11 @@ export default function DevicePage() {
 
       <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
-          Instant Browser Hardware Diagnostics — Zero Downloads
-        </h2>
+          {tr("Instant Browser Hardware Diagnostics — Zero Downloads\n        ")}</h2>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-          Before blaming your aim or blaming game servers, verify that your monitor, audio gear, and peripherals are operating at full specification. Our <Link href="/hz-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Screen Refresh Rate (Hz) &amp; Speed Test</Link> measures true browser frame pacing and UFO motion smoothness to confirm your 144Hz, 240Hz, or 360Hz panel isn&apos;t stuck at 60Hz.
-        </p>
+          {tr("Before blaming your aim or blaming game servers, verify that your monitor, audio gear, and peripherals are operating at full specification. Our ")}<Link href={localeHref('/hz-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Screen Refresh Rate (Hz) &amp; Speed Test")}</Link> {tr("measures true browser frame pacing and UFO motion smoothness to confirm your 144Hz, 240Hz, or 360Hz panel isn&apos;t stuck at 60Hz.\n        ")}</p>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
-          Just bought a new laptop or monitor? Use the <Link href="/dead-pixel-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Dead Pixel Test</Link> to inspect solid color patterns for stuck subpixels, and run the <Link href="/speaker-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Speaker &amp; Audio Test</Link> to check left/right stereo imaging, bass response, and phase polarity in seconds.
-        </p>
+          {tr("Just bought a new laptop or monitor? Use the ")}<Link href={localeHref('/dead-pixel-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Dead Pixel Test")}</Link> {tr("to inspect solid color patterns for stuck subpixels, and run the ")}<Link href={localeHref('/speaker-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Speaker &amp; Audio Test")}</Link> {tr("to check left/right stereo imaging, bass response, and phase polarity in seconds.\n        ")}</p>
       </article>
     </div>
   );

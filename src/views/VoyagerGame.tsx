@@ -1,6 +1,9 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/VoyagerGame.json';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import React, {
   useState,
   useEffect,
@@ -405,6 +408,8 @@ const makeInitialState = (): GameState => ({
 
 // â”€â”€ COMPONENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function VoyagerGame() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const canvasRef    = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const gs           = useRef<GameState>(makeInitialState());
@@ -1464,7 +1469,7 @@ export default function VoyagerGame() {
           */}
           <canvas
             ref={canvasRef}
-            aria-label="Voyager Space Game - click or press Space to boost"
+            aria-label={tr("Voyager Space Game - click or press Space to boost")}
             style={{
               position: 'absolute',
               top: 0, left: 0,
@@ -1501,13 +1506,13 @@ export default function VoyagerGame() {
                   <IconBtn onClick={toggleSound}                      aria-label={isMuted ? 'Unmute' : 'Mute'}>
                     {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} color="#00f5ff" />}
                   </IconBtn>
-                  <IconBtn onClick={() => actionsRef.current.pause()} aria-label="Pause game">
+                  <IconBtn onClick={() => actionsRef.current.pause()} aria-label={tr("Pause game")}>
                     <Pause size={14} color="#fff" />
                   </IconBtn>
-                  <IconBtn onClick={toggleFullscreen}                 aria-label="Toggle fullscreen">
+                  <IconBtn onClick={toggleFullscreen}                 aria-label={tr("Toggle fullscreen")}>
                     {isFullscreen ? <Minimize size={14} color="#fff" /> : <Maximize size={14} color="#fff" />}
                   </IconBtn>
-                  <IconBtn onClick={() => setShowFps(f => !f)}        aria-label="Toggle FPS">
+                  <IconBtn onClick={() => setShowFps(f => !f)}        aria-label={tr("Toggle FPS")}>
                     <Cpu size={14} color={showFps ? '#a855f7' : '#64748b'} />
                   </IconBtn>
                 </div>
@@ -1542,7 +1547,7 @@ export default function VoyagerGame() {
                   transform: 'translateY(-50%)', textAlign: 'center',
                   pointerEvents: 'none',
                 }}>
-                  <div style={{ fontSize: '0.6rem', color: '#eab308', fontWeight: '800', letterSpacing: '0.1em' }}>COMBO</div>
+                  <div style={{ fontSize: '0.6rem', color: '#eab308', fontWeight: '800', letterSpacing: '0.1em' }}>{tr("COMBO")}</div>
                   <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#eab308', lineHeight: 1 }}>
                     x{scoreMultiplier.toFixed(1)}
                   </div>
@@ -1560,8 +1565,7 @@ export default function VoyagerGame() {
               pointerEvents: 'none',
             }}>
               <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#00f5ff', letterSpacing: '0.2em', marginBottom: '1rem', textTransform: 'uppercase' }}>
-                Mission Ready
-              </div>
+                {tr("Mission Ready\n              ")}</div>
               <div
                 key={String(countdownNum)}
                 style={{
@@ -1605,16 +1609,14 @@ export default function VoyagerGame() {
 
                 {/* Badge */}
                 <div style={{ display: 'inline-flex', backgroundColor: 'rgba(0,245,255,0.06)', border: '1px solid rgba(0,245,255,0.2)', color: '#00f5ff', fontSize: '10px', fontWeight: 700, padding: '3px 10px', borderRadius: '20px', marginBottom: '0.5rem', letterSpacing: '0.5px' }}>
-                  SPACE ENDURANCE GAME
-                </div>
+                  {tr("SPACE ENDURANCE GAME\n                ")}</div>
 
                 {/* Title */}
                 <h1 style={{ fontSize: '2.2rem', fontWeight: 900, margin: '0 0 0.3rem', color: '#000000', letterSpacing: '-0.5px' }}>
-                  Guide The <span style={{ color: '#00f5ff' }}>Voyager</span>
+                  {tr("Guide The ")}<span style={{ color: '#00f5ff' }}>{tr("Voyager")}</span>
                 </h1>
                 <p style={{ color: '#64748b', fontSize: '0.85rem', margin: '0 0 1.25rem' }}>
-                  Navigate the asteroid field. Hold SPACE or tap to boost.
-                </p>
+                  {tr("Navigate the asteroid field. Hold SPACE or tap to boost.\n                ")}</p>
 
                 {/* Best scores */}
                 {highScores.bestDistance > 0 && (
@@ -1628,7 +1630,7 @@ export default function VoyagerGame() {
 
                 {/* Difficulty */}
                 <div style={{ width: '100%', marginBottom: '1.1rem' }}>
-                  <div style={{ fontSize: '0.62rem', fontWeight: 800, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Difficulty</div>
+                  <div style={{ fontSize: '0.62rem', fontWeight: 800, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>{tr("Difficulty")}</div>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     {(['easy', 'normal', 'hard'] as Difficulty[]).map(d => (
                       <button
@@ -1655,7 +1657,7 @@ export default function VoyagerGame() {
 
                 {/* Start button */}
                 <button
-                  aria-label="Start mission"
+                  aria-label={tr("Start mission")}
                   onClick={(e) => { e.currentTarget.blur(); actionsRef.current.start(); }}
                   style={{
                     width: '100%', padding: '0.95rem',
@@ -1667,15 +1669,14 @@ export default function VoyagerGame() {
                     boxSizing: 'border-box', letterSpacing: '0.5px',
                   }}
                 >
-                  <Play fill="currentColor" size={16} /> START MISSION
-                </button>
+                  <Play fill="currentColor" size={16} /> {tr("START MISSION\n                ")}</button>
 
                 {/* Bottom action row */}
                 <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
-                  <button aria-label="View stats"        onClick={() => setShowStats(true)}        style={outlineBtn}><BarChart2 size={14} /> Stats</button>
-                  <button aria-label="View achievements" onClick={() => setShowAchievements(true)} style={outlineBtn}><Trophy    size={14} /> Achievements</button>
+                  <button aria-label={tr("View stats")}        onClick={() => setShowStats(true)}        style={outlineBtn}><BarChart2 size={14} /> {tr("Stats")}</button>
+                  <button aria-label={tr("View achievements")} onClick={() => setShowAchievements(true)} style={outlineBtn}><Trophy    size={14} /> {tr("Achievements")}</button>
                   <button aria-label={isMuted ? 'Unmute' : 'Mute'} onClick={toggleSound}          style={outlineBtn}>{isMuted ? <VolumeX size={14} /> : <Volume2 size={14} color="#00f5ff" />}</button>
-                  <button aria-label="Toggle fullscreen" onClick={toggleFullscreen}                style={outlineBtn}>{isFullscreen ? <Minimize size={14} /> : <Maximize size={14} />}</button>
+                  <button aria-label={tr("Toggle fullscreen")} onClick={toggleFullscreen}                style={outlineBtn}>{isFullscreen ? <Minimize size={14} /> : <Maximize size={14} />}</button>
                 </div>
               </div>
             </div>
@@ -1695,18 +1696,15 @@ export default function VoyagerGame() {
                 borderRadius: '20px', padding: '2rem', minWidth: '260px',
               }}>
                 <Pause size={36} color="#00f5ff" style={{ marginBottom: '0.75rem' }} />
-                <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#000000', margin: '0 0 0.5rem' }}>Paused</h2>
-                <p style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>Press P or ESC to resume</p>
+                <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#000000', margin: '0 0 0.5rem' }}>{tr("Paused")}</h2>
+                <p style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>{tr("Press P or ESC to resume")}</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                  <button aria-label="Resume" onClick={() => actionsRef.current.resume()} style={{ ...solidBtn, background: 'linear-gradient(135deg,#00f5ff,#22c55e)', color: '#000' }}>
-                    <PlayIcon fill="currentColor" size={16} /> RESUME
-                  </button>
-                  <button aria-label="Restart" onClick={() => actionsRef.current.start()} style={{ ...solidBtn, background: 'rgba(255,255,255,0.08)' }}>
-                    <RefreshCcw size={16} /> RESTART
-                  </button>
-                  <Link href="/games" style={{ ...solidBtn, textDecoration: 'none', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' } as React.CSSProperties}>
-                    <Home size={16} /> QUIT
-                  </Link>
+                  <button aria-label={tr("Resume")} onClick={() => actionsRef.current.resume()} style={{ ...solidBtn, background: 'linear-gradient(135deg,#00f5ff,#22c55e)', color: '#000' }}>
+                    <PlayIcon fill="currentColor" size={16} /> {tr("RESUME\n                  ")}</button>
+                  <button aria-label={tr("Restart")} onClick={() => actionsRef.current.start()} style={{ ...solidBtn, background: 'rgba(255,255,255,0.08)' }}>
+                    <RefreshCcw size={16} /> {tr("RESTART\n                  ")}</button>
+                  <Link href={localeHref("/games")} style={{ ...solidBtn, textDecoration: 'none', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' } as React.CSSProperties}>
+                    <Home size={16} /> {tr("QUIT\n                  ")}</Link>
                 </div>
               </div>
             </div>
@@ -1727,8 +1725,8 @@ export default function VoyagerGame() {
                 borderRadius: '20px', padding: '1.5rem', textAlign: 'center',
                 boxSizing: 'border-box',
               }}>
-                <div style={{ color: '#ff4d4d', fontWeight: '900', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.2rem' }}>Signal Lost</div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#000000', marginBottom: '1rem', letterSpacing: '-0.02em' }}>MISSION FAILED</h2>
+                <div style={{ color: '#ff4d4d', fontWeight: '900', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.2rem' }}>{tr("Signal Lost")}</div>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#000000', marginBottom: '1rem', letterSpacing: '-0.02em' }}>{tr("MISSION FAILED")}</h2>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1rem' }}>
                   <GameOverStat label="Distance" value={Math.floor(gs.current.distance).toLocaleString()} highlight="#00f5ff" isNew={Math.floor(gs.current.distance) >= highScores.bestDistance && gs.current.distance > 0} />
@@ -1738,20 +1736,16 @@ export default function VoyagerGame() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                  <button aria-label="Retry" onClick={() => { GA.retry(); actionsRef.current.start(); }} style={{ ...solidBtn, background: '#fff', color: '#000' }}>
-                    <RefreshCcw size={16} /> RETRY MISSION
-                  </button>
+                  <button aria-label={tr("Retry")} onClick={() => { GA.retry(); actionsRef.current.start(); }} style={{ ...solidBtn, background: '#fff', color: '#000' }}>
+                    <RefreshCcw size={16} /> {tr("RETRY MISSION\n                  ")}</button>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button aria-label="Achievements" onClick={() => setShowAchievements(true)} style={{ ...solidBtn, flex: 1, background: 'rgba(255,255,255,0.06)', fontSize: '0.8rem' }}>
-                      <Trophy size={14} /> Achievements
-                    </button>
-                    <button aria-label="Stats" onClick={() => setShowStats(true)} style={{ ...solidBtn, flex: 1, background: 'rgba(255,255,255,0.06)', fontSize: '0.8rem' }}>
-                      <BarChart2 size={14} /> Stats
-                    </button>
+                    <button aria-label={tr("Achievements")} onClick={() => setShowAchievements(true)} style={{ ...solidBtn, flex: 1, background: 'rgba(255,255,255,0.06)', fontSize: '0.8rem' }}>
+                      <Trophy size={14} /> {tr("Achievements\n                    ")}</button>
+                    <button aria-label={tr("Stats")} onClick={() => setShowStats(true)} style={{ ...solidBtn, flex: 1, background: 'rgba(255,255,255,0.06)', fontSize: '0.8rem' }}>
+                      <BarChart2 size={14} /> {tr("Stats\n                    ")}</button>
                   </div>
-                  <Link href="/games" style={{ ...solidBtn, textDecoration: 'none', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' } as React.CSSProperties}>
-                    <Home size={16} /> ALL GAMES
-                  </Link>
+                  <Link href={localeHref("/games")} style={{ ...solidBtn, textDecoration: 'none', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' } as React.CSSProperties}>
+                    <Home size={16} /> {tr("ALL GAMES\n                  ")}</Link>
                 </div>
               </div>
             </div>
@@ -1775,7 +1769,7 @@ export default function VoyagerGame() {
               }}>
                 <span style={{ fontSize: '1.2rem' }}>{a.icon}</span>
                 <div>
-                  <div style={{ fontSize: '0.65rem', color: '#eab308', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Achievement Unlocked!</div>
+                  <div style={{ fontSize: '0.65rem', color: '#eab308', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{tr("Achievement Unlocked!")}</div>
                   <div style={{ fontSize: '0.85rem', color: '#000000', fontWeight: '700' }}>{a.title}</div>
                 </div>
               </div>
@@ -1785,7 +1779,7 @@ export default function VoyagerGame() {
 
         {/* Stats modal */}
         {showStats && (
-          <Modal title="Lifetime Statistics" icon={<BarChart2 size={20} color="#00f5ff" />} onClose={() => setShowStats(false)}>
+          <Modal title={tr("Lifetime Statistics")} icon={<BarChart2 size={20} color="#00f5ff" />} onClose={() => setShowStats(false)}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <StatModal label="Games Played"     value={lifetimeStats.gamesPlayed} />
               <StatModal label="Total Distance"   value={lifetimeStats.totalDistance.toLocaleString()} />
@@ -1800,7 +1794,7 @@ export default function VoyagerGame() {
 
         {/* Achievements modal */}
         {showAchievements && (
-          <Modal title="Achievements" icon={<Trophy size={20} color="#eab308" />} onClose={() => setShowAchievements(false)}>
+          <Modal title={tr("Achievements")} icon={<Trophy size={20} color="#eab308" />} onClose={() => setShowAchievements(false)}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', maxHeight: '60vh', overflowY: 'auto' }}>
               {achievements.map(a => (
                 <div key={a.id} style={{
@@ -1812,7 +1806,7 @@ export default function VoyagerGame() {
                   <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{a.icon}</div>
                   <div style={{ fontSize: '0.8rem', fontWeight: '800', color: a.unlocked ? '#eab308' : '#94a3b8' }}>{a.title}</div>
                   <div style={{ fontSize: '0.68rem', color: '#64748b' }}>{a.description}</div>
-                  {a.unlocked && <div style={{ fontSize: '0.6rem', color: '#22c55e', marginTop: '0.25rem', fontWeight: '700' }}>âœ“ Unlocked</div>}
+                  {a.unlocked && <div style={{ fontSize: '0.6rem', color: '#22c55e', marginTop: '0.25rem', fontWeight: '700' }}>{tr("âœ“ Unlocked")}</div>}
                 </div>
               ))}
             </div>
@@ -1820,12 +1814,12 @@ export default function VoyagerGame() {
         )}
 
         {/* â”€â”€ MORE TOOLS GRID â”€â”€ */}
-        <section aria-label="More Tools" style={{ width: '100%', maxWidth: '850px', marginBottom: '3.5rem', marginTop: '1rem' }}>
+        <section aria-label={tr("More Tools")} style={{ width: '100%', maxWidth: '850px', marginBottom: '3.5rem', marginTop: '1rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#000000',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -1884,16 +1878,14 @@ export default function VoyagerGame() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem' }}>
             <Gauge size={22} color="#00f5ff" />
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#000000', margin: 0, letterSpacing: '-0.3px' }}>
-              Voyager Game: Space Endurance Arcade That Trains Your CPS
-            </h2>
+              {tr("Voyager Game: Space Endurance Arcade That Trains Your CPS\n            ")}</h2>
           </div>
           <p style={{ marginBottom: '1.5rem' }}>
-            <strong>Voyager Game</strong> is a free browser-based <strong>space endurance arcade</strong> where your raw clicking speed controls everything. Every mouse click or spacebar tap fires the rocket engine — guiding your ship through an infinite asteroid field while measuring your <strong>Clicks Per Second (CPS)</strong> in real time.
-          </p>
+            <strong>{tr("Voyager Game")}</strong> {tr("is a free browser-based ")}<strong>{tr("space endurance arcade")}</strong> {tr("where your raw clicking speed controls everything. Every mouse click or spacebar tap fires the rocket engine — guiding your ship through an infinite asteroid field while measuring your ")}<strong>{tr("Clicks Per Second (CPS)")}</strong> {tr("in real time.\n          ")}</p>
 
           {/* Section 1: What is Voyager Game */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>What is Voyager Game?</h2>
-          <p style={seoP}>Voyager Game is an <strong>endless asteroid dodge game</strong> where you control a rocket ship by clicking or pressing SPACE. The more consistently you click, the more stable your altitude — making it both a fun arcade experience and a genuine <strong>CPS training tool</strong>.</p>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>{tr("What is Voyager Game?")}</h2>
+          <p style={seoP}>{tr("Voyager Game is an ")}<strong>{tr("endless asteroid dodge game")}</strong> {tr("where you control a rocket ship by clicking or pressing SPACE. The more consistently you click, the more stable your altitude — making it both a fun arcade experience and a genuine ")}<strong>{tr("CPS training tool")}</strong>.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(190px,1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
             {[
               { title: 'Click-to-Thrust Engine', desc: 'Every click fires the engine. Your CPS directly controls vertical velocity and altitude stability.' },
@@ -1909,35 +1901,35 @@ export default function VoyagerGame() {
           </div>
 
           {/* Section 2: How does it work */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>How Does Voyager Game Work?</h2>
-          <p style={seoP}>The game uses a <strong>Click-to-Velocity physics engine</strong> — each click adds upward force, while constant gravity pulls the ship down. Here is the full game loop:</p>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>{tr("How Does Voyager Game Work?")}</h2>
+          <p style={seoP}>{tr("The game uses a ")}<strong>{tr("Click-to-Velocity physics engine")}</strong> {tr("— each click adds upward force, while constant gravity pulls the ship down. Here is the full game loop:")}</p>
           <ul style={{ paddingLeft: '1.4rem', marginBottom: '1.5rem', color: '#2D3436' }}>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Select Difficulty:</strong> Choose Easy, Normal, or Hard — each changes obstacle speed, spawn rate, and gravity multiplier.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Hold SPACE or Click:</strong> Each input boosts the rocket upward. Stop clicking and gravity takes over.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Dodge Asteroids:</strong> Three asteroid types — regular, comet, and boss — each with different speeds and sizes.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Collect Power-Ups:</strong> Fly into glowing icons to activate Shield, Slow-Mo, Double Boost, Multiplier, or Invincibility.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Track Your CPS:</strong> The HUD shows live CPS, score, and distance. After the run, your Peak CPS is saved.</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Select Difficulty:")}</strong> {tr("Choose Easy, Normal, or Hard — each changes obstacle speed, spawn rate, and gravity multiplier.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Hold SPACE or Click:")}</strong> {tr("Each input boosts the rocket upward. Stop clicking and gravity takes over.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Dodge Asteroids:")}</strong> {tr("Three asteroid types — regular, comet, and boss — each with different speeds and sizes.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Collect Power-Ups:")}</strong> {tr("Fly into glowing icons to activate Shield, Slow-Mo, Double Boost, Multiplier, or Invincibility.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Track Your CPS:")}</strong> {tr("The HUD shows live CPS, score, and distance. After the run, your Peak CPS is saved.")}</li>
           </ul>
 
           {/* Section 3: How it improves CPS */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>How Does Voyager Game Help You Improve Your CPS?</h2>
-          <p style={seoP}>Unlike static click counters, Voyager gives you <strong>immediate physical feedback</strong> — your clicking speed directly controls game outcomes, forcing you to maintain rhythm under pressure.</p>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>{tr("How Does Voyager Game Help You Improve Your CPS?")}</h2>
+          <p style={seoP}>{tr("Unlike static click counters, Voyager gives you ")}<strong>{tr("immediate physical feedback")}</strong> {tr("— your clicking speed directly controls game outcomes, forcing you to maintain rhythm under pressure.")}</p>
           <ul style={{ paddingLeft: '1.4rem', marginBottom: '1.5rem', color: '#2D3436' }}>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Biofeedback Loop:</strong> The ship visually responds to every click — you feel when your rhythm breaks, training you to stay consistent.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Finger Stamina:</strong> Surviving 60+ seconds requires sustained clicking without fatigue, building endurance over time.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Multitask Simulation:</strong> Clicking fast while dodging obstacles mirrors real gaming scenarios — improving hand-eye coordination.</li>
-            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>Peak CPS Tracking:</strong> Your personal best is saved — giving you a measurable target to beat each session.</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Biofeedback Loop:")}</strong> {tr("The ship visually responds to every click — you feel when your rhythm breaks, training you to stay consistent.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Finger Stamina:")}</strong> {tr("Surviving 60+ seconds requires sustained clicking without fatigue, building endurance over time.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Multitask Simulation:")}</strong> {tr("Clicking fast while dodging obstacles mirrors real gaming scenarios — improving hand-eye coordination.")}</li>
+            <li style={{ marginBottom: '0.5rem' }}><strong style={{ color: '#d1d5db' }}>{tr("Peak CPS Tracking:")}</strong> {tr("Your personal best is saved — giving you a measurable target to beat each session.")}</li>
           </ul>
           <div style={{ background: 'rgba(0,245,255,0.04)', borderLeft: '4px solid #00f5ff', padding: '1rem 1.2rem', margin: '1.5rem 0', borderRadius: '0 12px 12px 0' }}>
-            <span style={{ display: 'block', fontWeight: 800, color: '#000000', marginBottom: '0.3rem' }}>Did You Know?</span>
-            <span style={{ fontSize: '0.88rem', color: '#2D3436' }}>The average global CPS is 4–6.5. Competitive gamers reach 10–14 CPS. Voyager Hard mode is calibrated to push you toward and beyond that range.</span>
+            <span style={{ display: 'block', fontWeight: 800, color: '#000000', marginBottom: '0.3rem' }}>{tr("Did You Know?")}</span>
+            <span style={{ fontSize: '0.88rem', color: '#2D3436' }}>{tr("The average global CPS is 4–6.5. Competitive gamers reach 10–14 CPS. Voyager Hard mode is calibrated to push you toward and beyond that range.")}</span>
           </div>
 
           {/* Section 4: SeoExtraSections */}
           <SeoExtraSections />
 
           {/* Section 5: Difficulty comparison table */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Voyager Difficulty Comparison</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>{tr("Voyager Difficulty Comparison")}</h2>
           <div style={{ overflowX: 'auto', marginBottom: '1.5rem' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', minWidth: '500px' }}>
               <thead>
@@ -1966,11 +1958,11 @@ export default function VoyagerGame() {
           </div>
 
           {/* FAQ */}
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Frequently Asked Questions</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>{tr("Frequently Asked Questions")}</h2>
           <FaqAccordion items={FAQ_ITEMS} />
 
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>Ready to Launch?</h2>
-          <p style={{ margin: 0 }}>Start the simulation above and see how far you can guide the Voyager through deep space. Track your Peak CPS, unlock achievements, and challenge Hard mode for the ultimate endurance test!</p>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#000000', marginTop: '2rem', marginBottom: '0.75rem', letterSpacing: '-0.2px' }}>{tr("Ready to Launch?")}</h2>
+          <p style={{ margin: 0 }}>{tr("Start the simulation above and see how far you can guide the Voyager through deep space. Track your Peak CPS, unlock achievements, and challenge Hard mode for the ultimate endurance test!")}</p>
         </article>
       </div>
 
@@ -2047,14 +2039,15 @@ function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
 }
 
 function SeoExtraSections() {
+  const { tr } = usePageI18n(pageDict);
   return (
     <>
-      <h3 style={seoH3}>Boss Asteroids and Long-Run Endurance</h3>
-      <p style={seoP}>Every 90 seconds a Boss Asteroid fills most of the vertical play field. Clearing one unlocks the "Boss Slayer" achievement.</p>
-      <h3 style={seoH3}>Understanding Your Power-Up Loadout</h3>
-      <p style={seoP}>Five collectible power-ups: <strong>Shield</strong>, <strong>Invincibility</strong>, <strong>Slow-Mo</strong>, <strong>Double Boost</strong>, and <strong>Multiplier</strong>.</p>
-      <h3 style={seoH3}>Reading the Near-Miss Window</h3>
-      <p style={seoP}>A near miss registers when an asteroid passes close without collision, building your combo multiplier.</p>
+      <h3 style={seoH3}>{tr("Boss Asteroids and Long-Run Endurance")}</h3>
+      <p style={seoP}>{tr("Every 90 seconds a Boss Asteroid fills most of the vertical play field. Clearing one unlocks the \"Boss Slayer\" achievement.")}</p>
+      <h3 style={seoH3}>{tr("Understanding Your Power-Up Loadout")}</h3>
+      <p style={seoP}>{tr("Five collectible power-ups: ")}<strong>{tr("Shield")}</strong>, <strong>{tr("Invincibility")}</strong>, <strong>{tr("Slow-Mo")}</strong>, <strong>{tr("Double Boost")}</strong>{tr(", and ")}<strong>{tr("Multiplier")}</strong>.</p>
+      <h3 style={seoH3}>{tr("Reading the Near-Miss Window")}</h3>
+      <p style={seoP}>{tr("A near miss registers when an asteroid passes close without collision, building your combo multiplier.")}</p>
     </>
   );
 }
@@ -2095,13 +2088,13 @@ StatBox.displayName = 'StatBox';
 
 const GameOverStat = React.memo(({ label, value, highlight = '#fff', isNew }: {
   label: string; value: string | number; highlight?: string; isNew?: boolean;
-}) => (
+}) => { const { tr } = usePageI18n(pageDict); return ((
   <div style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${isNew ? highlight + '44' : 'rgba(255,255,255,0.05)'}`, borderRadius: '12px', padding: '0.7rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', position: 'relative' }}>
-    {isNew && <div style={{ position: 'absolute', top: '-6px', right: '6px', fontSize: '0.55rem', background: highlight, color: '#000', fontWeight: '900', padding: '1px 5px', borderRadius: '4px' }}>NEW BEST</div>}
+    {isNew && <div style={{ position: 'absolute', top: '-6px', right: '6px', fontSize: '0.55rem', background: highlight, color: '#000', fontWeight: '900', padding: '1px 5px', borderRadius: '4px' }}>{tr("NEW BEST")}</div>}
     <div style={{ fontSize: '0.6rem', fontWeight: '800', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
     <div style={{ fontSize: '1.15rem', fontWeight: '800', fontFamily: 'monospace', color: highlight }}>{value}</div>
   </div>
-));
+)); });
 GameOverStat.displayName = 'GameOverStat';
 
 const HiScoreChip = React.memo(({ label, value, color }: { label: string; value: string | number; color: string }) => (
@@ -2140,7 +2133,7 @@ PowerUpHudItem.displayName = 'PowerUpHudItem';
 
 const Modal = React.memo(({ title, icon, onClose, children }: {
   title: string; icon: React.ReactNode; onClose: () => void; children: React.ReactNode;
-}) => (
+}) => { const { tr } = usePageI18n(pageDict); return ((
   <div
     style={{ position: 'fixed', inset: 0, background: 'rgba(3,7,18,0.85)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1rem' }}
     onClick={onClose}
@@ -2154,12 +2147,12 @@ const Modal = React.memo(({ title, icon, onClose, children }: {
           {icon}
           <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#000000' }}>{title}</h2>
         </div>
-        <button aria-label="Close modal" onClick={onClose} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.3rem 0.6rem', color: '#94a3b8', cursor: 'pointer', fontSize: '1rem' }}>âœ•</button>
+        <button aria-label={tr("Close modal")} onClick={onClose} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '0.3rem 0.6rem', color: '#94a3b8', cursor: 'pointer', fontSize: '1rem' }}>âœ•</button>
       </div>
       {children}
     </div>
   </div>
-));
+)); });
 Modal.displayName = 'Modal';
 
 const StatModal = React.memo(({ label, value }: { label: string; value: string | number }) => (

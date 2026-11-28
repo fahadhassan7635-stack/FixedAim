@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { translations, LANGS } from '../lib/i18n';
+import React, { createContext, useContext, useCallback, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { translations, LANGS, getLangFromPathname, withLangPath } from '../lib/i18n';
 import type { Lang, T } from '../lib/i18n';
 
 const STORAGE_KEY = 'fixedaim-lang';
@@ -10,39 +11,45 @@ interface LanguageContextValue {
   lang: Lang;
   t: T;
   setLang: (lang: Lang) => void;
+  localeHref: (path: string) => string;
   langs: typeof LANGS;
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('en');
+  const pathname = usePathname();
+  const router = useRouter();
+  const lang = getLangFromPathname(pathname);
 
-  // Hydrate from localStorage on mount (SSR-safe)
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY) as Lang | null;
-      if (stored && stored in translations) {
-        setLangState(stored);
-      }
+      localStorage.setItem(STORAGE_KEY, lang);
     } catch {
-      // localStorage not available (SSR / privacy mode) — keep default 'en'
+      // ignore
     }
-  }, []);
+  }, [lang]);
 
   const setLang = useCallback((newLang: Lang) => {
-    setLangState(newLang);
     try {
       localStorage.setItem(STORAGE_KEY, newLang);
     } catch {
       // ignore
     }
-  }, []);
+    const targetUrl = withLangPath(pathname || '/', newLang);
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+    router.push(`${targetUrl}${search}`);
+  }, [pathname, router]);
+
+  const localeHref = useCallback((path: string) => {
+    return withLangPath(path, lang);
+  }, [lang]);
 
   const value: LanguageContextValue = {
     lang,
     t: translations[lang],
     setLang,
+    localeHref,
     langs: LANGS,
   };
 

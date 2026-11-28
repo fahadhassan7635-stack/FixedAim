@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/MouseAccuracyPage.json';
 import { useState, useRef, useCallback, useEffect, memo } from 'react';
 
 // ─── More Tools ───────────────────────────────────────────────────────────────
@@ -94,11 +96,12 @@ function useSoundEngine(enabled: boolean) {
 }
 
 function Breadcrumb() {
+  const { tr } = usePageI18n(pageDict);
   const items: [string, string | null][] = [
     ['Home', '/'], ['Tools', '/tools'], ['Mouse Button Test', null],
   ];
   return (
-    <nav aria-label="Breadcrumb" style={{ marginBottom: '1rem' }}>
+    <nav aria-label={tr("Breadcrumb")} style={{ marginBottom: '1rem' }}>
       <ol style={{ display: 'flex', gap: '0.5rem', listStyle: 'none', margin: 0, padding: 0, flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--text-muted,#888)' }}>
         {items.map(([label, href], i) => (
           <li key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -116,6 +119,7 @@ function Breadcrumb() {
 
 
 export default function MouseButtonTestPage() {
+  const { tr } = usePageI18n(pageDict);
   const [status, setStatus] = useState<Record<ButtonId, ButtonStatus>>(initialStatus);
   const [counts, setCounts] = useState<Record<ButtonId, number>>(initialCounts);
   const [scrollDir, setScrollDir] = useState<ScrollDir>(null);
@@ -222,9 +226,9 @@ export default function MouseButtonTestPage() {
         <Breadcrumb />
 
         <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <div className="section-label">Mouse Tool</div>
-          <h1 className="tool-title">Mouse Button Test</h1>
-          <p className="tool-subtitle">Click inside the pad below with each button on your mouse, and scroll the wheel, to confirm they register correctly.</p>
+          <div className="section-label">{tr("Mouse Tool")}</div>
+          <h1 className="tool-title">{tr("Mouse Button Test")}</h1>
+          <p className="tool-subtitle">{tr("Click inside the pad below with each button on your mouse, and scroll the wheel, to confirm they register correctly.")}</p>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.75rem' }}>
@@ -260,7 +264,7 @@ export default function MouseButtonTestPage() {
             onMouseDown={onPadMouseDown}
             onContextMenu={onPadContextMenu}
             role="application"
-            aria-label="Mouse test pad. Click and scroll here to test your mouse buttons."
+            aria-label={tr("Mouse test pad. Click and scroll here to test your mouse buttons.")}
             style={{
               position: 'relative', height: '380px', borderRadius: '16px',
               background: 'var(--bg-card)', border: '2px dashed var(--border)',
@@ -326,8 +330,8 @@ export default function MouseButtonTestPage() {
               <button
                 onPointerDown={e => { e.stopPropagation(); e.preventDefault(); markButton('dpi', 'DPI / Sensitivity button'); }}
                 onContextMenu={e => e.preventDefault()}
-                aria-label="Test DPI or sensitivity button"
-                title="Test DPI / sensitivity button"
+                aria-label={tr("Test DPI or sensitivity button")}
+                title={tr("Test DPI / sensitivity button")}
                 style={{
                   position: 'absolute',
                   left: `${(88 / 200) * 100}%`,
@@ -339,10 +343,9 @@ export default function MouseButtonTestPage() {
                 }}
               />
             </div>
-            <span style={{ fontWeight: 800, color: '#fff', fontSize: '0.95rem', marginTop: '0.25rem' }}>Click & Scroll Anywhere Here</span>
+            <span style={{ fontWeight: 800, color: '#fff', fontSize: '0.95rem', marginTop: '0.25rem' }}>{tr("Click & Scroll Anywhere Here")}</span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', maxWidth: '260px' }}>
-              The matching part lights up the moment you press it. Scrolling stays locked inside this box.
-            </span>
+              {tr("The matching part lights up the moment you press it. Scrolling stays locked inside this box.\r\n            ")}</span>
           </div>
 
           {/* Button status diagram */}
@@ -361,8 +364,7 @@ export default function MouseButtonTestPage() {
                 </div>
                 {id === 'dpi' && (
                   <p style={{ margin: '0.2rem 0 0 1.65rem', fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                    Some mice never send this as a normal click — press your DPI button anywhere in the pad, or tap the small square on the diagram directly to confirm it.
-                  </p>
+                    {tr("Some mice never send this as a normal click — press your DPI button anywhere in the pad, or tap the small square on the diagram directly to confirm it.\r\n                  ")}</p>
                 )}
               </div>
             ))}
@@ -372,7 +374,7 @@ export default function MouseButtonTestPage() {
                 background: scrollDir ? '#fbbf24' : 'rgba(255,255,255,0.12)',
                 boxShadow: scrollDir ? '0 0 16px #fbbf24' : 'none', transition: 'all 0.15s ease',
               }} />
-              <span style={{ flex: 1, fontSize: '0.85rem', color: '#fff' }}>Scroll Wheel</span>
+              <span style={{ flex: 1, fontSize: '0.85rem', color: '#fff' }}>{tr("Scroll Wheel")}</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 ↑{scrollCounts.up} / ↓{scrollCounts.down}
               </span>
@@ -381,14 +383,14 @@ export default function MouseButtonTestPage() {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-          <button className="btn btn-secondary" onClick={reset}>↺ Reset Test</button>
+          <button className="btn btn-secondary" onClick={reset}>{tr("↺ Reset Test")}</button>
         </div>
 
         {/* Event log */}
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '1.25rem' }}>
-          <h3 style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Event Log</h3>
+          <h3 style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{tr("Event Log")}</h3>
           {log.length === 0 ? (
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>No events yet — click or scroll in the pad above.</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>{tr("No events yet — click or scroll in the pad above.")}</p>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', maxHeight: '200px', overflowY: 'auto' }}>
               {log.map(entry => (
@@ -402,12 +404,12 @@ export default function MouseButtonTestPage() {
         </div>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -462,15 +464,15 @@ export default function MouseButtonTestPage() {
         {/* SEO Article + FAQ */}
         <div style={{ marginTop: '2rem', color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.8' }}>
           <article>
-            <h2 style={{ fontWeight: 800, fontSize: '1.6rem', color: 'var(--neon-cyan,#00f5ff)', marginTop: 0, marginBottom: '0.75rem' }}>What is a Mouse Button Test?</h2>
-            <p style={{ marginBottom: '1.25rem' }}>A <strong>Mouse Button Test</strong> checks whether every physical control on your mouse — left click, right click, middle click, scroll wheel, side buttons, and DPI/sensitivity switch — actually reaches your browser and registers as the input it's supposed to. Instead of guessing whether a click "felt" right, this tool logs the exact event the moment it happens, so you can confirm hardware behavior instead of relying on impression.</p>
-            <p style={{ marginBottom: '1.25rem' }}>This is especially useful after dropping a mouse, before selling or buying a used one, or when a button has started to feel inconsistent — tests like this catch problems days or weeks before they become obvious during normal use.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.6rem', color: 'var(--neon-cyan,#00f5ff)', marginTop: 0, marginBottom: '0.75rem' }}>{tr("What is a Mouse Button Test?")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>A <strong>{tr("Mouse Button Test")}</strong> {tr("checks whether every physical control on your mouse — left click, right click, middle click, scroll wheel, side buttons, and DPI/sensitivity switch — actually reaches your browser and registers as the input it's supposed to. Instead of guessing whether a click \"felt\" right, this tool logs the exact event the moment it happens, so you can confirm hardware behavior instead of relying on impression.")}</p>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("This is especially useful after dropping a mouse, before selling or buying a used one, or when a button has started to feel inconsistent — tests like this catch problems days or weeks before they become obvious during normal use.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>How the Test Works</h2>
-            <p style={{ marginBottom: '1.25rem' }}>The pad listens directly for browser-level input events rather than simulating anything: <code>mousedown</code> for left, right, and middle clicks, the extended button codes for back and forward, and <code>wheel</code> events for scrolling. The moment an event fires, the matching part of the diagram lights up amber, then settles to green once confirmed — so a press that never arrives simply never lights up, which is itself useful information.</p>
-            <p style={{ marginBottom: '1.25rem' }}>Right-click and middle-click are intercepted so the browser's own context menu or auto-scroll icon doesn't interrupt the test, and scrolling is locked to the pad itself so the page underneath doesn't move while you test the wheel.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("How the Test Works")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("The pad listens directly for browser-level input events rather than simulating anything: ")}<code>mousedown</code> {tr("for left, right, and middle clicks, the extended button codes for back and forward, and ")}<code>wheel</code> {tr("events for scrolling. The moment an event fires, the matching part of the diagram lights up amber, then settles to green once confirmed — so a press that never arrives simply never lights up, which is itself useful information.")}</p>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("Right-click and middle-click are intercepted so the browser's own context menu or auto-scroll icon doesn't interrupt the test, and scrolling is locked to the pad itself so the page underneath doesn't move while you test the wheel.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Common Mouse Button Problems</h2>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Common Mouse Button Problems")}</h2>
             <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.25rem' }}>
               {[
                 ['Double-click chatter', 'A single physical press registers as two clicks. This is almost always worn microswitch contacts inside the button, not a software issue.'],
@@ -483,32 +485,32 @@ export default function MouseButtonTestPage() {
               ))}
             </ul>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Fixing a Double-Clicking Mouse</h2>
-            <p style={{ marginBottom: '1.25rem' }}>If the left-click counter in this test increases by two for a single press, the <a href="https://en.wikipedia.org/wiki/Microswitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>microswitch <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> underneath that button has likely worn out — a common failure after a couple of years of regular use. Software debounce settings in some mouse utilities can mask it temporarily, but the permanent fix is replacing the switch or the mouse. Confirm the pattern is consistent (test it 15–20 times) before concluding it's hardware rather than a one-off.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Fixing a Double-Clicking Mouse")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("If the left-click counter in this test increases by two for a single press, the ")}<a href="https://en.wikipedia.org/wiki/Microswitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>{tr("microswitch ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> {tr("underneath that button has likely worn out — a common failure after a couple of years of regular use. Software debounce settings in some mouse utilities can mask it temporarily, but the permanent fix is replacing the switch or the mouse. Confirm the pattern is consistent (test it 15–20 times) before concluding it's hardware rather than a one-off.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Why Side Buttons Sometimes Don't Show Up</h2>
-            <p style={{ marginBottom: '1.25rem' }}>Back and forward side buttons are historically mapped to browser navigation, so on some systems the browser consumes the event before a webpage can read it. If those buttons never light up here despite clearly working elsewhere (like navigating back in a browser tab), the hardware is fine — the event just isn't being exposed to the page.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Why Side Buttons Sometimes Don't Show Up")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("Back and forward side buttons are historically mapped to browser navigation, so on some systems the browser consumes the event before a webpage can read it. If those buttons never light up here despite clearly working elsewhere (like navigating back in a browser tab), the hardware is fine — the event just isn't being exposed to the page.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Mouse Polling Rate and Input Latency</h2>
-            <p style={{ marginBottom: '1.25rem' }}>Your mouse's <a href="https://en.wikipedia.org/wiki/Polling_(computer_science)" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>polling rate <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> determines how often it reports its state to the computer per second, measured in Hz. A standard 125 Hz mouse reports every 8 ms, while a 1000 Hz gaming mouse reports every 1 ms. For competitive gaming or precision testing, higher polling rates reduce perceived input lag and make cursor movement feel smoother and more accurate. Many modern gaming mice offer 2000 Hz or even 4000 Hz polling for near-zero latency.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Mouse Polling Rate and Input Latency")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("Your mouse's ")}<a href="https://en.wikipedia.org/wiki/Polling_(computer_science)" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>{tr("polling rate ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> {tr("determines how often it reports its state to the computer per second, measured in Hz. A standard 125 Hz mouse reports every 8 ms, while a 1000 Hz gaming mouse reports every 1 ms. For competitive gaming or precision testing, higher polling rates reduce perceived input lag and make cursor movement feel smoother and more accurate. Many modern gaming mice offer 2000 Hz or even 4000 Hz polling for near-zero latency.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Mechanical vs Optical Mouse Switches Explained</h2>
-            <p style={{ marginBottom: '1.25rem' }}>Traditional mice use <a href="https://en.wikipedia.org/wiki/Microswitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>mechanical microswitches <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> (most commonly Omron D2FC) that rely on two metal contacts touching. Over time, these contacts oxidize and bounce, creating the double-click chatter issue. Optical switches, used in newer gaming mice, replace the metal contact with a light beam — there's no physical bounce, so they are immune to chatter and are rated for 100 million+ clicks versus 20–50 million for mechanical options.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Mechanical vs Optical Mouse Switches Explained")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("Traditional mice use ")}<a href="https://en.wikipedia.org/wiki/Microswitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>{tr("mechanical microswitches ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> {tr("(most commonly Omron D2FC) that rely on two metal contacts touching. Over time, these contacts oxidize and bounce, creating the double-click chatter issue. Optical switches, used in newer gaming mice, replace the metal contact with a light beam — there's no physical bounce, so they are immune to chatter and are rated for 100 million+ clicks versus 20–50 million for mechanical options.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Understanding DPI and Mouse Sensitivity</h2>
-            <p style={{ marginBottom: '1.25rem' }}>DPI (Dots Per Inch) measures how sensitive your mouse is to physical movement. A 400 DPI setting means moving the mouse one inch moves the cursor 400 pixels. Most professional esports players prefer lower DPI (400–800) combined with high in-game sensitivity for greater control. The <a href="https://en.wikipedia.org/wiki/Dots_per_inch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>DPI standard <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> varies per game genre: FPS games favor 400–1600 DPI, while MOBA or RTS games may benefit from higher settings for fast multi-target selection.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Understanding DPI and Mouse Sensitivity")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("DPI (Dots Per Inch) measures how sensitive your mouse is to physical movement. A 400 DPI setting means moving the mouse one inch moves the cursor 400 pixels. Most professional esports players prefer lower DPI (400–800) combined with high in-game sensitivity for greater control. The ")}<a href="https://en.wikipedia.org/wiki/Dots_per_inch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>{tr("DPI standard ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> {tr("varies per game genre: FPS games favor 400–1600 DPI, while MOBA or RTS games may benefit from higher settings for fast multi-target selection.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Mouse Ergonomics and Grip Styles</h2>
-            <p style={{ marginBottom: '1.25rem' }}>How you hold your mouse significantly affects click accuracy and fatigue. The three main grip styles are: <strong>Palm grip</strong> (whole hand rests on mouse — comfortable for long sessions), <strong>Claw grip</strong> (fingertips and palm base contact — faster clicking), and <strong>Fingertip grip</strong> (only fingertips touch — most precise, least fatigue for small mice). <a href="https://www.osha.gov/ergonomics" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>Ergonomics guidelines <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> recommend keeping your wrist neutral and elbow at 90° to reduce repetitive strain injury risk.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Mouse Ergonomics and Grip Styles")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("How you hold your mouse significantly affects click accuracy and fatigue. The three main grip styles are: ")}<strong>{tr("Palm grip")}</strong> {tr("(whole hand rests on mouse — comfortable for long sessions), ")}<strong>{tr("Claw grip")}</strong> {tr("(fingertips and palm base contact — faster clicking), and ")}<strong>{tr("Fingertip grip")}</strong> {tr("(only fingertips touch — most precise, least fatigue for small mice). ")}<a href="https://www.osha.gov/ergonomics" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>{tr("Ergonomics guidelines ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> {tr("recommend keeping your wrist neutral and elbow at 90° to reduce repetitive strain injury risk.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Scroll Wheel Technology and Encoder Wear</h2>
-            <p style={{ marginBottom: '1.25rem' }}>The scroll wheel inside your mouse uses a <a href="https://en.wikipedia.org/wiki/Rotary_encoder" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>rotary encoder <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> — either a mechanical notched wheel or an optical disc — to detect rotation direction and steps. Over time, mechanical encoders wear and can produce "ghost scrolling" (scrolling in the wrong direction) or skipped notches. Gaming mice with optical encoders are much more resistant to this type of degradation. Use the scroll test zone above to verify your encoder produces the correct up/down signals consistently.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Scroll Wheel Technology and Encoder Wear")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("The scroll wheel inside your mouse uses a ")}<a href="https://en.wikipedia.org/wiki/Rotary_encoder" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: 500 }}>{tr("rotary encoder ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'text-bottom',marginLeft:'0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> {tr("— either a mechanical notched wheel or an optical disc — to detect rotation direction and steps. Over time, mechanical encoders wear and can produce \"ghost scrolling\" (scrolling in the wrong direction) or skipped notches. Gaming mice with optical encoders are much more resistant to this type of degradation. Use the scroll test zone above to verify your encoder produces the correct up/down signals consistently.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>How to Diagnose Mouse Hardware vs Software Issues</h2>
-            <p style={{ marginBottom: '1.25rem' }}>When a mouse button misbehaves, distinguishing hardware failure from a software/driver issue is the first diagnostic step. If the problem appears in this browser test (completely software-independent), it is almost certainly hardware. If the button works here but fails in a specific application, a driver, firmware, or application configuration is likely the cause. Try: updating mouse firmware through the manufacturer's companion software, uninstalling and reinstalling mouse drivers, testing on a different USB port or computer, and checking for OS accessibility settings that may intercept clicks.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("How to Diagnose Mouse Hardware vs Software Issues")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("When a mouse button misbehaves, distinguishing hardware failure from a software/driver issue is the first diagnostic step. If the problem appears in this browser test (completely software-independent), it is almost certainly hardware. If the button works here but fails in a specific application, a driver, firmware, or application configuration is likely the cause. Try: updating mouse firmware through the manufacturer's companion software, uninstalling and reinstalling mouse drivers, testing on a different USB port or computer, and checking for OS accessibility settings that may intercept clicks.")}</p>
 
-            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>Mouse Button Debouncing: What It Is and Why It Matters</h2>
-            <p style={{ marginBottom: '1.25rem' }}>Debouncing is a technique used in mouse firmware to filter out the rapid electrical on/off bouncing that occurs naturally when a mechanical switch makes or breaks contact. Without debouncing, a single press could register dozens of clicks in milliseconds. Most mice apply a debounce delay of 4–10 ms. If the debounce time is too short (due to firmware bugs or aging components), chatter escapes the filter. Some gaming mice allow you to configure the debounce time in their companion software — increasing it reduces chatter but adds a small amount of input latency.</p>
+            <h2 style={{ fontWeight: 800, fontSize: '1.4rem', color: '#fff', marginTop: '2rem', marginBottom: '0.75rem' }}>{tr("Mouse Button Debouncing: What It Is and Why It Matters")}</h2>
+            <p style={{ marginBottom: '1.25rem' }}>{tr("Debouncing is a technique used in mouse firmware to filter out the rapid electrical on/off bouncing that occurs naturally when a mechanical switch makes or breaks contact. Without debouncing, a single press could register dozens of clicks in milliseconds. Most mice apply a debounce delay of 4–10 ms. If the debounce time is too short (due to firmware bugs or aging components), chatter escapes the filter. Some gaming mice allow you to configure the debounce time in their companion software — increasing it reduces chatter but adds a small amount of input latency.")}</p>
           </article>
 
           {/* ── Accordion FAQ ── */}
@@ -538,10 +540,11 @@ const MOUSE_ACCURACY_FAQ = [
 ];
 
 const MouseFaqSection = memo(function MouseFaqSection() {
+  const { tr } = usePageI18n(pageDict);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
+    <section aria-label={tr("Frequently Asked Questions")} style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
       <h2 style={{
         fontWeight: 900, fontSize: '1.75rem', color: '#000000',
         marginTop: 0, marginBottom: '1.5rem',
@@ -556,8 +559,7 @@ const MouseFaqSection = memo(function MouseFaqSection() {
           <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
           <line x1="12" y1="17" x2="12.01" y2="17" />
         </svg>
-        Frequently Asked Questions
-      </h2>
+        {tr("Frequently Asked Questions\r\n      ")}</h2>
 
       <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {MOUSE_ACCURACY_FAQ.map((faq, i) => {

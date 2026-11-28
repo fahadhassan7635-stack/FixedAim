@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { useLang } from '../contexts/LanguageContext';
-import type { Lang } from '../lib/i18n';
+import { stripLocale, type Lang } from '../lib/i18n';
 
 const mouseIcon = '/gun-pfp.png';
 
@@ -171,7 +171,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [hoveredTool, setHoveredTool] = useState<{ label: string; top: number; left: number } | null>(null);
   const pathname = usePathname();
-  const { t } = useLang();
+  const cleanPath = stripLocale(pathname);
+  const { t, localeHref } = useLang();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -204,7 +205,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       }}>
         {/* LOGO */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
-          <Link href="/" style={{
+          <Link href={localeHref('/')} style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             textDecoration: 'none',
             background: '#FFE033',
@@ -248,11 +249,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           overflow: 'hidden',
         }} className="desktop-nav">
           {NAV_ITEM_KEYS.map(item => {
-            const isActive = ('exact' in item && item.exact) ? pathname === item.to : pathname?.startsWith(item.to);
+            const isActive = ('exact' in item && item.exact) ? cleanPath === item.to : cleanPath.startsWith(item.to);
             return (
               <li key={item.to} style={{ flexShrink: 0 }}>
                 <Link
-                  href={item.to}
+                  href={localeHref(item.to)}
                   className="top-nav-link"
                   style={{
                     padding: '0.42rem 0.8rem',
@@ -333,10 +334,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           boxSizing: 'border-box',
         }}>
           {NAV_ITEM_KEYS.map(item => {
-            const isActive = ('exact' in item && item.exact) ? pathname === item.to : pathname?.startsWith(item.to);
+            const isActive = ('exact' in item && item.exact) ? cleanPath === item.to : cleanPath.startsWith(item.to);
             return (
               <Link
-                key={item.to} href={item.to}
+                key={item.to} href={localeHref(item.to)}
                 onClick={() => setMenuOpen(false)}
                 style={{
                   padding: '0.75rem 1rem',
@@ -369,7 +370,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           opacity: 1,
           visibility: 'visible',
           background: '#FFFDF5',
-          borderRight: '3px solid #000000',
+          borderInlineEnd: '3px solid #000000',
           height: 'calc(100vh - 66px)',
           position: 'sticky',
           top: '66px',
@@ -471,13 +472,14 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingRight: '4px',
           }}>
             {filteredTools.map((tool) => {
-              const isCurrentActive = pathname === tool.to;
+              const isCurrentActive = cleanPath === tool.to;
+              const toolHref = localeHref(tool.to);
               const isPinned = tool.to === '/cps-test';
               const showLabel = sidebarOpen || isPinned;
               return (
                 <div key={tool.to} style={{ position: 'relative' }}>
                   <Link
-                    href={tool.to}
+                    href={toolHref}
                     className={`sidebar-tool-btn ${isCurrentActive ? 'active' : ''}`}
                     style={{
                       display: 'flex', alignItems: 'center',
@@ -491,7 +493,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     }}
                     onMouseEnter={() => {
                       if (!sidebarOpen) {
-                        const rect = document.querySelector(`[href="${tool.to}"]`)?.getBoundingClientRect();
+                        const rect = document.querySelector(`[href="${toolHref}"]`)?.getBoundingClientRect();
                         if (rect) {
                           setHoveredTool({ label: tool.label, top: rect.top + rect.height / 2, left: rect.right + 10 });
                         }

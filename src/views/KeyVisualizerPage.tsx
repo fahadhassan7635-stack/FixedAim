@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/KeyVisualizerPage.json';
 // src/pages/KeyVisualizerPage.tsx
 // ─────────────────────────────────────────────────────────────────────────────
 // HARDENED Key Visualizer — Tamper-proof, crash-proof, sound-locked
@@ -867,6 +869,7 @@ interface KeyboardGridProps {
 }
 
 const KeyboardGrid = memo(function KeyboardGrid({ activeKeys }: KeyboardGridProps) {
+  const { tr } = usePageI18n(pageDict);
   const [layoutMode, setLayoutMode] = useState<'100' | '80' | '60'>('100');
 
   // Check if key is active
@@ -886,7 +889,7 @@ const KeyboardGrid = memo(function KeyboardGrid({ activeKeys }: KeyboardGridProp
   return (
     <div
       role="presentation"
-      aria-label="Virtual keyboard — active keys light up"
+      aria-label={tr("Virtual keyboard — active keys light up")}
       style={{
         background: 'var(--bg-card)',
         border: '1px solid var(--border)',
@@ -911,8 +914,7 @@ const KeyboardGrid = memo(function KeyboardGrid({ activeKeys }: KeyboardGridProp
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
-            Layout Mode:
-          </span>
+            {tr("Layout Mode:\n          ")}</span>
           <span style={{ fontSize: '0.75rem', color: 'var(--neon-cyan)', fontWeight: 600 }}>
             {layoutMode === '100' ? '104-Key Full Size (Numpad + Arrows + F-Row)' : layoutMode === '80' ? 'Tenkeyless (TKL + Arrows + F-Row)' : '60% Compact'}
           </span>
@@ -1002,8 +1004,7 @@ const KeyboardGrid = memo(function KeyboardGrid({ activeKeys }: KeyboardGridProp
               {/* Header spacer to align with F-Row */}
               <div style={{ height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.05em' }}>
-                  NUMPAD
-                </span>
+                  {tr("NUMPAD\n                ")}</span>
               </div>
 
               {/* Grid 4 columns x 5 rows */}
@@ -1034,16 +1035,16 @@ const KeyboardGrid = memo(function KeyboardGrid({ activeKeys }: KeyboardGridProp
 interface KeyHistoryPanelProps { history: ReadonlyArray<KeyHistory> }
 
 const KeyHistoryPanel = memo(function KeyHistoryPanel({ history }: KeyHistoryPanelProps) {
+  const { tr } = usePageI18n(pageDict);
   return (
     <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden' }}>
       <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--neon-cyan)' }}>
-        ⌨️ Key Log
-      </div>
-      <div role="log" aria-label="Recent key presses" aria-live="polite" aria-relevant="additions"
+        {tr("⌨️ Key Log\n      ")}</div>
+      <div role="log" aria-label={tr("Recent key presses")} aria-live="polite" aria-relevant="additions"
         style={{ padding: '0.5rem', maxHeight: '200px', overflowY: 'auto' }}
       >
         {history.length === 0 ? (
-          <div style={{ padding: '1rem', color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center' }}>Start typing…</div>
+          <div style={{ padding: '1rem', color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center' }}>{tr("Start typing…")}</div>
         ) : (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', padding: '0.5rem' }}>
             {history.map((k, i) => (
@@ -1070,15 +1071,15 @@ const KeyHistoryPanel = memo(function KeyHistoryPanel({ history }: KeyHistoryPan
 interface TopKeysPanelProps { topKeys: ReadonlyArray<[string, number]> }
 
 const TopKeysPanel = memo(function TopKeysPanel({ topKeys }: TopKeysPanelProps) {
+  const { tr } = usePageI18n(pageDict);
   const maxCount = topKeys[0]?.[1] ?? 1;
   return (
     <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden' }}>
       <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid var(--border)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--neon-orange)' }}>
-        🏆 Most Used Keys
-      </div>
-      <div role="list" aria-label="Most frequently pressed keys" style={{ padding: '0.5rem' }}>
+        {tr("🏆 Most Used Keys\n      ")}</div>
+      <div role="list" aria-label={tr("Most frequently pressed keys")} style={{ padding: '0.5rem' }}>
         {topKeys.length === 0 ? (
-          <div style={{ padding: '1rem', color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center' }}>No data yet…</div>
+          <div style={{ padding: '1rem', color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center' }}>{tr("No data yet…")}</div>
         ) : (
           topKeys.map(([key, count]) => {
             const pct = clamp((count / Math.max(maxCount, 1)) * 100, 0, 100);
@@ -1282,6 +1283,7 @@ const VolumeBar = memo(function VolumeBar({ value, disabled, onChange }: VolumeB
 });
 
 const SoundControls = memo(function SoundControls({ sound, repeat, onSound, onRepeat }: SoundControlsProps) {
+  const { tr } = usePageI18n(pageDict);
   const handleEnabledChange = useCallback((v: boolean) => { try { onSound({ ...sound, enabled: v }); } catch { /* ignore */ } }, [sound, onSound]);
   const handleVolumeChange  = useCallback((v: number) => { try { onSound({ ...sound, volume: v }); } catch { /* ignore */ } }, [sound, onSound]);
   const handleRepeatChange  = useCallback((v: boolean) => { try { onRepeat({ blockRepeats: v }); } catch { /* ignore */ } }, [onRepeat]);
@@ -1299,19 +1301,17 @@ const SoundControls = memo(function SoundControls({ sound, repeat, onSound, onRe
   };
 
   return (
-    <div role="group" aria-label="Keyboard sound and repeat settings" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
+    <div role="group" aria-label={tr("Keyboard sound and repeat settings")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
       {/* SOUND CARD */}
       <div style={cardBase}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.08em', textTransform: 'uppercase', background: '#00F5FF', color: '#000', border: '2px solid #000', padding: '2px 8px' }}>
-            SOUND FX
-          </span>
+            {tr("SOUND FX\n          ")}</span>
           <NeonToggle id="toggle-sound" checked={sound.enabled} onChange={handleEnabledChange} color="#00F5FF" />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: '1rem', fontWeight: 900, color: '#000000' }}>
-            Click Sounds
-          </span>
+            {tr("Click Sounds\n          ")}</span>
           <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#555' }}>
             {sound.enabled ? 'Audio Active' : 'Muted'}
           </span>
@@ -1323,14 +1323,12 @@ const SoundControls = memo(function SoundControls({ sound, repeat, onSound, onRe
       <div style={cardBase}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.08em', textTransform: 'uppercase', background: '#FF9F43', color: '#000', border: '2px solid #000', padding: '2px 8px' }}>
-            INPUT FILTER
-          </span>
+            {tr("INPUT FILTER\n          ")}</span>
           <NeonToggle id="toggle-repeat" checked={repeat.blockRepeats} onChange={handleRepeatChange} color="#FF9F43" />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: '1rem', fontWeight: 900, color: '#000000' }}>
-            Block Key Repeat
-          </span>
+            {tr("Block Key Repeat\n          ")}</span>
         </div>
         <div
           style={{
@@ -1494,6 +1492,7 @@ const SHORTCUTS_DATA: ReadonlyArray<ShortcutItem> = Object.freeze([
 ]);
 
 const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
+  const { tr } = usePageI18n(pageDict);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -1534,7 +1533,7 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
 
   return (
     <section
-      aria-label="100+ Essential PC and Laptop Shortcuts Cheat Sheet"
+      aria-label={tr("100+ Essential PC and Laptop Shortcuts Cheat Sheet")}
       style={{
         background: '#0c1322',
         border: '1px solid rgba(0, 245, 255, 0.2)',
@@ -1548,14 +1547,12 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--neon-green, #00ff88)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             <Sparkles size={16} />
-            <span>Productivity Database</span>
+            <span>{tr("Productivity Database")}</span>
           </div>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: '0.25rem 0 0', letterSpacing: '-0.02em' }}>
-            100+ Essential PC & Laptop Shortcuts
-          </h2>
+            {tr("100+ Essential PC & Laptop Shortcuts\n          ")}</h2>
           <p style={{ color: '#2D3436', fontSize: '0.88rem', margin: '0.35rem 0 0' }}>
-            Master daily shortcuts for Windows, Mac, Chrome, Text Editing, VS Code & Excel. Press keys above on the visualizer to test!
-          </p>
+            {tr("Master daily shortcuts for Windows, Mac, Chrome, Text Editing, VS Code & Excel. Press keys above on the visualizer to test!\n          ")}</p>
         </div>
 
         {/* Live Search */}
@@ -1565,7 +1562,7 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search shortcuts (e.g. screenshot, tab)..."
+            placeholder={tr("Search shortcuts (e.g. screenshot, tab)...")}
             style={{
               width: '100%',
               padding: '9px 12px 9px 36px',
@@ -1609,14 +1606,13 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
 
       {/* Results Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', fontSize: '0.8rem', color: '#64748b' }}>
-        <span>Showing <strong>{filteredShortcuts.length}</strong> of 116 shortcuts</span>
+        <span>{tr("Showing ")}<strong>{filteredShortcuts.length}</strong> {tr("of 116 shortcuts")}</span>
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
             style={{ background: 'transparent', border: 'none', color: 'var(--neon-cyan)', cursor: 'pointer', fontSize: '0.8rem' }}
           >
-            Clear Search
-          </button>
+            {tr("Clear Search\n          ")}</button>
         )}
       </div>
 
@@ -1677,7 +1673,7 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
 
                   <button
                     onClick={() => handleCopy(item.keys, itemKey)}
-                    title="Copy shortcut"
+                    title={tr("Copy shortcut")}
                     aria-label={`Copy ${item.title} shortcut`}
                     style={{
                       background: isCopied ? 'rgba(0,255,136,0.15)' : 'rgba(255,255,255,0.05)',
@@ -1722,9 +1718,10 @@ const ShortcutsCheatSheet = memo(function ShortcutsCheatSheet() {
 });
 
 const TableOfContents = memo(function TableOfContents() {
+  const { tr } = usePageI18n(pageDict);
   return (
-    <nav aria-label="Article table of contents" style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '10px', padding: '1.25rem 1.5rem', marginBottom: '2rem', border: '1px solid var(--border)' }}>
-      <p style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--neon-cyan)', marginBottom: '0.75rem', marginTop: 0 }}>📋 Table of Contents</p>
+    <nav aria-label={tr("Article table of contents")} style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '10px', padding: '1.25rem 1.5rem', marginBottom: '2rem', border: '1px solid var(--border)' }}>
+      <p style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--neon-cyan)', marginBottom: '0.75rem', marginTop: 0 }}>{tr("📋 Table of Contents")}</p>
       <ol style={{ margin: 0, paddingLeft: '1.25rem' }}>
         {TOC_SECTIONS.map(s => (
           <li key={s.id} style={{ marginBottom: '0.35rem' }}>
@@ -1791,10 +1788,11 @@ const FAQ_DATA = [
 ];
 
 const FaqSection = memo(function FaqSection() {
+  const { tr } = usePageI18n(pageDict);
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
+    <section aria-label={tr("Frequently Asked Questions")} style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
       <h2 style={{
         fontWeight: 900,
         fontSize: '1.75rem',
@@ -1810,8 +1808,7 @@ const FaqSection = memo(function FaqSection() {
         fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif"
       }}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-        Frequently Asked Questions
-      </h2>
+        {tr("Frequently Asked Questions\n      ")}</h2>
 
       <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {FAQ_DATA.map((faq, i) => {
@@ -1937,6 +1934,7 @@ const BreadcrumbSchema = Object.freeze({
 const ArticleSection = lazy(() =>
   Promise.resolve({
     default: memo(function ArticleSection() {
+  const { tr } = usePageI18n(pageDict);
       const h2Style: CSSProperties = {
         color: 'var(--neon-green, #00ff88)',
         fontSize: '1.5rem',
@@ -1973,138 +1971,118 @@ const ArticleSection = lazy(() =>
       };
 
       return (
-        <article aria-label="Key Visualizer guide and information">
-          <h2 id="how-to-use" style={h2Style}>How to Use the Key Visualizer</h2>
+        <article aria-label={tr("Key Visualizer guide and information")}>
+          <h2 id="how-to-use" style={h2Style}>{tr("How to Use the Key Visualizer")}</h2>
           <p style={pStyle}>
-            FixedAim&apos;s <strong>Key Visualizer</strong> is a high-precision, zero-latency keyboard testing suite and real-time keystroke viewer.
-            Simply start pressing any key on your physical keyboard to see it actuate on the virtual display in real time.
-            Whether you are testing individual mechanical switches, identifying ghosted clusters, or benchmarking multi-key rollover (NKRO),
-            every keystroke is captured with sub-millisecond hardware accuracy.
-          </p>
+            {tr("FixedAim&apos;s ")}<strong>{tr("Key Visualizer")}</strong> {tr("is a high-precision, zero-latency keyboard testing suite and real-time keystroke viewer.\n            Simply start pressing any key on your physical keyboard to see it actuate on the virtual display in real time.\n            Whether you are testing individual mechanical switches, identifying ghosted clusters, or benchmarking multi-key rollover (NKRO),\n            every keystroke is captured with sub-millisecond hardware accuracy.\n          ")}</p>
 
-          <h3 style={h3Style}>1. Switch Between Full 100%, TKL, and 60% Layouts</h3>
+          <h3 style={h3Style}>{tr("1. Switch Between Full 100%, TKL, and 60% Layouts")}</h3>
           <p style={pStyle}>
-            Use the layout switcher at the top of the keyboard to choose between:
-          </p>
+            {tr("Use the layout switcher at the top of the keyboard to choose between:\n          ")}</p>
           <ul style={ulStyle}>
-            <li style={liStyle}><strong>100% Full Keyboard:</strong> Includes standard alphanumeric keys, Function Row (<code style={codeStyle}>F1–F12</code>), Navigation Cluster (<code style={codeStyle}>Ins, Del, Home, End, PgUp, PgDn</code>), dedicated Arrow Keys, and a complete Numeric Keypad.</li>
-            <li style={liStyle}><strong>80% Tenkeyless (TKL):</strong> Retains the Function Row, Navigation Cluster, and Arrow Keys without the Numpad.</li>
-            <li style={liStyle}><strong>60% Compact:</strong> Streamlined alphanumeric layout optimized for compact desks and mobile screens.</li>
+            <li style={liStyle}><strong>{tr("100% Full Keyboard:")}</strong> {tr("Includes standard alphanumeric keys, Function Row (")}<code style={codeStyle}>F1–F12</code>{tr("), Navigation Cluster (")}<code style={codeStyle}>Ins, Del, Home, End, PgUp, PgDn</code>{tr("), dedicated Arrow Keys, and a complete Numeric Keypad.")}</li>
+            <li style={liStyle}><strong>{tr("80% Tenkeyless (TKL):")}</strong> {tr("Retains the Function Row, Navigation Cluster, and Arrow Keys without the Numpad.")}</li>
+            <li style={liStyle}><strong>{tr("60% Compact:")}</strong> {tr("Streamlined alphanumeric layout optimized for compact desks and mobile screens.")}</li>
           </ul>
 
-          <h3 style={h3Style}>2. Testing Key Rollover (NKRO) & Ghosting</h3>
+          <h3 style={h3Style}>{tr("2. Testing Key Rollover (NKRO) & Ghosting")}</h3>
           <p style={pStyle}>
-            Press and hold multiple keys simultaneously (e.g. <code style={codeStyle}>W + A + S + D + Shift + Space</code>).
-            The <em>Active Keys</em> counter reflects the exact number of switches registered simultaneously.
-            Quality gaming keyboards feature N-Key Rollover (NKRO), allowing all held keys to register without dropped inputs.{' '}
+            {tr("Press and hold multiple keys simultaneously (e.g. ")}<code style={codeStyle}>W + A + S + D + Shift + Space</code>{tr(").\n            The ")}<em>{tr("Active Keys")}</em> {tr("counter reflects the exact number of switches registered simultaneously.\n            Quality gaming keyboards feature N-Key Rollover (NKRO), allowing all held keys to register without dropped inputs.")}{' '}
             <ContextPill label="NKRO Software" variant="amber" topicId="keyboard-troubleshooting" icon="none" />
           </p>
 
-          <h2 id="features" style={h2Style}>Features of This Keyboard Visualizer</h2>
+          <h2 id="features" style={h2Style}>{tr("Features of This Keyboard Visualizer")}</h2>
           <ul style={ulStyle}>
-            <li style={liStyle}><strong>Complete 104-Key Coverage:</strong> Includes F-keys, Numpad, and navigation clusters.</li>
-            <li style={liStyle}><strong>Zero-Scroll Tab Key:</strong> Tab navigation is suppressed so you can test the <code style={codeStyle}>Tab</code> key smoothly without viewport jumps.</li>
-            <li style={liStyle}><strong>Live Key Log:</strong> Inspect your last 20 keystrokes with timestamps and clear badges.</li>
-            <li style={liStyle}><strong>Usage Bar Chart:</strong> Analyze which keys receive the heaviest actuation during gaming and typing sessions.</li>
-            <li style={liStyle}><strong>Mechanical Audio Feedback:</strong> Optional Web Audio click sounds simulate mechanical key switch actuation.</li>
-            <li style={liStyle}><strong>100+ Shortcut Cheat Sheet:</strong> Fast searchable reference table for Windows, Mac, Chrome, VS Code, and Excel.</li>
+            <li style={liStyle}><strong>{tr("Complete 104-Key Coverage:")}</strong> {tr("Includes F-keys, Numpad, and navigation clusters.")}</li>
+            <li style={liStyle}><strong>{tr("Zero-Scroll Tab Key:")}</strong> {tr("Tab navigation is suppressed so you can test the ")}<code style={codeStyle}>Tab</code> {tr("key smoothly without viewport jumps.")}</li>
+            <li style={liStyle}><strong>{tr("Live Key Log:")}</strong> {tr("Inspect your last 20 keystrokes with timestamps and clear badges.")}</li>
+            <li style={liStyle}><strong>{tr("Usage Bar Chart:")}</strong> {tr("Analyze which keys receive the heaviest actuation during gaming and typing sessions.")}</li>
+            <li style={liStyle}><strong>{tr("Mechanical Audio Feedback:")}</strong> {tr("Optional Web Audio click sounds simulate mechanical key switch actuation.")}</li>
+            <li style={liStyle}><strong>{tr("100+ Shortcut Cheat Sheet:")}</strong> {tr("Fast searchable reference table for Windows, Mac, Chrome, VS Code, and Excel.")}</li>
           </ul>
 
-          <h2 id="shortcuts-guide" style={h2Style}>100+ Essential PC & Laptop Shortcuts for Daily Life</h2>
+          <h2 id="shortcuts-guide" style={h2Style}>{tr("100+ Essential PC & Laptop Shortcuts for Daily Life")}</h2>
           <p style={pStyle}>
-            Keyboard shortcuts transform how you interact with your computer. Navigating menus with a mouse requires visual searching, moving the cursor, clicking, and waiting for sub-menus to open. In contrast, triggering a shortcut executes the command in under <strong>50 milliseconds</strong>.
+            {tr("Keyboard shortcuts transform how you interact with your computer. Navigating menus with a mouse requires visual searching, moving the cursor, clicking, and waiting for sub-menus to open. In contrast, triggering a shortcut executes the command in under ")}<strong>{tr("50 milliseconds")}</strong>.
           </p>
           <p style={pStyle}>
-            Whether you are capturing screenshots (<code style={codeStyle}>Win + Shift + S</code>), reopening accidentally closed tabs (<code style={codeStyle}>Ctrl + Shift + T</code>), opening clipboard history (<code style={codeStyle}>Win + V</code>), or locking your workstation (<code style={codeStyle}>Win + L</code>), memorizing high-frequency combinations saves hours every month.{' '}
+            {tr("Whether you are capturing screenshots (")}<code style={codeStyle}>Win + Shift + S</code>{tr("), reopening accidentally closed tabs (")}<code style={codeStyle}>Ctrl + Shift + T</code>{tr("), opening clipboard history (")}<code style={codeStyle}>Win + V</code>{tr("), or locking your workstation (")}<code style={codeStyle}>Win + L</code>{tr("), memorizing high-frequency combinations saves hours every month.")}{' '}
             <ContextPill label="100+ Short Keys" variant="purple" topicId="pc-shortcuts" icon="none" />
           </p>
           <p style={pStyle}>
-            Use the interactive <strong>100+ Shortcuts Cheat Sheet</strong> above to filter by your operating system or application (Windows, Mac, Browser, File Explorer, Developer, or Excel) and press the keys directly on your physical keyboard to confirm their registration on the visualizer!
-          </p>
+            {tr("Use the interactive ")}<strong>{tr("100+ Shortcuts Cheat Sheet")}</strong> {tr("above to filter by your operating system or application (Windows, Mac, Browser, File Explorer, Developer, or Excel) and press the keys directly on your physical keyboard to confirm their registration on the visualizer!\n          ")}</p>
 
-          <h2 id="streamer-overlay" style={h2Style}>Real-Time Keystroke Visualizer for Speedruns, OBS Streaming & Gaming</h2>
+          <h2 id="streamer-overlay" style={h2Style}>{tr("Real-Time Keystroke Visualizer for Speedruns, OBS Streaming & Gaming")}</h2>
           <p style={pStyle}>
-            In competitive gaming, Twitch/YouTube streaming, and speedrunning leaderboards (such as Speedrun.com for Minecraft, Celeste, or Trackmania), proof of manual execution is paramount. Moderators and viewers require an on-screen keyboard display (KBM input visualizer) to verify that runs are performed without illegal macros, turbo controllers, or tool-assisted automation (TAS).{' '}
+            {tr("In competitive gaming, Twitch/YouTube streaming, and speedrunning leaderboards (such as Speedrun.com for Minecraft, Celeste, or Trackmania), proof of manual execution is paramount. Moderators and viewers require an on-screen keyboard display (KBM input visualizer) to verify that runs are performed without illegal macros, turbo controllers, or tool-assisted automation (TAS).")}{' '}
             <ContextPill label="Speedrun KBM" variant="blue" topicId="streamer-kbm-overlay" icon="none" />
           </p>
           <p style={pStyle}>
-            FixedAim Key Visualizer serves as an instant, zero-install <strong>on-screen key tracker screen</strong>. Streamers can easily capture the FixedAim browser tab as an OBS or Streamlabs Window Source or Browser Source. Because it renders via lightweight GPU-accelerated CSS and native event listeners, it imposes virtually zero CPU or GPU load compared to bloated desktop overlay software.
-          </p>
+            {tr("FixedAim Key Visualizer serves as an instant, zero-install ")}<strong>{tr("on-screen key tracker screen")}</strong>{tr(". Streamers can easily capture the FixedAim browser tab as an OBS or Streamlabs Window Source or Browser Source. Because it renders via lightweight GPU-accelerated CSS and native event listeners, it imposes virtually zero CPU or GPU load compared to bloated desktop overlay software.\n          ")}</p>
 
-          <h2 id="tab-detector" style={h2Style}>Tab Switch Detector & Window Focus Mechanics</h2>
+          <h2 id="tab-detector" style={h2Style}>{tr("Tab Switch Detector & Window Focus Mechanics")}</h2>
           <p style={pStyle}>
-            Modern web applications, online exams, remote proctoring portals, and competitive browser benchmarks frequently incorporate <strong>Tab Switch Detectors</strong>. When a user navigates away from an active tab or presses <code style={codeStyle}>Alt + Tab</code>, the browser fires <code style={codeStyle}>visibilitychange</code> and <code style={codeStyle}>window.onblur</code> events.{' '}
+            {tr("Modern web applications, online exams, remote proctoring portals, and competitive browser benchmarks frequently incorporate ")}<strong>{tr("Tab Switch Detectors")}</strong>{tr(". When a user navigates away from an active tab or presses ")}<code style={codeStyle}>Alt + Tab</code>{tr(", the browser fires ")}<code style={codeStyle}>visibilitychange</code> {tr("and ")}<code style={codeStyle}>window.onblur</code> {tr("events.")}{' '}
             <ContextPill label="Tab Switch Detector" variant="green" topicId="tab-switch-detector" icon="none" />
           </p>
           <p style={pStyle}>
-            On standard websites, pressing the <code style={codeStyle}>Tab</code> key cycles focus through links and buttons, which causes sudden viewport scrolling. FixedAim Key Visualizer solves this by attaching <code style={codeStyle}>passive: false</code> event listeners to intercept <code style={codeStyle}>e.preventDefault()</code> exclusively on the Tab key. This enables users to test their Tab key actuation reliably without disorienting viewport jumps.
-          </p>
+            {tr("On standard websites, pressing the ")}<code style={codeStyle}>Tab</code> {tr("key cycles focus through links and buttons, which causes sudden viewport scrolling. FixedAim Key Visualizer solves this by attaching ")}<code style={codeStyle}>passive: false</code> {tr("event listeners to intercept ")}<code style={codeStyle}>e.preventDefault()</code> {tr("exclusively on the Tab key. This enables users to test their Tab key actuation reliably without disorienting viewport jumps.\n          ")}</p>
 
-          <h2 id="nkro-ghosting" style={h2Style}>Key Rollover (NKRO) & Keyboard Matrix Bug Testing</h2>
+          <h2 id="nkro-ghosting" style={h2Style}>{tr("Key Rollover (NKRO) & Keyboard Matrix Bug Testing")}</h2>
           <p style={pStyle}>
-            Have you ever experienced your character freezing while strafing diagonally and jumping? Or does typing fast drop characters? This is caused by <strong>key rollover limits</strong> and matrix bugs. Budget membrane keyboards connect keys in an electrical grid of intersecting rows and columns without individual isolation diodes.
-          </p>
+            {tr("Have you ever experienced your character freezing while strafing diagonally and jumping? Or does typing fast drop characters? This is caused by ")}<strong>{tr("key rollover limits")}</strong> {tr("and matrix bugs. Budget membrane keyboards connect keys in an electrical grid of intersecting rows and columns without individual isolation diodes.\n          ")}</p>
           <ul style={ulStyle}>
-            <li style={liStyle}><strong>2-Key Rollover (2KRO):</strong> Basic membrane controllers can only detect 2 simultaneous keystrokes reliably. Pressing a 3rd key sharing an electrical trace causes dropped inputs.</li>
-            <li style={liStyle}><strong>6-Key Rollover (6KRO):</strong> Standard USB HID limit on legacy boards, allowing up to 6 simultaneous alphanumeric keys.</li>
-            <li style={liStyle}><strong>Full N-Key Rollover (NKRO):</strong> True gaming and enthusiast keyboards equip every mechanical switch with a discrete surface-mount diode. You can press 10, 20, or all 104 keys simultaneously, and every single switch will illuminate instantly.</li>
+            <li style={liStyle}><strong>{tr("2-Key Rollover (2KRO):")}</strong> {tr("Basic membrane controllers can only detect 2 simultaneous keystrokes reliably. Pressing a 3rd key sharing an electrical trace causes dropped inputs.")}</li>
+            <li style={liStyle}><strong>{tr("6-Key Rollover (6KRO):")}</strong> {tr("Standard USB HID limit on legacy boards, allowing up to 6 simultaneous alphanumeric keys.")}</li>
+            <li style={liStyle}><strong>{tr("Full N-Key Rollover (NKRO):")}</strong> {tr("True gaming and enthusiast keyboards equip every mechanical switch with a discrete surface-mount diode. You can press 10, 20, or all 104 keys simultaneously, and every single switch will illuminate instantly.")}</li>
           </ul>
           <p style={pStyle}>
-            Press both hands across your keyboard right now to benchmark your hardware rollover limit. The <strong>Active Keys</strong> counter will immediately reveal whether your keyboard suffers from ghosting or matrix blocking.
-          </p>
+            {tr("Press both hands across your keyboard right now to benchmark your hardware rollover limit. The ")}<strong>{tr("Active Keys")}</strong> {tr("counter will immediately reveal whether your keyboard suffers from ghosting or matrix blocking.\n          ")}</p>
 
-          <h2 id="troubleshoot-keys" style={h2Style}>Troubleshooting Dead, Sticky, or Erased Keys on Laptops & Mechanical Keyboards</h2>
+          <h2 id="troubleshoot-keys" style={h2Style}>{tr("Troubleshooting Dead, Sticky, or Erased Keys on Laptops & Mechanical Keyboards")}</h2>
           <p style={pStyle}>
-            Over years of daily typing, keycap legends frequently fade, wear off, or become completely erased—especially on ABS keycaps (like <code style={codeStyle}>WASD, E, Space, Enter</code>). Users often ask: <em>&ldquo;Is there a way to show what key does what on my erased keyboard?&rdquo;</em>{' '}
+            {tr("Over years of daily typing, keycap legends frequently fade, wear off, or become completely erased—especially on ABS keycaps (like ")}<code style={codeStyle}>WASD, E, Space, Enter</code>{tr("). Users often ask: ")}<em>{tr("&ldquo;Is there a way to show what key does what on my erased keyboard?&rdquo;")}</em>{' '}
             <ContextPill label="Fix Erased Keys" variant="cyan" topicId="keyboard-troubleshooting" icon="none" />
           </p>
           <p style={pStyle}>
-            FixedAim Key Visualizer is the easiest way to identify mystery or blank keycaps. Press the faded switch, and the virtual 104-key layout will light up the exact key name, character symbol, and physical location on screen. Furthermore, you can diagnose common hardware faults:
-          </p>
+            {tr("FixedAim Key Visualizer is the easiest way to identify mystery or blank keycaps. Press the faded switch, and the virtual 104-key layout will light up the exact key name, character symbol, and physical location on screen. Furthermore, you can diagnose common hardware faults:\n          ")}</p>
           <ul style={ulStyle}>
-            <li style={liStyle}><strong>Switch Chatter (Double-Typing):</strong> If pressing a switch once registers 2, 3, or more counts in the Live Key Log, the switch leaf contacts are oxidized or bouncing. Cleaning with isopropyl alcohol or replacing the switch can resolve the issue.</li>
-            <li style={liStyle}><strong>Dead Keys:</strong> If pressing a key firmly fails to trigger any visual feedback or entry in the Live Log, the PCB hot-swap socket, ribbon cable, or switch diode is severed.</li>
-            <li style={liStyle}><strong>Sticky Keys & Spills:</strong> Sticky keys exhibit delayed release times, remaining highlighted in the Active Keys panel long after your finger has released the keycap.</li>
+            <li style={liStyle}><strong>{tr("Switch Chatter (Double-Typing):")}</strong> {tr("If pressing a switch once registers 2, 3, or more counts in the Live Key Log, the switch leaf contacts are oxidized or bouncing. Cleaning with isopropyl alcohol or replacing the switch can resolve the issue.")}</li>
+            <li style={liStyle}><strong>{tr("Dead Keys:")}</strong> {tr("If pressing a key firmly fails to trigger any visual feedback or entry in the Live Log, the PCB hot-swap socket, ribbon cable, or switch diode is severed.")}</li>
+            <li style={liStyle}><strong>{tr("Sticky Keys & Spills:")}</strong> {tr("Sticky keys exhibit delayed release times, remaining highlighted in the Active Keys panel long after your finger has released the keycap.")}</li>
           </ul>
 
-          <h2 id="web-vs-desktop" style={h2Style}>Web-Based Key Visualizer vs Desktop Software (Vovsoft, NohBoard)</h2>
+          <h2 id="web-vs-desktop" style={h2Style}>{tr("Web-Based Key Visualizer vs Desktop Software (Vovsoft, NohBoard)")}</h2>
           <p style={pStyle}>
-            Many streamers and gamers historically relied on desktop software utilities like <em>Vovsoft Keystroke Visualizer</em> or <em>NohBoard</em>. While these tools function as local overlays, they present significant disadvantages compared to FixedAim:
-          </p>
+            {tr("Many streamers and gamers historically relied on desktop software utilities like ")}<em>{tr("Vovsoft Keystroke Visualizer")}</em> {tr("or ")}<em>{tr("NohBoard")}</em>{tr(". While these tools function as local overlays, they present significant disadvantages compared to FixedAim:\n          ")}</p>
           <ul style={ulStyle}>
-            <li style={liStyle}><strong>Zero Security Risk:</strong> Desktop visualizers require administrative installer permissions and low-level keyboard hook drivers. This introduces potential keylogger vulnerabilities. FixedAim runs entirely in your sandboxed web browser.</li>
-            <li style={liStyle}><strong>Zero Bloat & Zero Installation:</strong> No downloads, no unzipping, no background tray processes consuming system RAM. Simply open the URL and test instantly.</li>
-            <li style={liStyle}><strong>Cross-Platform Compatibility:</strong> Desktop software is almost universally restricted to Windows. FixedAim Key Visualizer runs flawlessly across Windows 10/11, macOS, Linux, and ChromeOS laptops.</li>
+            <li style={liStyle}><strong>{tr("Zero Security Risk:")}</strong> {tr("Desktop visualizers require administrative installer permissions and low-level keyboard hook drivers. This introduces potential keylogger vulnerabilities. FixedAim runs entirely in your sandboxed web browser.")}</li>
+            <li style={liStyle}><strong>{tr("Zero Bloat & Zero Installation:")}</strong> {tr("No downloads, no unzipping, no background tray processes consuming system RAM. Simply open the URL and test instantly.")}</li>
+            <li style={liStyle}><strong>{tr("Cross-Platform Compatibility:")}</strong> {tr("Desktop software is almost universally restricted to Windows. FixedAim Key Visualizer runs flawlessly across Windows 10/11, macOS, Linux, and ChromeOS laptops.")}</li>
           </ul>
 
-          <h2 id="benefits-gamers" style={h2Style}>Benefits for Gamers & Competitive Esports</h2>
+          <h2 id="benefits-gamers" style={h2Style}>{tr("Benefits for Gamers & Competitive Esports")}</h2>
           <p style={pStyle}>
-            In competitive shooters like CS2, Valorant, Fortnite, Apex Legends, and Minecraft PvP, movement mechanics rely on rapid switch actuation:
-          </p>
+            {tr("In competitive shooters like CS2, Valorant, Fortnite, Apex Legends, and Minecraft PvP, movement mechanics rely on rapid switch actuation:\n          ")}</p>
           <ul style={ulStyle}>
-            <li style={liStyle}><strong>Counter-Strafing:</strong> Rapidly releasing <code style={codeStyle}>A</code> and tapping <code style={codeStyle}>D</code> halts player velocity instantly for pinpoint first-bullet rifle accuracy.</li>
-            <li style={liStyle}><strong>Sprint Resets & W-Tapping:</strong> In Minecraft PvP, resetting your sprint key between sword hits maximizes knockback against your opponent.</li>
-            <li style={liStyle}><strong>Rapid Weapon Switching:</strong> Ensures number row (<code style={codeStyle}>1, 2, 3, 4</code>) actuates reliably without missing grenade or sidearm swaps.</li>
+            <li style={liStyle}><strong>{tr("Counter-Strafing:")}</strong> {tr("Rapidly releasing ")}<code style={codeStyle}>A</code> {tr("and tapping ")}<code style={codeStyle}>D</code> {tr("halts player velocity instantly for pinpoint first-bullet rifle accuracy.")}</li>
+            <li style={liStyle}><strong>{tr("Sprint Resets & W-Tapping:")}</strong> {tr("In Minecraft PvP, resetting your sprint key between sword hits maximizes knockback against your opponent.")}</li>
+            <li style={liStyle}><strong>{tr("Rapid Weapon Switching:")}</strong> {tr("Ensures number row (")}<code style={codeStyle}>1, 2, 3, 4</code>{tr(") actuates reliably without missing grenade or sidearm swaps.")}</li>
           </ul>
 
-          <h2 id="benefits-typists" style={h2Style}>Benefits for Programmers, Data Entry & Ergonomics</h2>
+          <h2 id="benefits-typists" style={h2Style}>{tr("Benefits for Programmers, Data Entry & Ergonomics")}</h2>
           <p style={pStyle}>
-            Software engineers and transcriptionists actuate modifier clusters thousands of times daily (<code style={codeStyle}>Ctrl, Alt, Shift, Cmd, Win</code>) alongside punctuation brackets (<code style={codeStyle}>&#123;&#125;, [], &lt;&gt;, ;, :</code>).
-            The Key Visualizer verifies that every modifier and symbol switch actuates with equal pressure on both hands, preventing wrist strain and repetitive strain injuries (RSI).
-          </p>
+            {tr("Software engineers and transcriptionists actuate modifier clusters thousands of times daily (")}<code style={codeStyle}>Ctrl, Alt, Shift, Cmd, Win</code>{tr(") alongside punctuation brackets (")}<code style={codeStyle}>&#123;&#125;, [], &lt;&gt;, ;, :</code>{tr(").\n            The Key Visualizer verifies that every modifier and symbol switch actuates with equal pressure on both hands, preventing wrist strain and repetitive strain injuries (RSI).\n          ")}</p>
 
-          <h2 id="browser-compat" style={h2Style}>Browser Compatibility & Zero-Log Privacy Guarantee</h2>
+          <h2 id="browser-compat" style={h2Style}>{tr("Browser Compatibility & Zero-Log Privacy Guarantee")}</h2>
           <p style={pStyle}>
-            FixedAim Key Visualizer is compatible with all modern desktop and laptop browsers, including Google Chrome, Mozilla Firefox, Microsoft Edge, Brave, Opera, and Apple Safari.
-          </p>
+            {tr("FixedAim Key Visualizer is compatible with all modern desktop and laptop browsers, including Google Chrome, Mozilla Firefox, Microsoft Edge, Brave, Opera, and Apple Safari.\n          ")}</p>
           <p style={pStyle}>
-            <strong>Your Privacy is 100% Protected:</strong> Every keystroke is captured exclusively in local browser RAM via native JavaScript event handlers. Zero keystroke data is ever recorded, stored in cookies, or transmitted to any remote server or analytics platform.
-          </p>
+            <strong>{tr("Your Privacy is 100% Protected:")}</strong> {tr("Every keystroke is captured exclusively in local browser RAM via native JavaScript event handlers. Zero keystroke data is ever recorded, stored in cookies, or transmitted to any remote server or analytics platform.\n          ")}</p>
 
-          <h2 id="conclusion" style={h2Style}>Conclusion & Routine Keyboard Maintenance</h2>
+          <h2 id="conclusion" style={h2Style}>{tr("Conclusion & Routine Keyboard Maintenance")}</h2>
           <p style={pStyle}>
-            Keep your peripherals in pristine condition with FixedAim&apos;s full-size Key Visualizer. Test individual switches, verify multi-key rollover (NKRO), explore our 100+ shortcuts database, and diagnose hardware chatter before jumping into competitive ranked gaming or professional typing workflows.
-          </p>
+            {tr("Keep your peripherals in pristine condition with FixedAim&apos;s full-size Key Visualizer. Test individual switches, verify multi-key rollover (NKRO), explore our 100+ shortcuts database, and diagnose hardware chatter before jumping into competitive ranked gaming or professional typing workflows.\n          ")}</p>
         </article>
       );
     }),
@@ -2116,6 +2094,7 @@ const ArticleSection = lazy(() =>
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function KeyVisualizerPage() {
+  const { tr } = usePageI18n(pageDict);
   useDocumentMeta();
 
   const [sound, setSound]   = useState<SoundSettings>({ enabled: true, volume: 0.5 });
@@ -2143,12 +2122,12 @@ export default function KeyVisualizerPage() {
     <div style={{ maxWidth: '1050px', margin: '0 auto', padding: '2rem 1.25rem' }}>
 
       <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <div className="section-label">Keyboard Tool</div>
-        <h1 className="tool-title">Key Visualizer</h1>
-        <p className="tool-subtitle">Real-time full keyboard display — test all 104 keys, Numpad, F-keys & Arrows</p>
+        <div className="section-label">{tr("Keyboard Tool")}</div>
+        <h1 className="tool-title">{tr("Key Visualizer")}</h1>
+        <p className="tool-subtitle">{tr("Real-time full keyboard display — test all 104 keys, Numpad, F-keys & Arrows")}</p>
       </header>
 
-      <div role="region" aria-label="Keyboard statistics"
+      <div role="region" aria-label={tr("Keyboard statistics")}
         style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.75rem' }}
       >
         {statsData.map(s => (
@@ -2158,11 +2137,10 @@ export default function KeyVisualizerPage() {
 
       <SoundControls sound={sound} repeat={repeat} onSound={setSound} onRepeat={setRepeat} />
 
-      <div role="note" aria-label="Typing instruction"
+      <div role="note" aria-label={tr("Typing instruction")}
         style={{ background: 'rgba(0,245,255,0.05)', border: '1px dashed rgba(0,245,255,0.2)', borderRadius: '10px', padding: '0.75rem 1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}
       >
-        ⌨️ Press any key on your keyboard to test! (Tab key scroll is disabled for smooth testing)
-      </div>
+        {tr("⌨️ Press any key on your keyboard to test! (Tab key scroll is disabled for smooth testing)\n      ")}</div>
 
       <KeyVisualizerErrorBoundary label="Virtual keyboard">
         <KeyboardGrid activeKeys={state.activeKeys} />
@@ -2178,18 +2156,17 @@ export default function KeyVisualizerPage() {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}>
-        <button className="btn btn-secondary" aria-label="Reset all keyboard statistics and history" onClick={reset}>
-          🔄 Reset Dashboard
-        </button>
+        <button className="btn btn-secondary" aria-label={tr("Reset all keyboard statistics and history")} onClick={reset}>
+          {tr("🔄 Reset Dashboard\n        ")}</button>
       </div>
 
       {/* ── MORE TOOLS GRID ── */}
-      <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
+      <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
         <h2 style={{
           fontWeight: 800, fontSize: '1.5rem', color: '#fff',
           marginBottom: '1.5rem', textAlign: 'center',
           letterSpacing: '-0.3px',
-        }}>More Tools</h2>
+        }}>{tr("More Tools")}</h2>
         <div
           className="cps-games-grid"
           style={{
@@ -2247,7 +2224,7 @@ export default function KeyVisualizerPage() {
         {/* Reading time */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
           <span aria-hidden="true">🕐</span>
-          <span aria-label={`Estimated reading time: ${READING_TIME_MIN} minutes`}>{READING_TIME_MIN} min read</span>
+          <span aria-label={`Estimated reading time: ${READING_TIME_MIN} minutes`}>{READING_TIME_MIN} {tr("min read")}</span>
         </div>
 
         <TableOfContents />
@@ -2255,9 +2232,8 @@ export default function KeyVisualizerPage() {
         {/* Article section */}
         <KeyVisualizerErrorBoundary label="Article section">
           <Suspense fallback={
-            <div aria-label="Loading article content" style={{ color: 'var(--text-muted)', padding: '2rem', textAlign: 'center' }}>
-              Loading…
-            </div>
+            <div aria-label={tr("Loading article content")} style={{ color: 'var(--text-muted)', padding: '2rem', textAlign: 'center' }}>
+              {tr("Loading…\n            ")}</div>
           }>
             <ArticleSection />
           </Suspense>

@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import DevicePage from '@/views/DevicePage';
+import { buildHreflangLanguages } from '@/lib/seo-i18n';
 
 export const metadata: Metadata = {
   title: "Device Test & Hardware Diagnostics Hub | FixedAim",
   description: "Test your PC, monitor, laptop, and smartphone hardware online. Free tests for screen refresh rate (Hz), dead pixels, speakers, mic, mouse, and keyboard.",
   alternates: {
     canonical: "https://fixedaim.com/device",
+    languages: buildHreflangLanguages('/device'),
   },
   openGraph: {
     title: "Device Test & Hardware Diagnostics Hub | FixedAim",

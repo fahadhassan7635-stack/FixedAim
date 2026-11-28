@@ -1,7 +1,10 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/HzTestPage.json';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import { Home, ChevronRight, Activity, Cpu, Monitor, Gauge, Timer, Layers } from 'lucide-react';
 
 const SITE_URL = 'https://fixedaim.com/hz-test';
@@ -30,6 +33,8 @@ const FAQS = [
 ];
 
 export default function HzTestPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<'hz' | 'mo' | 'ps' | 'la' | 'cp' | 'sy'>('hz');
   const [showFps, setShowFps] = useState(false);
@@ -822,28 +827,25 @@ export default function HzTestPage() {
       `}</style>
 
       {/* BREADCRUMB */}
-      <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 600 }}>
-        <Link href="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-          <Home size={14} /> Home
-        </Link>
+      <nav aria-label={tr("Breadcrumb")} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 600 }}>
+        <Link href={localeHref("/")} style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+          <Home size={14} /> {tr("Home\n        ")}</Link>
         <ChevronRight size={13} />
-        <Link href="/device" style={{ color: 'inherit', textDecoration: 'none' }}>Device Test</Link>
+        <Link href={localeHref("/device")} style={{ color: 'inherit', textDecoration: 'none' }}>{tr("Device Test")}</Link>
         <ChevronRight size={13} />
-        <span style={{ color: '#2B4EDB', fontWeight: 800 }}>Page Speed &amp; Hz Test</span>
+        <span style={{ color: '#2B4EDB', fontWeight: 800 }}>{tr("Page Speed &amp; Hz Test")}</span>
       </nav>
 
       {/* HEADER */}
       <header style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <div style={{ display: 'inline-block', padding: '0.3rem 0.8rem', background: '#FFE033', border: '2px solid #000000', boxShadow: '2px 2px 0 0 #000000', fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>
-            Hardware &amp; Performance Telemetry · 100% Free
-          </div>
+            {tr("Hardware &amp; Performance Telemetry · 100% Free\n          ")}</div>
           <h1 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.8rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '0 0 8px', lineHeight: 1.1 }}>
-            Page Speed &amp; <span style={{ color: '#2B4EDB' }}>Hz Test Tool</span>
+            {tr("Page Speed &amp; ")}<span style={{ color: '#2B4EDB' }}>{tr("Hz Test Tool")}</span>
           </h1>
           <p style={{ maxWidth: '65ch', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
-            Test your screen refresh rate (Hz), FPS, motion smoothness, page speed, Core Web Vitals, input latency, and CPU performance live in your browser.
-          </p>
+            {tr("Test your screen refresh rate (Hz), FPS, motion smoothness, page speed, Core Web Vitals, input latency, and CPU performance live in your browser.\n          ")}</p>
         </div>
 
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer', background: '#FFF', border: '2px solid #000', boxShadow: '3px 3px 0 0 #000', padding: '8px 14px' }}>
@@ -853,8 +855,7 @@ export default function HzTestPage() {
             onChange={(e) => setShowFps(e.target.checked)}
             style={{ width: '18px', height: '18px', accentColor: '#2B4EDB', cursor: 'pointer' }}
           />
-          Show Live FPS Overlay
-        </label>
+          {tr("Show Live FPS Overlay\n        ")}</label>
       </header>
 
       {/* TABS NAVIGATION */}
@@ -881,24 +882,22 @@ export default function HzTestPage() {
       {/* PANEL 1: REFRESH RATE (HZ) */}
       <section style={{ display: activeTab === 'hz' ? 'block' : 'none' }}>
         <div className="hz-card">
-          <h2>Screen Refresh Rate (Hz) Test</h2>
+          <h2>{tr("Screen Refresh Rate (Hz) Test")}</h2>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', margin: '14px 0 8px' }}>
             <span id="hzV" style={{ fontSize: '3.8rem', fontWeight: 900, lineHeight: 1, color: '#000000' }}>--</span>
             <span style={{ fontSize: '1.4rem', fontWeight: 800, color: '#5D6A7A' }}>Hz</span>
           </div>
           <div id="hzS" style={{ color: '#5D6A7A', fontWeight: 700, fontSize: '0.92rem', marginBottom: '14px' }}>
-            Measures your display via requestAnimationFrame for 3 seconds.
-          </div>
+            {tr("Measures your display via requestAnimationFrame for 3 seconds.\n          ")}</div>
           <div style={{ marginBottom: '20px' }}>
             <button className="hz-btn" id="hzGo" type="button">
-              ▶ Start 3-Second Hz Test
-            </button>
+              {tr("▶ Start 3-Second Hz Test\n            ")}</button>
           </div>
 
-          <h3>Frame Time Graph</h3>
+          <h3>{tr("Frame Time Graph")}</h3>
           <canvas id="hzC" width="860" height="240" style={{ width: '100%', height: '160px', background: '#0D1117', border: '3px solid #000', boxShadow: '3px 3px 0 0 #000' }}></canvas>
 
-          <h3>Frame Statistics &amp; Jitter</h3>
+          <h3>{tr("Frame Statistics &amp; Jitter")}</h3>
           <div className="stat-grid" style={{ marginTop: '12px' }} id="hzG"></div>
         </div>
       </section>
@@ -906,26 +905,23 @@ export default function HzTestPage() {
       {/* PANEL 2: MOTION UFO TEST */}
       <section style={{ display: activeTab === 'mo' ? 'block' : 'none' }}>
         <div className="hz-card">
-          <h2>Motion Smoothness Test (UFO-Style)</h2>
+          <h2>{tr("Motion Smoothness Test (UFO-Style)")}</h2>
           <p style={{ color: '#4A5568', fontSize: '0.9rem', marginBottom: '16px' }}>
-            Watch the moving target. Stutter, ghosting, or judder indicates frame pacing anomalies. Dropped frames are tallied in real time.
-          </p>
+            {tr("Watch the moving target. Stutter, ghosting, or judder indicates frame pacing anomalies. Dropped frames are tallied in real time.\n          ")}</p>
           <div className="lane">
             <div className="box" id="bx"></div>
           </div>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap', marginBottom: '18px' }}>
             <button className="hz-btn" id="moGo" type="button">
-              ▶ Start
-            </button>
+              {tr("▶ Start\n            ")}</button>
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, fontSize: '0.9rem' }}>
-              Speed: <span id="spV">480</span> px/s
-              <input type="range" id="sp" min="120" max="1500" defaultValue="480" style={{ accentColor: '#2B4EDB', cursor: 'pointer', width: '160px' }} />
+              {tr("Speed: ")}<span id="spV">480</span> {tr("px/s\n              ")}<input type="range" id="sp" min="120" max="1500" defaultValue="480" style={{ accentColor: '#2B4EDB', cursor: 'pointer', width: '160px' }} />
             </label>
           </div>
           <div className="stat-grid">
-            <div className="stat-box"><b id="moF">--</b><span>Current FPS</span></div>
-            <div className="stat-box"><b id="moD">0</b><span>Dropped Frames</span></div>
-            <div className="stat-box"><b id="moW">--</b><span>Worst Frame ms</span></div>
+            <div className="stat-box"><b id="moF">--</b><span>{tr("Current FPS")}</span></div>
+            <div className="stat-box"><b id="moD">0</b><span>{tr("Dropped Frames")}</span></div>
+            <div className="stat-box"><b id="moW">--</b><span>{tr("Worst Frame ms")}</span></div>
           </div>
         </div>
       </section>
@@ -933,59 +929,53 @@ export default function HzTestPage() {
       {/* PANEL 3: PAGE SPEED & CORE WEB VITALS */}
       <section style={{ display: activeTab === 'ps' ? 'block' : 'none' }}>
         <div className="hz-card">
-          <h2>Page Speed Test &amp; Core Web Vitals</h2>
-          <h3>Load &amp; Performance Metrics</h3>
+          <h2>{tr("Page Speed Test &amp; Core Web Vitals")}</h2>
+          <h3>{tr("Load &amp; Performance Metrics")}</h3>
           <div className="stat-grid" style={{ marginTop: '10px' }} id="psG"></div>
 
           <div style={{ margin: '18px 0 10px', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button className="hz-btn" type="button" onClick={() => window.location.reload()}>
-              🔄 Reload &amp; Re-measure
-            </button>
+              {tr("🔄 Reload &amp; Re-measure\n            ")}</button>
             <span style={{ fontWeight: 800, fontSize: '1rem' }}>
-              Overall Score: <b id="psS" style={{ color: '#16a34a', fontSize: '1.3rem' }}>--</b>/100
+              {tr("Overall Score: ")}<b id="psS" style={{ color: '#16a34a', fontSize: '1.3rem' }}>--</b>/100
             </span>
           </div>
 
-          <h3>Slowest Sub-Resources</h3>
+          <h3>{tr("Slowest Sub-Resources")}</h3>
           <table className="hz-table" id="rsT"></table>
         </div>
 
         <div className="hz-card">
-          <h3>Track Core Web Vitals on Your Own Website</h3>
+          <h3>{tr("Track Core Web Vitals on Your Own Website")}</h3>
           <p style={{ color: '#4A5568', fontSize: '0.88rem', margin: '4px 0 12px' }}>
-            Paste this snippet right before &lt;/body&gt; to monitor FCP, LCP, CLS, and TTFB in your console.
-          </p>
+            {tr("Paste this snippet right before &lt;/body&gt; to monitor FCP, LCP, CLS, and TTFB in your console.\n          ")}</p>
           <pre id="snip" style={{ background: '#0D1117', color: '#55EFC4', padding: '14px', border: '2px solid #000', overflowX: 'auto', fontSize: '0.8rem', fontWeight: 600 }}></pre>
           <button className="hz-btn" id="cpSn" type="button" style={{ marginTop: '10px', background: '#55EFC4', color: '#000' }}>
-            📋 Copy Snippet
-          </button>
+            {tr("📋 Copy Snippet\n          ")}</button>
         </div>
       </section>
 
       {/* PANEL 4: LATENCY TESTS */}
       <section style={{ display: activeTab === 'la' ? 'block' : 'none' }}>
         <div className="hz-card">
-          <h2>Human Reaction Time Test</h2>
+          <h2>{tr("Human Reaction Time Test")}</h2>
           <p style={{ color: '#4A5568', fontSize: '0.9rem', marginBottom: '12px' }}>
-            Click anywhere inside the box as soon as it turns green.
-          </p>
-          <div className="rt-box idle" id="rt">Click to Start</div>
+            {tr("Click anywhere inside the box as soon as it turns green.\n          ")}</p>
+          <div className="rt-box idle" id="rt">{tr("Click to Start")}</div>
           <div className="stat-grid" style={{ marginTop: '12px' }}>
-            <div className="stat-box"><b id="rtL">--</b><span>Last ms</span></div>
-            <div className="stat-box"><b id="rtA">--</b><span>Average ms</span></div>
-            <div className="stat-box"><b id="rtB">--</b><span>Best ms</span></div>
+            <div className="stat-box"><b id="rtL">--</b><span>{tr("Last ms")}</span></div>
+            <div className="stat-box"><b id="rtA">--</b><span>{tr("Average ms")}</span></div>
+            <div className="stat-box"><b id="rtB">--</b><span>{tr("Best ms")}</span></div>
           </div>
         </div>
 
         <div className="hz-card">
-          <h2>Input Delay Test (Hardware to Frame)</h2>
+          <h2>{tr("Input Delay Test (Hardware to Frame)")}</h2>
           <p style={{ color: '#4A5568', fontSize: '0.9rem', marginBottom: '14px' }}>
-            Tap the button repeatedly. Measures the delay between pointerdown and the next painted animation frame.
-          </p>
+            {tr("Tap the button repeatedly. Measures the delay between pointerdown and the next painted animation frame.\n          ")}</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <button className="hz-btn" id="idB" type="button" style={{ background: '#FFE033', color: '#000' }}>
-              ⚡ Tap Me Fast
-            </button>
+              {tr("⚡ Tap Me Fast\n            ")}</button>
             <span id="idV" style={{ fontWeight: 800, fontSize: '0.95rem' }}>--</span>
           </div>
         </div>
@@ -994,17 +984,16 @@ export default function HzTestPage() {
       {/* PANEL 5: CPU BENCHMARK */}
       <section style={{ display: activeTab === 'cp' ? 'block' : 'none' }}>
         <div className="hz-card">
-          <h2>CPU &amp; Timer Precision Benchmark</h2>
+          <h2>{tr("CPU &amp; Timer Precision Benchmark")}</h2>
           <div style={{ marginBottom: '18px' }}>
             <button className="hz-btn" id="cpGo" type="button">
-              ▶ Run CPU Benchmark
-            </button>
+              {tr("▶ Run CPU Benchmark\n            ")}</button>
           </div>
           <div className="stat-grid">
-            <div className="stat-box"><b id="cpS">--</b><span>Score (Mops/s)</span></div>
-            <div className="stat-box"><b id="cpT">--</b><span>1ms Timer Avg (ms)</span></div>
-            <div className="stat-box"><b id="cpJ">--</b><span>Timer Jitter (ms)</span></div>
-            <div className="stat-box"><b id="cpM">--</b><span>JS Heap (MB)</span></div>
+            <div className="stat-box"><b id="cpS">--</b><span>{tr("Score (Mops/s)")}</span></div>
+            <div className="stat-box"><b id="cpT">--</b><span>{tr("1ms Timer Avg (ms)")}</span></div>
+            <div className="stat-box"><b id="cpJ">--</b><span>{tr("Timer Jitter (ms)")}</span></div>
+            <div className="stat-box"><b id="cpM">--</b><span>{tr("JS Heap (MB)")}</span></div>
           </div>
         </div>
       </section>
@@ -1012,17 +1001,17 @@ export default function HzTestPage() {
       {/* PANEL 6: SYSTEM & HISTORY */}
       <section style={{ display: activeTab === 'sy' ? 'block' : 'none' }}>
         <div className="hz-card">
-          <h2>System &amp; Network Telemetry</h2>
+          <h2>{tr("System &amp; Network Telemetry")}</h2>
           <table className="hz-table" id="syT"></table>
         </div>
 
         <div className="hz-card">
-          <h2>Benchmark Results &amp; History</h2>
+          <h2>{tr("Benchmark Results &amp; History")}</h2>
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', margin: '12px 0 16px' }}>
-            <button className="hz-btn" id="runAll" type="button">▶ Run All Tests</button>
-            <button className="hz-btn" id="cpJs" type="button" style={{ background: '#FFF', color: '#000' }}>Copy JSON</button>
-            <button className="hz-btn" id="dl" type="button" style={{ background: '#FFF', color: '#000' }}>Download JSON</button>
-            <button className="hz-btn" id="clr" type="button" style={{ background: '#FF6B6B', color: '#000' }}>Clear History</button>
+            <button className="hz-btn" id="runAll" type="button">{tr("▶ Run All Tests")}</button>
+            <button className="hz-btn" id="cpJs" type="button" style={{ background: '#FFF', color: '#000' }}>{tr("Copy JSON")}</button>
+            <button className="hz-btn" id="dl" type="button" style={{ background: '#FFF', color: '#000' }}>{tr("Download JSON")}</button>
+            <button className="hz-btn" id="clr" type="button" style={{ background: '#FF6B6B', color: '#000' }}>{tr("Clear History")}</button>
           </div>
           <table className="hz-table" id="hiT"></table>
         </div>
@@ -1031,44 +1020,41 @@ export default function HzTestPage() {
       {/* SEO ARTICLE & COMPARISON GUIDE */}
       <article style={{ marginTop: '3.5rem' }}>
         <h2 style={{ fontSize: '1.8rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '0 0 1rem' }}>
-          Understanding Screen Refresh Rate (Hz) &amp; Display Motion
-        </h2>
+          {tr("Understanding Screen Refresh Rate (Hz) &amp; Display Motion\n        ")}</h2>
         <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-          Monitor refresh rate (expressed in Hertz or Hz) defines the number of individual frames your display panel can refresh every second. While 60 Hz has historically served as the office baseline, modern gaming and pro-creatives demand 120Hz, 144Hz, 240Hz, or 360Hz to reduce input latency and eliminate motion blur.
-        </p>
+          {tr("Monitor refresh rate (expressed in Hertz or Hz) defines the number of individual frames your display panel can refresh every second. While 60 Hz has historically served as the office baseline, modern gaming and pro-creatives demand 120Hz, 144Hz, 240Hz, or 360Hz to reduce input latency and eliminate motion blur.\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', margin: '1.5rem 0 0.5rem' }}>
-          Refresh Rate Comparison: 60Hz vs 120Hz vs 144Hz vs 240Hz
-        </h3>
+          {tr("Refresh Rate Comparison: 60Hz vs 120Hz vs 144Hz vs 240Hz\n        ")}</h3>
         <div style={{ overflowX: 'auto', border: '3px solid #000', boxShadow: '4px 4px 0 0 #000', background: '#FFF', margin: '1rem 0 2rem' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
             <thead>
               <tr style={{ background: '#FFE033', borderBottom: '2px solid #000' }}>
-                <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 900 }}>Refresh Rate</th>
-                <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 900 }}>Frame Time</th>
-                <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 900 }}>Ideal Use Case</th>
+                <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 900 }}>{tr("Refresh Rate")}</th>
+                <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 900 }}>{tr("Frame Time")}</th>
+                <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 900 }}>{tr("Ideal Use Case")}</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: '1px solid #000' }}>
-                <td style={{ padding: '10px 14px', fontWeight: 800 }}>60 Hz</td>
-                <td style={{ padding: '10px 14px' }}>16.67 ms</td>
-                <td style={{ padding: '10px 14px' }}>Office productivity, casual video playback, basic web browsing</td>
+                <td style={{ padding: '10px 14px', fontWeight: 800 }}>{tr("60 Hz")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("16.67 ms")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("Office productivity, casual video playback, basic web browsing")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid #000' }}>
-                <td style={{ padding: '10px 14px', fontWeight: 800 }}>120 Hz</td>
-                <td style={{ padding: '10px 14px' }}>8.33 ms</td>
-                <td style={{ padding: '10px 14px' }}>Fluid smartphone scrolling (ProMotion), tablets, light gaming</td>
+                <td style={{ padding: '10px 14px', fontWeight: 800 }}>{tr("120 Hz")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("8.33 ms")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("Fluid smartphone scrolling (ProMotion), tablets, light gaming")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid #000' }}>
-                <td style={{ padding: '10px 14px', fontWeight: 800 }}>144 Hz – 165 Hz</td>
-                <td style={{ padding: '10px 14px' }}>6.94 ms – 6.06 ms</td>
-                <td style={{ padding: '10px 14px' }}>Competitive FPS gaming (CS2, Valorant, Apex Legends)</td>
+                <td style={{ padding: '10px 14px', fontWeight: 800 }}>{tr("144 Hz – 165 Hz")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("6.94 ms – 6.06 ms")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("Competitive FPS gaming (CS2, Valorant, Apex Legends)")}</td>
               </tr>
               <tr>
-                <td style={{ padding: '10px 14px', fontWeight: 800 }}>240 Hz – 360 Hz</td>
-                <td style={{ padding: '10px 14px' }}>4.17 ms – 2.78 ms</td>
-                <td style={{ padding: '10px 14px' }}>Esports tournament standards, zero motion blur tracking</td>
+                <td style={{ padding: '10px 14px', fontWeight: 800 }}>{tr("240 Hz – 360 Hz")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("4.17 ms – 2.78 ms")}</td>
+                <td style={{ padding: '10px 14px' }}>{tr("Esports tournament standards, zero motion blur tracking")}</td>
               </tr>
             </tbody>
           </table>
@@ -1076,8 +1062,7 @@ export default function HzTestPage() {
 
         {/* FAQS */}
         <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '2.5rem 0 1rem' }}>
-          Frequently Asked Questions (FAQs)
-        </h2>
+          {tr("Frequently Asked Questions (FAQs)\n        ")}</h2>
         <div className="hz-faq">
           {FAQS.map((faq, idx) => (
             <details key={idx}>
@@ -1089,8 +1074,7 @@ export default function HzTestPage() {
 
         {/* MORE TOOLS */}
         <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '3rem 0 1.25rem' }}>
-          Explore More Tools
-        </h2>
+          {tr("Explore More Tools\n        ")}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
           {MORE_TOOLS.map((t) => (
             <Link

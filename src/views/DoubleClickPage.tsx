@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/DoubleClickPage.json';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 // ─── More Tools ───────────────────────────────────────────────────────────────
@@ -150,6 +152,7 @@ function RippleEffect({ ripples }: { ripples: Ripple[] }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function DoubleClickPage() {
+  const { tr } = usePageI18n(pageDict);
   const [results, setResults]           = useState<number[]>([]);
   const [lastInterval, setLastInterval] = useState<number | null>(null);
   const [status, setStatus]             = useState('');
@@ -318,17 +321,17 @@ export default function DoubleClickPage() {
 
       {/* ─── Header ──────────────────────────────────────────────────── */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <div className="section-label">Mouse Tool</div>
-        <h1 className="tool-title">Double Click Test</h1>
-        <p className="tool-subtitle">Test how fast you can double-click your mouse</p>
+        <div className="section-label">{tr("Mouse Tool")}</div>
+        <h1 className="tool-title">{tr("Double Click Test")}</h1>
+        <p className="tool-subtitle">{tr("Test how fast you can double-click your mouse")}</p>
       </div>
 
       {/* ─── Difficulty Selector ─────────────────────────────────────── */}
       <div style={{ marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700' }}>
-            Difficulty — Current threshold:{' '}
-            <span style={{ color: diffConfig.color }}>{THRESHOLD}ms</span>
+            {tr("Difficulty — Current threshold:")}{' '}
+            <span style={{ color: diffConfig.color }}>{THRESHOLD}{tr("ms")}</span>
           </div>
           <button
             onClick={() => setSoundOn(s => !s)}
@@ -390,7 +393,7 @@ export default function DoubleClickPage() {
         onClick={handleClick}
         role="button"
         tabIndex={0}
-        aria-label="Double click test zone"
+        aria-label={tr("Double click test zone")}
         onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleClick(e as unknown as React.MouseEvent<HTMLDivElement>); }}
         style={{
           position:      'relative',
@@ -420,8 +423,7 @@ export default function DoubleClickPage() {
           {status || 'Click twice quickly!'}
         </span>
         <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', position: 'relative', zIndex: 1 }}>
-          Double-click within {THRESHOLD}ms
-        </span>
+          {tr("Double-click within ")}{THRESHOLD}{tr("ms\r\n        ")}</span>
         {lastInterval && (
           <div style={{
             padding:    '0.4rem 1rem',
@@ -442,7 +444,7 @@ export default function DoubleClickPage() {
       {results.length > 0 && (
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden', marginBottom: '1.5rem' }}>
           <div style={{ padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border)', fontWeight: '700', fontSize: '0.85rem', color: 'var(--neon-cyan)' }}>
-            📊 Results ({results.length})
+            {tr("📊 Results (")}{results.length})
           </div>
           <div style={{ padding: '1rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {results.map((r, i) => (
@@ -455,8 +457,7 @@ export default function DoubleClickPage() {
                 fontWeight: '700',
                 color:      getRating(r).color,
               }}>
-                {r}ms
-              </div>
+                {r}{tr("ms\r\n              ")}</div>
             ))}
           </div>
         </div>
@@ -465,8 +466,7 @@ export default function DoubleClickPage() {
       {/* ─── Statistics Panel ────────────────────────────────────────── */}
       <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden', marginBottom: '1.5rem' }}>
         <div style={{ padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border)', fontWeight: '700', fontSize: '0.85rem', color: 'var(--neon-cyan)' }}>
-          📈 Statistics
-        </div>
+          {tr("📈 Statistics\r\n        ")}</div>
         <div className="double-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '0.75rem' }}>
           {[
             { label: 'Total Attempts',  value: stats.totalAttempts,                                              color: 'var(--neon-cyan)'    },
@@ -494,16 +494,15 @@ export default function DoubleClickPage() {
 
       {/* ─── Reset ───────────────────────────────────────────────────── */}
       <button className="btn btn-secondary" onClick={handleReset}>
-        🔄 Reset
-      </button>
+        {tr("🔄 Reset\r\n      ")}</button>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#000000',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -560,94 +559,74 @@ export default function DoubleClickPage() {
       <section style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.75' }}>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '0' }}>
-          What is a Double Click Test and Why is it Crucial?
-        </h2>
+          {tr("What is a Double Click Test and Why is it Crucial?\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          A <strong>Double Click Test</strong> is a specialized speed and hardware benchmarking utility used to measure the precise millisecond (ms) response delay between two consecutive mouse presses. OS operating systems and video games rely on this preset threshold to register context menus or inventory selections. Testing your speed ensures your mouse switches operate at maximum efficiency.
-        </p>
+          A <strong>{tr("Double Click Test")}</strong> {tr("is a specialized speed and hardware benchmarking utility used to measure the precise millisecond (ms) response delay between two consecutive mouse presses. OS operating systems and video games rely on this preset threshold to register context menus or inventory selections. Testing your speed ensures your mouse switches operate at maximum efficiency.\r\n        ")}</p>
 
         <h3 style={{ color: '#000000', fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.75rem', marginTop: '2rem' }}>
-          How the Double Click Speed Ranking Scale Works
-        </h3>
+          {tr("How the Double Click Speed Ranking Scale Works\r\n        ")}</h3>
         <p style={{ marginBottom: '1.5rem' }}>
-          Human reflex and hardware delay combine to form your final score. Understanding your speed metric allows you to optimize operating system options or gauge gaming reflexes:
-        </p>
+          {tr("Human reflex and hardware delay combine to form your final score. Understanding your speed metric allows you to optimize operating system options or gauge gaming reflexes:\r\n        ")}</p>
         <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-red)' }}>⚡ Lightning (&lt; 80ms):</strong> Elite reflex speed. Often achieved by competitive gamers using high-performance optical switches with minimal de-bounce delay.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-orange)' }}>🚀 Fast (80ms - 150ms):</strong> Excellent mechanical performance. Perfect for snappy productivity mapping and rapid execution queues.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-green)' }}>✅ Normal (150ms - 250ms):</strong> The global human average benchmark. Ideal for everyday web browsing and standard application usage.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--text-muted)' }}>🐢 Slow (&gt; 250ms):</strong> Might cause software applications to misinterpret double-clicks as two separate individual actions.</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-red)' }}>{tr("⚡ Lightning (&lt; 80ms):")}</strong> {tr("Elite reflex speed. Often achieved by competitive gamers using high-performance optical switches with minimal de-bounce delay.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-orange)' }}>{tr("🚀 Fast (80ms - 150ms):")}</strong> {tr("Excellent mechanical performance. Perfect for snappy productivity mapping and rapid execution queues.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-green)' }}>{tr("✅ Normal (150ms - 250ms):")}</strong> {tr("The global human average benchmark. Ideal for everyday web browsing and standard application usage.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--text-muted)' }}>{tr("🐢 Slow (&gt; 250ms):")}</strong> {tr("Might cause software applications to misinterpret double-clicks as two separate individual actions.")}</li>
         </ul>
 
         <h3 style={{ color: '#000000', fontSize: '1.2rem', fontWeight: '600', marginBottom: '0.75rem', marginTop: '2rem' }}>
-          Diagnosing Mouse Double-Clicking Hardware Issues
-        </h3>
+          {tr("Diagnosing Mouse Double-Clicking Hardware Issues\r\n        ")}</h3>
         <p style={{ marginBottom: '1.5rem' }}>
-          Are you registering unexpected double clicks when pressing your mouse button only once? This web tester serves as an excellent diagnostic tool for mouse degradation. Over time, traditional copper <a href="https://en.wikipedia.org/wiki/Microswitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>mechanical leaf-spring switches <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> (like Omron switches) oxidize or lose structural tension, causing a phenomenon called <em>switch chatter</em>. If you record abnormally low intervals like <strong>5ms to 30ms</strong> without meaning to click twice, your peripheral is likely experiencing hardware malfunction or requires an adjusted de-bounce filter.
-        </p>
+          {tr("Are you registering unexpected double clicks when pressing your mouse button only once? This web tester serves as an excellent diagnostic tool for mouse degradation. Over time, traditional copper ")}<a href="https://en.wikipedia.org/wiki/Microswitch" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("mechanical leaf-spring switches ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> {tr("(like Omron switches) oxidize or lose structural tension, causing a phenomenon called ")}<em>{tr("switch chatter")}</em>{tr(". If you record abnormally low intervals like ")}<strong>{tr("5ms to 30ms")}</strong> {tr("without meaning to click twice, your peripheral is likely experiencing hardware malfunction or requires an adjusted de-bounce filter.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          How to Use the Double Click Test
-        </h2>
+          {tr("How to Use the Double Click Test\r\n        ")}</h2>
         <ol style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem' }}>
-          <li style={{ marginBottom: '0.5rem' }}>Select your preferred <strong>difficulty level</strong> (Easy, Normal, Hard, or Pro) to set the click threshold.</li>
-          <li style={{ marginBottom: '0.5rem' }}>Click the large zone once — the status changes to prompt a second click, and a short arming tone confirms the first press was registered.</li>
-          <li style={{ marginBottom: '0.5rem' }}>Click again as quickly as possible within the threshold window.</li>
-          <li style={{ marginBottom: '0.5rem' }}>Your millisecond interval is recorded and added to the results panel, accompanied by a rising success chime.</li>
-          <li style={{ marginBottom: '0.5rem' }}>Repeat to build statistics and track your average, median, and standard deviation.</li>
-          <li style={{ marginBottom: '0.5rem' }}>Press <strong>Reset</strong> to clear all data and start a fresh session.</li>
+          <li style={{ marginBottom: '0.5rem' }}>{tr("Select your preferred ")}<strong>{tr("difficulty level")}</strong> {tr("(Easy, Normal, Hard, or Pro) to set the click threshold.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}>{tr("Click the large zone once — the status changes to prompt a second click, and a short arming tone confirms the first press was registered.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}>{tr("Click again as quickly as possible within the threshold window.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}>{tr("Your millisecond interval is recorded and added to the results panel, accompanied by a rising success chime.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}>{tr("Repeat to build statistics and track your average, median, and standard deviation.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}>{tr("Press ")}<strong>{tr("Reset")}</strong> {tr("to clear all data and start a fresh session.")}</li>
         </ol>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Audio Feedback: How the Sound Cues Work
-        </h2>
+          {tr("Audio Feedback: How the Sound Cues Work\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          This tool now includes built-in audio feedback generated live in your browser using the Web Audio API — no sound files are downloaded, so there is zero added page weight. A short, low <strong>arming tick</strong> plays the instant your first click registers, letting you know the timer has started without needing to glance at the status text. If your second click lands inside the threshold, a bright <strong>rising chime</strong> confirms a successful double-click. If you miss the window, a low descending <strong>buzz</strong> tells you the attempt failed. All three cues are generated with oscillators rather than audio files, so they load instantly and work offline. A dedicated <strong>Sound On / Sound Off</strong> toggle sits above the difficulty selector if you would rather test in silence — useful in shared offices, libraries, or late-night sessions.
-        </p>
+          {tr("This tool now includes built-in audio feedback generated live in your browser using the Web Audio API — no sound files are downloaded, so there is zero added page weight. A short, low ")}<strong>{tr("arming tick")}</strong> {tr("plays the instant your first click registers, letting you know the timer has started without needing to glance at the status text. If your second click lands inside the threshold, a bright ")}<strong>{tr("rising chime")}</strong> {tr("confirms a successful double-click. If you miss the window, a low descending ")}<strong>{tr("buzz")}</strong> {tr("tells you the attempt failed. All three cues are generated with oscillators rather than audio files, so they load instantly and work offline. A dedicated ")}<strong>{tr("Sound On / Sound Off")}</strong> {tr("toggle sits above the difficulty selector if you would rather test in silence — useful in shared offices, libraries, or late-night sessions.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Why Audio Feedback Improves Double-Click Testing
-        </h2>
+          {tr("Why Audio Feedback Improves Double-Click Testing\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Relying purely on vision to judge timing introduces a small perceptual delay, since your brain has to process the on-screen text change before you react. Sound is processed by the auditory cortex slightly faster than visual text is parsed for meaning, which means audio cues can make the rhythm of clicking feel tighter and more responsive. Many rhythm-based games and typing trainers use the same principle: pairing an action with an immediate, distinct tone reinforces muscle memory faster than silent visual feedback alone. For double-click training specifically, hearing the arming tick helps you internalize the exact moment the timer starts, which over repeated sessions can shave a few milliseconds off your average interval simply through better timing awareness.
-        </p>
+          {tr("Relying purely on vision to judge timing introduces a small perceptual delay, since your brain has to process the on-screen text change before you react. Sound is processed by the auditory cortex slightly faster than visual text is parsed for meaning, which means audio cues can make the rhythm of clicking feel tighter and more responsive. Many rhythm-based games and typing trainers use the same principle: pairing an action with an immediate, distinct tone reinforces muscle memory faster than silent visual feedback alone. For double-click training specifically, hearing the arming tick helps you internalize the exact moment the timer starts, which over repeated sessions can shave a few milliseconds off your average interval simply through better timing awareness.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Why Double Click Speed Matters
-        </h2>
+          {tr("Why Double Click Speed Matters\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Your double-click speed affects far more than just opening folders. In competitive gaming, a fast and reliable double-click can trigger combo attacks, inventory swaps, or ability activations ahead of opponents. In productivity workflows, quick double-clicking accelerates text selection, file launching, and spreadsheet navigation. Understanding your baseline speed lets you tune OS settings, compare hardware, and identify degradation before it impacts performance.
-        </p>
+          {tr("Your double-click speed affects far more than just opening folders. In competitive gaming, a fast and reliable double-click can trigger combo attacks, inventory swaps, or ability activations ahead of opponents. In productivity workflows, quick double-clicking accelerates text selection, file launching, and spreadsheet navigation. Understanding your baseline speed lets you tune OS settings, compare hardware, and identify degradation before it impacts performance.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Best Double Click Speed for Gaming
-        </h2>
+          {tr("Best Double Click Speed for Gaming\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Competitive gamers — especially those playing Minecraft PvP, shooters, or real-time strategy games — aim for double-click intervals of <strong>80–150 ms</strong>. This range is fast enough to outmaneuver opponents while remaining reliable and unlikely to be misinterpreted as a single click. Elite players using optical-switch gaming mice routinely achieve sub-80 ms intervals. If you are a casual gamer, 150–250 ms is perfectly adequate for most titles.
-        </p>
+          {tr("Competitive gamers — especially those playing Minecraft PvP, shooters, or real-time strategy games — aim for double-click intervals of ")}<strong>{tr("80–150 ms")}</strong>{tr(". This range is fast enough to outmaneuver opponents while remaining reliable and unlikely to be misinterpreted as a single click. Elite players using optical-switch gaming mice routinely achieve sub-80 ms intervals. If you are a casual gamer, 150–250 ms is perfectly adequate for most titles.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Double Click Test vs CPS Test
-        </h2>
+          {tr("Double Click Test vs CPS Test\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          A <strong>CPS (Clicks Per Second) Test</strong> measures the total number of individual clicks you can produce within a set time window, typically 5 or 10 seconds. A <strong>Double Click Test</strong> measures only the precise gap between two consecutive intentional clicks. CPS is a stamina and rhythm metric; double-click speed is a reflex and hardware precision metric. Both are valuable, but they test different skills. High CPS does not guarantee a fast double-click, and a fast double-click does not guarantee high CPS.
-        </p>
+          A <strong>{tr("CPS (Clicks Per Second) Test")}</strong> {tr("measures the total number of individual clicks you can produce within a set time window, typically 5 or 10 seconds. A ")}<strong>{tr("Double Click Test")}</strong> {tr("measures only the precise gap between two consecutive intentional clicks. CPS is a stamina and rhythm metric; double-click speed is a reflex and hardware precision metric. Both are valuable, but they test different skills. High CPS does not guarantee a fast double-click, and a fast double-click does not guarantee high CPS.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Double Click Test vs Drag Click Test
-        </h2>
+          {tr("Double Click Test vs Drag Click Test\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          <strong>Drag clicking</strong> is a technique where a user drags their finger across the mouse button surface, using friction to generate rapid electrical signals and artificially inflate CPS scores — sometimes exceeding 30–50 CPS. The <strong>Double Click Test</strong>, by contrast, requires intentional, discrete presses and accurately reflects real-world click behavior. Drag clicking can damage mouse switches faster and is prohibited on many gaming servers for fairness reasons.
-        </p>
+          <strong>{tr("Drag clicking")}</strong> {tr("is a technique where a user drags their finger across the mouse button surface, using friction to generate rapid electrical signals and artificially inflate CPS scores — sometimes exceeding 30–50 CPS. The ")}<strong>{tr("Double Click Test")}</strong>{tr(", by contrast, requires intentional, discrete presses and accurately reflects real-world click behavior. Drag clicking can damage mouse switches faster and is prohibited on many gaming servers for fairness reasons.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Common Mouse Double Click Problems
-        </h2>
+          {tr("Common Mouse Double Click Problems\r\n        ")}</h2>
         <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Phantom double-clicks:</strong> Mouse registers two clicks when only one press is made. Caused by switch chatter.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Missed double-clicks:</strong> Two quick presses register as single clicks. Usually due to OS threshold set too low or switch being too stiff.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Inconsistent results:</strong> Wide variance in recorded intervals. May indicate dirty switch contacts or USB polling issues.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Delayed registration:</strong> Noticeable lag between click and response. Suggests a driver issue or high system CPU load.</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Phantom double-clicks:")}</strong> {tr("Mouse registers two clicks when only one press is made. Caused by switch chatter.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Missed double-clicks:")}</strong> {tr("Two quick presses register as single clicks. Usually due to OS threshold set too low or switch being too stiff.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Inconsistent results:")}</strong> {tr("Wide variance in recorded intervals. May indicate dirty switch contacts or USB polling issues.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Delayed registration:")}</strong> {tr("Noticeable lag between click and response. Suggests a driver issue or high system CPU load.")}</li>
         </ul>
 
         {/* ================= YOUTUBE VIDEO EMBED ================= */}
@@ -660,8 +639,7 @@ export default function DoubleClickPage() {
           textAlign: 'center'
         }}>
           <h3 style={{ color: '#000000', fontSize: '1.15rem', fontWeight: '600', marginBottom: '1rem' }}>
-            📹 Watch: Double Click Test & Mouse Switch Guide
-          </h3>
+            {tr("📹 Watch: Double Click Test & Mouse Switch Guide\r\n          ")}</h3>
           <div style={{
             position: 'relative',
             paddingBottom: '56.25%',
@@ -681,7 +659,7 @@ export default function DoubleClickPage() {
                 borderRadius: '12px'
               }}
               src="https://www.youtube.com/embed/LucSXI6nl8A?si=Gw8kl0Pil8Tlubhu"
-              title="YouTube video player"
+              title={tr("YouTube video player")}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
@@ -690,40 +668,33 @@ export default function DoubleClickPage() {
         </div>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          How to Fix a Mouse That Double Clicks
-        </h2>
+          {tr("How to Fix a Mouse That Double Clicks\r\n        ")}</h2>
         <ol style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem' }}>
-          <li style={{ marginBottom: '0.5rem' }}><strong>Increase OS debounce threshold</strong> — raise the double-click speed slider to a slower setting so the OS ignores rapid re-activations.</li>
-          <li style={{ marginBottom: '0.5rem' }}><strong>Use peripheral software</strong> — tools like Logitech G Hub or Razer Synapse offer a debounce filter setting in milliseconds.</li>
-          <li style={{ marginBottom: '0.5rem' }}><strong>Clean the switch</strong> — apply isopropyl alcohol (90%+) to the switch and click rapidly to flush debris.</li>
-          <li style={{ marginBottom: '0.5rem' }}><strong>Replace the switch</strong> — Omron D2FC-F-7N switches cost under $2 and are solderable by anyone with basic skills.</li>
-          <li style={{ marginBottom: '0.5rem' }}><strong>Update firmware/drivers</strong> — manufacturers occasionally patch switch chatter bugs via driver updates.</li>
+          <li style={{ marginBottom: '0.5rem' }}><strong>{tr("Increase OS debounce threshold")}</strong> {tr("— raise the double-click speed slider to a slower setting so the OS ignores rapid re-activations.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}><strong>{tr("Use peripheral software")}</strong> {tr("— tools like Logitech G Hub or Razer Synapse offer a debounce filter setting in milliseconds.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}><strong>{tr("Clean the switch")}</strong> {tr("— apply isopropyl alcohol (90%+) to the switch and click rapidly to flush debris.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}><strong>{tr("Replace the switch")}</strong> {tr("— Omron D2FC-F-7N switches cost under $2 and are solderable by anyone with basic skills.")}</li>
+          <li style={{ marginBottom: '0.5rem' }}><strong>{tr("Update firmware/drivers")}</strong> {tr("— manufacturers occasionally patch switch chatter bugs via driver updates.")}</li>
         </ol>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Windows Double Click Speed Settings
-        </h2>
+          {tr("Windows Double Click Speed Settings\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          On Windows 10 and 11, navigate to <strong>Control Panel → Hardware and Sound → Mouse → Buttons tab</strong>. The <em>Double-click speed</em> slider adjusts the time window from approximately 200 ms (Fast) to 900 ms (Slow). Moving the slider left increases the threshold, making it easier to register double-clicks. For gaming, a medium-to-fast setting (~400–500 ms) provides the best balance of responsiveness and accuracy.
+          {tr("On Windows 10 and 11, navigate to ")}<strong>{tr("Control Panel → Hardware and Sound → Mouse → Buttons tab")}</strong>{tr(". The ")}<em>{tr("Double-click speed")}</em> {tr("slider adjusts the time window from approximately 200 ms (Fast) to 900 ms (Slow). Moving the slider left increases the threshold, making it easier to register double-clicks. For gaming, a medium-to-fast setting (~400–500 ms) provides the best balance of responsiveness and accuracy.\r\n        ")}</p>
+
+        <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
+          {tr("macOS Double Click Speed Settings\r\n        ")}</h2>
+        <p style={{ marginBottom: '1.5rem' }}>
+          {tr("On macOS Ventura and later, go to ")}<strong>{tr("System Settings → Accessibility → Pointer Control")}</strong>{tr(". The ")}<em>{tr("Double-click speed")}</em> {tr("slider lets you increase or decrease the recognition window. Earlier macOS versions use ")}<strong>{tr("System Preferences → Accessibility → Mouse &amp; Trackpad → Double-click speed")}</strong>{tr(". The default value is approximately 500 ms.\r\n        ")}</p>
+
+        <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
+          {tr("Linux Double Click Settings\r\n        ")}</h2>
+        <p style={{ marginBottom: '1.5rem' }}>
+          {tr("Linux users can configure double-click speed via the desktop environment or terminal. On ")}<strong>{tr("GNOME")}</strong>{tr(", run: ")}<code>gsettings set org.gnome.desktop.peripherals.mouse double-click 400</code> {tr("(value in ms). On ")}<strong>{tr("KDE Plasma")}</strong>{tr(", go to System Settings → Input Devices → Mouse → Advanced. For ")}<strong>X11</strong>{tr(", use ")}<code>xset m</code> {tr("or edit ")}<code>/etc/X11/xorg.conf</code>.
         </p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          macOS Double Click Speed Settings
-        </h2>
-        <p style={{ marginBottom: '1.5rem' }}>
-          On macOS Ventura and later, go to <strong>System Settings → Accessibility → Pointer Control</strong>. The <em>Double-click speed</em> slider lets you increase or decrease the recognition window. Earlier macOS versions use <strong>System Preferences → Accessibility → Mouse &amp; Trackpad → Double-click speed</strong>. The default value is approximately 500 ms.
-        </p>
-
-        <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Linux Double Click Settings
-        </h2>
-        <p style={{ marginBottom: '1.5rem' }}>
-          Linux users can configure double-click speed via the desktop environment or terminal. On <strong>GNOME</strong>, run: <code>gsettings set org.gnome.desktop.peripherals.mouse double-click 400</code> (value in ms). On <strong>KDE Plasma</strong>, go to System Settings → Input Devices → Mouse → Advanced. For <strong>X11</strong>, use <code>xset m</code> or edit <code>/etc/X11/xorg.conf</code>.
-        </p>
-
-        <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Mechanical vs Optical Mouse Switches
-        </h2>
+          {tr("Mechanical vs Optical Mouse Switches\r\n        ")}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           {[
             { title: '⚙️ Mechanical Switches', points: ['Physical metal contacts', 'Susceptible to oxidation and chatter', 'Rated 20–50M clicks (Omron)', 'Lower cost', 'Tactile feedback'] },
@@ -739,72 +710,57 @@ export default function DoubleClickPage() {
         </div>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Gaming Mouse Recommendations
-        </h2>
+          {tr("Gaming Mouse Recommendations\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          For the fastest and most consistent double-click performance, look for mice featuring optical switches such as the <strong>Razer HyperSpeed Optical</strong>, <strong>SteelSeries OmniPoint</strong>, or <strong>Logitech HERO</strong> sensor models. Popular competitive choices include the Logitech G Pro X Superlight 2, Razer DeathAdder V3, and Zowie EC series. Ensure your mouse has a <a href="https://en.wikipedia.org/wiki/Polling_(computer_science)" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>polling rate <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> of at least 500 Hz (1000 Hz preferred) and a configurable debounce time below 4 ms.
-        </p>
+          {tr("For the fastest and most consistent double-click performance, look for mice featuring optical switches such as the ")}<strong>{tr("Razer HyperSpeed Optical")}</strong>, <strong>{tr("SteelSeries OmniPoint")}</strong>{tr(", or ")}<strong>{tr("Logitech HERO")}</strong> {tr("sensor models. Popular competitive choices include the Logitech G Pro X Superlight 2, Razer DeathAdder V3, and Zowie EC series. Ensure your mouse has a ")}<a href="https://en.wikipedia.org/wiki/Polling_(computer_science)" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("polling rate ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> {tr("of at least 500 Hz (1000 Hz preferred) and a configurable debounce time below 4 ms.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Tips to Improve Double Click Speed
-        </h2>
+          {tr("Tips to Improve Double Click Speed\r\n        ")}</h2>
         <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Practice daily:</strong> Use this tool for 5-minute sessions to build muscle memory for quick repeated presses.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Relax your hand:</strong> Tension slows you down. Keep your wrist loose and let your fingertip do the work.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Use your fingertip, not the pad:</strong> The tip of your index finger has faster nerve response than the flat pad.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Upgrade your switch:</strong> Optical switches eliminate bounce delay, shaving off 5–15 ms of effective debounce time.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Adjust difficulty progressively:</strong> Start on Easy (600 ms), then move to Normal, Hard, and finally Pro (250 ms) as you improve.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Train with sound on:</strong> Let the arming tick anchor your sense of rhythm before you rely purely on visual feedback.</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Practice daily:")}</strong> {tr("Use this tool for 5-minute sessions to build muscle memory for quick repeated presses.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Relax your hand:")}</strong> {tr("Tension slows you down. Keep your wrist loose and let your fingertip do the work.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Use your fingertip, not the pad:")}</strong> {tr("The tip of your index finger has faster nerve response than the flat pad.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Upgrade your switch:")}</strong> {tr("Optical switches eliminate bounce delay, shaving off 5–15 ms of effective debounce time.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Adjust difficulty progressively:")}</strong> {tr("Start on Easy (600 ms), then move to Normal, Hard, and finally Pro (250 ms) as you improve.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Train with sound on:")}</strong> {tr("Let the arming tick anchor your sense of rhythm before you rely purely on visual feedback.")}</li>
         </ul>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Double-Click Speed by Age Group
-        </h2>
+          {tr("Double-Click Speed by Age Group\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Reaction speed and fine motor coordination generally peak in the late teens to mid-20s and decline gradually afterward. Studies on general reflex timing suggest younger adults average tighter double-click intervals, often in the 180–240 ms range, while adults over 50 commonly average 250–320 ms. This is a broad trend, not a rule — regular practice, <a href="https://en.wikipedia.org/wiki/Ergonomics" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>ergonomic mouse grip <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>, and quality hardware can offset much of the age-related slowdown, and many older users who click frequently for work stay well within the Normal range. If you are teaching a parent or grandparent to use a computer, using the Easy difficulty setting (600 ms) first can build confidence before increasing the challenge, and gradually stepping up to Normal once several sessions in a row feel comfortable.
-        </p>
+          {tr("Reaction speed and fine motor coordination generally peak in the late teens to mid-20s and decline gradually afterward. Studies on general reflex timing suggest younger adults average tighter double-click intervals, often in the 180–240 ms range, while adults over 50 commonly average 250–320 ms. This is a broad trend, not a rule — regular practice, ")}<a href="https://en.wikipedia.org/wiki/Ergonomics" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("ergonomic mouse grip ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>{tr(", and quality hardware can offset much of the age-related slowdown, and many older users who click frequently for work stay well within the Normal range. If you are teaching a parent or grandparent to use a computer, using the Easy difficulty setting (600 ms) first can build confidence before increasing the challenge, and gradually stepping up to Normal once several sessions in a row feel comfortable.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Double-Click Test for Accessibility Needs
-        </h2>
+          {tr("Double-Click Test for Accessibility Needs\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          For users with motor impairments, tremors, or arthritis, double-clicking can be one of the more physically demanding interface actions. Most operating systems allow the double-click threshold to be extended well beyond the 500 ms default specifically to accommodate this. Using this tool on the Easy setting (600 ms) can help verify whether an extended OS threshold is actually being applied correctly, and can serve as a simple diagnostic before adjusting system-wide accessibility settings. Sound cues are especially useful here, since they confirm a click registered without requiring the user to track fast-changing on-screen text.
-        </p>
+          {tr("For users with motor impairments, tremors, or arthritis, double-clicking can be one of the more physically demanding interface actions. Most operating systems allow the double-click threshold to be extended well beyond the 500 ms default specifically to accommodate this. Using this tool on the Easy setting (600 ms) can help verify whether an extended OS threshold is actually being applied correctly, and can serve as a simple diagnostic before adjusting system-wide accessibility settings. Sound cues are especially useful here, since they confirm a click registered without requiring the user to track fast-changing on-screen text.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Double-Click Speed: Mouse vs Trackpad vs Touchscreen
-        </h2>
+          {tr("Double-Click Speed: Mouse vs Trackpad vs Touchscreen\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Input method has a measurable effect on double-click consistency. A dedicated mouse with a mechanical or optical switch typically produces the tightest, most repeatable intervals because the electrical signal path is short and direct. Laptop trackpads rely on capacitive touch sensing and firmware-level tap debouncing, which tends to add a small amount of latency and variance. Touchscreens on phones and tablets apply their own gesture-recognition layers — often around 300 ms — specifically to distinguish a double-tap from two accidental single taps, which can make raw touchscreen results appear slower even when the user's reflexes are fast.
-        </p>
+          {tr("Input method has a measurable effect on double-click consistency. A dedicated mouse with a mechanical or optical switch typically produces the tightest, most repeatable intervals because the electrical signal path is short and direct. Laptop trackpads rely on capacitive touch sensing and firmware-level tap debouncing, which tends to add a small amount of latency and variance. Touchscreens on phones and tablets apply their own gesture-recognition layers — often around 300 ms — specifically to distinguish a double-tap from two accidental single taps, which can make raw touchscreen results appear slower even when the user's reflexes are fast.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Using This Tool to Benchmark New Hardware
-        </h2>
+          {tr("Using This Tool to Benchmark New Hardware\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Before a retail return window closes, it is worth stress-testing a newly purchased mouse. Run several dozen double-clicks across all four difficulty levels and watch the Standard Deviation stat in the Statistics panel — a healthy, well-manufactured switch should produce a fairly tight spread of results. A wide standard deviation, or occasional suspiciously low intervals under 20 ms that you did not intend, can indicate a manufacturing defect or an early sign of switch chatter, both of which are valid reasons to request an exchange.
-        </p>
+          {tr("Before a retail return window closes, it is worth stress-testing a newly purchased mouse. Run several dozen double-clicks across all four difficulty levels and watch the Standard Deviation stat in the Statistics panel — a healthy, well-manufactured switch should produce a fairly tight spread of results. A wide standard deviation, or occasional suspiciously low intervals under 20 ms that you did not intend, can indicate a manufacturing defect or an early sign of switch chatter, both of which are valid reasons to request an exchange.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Esports and Competitive Benchmarking Standards
-        </h2>
+          {tr("Esports and Competitive Benchmarking Standards\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          While there is no single official governing body certifying double-click speed the way there is for typing tests, many esports organizations and hardware manufacturers publish informal benchmarks for their sponsored athletes. Competitive click-intensive titles have driven demand for input devices with sub-1ms polling response and near-zero debounce delay, which is why optical switches have become the de facto standard in high-end gaming mice over the past several years. Community leaderboards on gaming forums have documented verified double-clicks as fast as 20–40 ms using specialized capture equipment, though such results sit well outside what casual play requires.
-        </p>
+          {tr("While there is no single official governing body certifying double-click speed the way there is for typing tests, many esports organizations and hardware manufacturers publish informal benchmarks for their sponsored athletes. Competitive click-intensive titles have driven demand for input devices with sub-1ms polling response and near-zero debounce delay, which is why optical switches have become the de facto standard in high-end gaming mice over the past several years. Community leaderboards on gaming forums have documented verified double-clicks as fast as 20–40 ms using specialized capture equipment, though such results sit well outside what casual play requires.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Quick Troubleshooting Reference
-        </h2>
+          {tr("Quick Troubleshooting Reference\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          Use this quick-reference table to match a symptom you notice while testing to the most likely underlying cause and fix:
-        </p>
+          {tr("Use this quick-reference table to match a symptom you notice while testing to the most likely underlying cause and fix:\r\n        ")}</p>
         <div style={{ overflowX: 'auto', marginBottom: '1.5rem' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
             <thead>
               <tr style={{ background: 'rgba(0,245,255,0.08)' }}>
-                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>Symptom</th>
-                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>Likely Cause</th>
-                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>Recommended Fix</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>{tr("Symptom")}</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>{tr("Likely Cause")}</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left', border: '1px solid var(--border)', color: '#000000' }}>{tr("Recommended Fix")}</th>
               </tr>
             </thead>
             <tbody>
@@ -826,64 +782,50 @@ export default function DoubleClickPage() {
         </div>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          History of the Double Click
-        </h2>
+          {tr("History of the Double Click\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          The double-click was introduced by <strong>Larry Tesler</strong> and colleagues at Xerox PARC in the late 1970s as part of the <a href="https://en.wikipedia.org/wiki/Graphical_user_interface" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>graphical user interface paradigm <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>. When Apple's Lisa and Macintosh computers popularized the GUI in the early 1980s, double-clicking became the standard method for opening files and launching applications. Microsoft adopted the convention in Windows 1.0 (1985). Today, despite touchscreens reducing its prevalence, the double-click remains a fundamental desktop interaction pattern used by billions daily.
-        </p>
+          {tr("The double-click was introduced by ")}<strong>{tr("Larry Tesler")}</strong> {tr("and colleagues at Xerox PARC in the late 1970s as part of the ")}<a href="https://en.wikipedia.org/wiki/Graphical_user_interface" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("graphical user interface paradigm ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>{tr(". When Apple's Lisa and Macintosh computers popularized the GUI in the early 1980s, double-clicking became the standard method for opening files and launching applications. Microsoft adopted the convention in Windows 1.0 (1985). Today, despite touchscreens reducing its prevalence, the double-click remains a fundamental desktop interaction pattern used by billions daily.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Browser Compatibility
-        </h2>
+          {tr("Browser Compatibility\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          This Double Click Test uses the <code>performance.now()</code> Web API for high-resolution timing and the <code>Web Audio API</code> for sound feedback, both supported in all modern browsers: <strong>Chrome 24+, Firefox 15+, Safari 8+, Edge 12+, and Opera 15+</strong>. No plugins or downloads are required. JavaScript must be enabled. If your browser blocks audio autoplay, the very first click on the page unlocks the audio context, after which all subsequent tones play normally.
-        </p>
+          {tr("This Double Click Test uses the ")}<code>performance.now()</code> {tr("Web API for high-resolution timing and the ")}<code>Web Audio API</code> {tr("for sound feedback, both supported in all modern browsers: ")}<strong>{tr("Chrome 24+, Firefox 15+, Safari 8+, Edge 12+, and Opera 15+")}</strong>{tr(". No plugins or downloads are required. JavaScript must be enabled. If your browser blocks audio autoplay, the very first click on the page unlocks the audio context, after which all subsequent tones play normally.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Mobile Device Support
-        </h2>
+          {tr("Mobile Device Support\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          The test zone responds to touch events on iOS and Android devices. Be aware that mobile OS frameworks apply their own touch debounce and gesture recognition layers (typically 300 ms for distinguishing single from double taps), which may alter raw measurements. Sound cues work the same way on mobile as on desktop once the page has registered an initial tap. For the most accurate results, use a physical mouse on a desktop or laptop computer.
-        </p>
+          {tr("The test zone responds to touch events on iOS and Android devices. Be aware that mobile OS frameworks apply their own touch debounce and gesture recognition layers (typically 300 ms for distinguishing single from double taps), which may alter raw measurements. Sound cues work the same way on mobile as on desktop once the page has registered an initial tap. For the most accurate results, use a physical mouse on a desktop or laptop computer.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Privacy Statement
-        </h2>
+          {tr("Privacy Statement\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          This tool operates entirely within your browser using client-side JavaScript, including all sound generation. <strong>No click data, timing results, audio settings, or personal information is collected, stored, or transmitted to any server.</strong> All statistics exist only in your browser memory and are cleared when you reset the tool or close the tab. We do not use cookies for this tool.
-        </p>
+          {tr("This tool operates entirely within your browser using client-side JavaScript, including all sound generation. ")}<strong>{tr("No click data, timing results, audio settings, or personal information is collected, stored, or transmitted to any server.")}</strong> {tr("All statistics exist only in your browser memory and are cleared when you reset the tool or close the tab. We do not use cookies for this tool.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Accuracy Disclaimer
-        </h2>
+          {tr("Accuracy Disclaimer\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          While <code>performance.now()</code> provides sub-millisecond resolution, real-world accuracy is influenced by browser event loop scheduling (typically ±1–4 ms), system CPU load, background processes, and browser throttling in inactive tabs. Audio playback timing is independent of the recorded interval and does not affect measurement accuracy. Results are highly accurate under normal conditions but should not be used for scientific or medical purposes.
-        </p>
+          {tr("While ")}<code>performance.now()</code> {tr("provides sub-millisecond resolution, real-world accuracy is influenced by browser event loop scheduling (typically ±1–4 ms), system CPU load, background processes, and browser throttling in inactive tabs. Audio playback timing is independent of the recorded interval and does not affect measurement accuracy. Results are highly accurate under normal conditions but should not be used for scientific or medical purposes.\r\n        ")}</p>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Glossary of Double-Click Terminology
-        </h2>
+          {tr("Glossary of Double-Click Terminology\r\n        ")}</h2>
         <p style={{ marginBottom: '1rem' }}>
-          The following terms come up frequently when discussing click testing, mouse hardware, and input latency. Use this glossary as a quick reference while reading the rest of this guide or comparing peripherals:
-        </p>
+          {tr("The following terms come up frequently when discussing click testing, mouse hardware, and input latency. Use this glossary as a quick reference while reading the rest of this guide or comparing peripherals:\r\n        ")}</p>
         <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Debounce:</strong> A software or firmware delay inserted after a click to prevent a single physical press from being read as multiple electrical signals.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Polling rate:</strong> How often a mouse reports its state to the computer, measured in Hz. Higher polling rates reduce the delay between a physical click and the signal reaching your PC.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Actuation force:</strong> The amount of physical pressure required to trigger a switch. Lighter actuation generally allows for faster repeated clicking.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Latency:</strong> The total <a href="https://en.wikipedia.org/wiki/Input_lag" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>input latency <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> between a physical action and its effect appearing on screen, combining hardware, USB transmission, and software processing time.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Threshold:</strong> The maximum interval, in milliseconds, that the operating system or this test will accept between two clicks for them to count as a double-click.</li>
-          <li style={{ marginBottom: '0.6rem' }}><strong>Standard deviation:</strong> A statistical measure of how spread out your recorded intervals are; a lower value means more consistent timing between attempts.</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Debounce:")}</strong> {tr("A software or firmware delay inserted after a click to prevent a single physical press from being read as multiple electrical signals.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Polling rate:")}</strong> {tr("How often a mouse reports its state to the computer, measured in Hz. Higher polling rates reduce the delay between a physical click and the signal reaching your PC.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Actuation force:")}</strong> {tr("The amount of physical pressure required to trigger a switch. Lighter actuation generally allows for faster repeated clicking.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Latency:")}</strong> {tr("The total ")}<a href="https://en.wikipedia.org/wiki/Input_lag" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("input latency ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> {tr("between a physical action and its effect appearing on screen, combining hardware, USB transmission, and software processing time.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Threshold:")}</strong> {tr("The maximum interval, in milliseconds, that the operating system or this test will accept between two clicks for them to count as a double-click.")}</li>
+          <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Standard deviation:")}</strong> {tr("A statistical measure of how spread out your recorded intervals are; a lower value means more consistent timing between attempts.")}</li>
         </ul>
 
         <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-          Final Thoughts: Making the Most of Your Double-Click Test Results
-        </h2>
+          {tr("Final Thoughts: Making the Most of Your Double-Click Test Results\r\n        ")}</h2>
         <p style={{ marginBottom: '1.5rem' }}>
-          A single double-click score is only a snapshot. The real value of this tool comes from testing repeatedly over time — before and after cleaning a switch, before and after upgrading to an optical-switch mouse, or simply across a few days to see how consistent your natural reflex timing really is. Pay closer attention to your standard deviation and success rate than to any single best result: a low best time paired with a high failure rate usually means you got lucky once rather than developed genuine consistency. Combine the sound feedback with the visual stats, work your way up through the difficulty levels gradually, and use the troubleshooting table above the moment you notice anything unusual in your numbers. Whether you are diagnosing a flaky switch, tuning your operating system's threshold, or simply curious how your reflexes compare to the global average, this tool gives you a fast, private, and completely free way to find out. Bookmark this page and revisit it every few weeks — small, gradual improvements in your average interval are far more meaningful than chasing a single lucky lightning-fast click, and tracking that trend over time is the best way to know whether your hardware, technique, or both are actually getting better.
-        </p>
+          {tr("A single double-click score is only a snapshot. The real value of this tool comes from testing repeatedly over time — before and after cleaning a switch, before and after upgrading to an optical-switch mouse, or simply across a few days to see how consistent your natural reflex timing really is. Pay closer attention to your standard deviation and success rate than to any single best result: a low best time paired with a high failure rate usually means you got lucky once rather than developed genuine consistency. Combine the sound feedback with the visual stats, work your way up through the difficulty levels gradually, and use the troubleshooting table above the moment you notice anything unusual in your numbers. Whether you are diagnosing a flaky switch, tuning your operating system's threshold, or simply curious how your reflexes compare to the global average, this tool gives you a fast, private, and completely free way to find out. Bookmark this page and revisit it every few weeks — small, gradual improvements in your average interval are far more meaningful than chasing a single lucky lightning-fast click, and tracking that trend over time is the best way to know whether your hardware, technique, or both are actually getting better.\r\n        ")}</p>
 
         {/* ── Expanded FAQ ─────────────────────────────────────────────── */}
-        <section aria-label="Frequently Asked Questions" style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
+        <section aria-label={tr("Frequently Asked Questions")} style={{ marginBottom: '3rem', marginTop: '2.5rem' }}>
           <h2 style={{
             fontWeight: 900, fontSize: '1.75rem', color: '#000000',
             marginTop: 0, marginBottom: '1.5rem',
@@ -898,8 +840,7 @@ export default function DoubleClickPage() {
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
               <line x1="12" y1="17" x2="12.01" y2="17" />
             </svg>
-            Frequently Asked Questions
-          </h2>
+            {tr("Frequently Asked Questions\r\n          ")}</h2>
     
           <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {FAQ_ITEMS.map((faq, i) => {

@@ -1,7 +1,10 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/InternetSpeedPage.json';
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import { Home, ChevronRight } from 'lucide-react';
 
 const SITE_URL = 'https://fixedaim.com/internet-speed';
@@ -36,6 +39,8 @@ const MORE_TOOLS: ToolLink[] = [
 ];
 
 export default function InternetSpeedPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -1331,83 +1336,81 @@ export default function InternetSpeedPage() {
           }
         }
       `}} />{/* BREADCRUMB */}
-      <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-        <Link href="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-          <Home size={14} /> Home
-        </Link>
+      <nav aria-label={tr("Breadcrumb")} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+        <Link href={localeHref("/")} style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+          <Home size={14} /> {tr("Home\n        ")}</Link>
         <ChevronRight size={13} />
-        <Link href="/benchmark" style={{ color: 'inherit', textDecoration: 'none' }}>Benchmark</Link>
+        <Link href={localeHref("/benchmark")} style={{ color: 'inherit', textDecoration: 'none' }}>{tr("Benchmark")}</Link>
         <ChevronRight size={13} />
-        <span style={{ color: 'var(--neon-cyan)', fontWeight: 600 }}>Internet Speed Test</span>
+        <span style={{ color: 'var(--neon-cyan)', fontWeight: 600 }}>{tr("Internet Speed Test")}</span>
       </nav>
 
       {/* HEADER */}
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
         <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0, color: 'var(--neon-cyan)' }}>
-          Internet Speed Test
-        </h1>
-        <span className="pill" id="conn" data-k="conn" data-on="1">Online</span>
+          {tr("Internet Speed Test\n        ")}</h1>
+        <span className="pill" id="conn" data-k="conn" data-on="1">{tr("Online")}</span>
       </header>
 
       <main style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: '16px' }}>
         {/* SPEEDOMETER HERO CARD */}
         <section className="card" id="hero">
           <svg className="gauge" id="g1" viewBox="0 0 180 134" role="img" aria-label="Live speedometer in megabits per second"></svg>
-          <div className="ph" data-k="phase">Ready to test</div>
-          <div className="bar" role="progressbar" aria-label="Test progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={0}>
+          <div className="ph" data-k="phase">{tr("Ready to test")}</div>
+          <div className="bar" role="progressbar" aria-label={tr("Test progress")} aria-valuemin={0} aria-valuemax={100} aria-valuenow={0}>
             <i data-bar></i>
           </div>
           <div className="ctrl" data-avoid>
-            <button className="btn pri" id="bStart">Start test</button>
-            <button className="btn" id="bPause" disabled>Pause</button>
-            <button className="btn" id="bStop" disabled>Stop</button>
-            <button className="btn" id="bRestart">Restart</button>
-            <button className="btn" id="bDash">Mini dashboard</button>
-            <button className="btn" id="bSet">Settings</button>
-            <button className="btn" id="bCopy">Copy result</button>
+            <button className="btn pri" id="bStart">{tr("Start test")}</button>
+            <button className="btn" id="bPause" disabled>{tr("Pause")}</button>
+            <button className="btn" id="bStop" disabled>{tr("Stop")}</button>
+            <button className="btn" id="bRestart">{tr("Restart")}</button>
+            <button className="btn" id="bDash">{tr("Mini dashboard")}</button>
+            <button className="btn" id="bSet">{tr("Settings")}</button>
+            <button className="btn" id="bCopy">{tr("Copy result")}</button>
           </div>
         </section>
 
         {/* STATS GRID */}
         <section className="grid">
-          <div className="card st"><span>Download (Mbps)</span><b data-k="dl">–</b></div>
-          <div className="card st"><span>Upload (Mbps)</span><b data-k="ul">–</b></div>
-          <div className="card st"><span>Ping (ms)</span><b data-k="ping">–</b><small data-k="pr"></small></div>
-          <div className="card st"><span>Jitter (ms)</span><b data-k="jit">–</b></div>
-          <div className="card st"><span>Latency during download (ms)</span><b data-k="ldl">–</b></div>
-          <div className="card st"><span>Latency during upload (ms)</span><b data-k="lul">–</b></div>
-          <div className="card st"><span>Packet loss (%)</span><b data-k="loss">–</b></div>
-          <div className="card st"><span>Connection quality</span><b data-k="qual" data-q="">–</b></div>
-          <div className="card st"><span>Progress</span><b data-k="prog">0%</b></div>
-          <div className="card st wide"><span>Last test result</span><b style={{ fontSize: '1.05rem' }} data-k="last">No test yet</b></div>
+          <div className="card st"><span>{tr("Download (Mbps)")}</span><b data-k="dl">–</b></div>
+          <div className="card st"><span>{tr("Upload (Mbps)")}</span><b data-k="ul">–</b></div>
+          <div className="card st"><span>{tr("Ping (ms)")}</span><b data-k="ping">–</b><small data-k="pr"></small></div>
+          <div className="card st"><span>{tr("Jitter (ms)")}</span><b data-k="jit">–</b></div>
+          <div className="card st"><span>{tr("Latency during download (ms)")}</span><b data-k="ldl">–</b></div>
+          <div className="card st"><span>{tr("Latency during upload (ms)")}</span><b data-k="lul">–</b></div>
+          <div className="card st"><span>{tr("Packet loss (%)")}</span><b data-k="loss">–</b></div>
+          <div className="card st"><span>{tr("Connection quality")}</span><b data-k="qual" data-q="">–</b></div>
+          <div className="card st"><span>{tr("Progress")}</span><b data-k="prog">0%</b></div>
+          <div className="card st wide"><span>{tr("Last test result")}</span><b style={{ fontSize: '1.05rem' }} data-k="last">{tr("No test yet")}</b></div>
         </section>
 
         {/* NETWORK QUALITY SCORE */}
         <section className="card">
-          <b style={{ fontSize: '0.95rem', display: 'block', marginBottom: '8px' }}>Network quality score</b>
+          <b style={{ fontSize: '0.95rem', display: 'block', marginBottom: '8px' }}>{tr("Network quality score")}</b>
           <div className="qs">
-            <div><span>Streaming</span><b className="stars" data-k="s1" role="img">☆☆☆☆☆</b></div>
-            <div><span>Gaming</span><b className="stars" data-k="s2" role="img">☆☆☆☆☆</b></div>
-            <div><span>Video calls</span><b className="stars" data-k="s3" role="img">☆☆☆☆☆</b></div>
+            <div><span>{tr("Streaming")}</span><b className="stars" data-k="s1" role="img">☆☆☆☆☆</b></div>
+            <div><span>{tr("Gaming")}</span><b className="stars" data-k="s2" role="img">☆☆☆☆☆</b></div>
+            <div><span>{tr("Video calls")}</span><b className="stars" data-k="s3" role="img">☆☆☆☆☆</b></div>
           </div>
         </section>
 
         {/* CONNECTION DETAILS */}
         <section className="card">
-          <b style={{ fontSize: '0.95rem', display: 'block', marginBottom: '8px' }}>Connection details</b>
+          <b style={{ fontSize: '0.95rem', display: 'block', marginBottom: '8px' }}>{tr("Connection details")}</b>
           <dl className="info">
-            <dt>Server location</dt><dd data-k="srv">–</dd>
-            <dt>Network</dt><dd data-k="isp">–</dd>
-            <dt>IP address</dt><dd data-k="ip">–</dd>
-            <dt>Connection type</dt><dd data-k="ct">–</dd>
-            <dt>Measured at</dt><dd data-k="mt">–</dd>
+            <dt>{tr("Server location")}</dt><dd data-k="srv">–</dd>
+            <dt>{tr("Network")}</dt><dd data-k="isp">–</dd>
+            <dt>{tr("IP address")}</dt><dd data-k="ip">–</dd>
+            <dt>{tr("Connection type")}</dt><dd data-k="ct">–</dd>
+            <dt>{tr("Measured at")}</dt><dd data-k="mt">–</dd>
           </dl>
         </section>
 
         {/* PACKET LOSS CARD */}
         <section className="card">
-          <b style={{ fontSize: '0.95rem', display: 'block', marginBottom: '4px' }}>Packet loss</b>
-          <div className="plb" role="img" aria-label="Packets received versus lost">
+          <b style={{ fontSize: '0.95rem', display: 'block', marginBottom: '4px' }}>{tr("Packet loss")}</b>
+          <div className="plb" role="img" aria-label={tr("Packets received versus lost")}>
             <i id="plg" style={{ width: '0%' }}></i>
             <i id="plr" style={{ width: '0%' }}></i>
           </div>
@@ -1416,117 +1419,114 @@ export default function InternetSpeedPage() {
 
         {/* LIVE PERFORMANCE CANVAS */}
         <section className="card">
-          <b style={{ fontSize: '0.95rem', display: 'block' }}>Live performance</b>
+          <b style={{ fontSize: '0.95rem', display: 'block' }}>{tr("Live performance")}</b>
           <p className="sm">
-            <span style={{ color: 'var(--ac)' }}>●</span> Download &nbsp;
-            <span style={{ color: 'var(--a2)' }}>●</span> Upload &nbsp;
-            <span style={{ color: '#f59e0b' }}>●</span> Ping &nbsp;(each line scaled to its own range)
-          </p>
-          <canvas className="cv2" id="cLive" role="img" aria-label="Live download, upload and ping graph"></canvas>
+            <span style={{ color: 'var(--ac)' }}>●</span> {tr("Download &nbsp;\n            ")}<span style={{ color: 'var(--a2)' }}>●</span> {tr("Upload &nbsp;\n            ")}<span style={{ color: '#f59e0b' }}>●</span> {tr("Ping &nbsp;(each line scaled to its own range)\n          ")}</p>
+          <canvas className="cv2" id="cLive" role="img" aria-label={tr("Live download, upload and ping graph")}></canvas>
         </section>
 
         {/* RECENT TESTS CANVAS */}
         <section className="card">
-          <b style={{ fontSize: '0.95rem', display: 'block' }}>Recent tests</b>
-          <p className="sm">Download (Cyan) and upload (Light Blue) in Mbps for your last 10 tests</p>
-          <canvas className="cv2" id="cHist" role="img" aria-label="Bar chart of recent test results"></canvas>
+          <b style={{ fontSize: '0.95rem', display: 'block' }}>{tr("Recent tests")}</b>
+          <p className="sm">{tr("Download (Cyan) and upload (Light Blue) in Mbps for your last 10 tests")}</p>
+          <canvas className="cv2" id="cHist" role="img" aria-label={tr("Bar chart of recent test results")}></canvas>
         </section>
 
         {/* SEO GUIDE ARTICLE */}
         <article className="seo" aria-labelledby="seoT">
-          <h2 id="seoT">How to read your internet speed test results</h2>
-          <p>A speed test shows how quickly data moves between your device and the internet. The free FixedAim speed test above measures all of it in one run. The numbers look simple, but each one affects something different in daily life.</p>
+          <h2 id="seoT">{tr("How to read your internet speed test results")}</h2>
+          <p>{tr("A speed test shows how quickly data moves between your device and the internet. The free FixedAim speed test above measures all of it in one run. The numbers look simple, but each one affects something different in daily life.")}</p>
           <ul>
-            <li><strong>Download speed (Mbps)</strong> – how fast you receive data. It decides how quickly web pages load, videos stream and files download.</li>
-            <li><strong>Upload speed (Mbps)</strong> – how fast you send data. It matters for video calls, sending large attachments, cloud backups and live streaming.</li>
-            <li><strong>Ping (ms)</strong> – the delay before data starts to move. Lower is better, and it is the most important number for online games.</li>
-            <li><strong>Jitter (ms)</strong> – how much your ping jumps around. High jitter causes choppy voice and video calls even when speed looks fine.</li>
-            <li><strong>Packet loss (%)</strong> – the share of data that never arrives. Anything above 1% can cause freezes, lag and dropped calls.</li>
+            <li><strong>{tr("Download speed (Mbps)")}</strong> {tr("– how fast you receive data. It decides how quickly web pages load, videos stream and files download.")}</li>
+            <li><strong>{tr("Upload speed (Mbps)")}</strong> {tr("– how fast you send data. It matters for video calls, sending large attachments, cloud backups and live streaming.")}</li>
+            <li><strong>{tr("Ping (ms)")}</strong> {tr("– the delay before data starts to move. Lower is better, and it is the most important number for online games.")}</li>
+            <li><strong>{tr("Jitter (ms)")}</strong> {tr("– how much your ping jumps around. High jitter causes choppy voice and video calls even when speed looks fine.")}</li>
+            <li><strong>{tr("Packet loss (%)")}</strong> {tr("– the share of data that never arrives. Anything above 1% can cause freezes, lag and dropped calls.")}</li>
           </ul>
 
-          <h2>What internet speed do you actually need?</h2>
-          <p>These are typical guidelines per activity. If several people use the connection at the same time, add the numbers together.</p>
+          <h2>{tr("What internet speed do you actually need?")}</h2>
+          <p>{tr("These are typical guidelines per activity. If several people use the connection at the same time, add the numbers together.")}</p>
           <div className="tw">
             <table>
-              <thead><tr><th>Activity</th><th>Suggested download</th><th>Also check</th></tr></thead>
+              <thead><tr><th>{tr("Activity")}</th><th>{tr("Suggested download")}</th><th>{tr("Also check")}</th></tr></thead>
               <tbody>
-                <tr><td>Email and browsing</td><td>1–5 Mbps</td><td>Stable connection</td></tr>
-                <tr><td>HD video streaming</td><td>5–10 Mbps per stream</td><td>Low packet loss</td></tr>
-                <tr><td>4K video streaming</td><td>15–25 Mbps per stream</td><td>Consistent speed</td></tr>
-                <tr><td>Video calls (Zoom, Meet, Teams)</td><td>3–10 Mbps</td><td>Upload, jitter</td></tr>
-                <tr><td>Online gaming</td><td>10–25 Mbps</td><td>Ping under 50 ms</td></tr>
-                <tr><td>Work from home, several devices</td><td>50–100 Mbps</td><td>Upload 10+ Mbps</td></tr>
-                <tr><td>Large family, 4K and smart home</td><td>200+ Mbps</td><td>Good Wi-Fi coverage</td></tr>
+                <tr><td>{tr("Email and browsing")}</td><td>{tr("1–5 Mbps")}</td><td>{tr("Stable connection")}</td></tr>
+                <tr><td>{tr("HD video streaming")}</td><td>{tr("5–10 Mbps per stream")}</td><td>{tr("Low packet loss")}</td></tr>
+                <tr><td>{tr("4K video streaming")}</td><td>{tr("15–25 Mbps per stream")}</td><td>{tr("Consistent speed")}</td></tr>
+                <tr><td>{tr("Video calls (Zoom, Meet, Teams)")}</td><td>{tr("3–10 Mbps")}</td><td>{tr("Upload, jitter")}</td></tr>
+                <tr><td>{tr("Online gaming")}</td><td>{tr("10–25 Mbps")}</td><td>{tr("Ping under 50 ms")}</td></tr>
+                <tr><td>{tr("Work from home, several devices")}</td><td>{tr("50–100 Mbps")}</td><td>{tr("Upload 10+ Mbps")}</td></tr>
+                <tr><td>{tr("Large family, 4K and smart home")}</td><td>{tr("200+ Mbps")}</td><td>{tr("Good Wi-Fi coverage")}</td></tr>
               </tbody>
             </table>
           </div>
-          <p>To put speed in real terms: a 1 GB file takes about 80 seconds to download at 100 Mbps, but around 5 minutes at 25 Mbps.</p>
+          <p>{tr("To put speed in real terms: a 1 GB file takes about 80 seconds to download at 100 Mbps, but around 5 minutes at 25 Mbps.")}</p>
 
-          <h2>How to get an accurate speed test result</h2>
+          <h2>{tr("How to get an accurate speed test result")}</h2>
           <ol>
-            <li>Pause downloads, cloud sync and streaming on every device in your home.</li>
-            <li>Turn off your VPN, because it adds distance and can lower your speed.</li>
-            <li>Connect with an Ethernet cable, or stand close to the Wi-Fi router.</li>
-            <li>Restart your router if you have not done so in a while.</li>
-            <li>Run the test two or three times, and once in the evening when the network is busiest. Compare the results using the history chart.</li>
+            <li>{tr("Pause downloads, cloud sync and streaming on every device in your home.")}</li>
+            <li>{tr("Turn off your VPN, because it adds distance and can lower your speed.")}</li>
+            <li>{tr("Connect with an Ethernet cable, or stand close to the Wi-Fi router.")}</li>
+            <li>{tr("Restart your router if you have not done so in a while.")}</li>
+            <li>{tr("Run the test two or three times, and once in the evening when the network is busiest. Compare the results using the history chart.")}</li>
           </ol>
 
-          <h2>Why is my internet slow? Quick fixes that work</h2>
+          <h2>{tr("Why is my internet slow? Quick fixes that work")}</h2>
           <ul>
-            <li><strong>Weak Wi-Fi signal:</strong> move the router to a central, open place or use the 5 GHz band for nearby devices.</li>
-            <li><strong>Too many devices:</strong> disconnect devices you are not using, and move streaming boxes and PCs to a cable.</li>
-            <li><strong>Background updates:</strong> game launchers, phone updates and cloud backups can quietly use most of your bandwidth.</li>
-            <li><strong>Old router or cables:</strong> routers older than five years often cannot reach the speeds of a modern plan.</li>
-            <li><strong>Evening congestion:</strong> if speeds drop only at peak hours, the problem may be your provider&apos;s network.</li>
-            <li><strong>Still slow over a cable?</strong> Share your test results with your provider and ask them to check the line.</li>
+            <li><strong>{tr("Weak Wi-Fi signal:")}</strong> {tr("move the router to a central, open place or use the 5 GHz band for nearby devices.")}</li>
+            <li><strong>{tr("Too many devices:")}</strong> {tr("disconnect devices you are not using, and move streaming boxes and PCs to a cable.")}</li>
+            <li><strong>{tr("Background updates:")}</strong> {tr("game launchers, phone updates and cloud backups can quietly use most of your bandwidth.")}</li>
+            <li><strong>{tr("Old router or cables:")}</strong> {tr("routers older than five years often cannot reach the speeds of a modern plan.")}</li>
+            <li><strong>{tr("Evening congestion:")}</strong> {tr("if speeds drop only at peak hours, the problem may be your provider&apos;s network.")}</li>
+            <li><strong>{tr("Still slow over a cable?")}</strong> {tr("Share your test results with your provider and ask them to check the line.")}</li>
           </ul>
         </article>
 
         {/* FAQ ACCORDION */}
         <section aria-labelledby="faqT">
-          <h2 className="faq-h" id="faqT">Frequently asked questions</h2>
+          <h2 className="faq-h" id="faqT">{tr("Frequently asked questions")}</h2>
           <div className="faq" style={{ marginTop: '12px' }}>
             <details open>
-              <summary>What is the best free internet speed test online?</summary>
-              <div className="a">A good free speed test measures download, upload, ping, jitter and packet loss in one run, works on any phone or computer, and needs no sign-up or app. The FixedAim speed test does all of that in your browser and saves your last 10 results so you can compare them over time.</div>
+              <summary>{tr("What is the best free internet speed test online?")}</summary>
+              <div className="a">{tr("A good free speed test measures download, upload, ping, jitter and packet loss in one run, works on any phone or computer, and needs no sign-up or app. The FixedAim speed test does all of that in your browser and saves your last 10 results so you can compare them over time.")}</div>
             </details>
             <details>
-              <summary>How do I test my internet speed accurately?</summary>
-              <div className="a">Close other apps and tabs, pause downloads and streaming, turn off your VPN, and connect with an Ethernet cable if you can. If you are on Wi-Fi, stand close to the router. Run the test two or three times and use the average, because a single run can be affected by a short burst of traffic.</div>
+              <summary>{tr("How do I test my internet speed accurately?")}</summary>
+              <div className="a">{tr("Close other apps and tabs, pause downloads and streaming, turn off your VPN, and connect with an Ethernet cable if you can. If you are on Wi-Fi, stand close to the router. Run the test two or three times and use the average, because a single run can be affected by a short burst of traffic.")}</div>
             </details>
             <details>
-              <summary>What is a good internet speed?</summary>
-              <div className="a">For one or two people browsing, streaming HD video and making video calls, 25 to 50 Mbps download is usually enough. A busy household with several devices, 4K streaming or remote work is more comfortable at 100 Mbps or more. For gaming, low ping (under 50 ms) matters more than raw download speed.</div>
+              <summary>{tr("What is a good internet speed?")}</summary>
+              <div className="a">{tr("For one or two people browsing, streaming HD video and making video calls, 25 to 50 Mbps download is usually enough. A busy household with several devices, 4K streaming or remote work is more comfortable at 100 Mbps or more. For gaming, low ping (under 50 ms) matters more than raw download speed.")}</div>
             </details>
             <details>
-              <summary>What is the difference between Mbps and MB/s?</summary>
-              <div className="a">Mbps means megabits per second and is how internet plans are sold. MB/s means megabytes per second and is what most download windows show. One byte is 8 bits, so divide Mbps by 8 to get MB/s. A 100 Mbps connection downloads at roughly 12.5 MB/s at best.</div>
+              <summary>{tr("What is the difference between Mbps and MB/s?")}</summary>
+              <div className="a">{tr("Mbps means megabits per second and is how internet plans are sold. MB/s means megabytes per second and is what most download windows show. One byte is 8 bits, so divide Mbps by 8 to get MB/s. A 100 Mbps connection downloads at roughly 12.5 MB/s at best.")}</div>
             </details>
             <details>
-              <summary>What are ping, jitter and packet loss?</summary>
-              <div className="a">Ping is the time (in milliseconds) a small message takes to reach a server and come back. Jitter is how much that time changes from one message to the next. Packet loss is the percentage of messages that never arrive. Low ping, low jitter and 0% packet loss give smooth calls and gaming, even on a modest plan.</div>
+              <summary>{tr("What are ping, jitter and packet loss?")}</summary>
+              <div className="a">{tr("Ping is the time (in milliseconds) a small message takes to reach a server and come back. Jitter is how much that time changes from one message to the next. Packet loss is the percentage of messages that never arrive. Low ping, low jitter and 0% packet loss give smooth calls and gaming, even on a modest plan.")}</div>
             </details>
             <details>
-              <summary>Why is my internet slower than what I pay for?</summary>
-              <div className="a">Plans advertise a maximum speed, and real speeds are often lower. Common causes are weak Wi-Fi signal, an old router, many devices sharing the connection, a busy evening network, background updates, or a VPN. Testing over a cable next to the router shows the speed your provider is actually delivering.</div>
+              <summary>{tr("Why is my internet slower than what I pay for?")}</summary>
+              <div className="a">{tr("Plans advertise a maximum speed, and real speeds are often lower. Common causes are weak Wi-Fi signal, an old router, many devices sharing the connection, a busy evening network, background updates, or a VPN. Testing over a cable next to the router shows the speed your provider is actually delivering.")}</div>
             </details>
             <details>
-              <summary>Is this speed test accurate?</summary>
-              <div className="a">The FixedAim speed test measures real transfer speed in your browser against Cloudflare&apos;s speed servers, which is a good estimate of everyday performance. Results can differ slightly from other tools because of server location, your device and browser. If the server cannot be reached, the page falls back to a simulation and clearly marks the result as simulated.</div>
+              <summary>{tr("Is this speed test accurate?")}</summary>
+              <div className="a">{tr("The FixedAim speed test measures real transfer speed in your browser against Cloudflare&apos;s speed servers, which is a good estimate of everyday performance. Results can differ slightly from other tools because of server location, your device and browser. If the server cannot be reached, the page falls back to a simulation and clearly marks the result as simulated.")}</div>
             </details>
             <details>
-              <summary>How can I make my Wi-Fi faster?</summary>
-              <div className="a">Place the router in a central, open spot away from walls and appliances, restart it every so often, use the 5 GHz band for nearby devices, and update the router&apos;s firmware. Switching the Wi-Fi channel, moving heavy devices to Ethernet, or adding a mesh node can also help in larger homes.</div>
+              <summary>{tr("How can I make my Wi-Fi faster?")}</summary>
+              <div className="a">{tr("Place the router in a central, open spot away from walls and appliances, restart it every so often, use the 5 GHz band for nearby devices, and update the router&apos;s firmware. Switching the Wi-Fi channel, moving heavy devices to Ethernet, or adding a mesh node can also help in larger homes.")}</div>
             </details>
           </div>
         </section>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginTop: '3.5rem', marginBottom: '2.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginTop: '3.5rem', marginBottom: '2.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center', letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -1579,12 +1579,12 @@ export default function InternetSpeedPage() {
       </main>
 
       {/* FLOATING ACTION BUTTON & RADIAL MENU */}
-      <div id="fw" role="group" aria-label="Speed test floating controls">
+      <div id="fw" role="group" aria-label={tr("Speed test floating controls")}>
         <div className="ring"></div>
-        <button id="fab" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="menu" aria-label="Speed test menu. Press Enter to open, Shift plus arrow keys to move.">
+        <button id="fab" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="menu" aria-label={tr("Speed test menu. Press Enter to open, Shift plus arrow keys to move.")}>
           <span id="ico"></span>
         </button>
-        <div id="menu" role="menu" aria-label="Speed test actions">
+        <div id="menu" role="menu" aria-label={tr("Speed test actions")}>
           <button className="mi" role="menuitem" data-a="toggle" type="button"></button>
           <button className="mi" role="menuitem" data-a="pause" type="button"></button>
           <button className="mi" role="menuitem" data-a="restart" type="button"></button>
@@ -1593,49 +1593,49 @@ export default function InternetSpeedPage() {
       </div>
 
       {/* MINI DASHBOARD POPUP DIALOG */}
-      <div id="dash" role="dialog" aria-label="Mini dashboard">
+      <div id="dash" role="dialog" aria-label={tr("Mini dashboard")}>
         <div className="dh">
-          <span>Speed monitor</span>
+          <span>{tr("Speed monitor")}</span>
           <span>
-            <button className="ib" id="dMode" type="button" aria-label="Switch compact or detailed mode" title="Compact / detailed">⇔</button>{' '}
-            <button className="ib" id="dClose" type="button" aria-label="Collapse mini dashboard" title="Collapse">✕</button>
+            <button className="ib" id="dMode" type="button" aria-label={tr("Switch compact or detailed mode")} title={tr("Compact / detailed")}>⇔</button>{' '}
+            <button className="ib" id="dClose" type="button" aria-label={tr("Collapse mini dashboard")} title={tr("Collapse")}>✕</button>
           </span>
         </div>
         <svg className="gauge" id="g2" viewBox="0 0 180 134" role="img" aria-label="Mini speedometer"></svg>
         <div className="two">
-          <div><b data-k="dl">–</b><span>↓ Mbps</span></div>
-          <div><b data-k="ul">–</b><span>↑ Mbps</span></div>
+          <div><b data-k="dl">–</b><span>{tr("↓ Mbps")}</span></div>
+          <div><b data-k="ul">–</b><span>{tr("↑ Mbps")}</span></div>
         </div>
         <div className="det">
           <div className="two">
-            <div><b data-k="ping">–</b><span>Ping ms</span></div>
-            <div><b data-k="jit">–</b><span>Jitter ms</span></div>
-            <div><b data-k="loss">–</b><span>Loss %</span></div>
-            <div><b data-k="qual" data-q="">–</b><span>Quality</span></div>
+            <div><b data-k="ping">–</b><span>{tr("Ping ms")}</span></div>
+            <div><b data-k="jit">–</b><span>{tr("Jitter ms")}</span></div>
+            <div><b data-k="loss">–</b><span>{tr("Loss %")}</span></div>
+            <div><b data-k="qual" data-q="">–</b><span>{tr("Quality")}</span></div>
           </div>
-          <canvas id="cv" role="img" aria-label="Live performance graph"></canvas>
+          <canvas id="cv" role="img" aria-label={tr("Live performance graph")}></canvas>
           <p className="sm" data-k="phase"></p>
           <p className="sm" data-k="last"></p>
         </div>
-        <button className="btn pri" id="dRetest" type="button">Quick retest</button>
+        <button className="btn pri" id="dRetest" type="button">{tr("Quick retest")}</button>
       </div>
 
       {/* SETTINGS BACKDROP & MODAL */}
       <div id="bk" hidden></div>
       <div id="set" role="dialog" aria-modal="true" aria-labelledby="stt" hidden>
-        <h2 id="stt">Customization</h2>
-        <label className="f">Show floating button <input type="checkbox" data-s="on" /></label>
-        <label className="f">Auto live speed on button <input type="checkbox" data-s="mon" /></label>
-        <label className="f">Button size <input type="range" min="40" max="80" step="2" data-s="size" /></label>
-        <label className="f">Opacity <input type="range" min="30" max="100" data-s="op" /></label>
-        <label className="f">Theme <select data-s="theme"><option value="auto">Auto</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
-        <label className="f">Menu layout <select data-s="layout"><option value="radial">Radial</option><option value="list">Stacked list</option></select></label>
-        <label className="f">Position <select data-s="pos"><option value="">Custom (dragged)</option><option value="right:.5">Right middle</option><option value="left:.5">Left middle</option><option value="right:.1">Top right</option><option value="left:.1">Top left</option><option value="right:.9">Bottom right</option><option value="left:.9">Bottom left</option></select></label>
+        <h2 id="stt">{tr("Customization")}</h2>
+        <label className="f">{tr("Show floating button ")}<input type="checkbox" data-s="on" /></label>
+        <label className="f">{tr("Auto live speed on button ")}<input type="checkbox" data-s="mon" /></label>
+        <label className="f">{tr("Button size ")}<input type="range" min="40" max="80" step="2" data-s="size" /></label>
+        <label className="f">{tr("Opacity ")}<input type="range" min="30" max="100" data-s="op" /></label>
+        <label className="f">{tr("Theme ")}<select data-s="theme"><option value="auto">{tr("Auto")}</option><option value="light">{tr("Light")}</option><option value="dark">{tr("Dark")}</option></select></label>
+        <label className="f">{tr("Menu layout ")}<select data-s="layout"><option value="radial">{tr("Radial")}</option><option value="list">{tr("Stacked list")}</option></select></label>
+        <label className="f">{tr("Position ")}<select data-s="pos"><option value="">{tr("Custom (dragged)")}</option><option value="right:.5">{tr("Right middle")}</option><option value="left:.5">{tr("Left middle")}</option><option value="right:.1">{tr("Top right")}</option><option value="left:.1">{tr("Top left")}</option><option value="right:.9">{tr("Bottom right")}</option><option value="left:.9">{tr("Bottom left")}</option></select></label>
         <div className="ctrl" style={{ marginTop: '14px' }}>
-          <button className="btn" id="sReset" type="button">Reset position</button>
-          <button className="btn pri" id="sClose" type="button">Done</button>
+          <button className="btn" id="sReset" type="button">{tr("Reset position")}</button>
+          <button className="btn pri" id="sClose" type="button">{tr("Done")}</button>
         </div>
-        <p className="note" style={{ marginTop: '8px' }}>Preferences are saved automatically on this device.</p>
+        <p className="note" style={{ marginTop: '8px' }}>{tr("Preferences are saved automatically on this device.")}</p>
       </div>
 
       {/* HOVER TOOLTIP POPUP */}

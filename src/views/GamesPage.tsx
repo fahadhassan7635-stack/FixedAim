@@ -1,10 +1,13 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/GamesPage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 
 export default function GamesPage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
   const games = [
     { to: '/space-defense', title: 'Space Defense', desc: 'Defend your base from incoming asteroids. Trains tracking precision, reaction time, and clicking speed in high-pressure scenarios.', color: '#ff6b35', badge: 'SKILL BUILDER' },
     { to: '/voyager-game', title: 'Voyager Game', desc: 'Navigate through the asteroid field using your spacebar or clicking speed. Test your endurance and boost your reflexes.', color: '#a855f7', badge: 'MOST POPULAR' },
@@ -120,28 +123,27 @@ export default function GamesPage() {
 `}</style>
 
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div className="section-label">Category</div>
+        <div className="section-label">{tr("Category")}</div>
         <h1 translate="no" className="tool-title">{t.hubs.games.h1}</h1>
         <p translate="no" className="tool-subtitle">{t.hubs.games.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {games.map((game) => (
-          <Link key={game.to} href={game.to} className="cod-hub-card" style={{ ['--ch-accent' as string]: game.color }}>
+          <Link key={game.to} href={localeHref(game.to)} className="cod-hub-card" style={{ ['--ch-accent' as string]: game.color }}>
             <div>
               <div className="cod-hub-title" style={{ color: game.color }}>{game.title}</div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{game.desc}</p>
             </div>
-            <span className="cod-hub-cta" style={{ color: game.color }}>Play Now →</span>
+            <span className="cod-hub-cta" style={{ color: game.color }}>{tr("Play Now →")}</span>
           </Link>
         ))}
       </div>
 
       <div className="cod-tip-box">
-        <div className="cod-tip-title" style={{ color: '#ff6b35' }}>Skill Development Tips</div>
+        <div className="cod-tip-title" style={{ color: '#ff6b35' }}>{tr("Skill Development Tips")}</div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.7', marginBottom: '1.25rem' }}>
-          These games are designed to genuinely improve your gaming performance. Play deliberately to see real results.
-        </p>
+          {tr("These games are designed to genuinely improve your gaming performance. Play deliberately to see real results.\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { t: 'Warm Up Daily', d: 'Even 5–10 min of aim/reflex training before sessions sharpens performance.' },
@@ -149,9 +151,9 @@ export default function GamesPage() {
             { t: 'Low Sensitivity', d: 'Training with lower DPI builds muscle memory for precise aiming.' },
             { t: 'Consistent Setup', d: 'Same chair, monitor distance, and grip every session = repeatable results.' },
           ].map(tip => (
-            <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title" style={{ color: '#ff6b35' }}>{tip.t}</div>
-              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tip.d}</div>
+            <div key={tr(tip.t)} className="cod-tip-item">
+              <div className="cod-tip-item-title" style={{ color: '#ff6b35' }}>{tr(tip.t)}</div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tr(tip.d)}</div>
             </div>
           ))}
         </div>
@@ -159,14 +161,12 @@ export default function GamesPage() {
 
       <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
-          Skill-Based Arcade Games Built for Mechanical Warm-Ups
-        </h2>
+          {tr("Skill-Based Arcade Games Built for Mechanical Warm-Ups\n        ")}</h2>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-          Repetitive drills work, but interactive skill games keep your focus sharp while training the exact same hand-eye coordination, mouse control, and APM endurance required in competitive esports. Challenge your rapid targeting in <Link href="/space-defense" style={{ textDecoration: 'underline', fontWeight: 800 }}>Space Defense</Link>, test micro-timing and obstacle dodging in <Link href="/space-waves" style={{ textDecoration: 'underline', fontWeight: 800 }}>Space Waves</Link>, or push your actions per minute in the <Link href="/apm-drill" style={{ textDecoration: 'underline', fontWeight: 800 }}>APM Drill</Link>.
+          {tr("Repetitive drills work, but interactive skill games keep your focus sharp while training the exact same hand-eye coordination, mouse control, and APM endurance required in competitive esports. Challenge your rapid targeting in ")}<Link href={localeHref('/space-defense')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Space Defense")}</Link>{tr(", test micro-timing and obstacle dodging in ")}<Link href={localeHref('/space-waves')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Space Waves")}</Link>{tr(", or push your actions per minute in the ")}<Link href={localeHref('/apm-drill')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("APM Drill")}</Link>.
         </p>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
-          Every game in the FixedAim Arcade runs smoothly in your browser at native monitor refresh rates with instant restarts and zero signups, making them ideal for quick 5-minute warm-ups between ranked queues or relaxing reflex sessions.
-        </p>
+          {tr("Every game in the FixedAim Arcade runs smoothly in your browser at native monitor refresh rates with instant restarts and zero signups, making them ideal for quick 5-minute warm-ups between ranked queues or relaxing reflex sessions.\n        ")}</p>
       </article>
     </div>
   );

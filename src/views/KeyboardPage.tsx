@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/KeyboardPage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 const tools = [
@@ -10,7 +12,8 @@ const tools = [
 ];
 
 export default function KeyboardPage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <script
@@ -117,25 +120,25 @@ export default function KeyboardPage() {
   }
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div className="section-label">Category</div>
+        <div className="section-label">{tr("Category")}</div>
         <h1 translate="no" className="tool-title">{t.hubs.keyboard.h1}</h1>
         <p translate="no" className="tool-subtitle">{t.hubs.keyboard.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {tools.map(tool => (
-          <Link key={tool.to} href={tool.to} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
+          <Link key={tool.to} href={localeHref(tool.to)} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
             <div>
-              <div className="cod-hub-title" style={{ color: tool.color }}>{tool.title}</div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{tool.desc}</p>
+              <div className="cod-hub-title" style={{ color: tool.color }}>{tr(tool.title)}</div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{tr(tool.desc)}</p>
             </div>
-            <span className="cod-hub-cta" style={{ color: tool.color }}>Start Test →</span>
+            <span className="cod-hub-cta" style={{ color: tool.color }}>{tr("Start Test →")}</span>
           </Link>
         ))}
       </div>
 
       <div className="cod-tip-box">
-        <div className="cod-tip-title" style={{ color: '#00f5ff' }}>Typing Improvement Tips</div>
+        <div className="cod-tip-title" style={{ color: '#00f5ff' }}>{tr("Typing Improvement Tips")}</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { t: 'Touch Typing', d: 'Learn to type without looking at the keyboard. Use all 10 fingers.' },
@@ -143,9 +146,9 @@ export default function KeyboardPage() {
             { t: 'Focus on Accuracy', d: 'Accuracy first, then speed. Mistakes slow you down more than careful typing.' },
             { t: 'Proper Posture', d: 'Sit upright, elbows at 90°, wrists neutral. Reduces fatigue and errors.' },
           ].map(tip => (
-            <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title" style={{ color: '#00f5ff' }}>{tip.t}</div>
-              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tip.d}</div>
+            <div key={tr(tip.t)} className="cod-tip-item">
+              <div className="cod-tip-item-title" style={{ color: '#00f5ff' }}>{tr(tip.t)}</div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tr(tip.d)}</div>
             </div>
           ))}
         </div>
@@ -153,14 +156,11 @@ export default function KeyboardPage() {
 
       <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
-          Why Benchmark Your Keyboard Performance Online?
-        </h2>
+          {tr("Why Benchmark Your Keyboard Performance Online?\n        ")}</h2>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-          Your keyboard is your primary input device for both competitive gaming and daily productivity. Whether you are trying to break past 100 WPM on a <Link href="/typing-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Typing Speed Test</Link>, verify N-key rollover (NKRO) and switch actuation with our <Link href="/key-visualizer" style={{ textDecoration: 'underline', fontWeight: 800 }}>Key Visualizer</Link>, or drill rapid thumb presses in the <Link href="/spacebar" style={{ textDecoration: 'underline', fontWeight: 800 }}>Spacebar Counter</Link>, measuring real-time input accuracy exposes hidden bottlenecks before they cost you in matches or work.
-        </p>
+          {tr("Your keyboard is your primary input device for both competitive gaming and daily productivity. Whether you are trying to break past 100 WPM on a ")}<Link href={localeHref('/typing-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Typing Speed Test")}</Link>{tr(", verify N-key rollover (NKRO) and switch actuation with our ")}<Link href={localeHref('/key-visualizer')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Key Visualizer")}</Link>{tr(", or drill rapid thumb presses in the ")}<Link href={localeHref('/spacebar')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Spacebar Counter")}</Link>{tr(", measuring real-time input accuracy exposes hidden bottlenecks before they cost you in matches or work.\n        ")}</p>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
-          Every FixedAim keyboard tool runs locally in your browser with sub-millisecond JavaScript event timing. No downloads or accounts are required—simply pick a test above to measure net WPM, raw character accuracy, key rollover, and sustained actuation consistency across mechanical, optical, or laptop keyboards.
-        </p>
+          {tr("Every FixedAim keyboard tool runs locally in your browser with sub-millisecond JavaScript event timing. No downloads or accounts are required—simply pick a test above to measure net WPM, raw character accuracy, key rollover, and sustained actuation consistency across mechanical, optical, or laptop keyboards.\n        ")}</p>
       </article>
     </div>
   );

@@ -1,7 +1,10 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/DeadPixelTestPage.json';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import { Home, ChevronRight, Monitor, Play, Pause, Maximize, Minimize, X, RefreshCw, Zap } from 'lucide-react';
 
 const SITE_URL = 'https://fixedaim.com/dead-pixel-test';
@@ -30,6 +33,8 @@ const FAQS = [
 ];
 
 export default function DeadPixelTestPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
   const [displayInfo, setDisplayInfo] = useState<{ [key: string]: string }>({});
 
@@ -720,28 +725,25 @@ export default function DeadPixelTestPage() {
       `}</style>
 
       {/* BREADCRUMB */}
-      <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 600 }}>
-        <Link href="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-          <Home size={14} /> Home
-        </Link>
+      <nav aria-label={tr("Breadcrumb")} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.25rem', fontWeight: 600 }}>
+        <Link href={localeHref("/")} style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+          <Home size={14} /> {tr("Home\n        ")}</Link>
         <ChevronRight size={13} />
-        <Link href="/benchmark" style={{ color: 'inherit', textDecoration: 'none' }}>Benchmark</Link>
+        <Link href={localeHref("/benchmark")} style={{ color: 'inherit', textDecoration: 'none' }}>{tr("Benchmark")}</Link>
         <ChevronRight size={13} />
-        <span style={{ color: '#2B4EDB', fontWeight: 800 }}>Dead Pixel Test</span>
+        <span style={{ color: '#2B4EDB', fontWeight: 800 }}>{tr("Dead Pixel Test")}</span>
       </nav>
 
       <main id="home">
         {/* HEADER */}
         <header style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'inline-block', padding: '0.3rem 0.8rem', background: '#FFE033', border: '2px solid #000000', boxShadow: '2px 2px 0 0 #000000', fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>
-            Display Diagnostics · 100% Free · No Sign-Up
-          </div>
+            {tr("Display Diagnostics · 100% Free · No Sign-Up\n          ")}</div>
           <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '0 0 10px', lineHeight: 1.1 }}>
-            Dead Pixel <span style={{ color: '#2B4EDB' }}>Test</span>
+            {tr("Dead Pixel ")}<span style={{ color: '#2B4EDB' }}>{tr("Test")}</span>
           </h1>
           <p style={{ maxWidth: '75ch', color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.6', margin: '0 0 1.5rem' }}>
-            Fill your screen with pure primary colors, subpixel matrices, and high-frequency patterns to inspect for dead, stuck, or hot pixels. Features a built-in pixel exercise tool to unstick frozen transistors.
-          </p>
+            {tr("Fill your screen with pure primary colors, subpixel matrices, and high-frequency patterns to inspect for dead, stuck, or hot pixels. Features a built-in pixel exercise tool to unstick frozen transistors.\n          ")}</p>
 
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <button
@@ -759,8 +761,7 @@ export default function DeadPixelTestPage() {
                 cursor: 'pointer',
               }}
             >
-              ▶ Start Fullscreen Test
-            </button>
+              {tr("▶ Start Fullscreen Test\n            ")}</button>
             <button
               id="auto"
               type="button"
@@ -776,35 +777,31 @@ export default function DeadPixelTestPage() {
                 cursor: 'pointer',
               }}
             >
-              ⚡ Start With Autoplay
-            </button>
+              {tr("⚡ Start With Autoplay\n            ")}</button>
           </div>
         </header>
 
         {/* SETTINGS BAR */}
-        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>Test Options</h2>
+        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>{tr("Test Options")}</h2>
         <div className="dpt-opts">
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            Autoplay Delay:
-            <input type="range" id="delay" min="1" max="10" defaultValue="3" style={{ accentColor: '#2B4EDB', cursor: 'pointer' }} />
+            {tr("Autoplay Delay:\n            ")}<input type="range" id="delay" min="1" max="10" defaultValue="3" style={{ accentColor: '#2B4EDB', cursor: 'pointer' }} />
             <output id="delayOut" style={{ fontWeight: 800 }}>3 s</output>
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
             <input type="checkbox" id="fs" defaultChecked style={{ width: '18px', height: '18px', accentColor: '#2B4EDB' }} />
-            Enter Fullscreen Automatically
-          </label>
+            {tr("Enter Fullscreen Automatically\n          ")}</label>
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
             <input type="checkbox" id="wake" defaultChecked style={{ width: '18px', height: '18px', accentColor: '#2B4EDB' }} />
-            Keep Screen Awake (Wake Lock)
-          </label>
+            {tr("Keep Screen Awake (Wake Lock)\n          ")}</label>
         </div>
 
         {/* TILES GRID */}
-        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>Pick a Color or Pattern</h2>
+        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>{tr("Pick a Color or Pattern")}</h2>
         <div id="tiles" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px', marginBottom: '2.5rem' }}></div>
 
         {/* HARDWARE DISPLAY TELEMETRY */}
-        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>Your Display Telemetry</h2>
+        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>{tr("Your Display Telemetry")}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '2.5rem' }}>
           {Object.entries(displayInfo).map(([key, val]) => (
             <div
@@ -827,36 +824,36 @@ export default function DeadPixelTestPage() {
         </div>
 
         {/* KEYBOARD SHORTCUTS */}
-        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>Navigation & Controls</h2>
+        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.75rem' }}>{tr("Navigation & Controls")}</h2>
         <table className="dpt-table">
           <tbody>
             <tr>
-              <td><span className="dpt-kbd">→</span> <span className="dpt-kbd">←</span> or Tap Sides</td>
-              <td>Switch to next or previous color test</td>
+              <td><span className="dpt-kbd">→</span> <span className="dpt-kbd">←</span> {tr("or Tap Sides")}</td>
+              <td>{tr("Switch to next or previous color test")}</td>
             </tr>
             <tr>
               <td><span className="dpt-kbd">1</span> – <span className="dpt-kbd">9</span></td>
-              <td>Quick jump directly to standard solid primary colors</td>
+              <td>{tr("Quick jump directly to standard solid primary colors")}</td>
             </tr>
             <tr>
-              <td><span className="dpt-kbd">Space</span></td>
-              <td>Toggle automatic slideshow playback</td>
+              <td><span className="dpt-kbd">{tr("Space")}</span></td>
+              <td>{tr("Toggle automatic slideshow playback")}</td>
             </tr>
             <tr>
               <td><span className="dpt-kbd">+</span> / <span className="dpt-kbd">−</span></td>
-              <td>Increase or decrease autoplay transition speed</td>
+              <td>{tr("Increase or decrease autoplay transition speed")}</td>
             </tr>
             <tr>
               <td><span className="dpt-kbd">H</span></td>
-              <td>Show or hide HUD controls overlay</td>
+              <td>{tr("Show or hide HUD controls overlay")}</td>
             </tr>
             <tr>
               <td><span className="dpt-kbd">F</span></td>
-              <td>Toggle fullscreen view</td>
+              <td>{tr("Toggle fullscreen view")}</td>
             </tr>
             <tr>
-              <td><span className="dpt-kbd">Esc</span></td>
-              <td>Exit test mode and return to dashboard</td>
+              <td><span className="dpt-kbd">{tr("Esc")}</span></td>
+              <td>{tr("Exit test mode and return to dashboard")}</td>
             </tr>
           </tbody>
         </table>
@@ -864,44 +861,36 @@ export default function DeadPixelTestPage() {
         {/* SEO GUIDE & RESULTS INTERPRETATION */}
         <article style={{ marginTop: '3.5rem' }}>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '0 0 1rem' }}>
-            How to Detect & Diagnose Dead or Stuck Pixels
-          </h2>
+            {tr("How to Detect & Diagnose Dead or Stuck Pixels\n          ")}</h2>
           <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-            A standard 4K monitor contains over <strong>8.29 million pixels</strong>, each composed of red, green, and blue subpixels controlled by microscopic thin-film transistors (TFT). When manufacturing anomalies occur or physical panel stress arises, pixels can malfunction in distinct ways:
-          </p>
+            {tr("A standard 4K monitor contains over ")}<strong>{tr("8.29 million pixels")}</strong>{tr(", each composed of red, green, and blue subpixels controlled by microscopic thin-film transistors (TFT). When manufacturing anomalies occur or physical panel stress arises, pixels can malfunction in distinct ways:\n          ")}</p>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px', marginBottom: '2rem' }}>
             <div style={{ background: '#FFF', border: '3px solid #000', boxShadow: '4px 4px 0 0 #000', padding: '16px' }}>
-              <div style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', color: '#D63031', marginBottom: '6px' }}>Dead Pixels (Black)</div>
+              <div style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', color: '#D63031', marginBottom: '6px' }}>{tr("Dead Pixels (Black)")}</div>
               <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: '#4A5568', margin: 0 }}>
-                A dead pixel remains permanently unlit and displays as a microscopic black dot across all color screens. This is caused by a broken transistor that fails to supply electrical current.
-              </p>
+                {tr("A dead pixel remains permanently unlit and displays as a microscopic black dot across all color screens. This is caused by a broken transistor that fails to supply electrical current.\n              ")}</p>
             </div>
             <div style={{ background: '#FFF', border: '3px solid #000', boxShadow: '4px 4px 0 0 #000', padding: '16px' }}>
-              <div style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', color: '#0984E3', marginBottom: '6px' }}>Stuck Pixels (Color)</div>
+              <div style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', color: '#0984E3', marginBottom: '6px' }}>{tr("Stuck Pixels (Color)")}</div>
               <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: '#4A5568', margin: 0 }}>
-                A stuck pixel has one or two subpixel transistors locked permanently open. It manifests as a stubborn bright red, green, blue, or yellow dot that stands out prominently against dark backgrounds.
-              </p>
+                {tr("A stuck pixel has one or two subpixel transistors locked permanently open. It manifests as a stubborn bright red, green, blue, or yellow dot that stands out prominently against dark backgrounds.\n              ")}</p>
             </div>
             <div style={{ background: '#FFF', border: '3px solid #000', boxShadow: '4px 4px 0 0 #000', padding: '16px' }}>
-              <div style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', color: '#E17055', marginBottom: '6px' }}>Hot Pixels (White)</div>
+              <div style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', color: '#E17055', marginBottom: '6px' }}>{tr("Hot Pixels (White)")}</div>
               <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: '#4A5568', margin: 0 }}>
-                A hot pixel occurs when all three RGB subpixels remain permanently energized simultaneously, producing a bright white prick of light that remains visible on a pure black background.
-              </p>
+                {tr("A hot pixel occurs when all three RGB subpixels remain permanently energized simultaneously, producing a bright white prick of light that remains visible on a pure black background.\n              ")}</p>
             </div>
           </div>
 
           <h3 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', margin: '2rem 0 0.5rem' }}>
-            Using the Built-in Pixel Fixer
-          </h3>
+            {tr("Using the Built-in Pixel Fixer\n          ")}</h3>
           <p style={{ lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-            If you identify a stuck subpixel during testing, switch to the <strong>Pixel Fixer</strong> mode. A draggable high-speed noise square will appear on screen. Drag this square directly over the stuck pixel and leave it flashing for 10–20 minutes. The rapid rapid electrical state switching often forces the liquid crystal molecule or transistor gate to unstick.
-          </p>
+            {tr("If you identify a stuck subpixel during testing, switch to the ")}<strong>{tr("Pixel Fixer")}</strong> {tr("mode. A draggable high-speed noise square will appear on screen. Drag this square directly over the stuck pixel and leave it flashing for 10–20 minutes. The rapid rapid electrical state switching often forces the liquid crystal molecule or transistor gate to unstick.\n          ")}</p>
 
           {/* FAQS */}
           <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '2.5rem 0 1rem' }}>
-            Frequently Asked Questions (FAQs)
-          </h2>
+            {tr("Frequently Asked Questions (FAQs)\n          ")}</h2>
           <div className="dpt-faq">
             {FAQS.map((faq, idx) => (
               <details key={idx}>
@@ -913,8 +902,7 @@ export default function DeadPixelTestPage() {
 
           {/* MORE TOOLS */}
           <h2 style={{ fontSize: '1.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: '3rem 0 1.25rem' }}>
-            Explore More Tools
-          </h2>
+            {tr("Explore More Tools\n          ")}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
             {MORE_TOOLS.map((t) => (
               <Link
@@ -952,11 +940,11 @@ export default function DeadPixelTestPage() {
         <div id="toast"></div>
         <div id="hud">
           <b id="name"></b>
-          <button id="prev" type="button">◀ Back</button>
-          <button id="play" type="button" aria-pressed="false">⚡ Autoplay</button>
-          <button id="next" type="button">Next ▶</button>
-          <button id="fsBtn" type="button">⛶ Fullscreen</button>
-          <button id="exit" type="button" style={{ background: '#FF6B6B', color: '#000' }}>✖ Exit</button>
+          <button id="prev" type="button">{tr("◀ Back")}</button>
+          <button id="play" type="button" aria-pressed="false">{tr("⚡ Autoplay")}</button>
+          <button id="next" type="button">{tr("Next ▶")}</button>
+          <button id="fsBtn" type="button">{tr("⛶ Fullscreen")}</button>
+          <button id="exit" type="button" style={{ background: '#FF6B6B', color: '#000' }}>{tr("✖ Exit")}</button>
         </div>
       </div>
     </div>

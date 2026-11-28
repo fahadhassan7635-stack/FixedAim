@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/HomePage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 
@@ -30,7 +32,8 @@ const tools = [
 ];
 
 export default function HomePage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 0.5rem', paddingBottom: '3rem' }}>
@@ -89,7 +92,7 @@ export default function HomePage() {
             </p>
 
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <Link href="/cps-test" className="btn btn-primary" style={{
+              <Link href={localeHref('/cps-test')} className="btn btn-primary" style={{
                 background: '#FF6B6B',
                 color: '#000000',
                 border: '3px solid #000000',
@@ -100,7 +103,7 @@ export default function HomePage() {
               }}>
                 {t.hero.ctaCps}
               </Link>
-              <Link href="/typing-test" className="btn btn-secondary" style={{
+              <Link href={localeHref('/typing-test')} className="btn btn-secondary" style={{
                 background: '#74B9FF',
                 color: '#000000',
                 border: '3px solid #000000',
@@ -140,7 +143,7 @@ export default function HomePage() {
             
             {/* Sticker 1: 3D Aim Trainer Button (Black Card) */}
             <Link
-              href="/3d-aim-trainer"
+              href={localeHref('/3d-aim-trainer')}
               className="hero-sticker-btn"
               style={{
                 display: 'block',
@@ -176,13 +179,12 @@ export default function HomePage() {
                 color: '#FFE033',
                 lineHeight: 1.2,
               }}>
-                3D AIM TRAINER
-              </div>
+                {tr("3D AIM TRAINER\n              ")}</div>
             </Link>
 
             {/* Sticker 2: 2D Aim Trainer Button (Pink Card) */}
             <Link
-              href="/aim-trainer"
+              href={localeHref('/aim-trainer')}
               className="hero-sticker-btn"
               style={{
                 display: 'block',
@@ -218,13 +220,12 @@ export default function HomePage() {
                 color: '#000000',
                 lineHeight: 1.2,
               }}>
-                2D AIM TRAINER
-              </div>
+                {tr("2D AIM TRAINER\n              ")}</div>
             </Link>
 
             {/* Sticker 3: Key Visualizer Button (Mint/Blue Card) */}
             <Link
-              href="/key-visualizer"
+              href={localeHref('/key-visualizer')}
               className="hero-sticker-btn"
               style={{
                 display: 'block',
@@ -260,8 +261,7 @@ export default function HomePage() {
                 color: '#000000',
                 lineHeight: 1.2,
               }}>
-                KEY VISUALIZER
-              </div>
+                {tr("KEY VISUALIZER\n              ")}</div>
             </Link>
 
           </div>
@@ -271,9 +271,9 @@ export default function HomePage() {
 
       {/* ── 2. CATEGORY CARDS — CHOOSE YOUR ARENA ── */}
       <section style={{ marginBottom: '4rem' }}>
-        <div className="section-label">ARENA CATEGORIES</div>
-        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>CHOOSE YOUR ARENA</h2>
-        <p style={{ color: '#2D3436', fontWeight: 600, marginBottom: '2rem' }}>Precision tools and skill games. Free, instant, zero signup required.</p>
+        <div className="section-label">{tr("ARENA CATEGORIES")}</div>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>{tr("CHOOSE YOUR ARENA")}</h2>
+        <p style={{ color: '#2D3436', fontWeight: 600, marginBottom: '2rem' }}>{tr("Precision tools and skill games. Free, instant, zero signup required.")}</p>
 
         <div style={{
           display: 'grid',
@@ -347,7 +347,7 @@ export default function HomePage() {
           ].map(cat => (
             <Link
               key={cat.to}
-              href={cat.to}
+              href={localeHref(cat.to)}
               className="card"
               style={{
                 background: '#FFFFFF',
@@ -382,7 +382,7 @@ export default function HomePage() {
                   textTransform: 'uppercase',
                   marginBottom: '0.75rem',
                 }}>
-                  {cat.title}
+                  {tr(cat.title)}
                 </div>
                 <div className="category-title" style={{
                   fontFamily: "'Public Sans', 'Barlow Condensed', sans-serif",
@@ -392,13 +392,13 @@ export default function HomePage() {
                   textTransform: 'uppercase',
                   lineHeight: 1.1,
                   marginBottom: '0.6rem',
-                }}>{cat.title}</div>
-                <p className="category-desc" style={{ fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.55, marginBottom: '1.5rem' }}>{cat.desc}</p>
+                }}>{tr(cat.title)}</div>
+                <p className="category-desc" style={{ fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.55, marginBottom: '1.5rem' }}>{tr(cat.desc)}</p>
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', borderTop: '2px dashed #000000', paddingTop: '1rem' }}>
                 {cat.pills.map(p => (
-                  <span key={p.label} className="category-pill" style={{
+                  <span key={tr(p.label)} className="category-pill" style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     padding: '0.25rem 0.65rem',
@@ -407,7 +407,7 @@ export default function HomePage() {
                     textTransform: 'uppercase',
                     border: '2px solid #000000',
                     boxShadow: '2px 2px 0 0 #000000',
-                  }}>{p.label}</span>
+                  }}>{tr(p.label)}</span>
                 ))}
               </div>
             </Link>
@@ -417,9 +417,9 @@ export default function HomePage() {
 
       {/* ── 3. QUICK LAUNCH GRID (ALL 17 TOOLS) ── */}
       <section id="all-tools" style={{ marginBottom: '4rem' }}>
-        <div className="section-label">QUICK LAUNCH</div>
-        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>JUMP IN INSTANTLY</h2>
-        <p className="section-desc" style={{ fontWeight: 600, marginBottom: '2rem' }}>No setup required. Click any tool and start testing in under 2 seconds.</p>
+        <div className="section-label">{tr("QUICK LAUNCH")}</div>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '0.5rem' }}>{tr("JUMP IN INSTANTLY")}</h2>
+        <p className="section-desc" style={{ fontWeight: 600, marginBottom: '2rem' }}>{tr("No setup required. Click any tool and start testing in under 2 seconds.")}</p>
 
         <div style={{
           display: 'grid',
@@ -429,7 +429,7 @@ export default function HomePage() {
           {tools.map(tool => (
             <Link
               key={tool.to}
-              href={tool.to}
+              href={localeHref(tool.to)}
               className="quick-launch-card"
               style={{
                 padding: '1.1rem 1.25rem',
@@ -447,7 +447,7 @@ export default function HomePage() {
                 letterSpacing: '-0.01em',
                 textTransform: 'uppercase',
                 lineHeight: 1.2,
-              }}>{tool.name}</div>
+              }}>{tr(tool.name)}</div>
               
               <div style={{ marginTop: '0.5rem' }}>
                 <span style={{
@@ -461,7 +461,7 @@ export default function HomePage() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                   padding: '1px 6px',
-                }}>{tool.tag}</span>
+                }}>{tr(tool.tag)}</span>
               </div>
             </Link>
           ))}
@@ -474,9 +474,9 @@ export default function HomePage() {
 
           {/* LEFT: Mini Speed Dashboard Card */}
           <div>
-            <div className="section-label">BENCHMARK</div>
+            <div className="section-label">{tr("BENCHMARK")}</div>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-              INTERNET SPEED<br /><span style={{ background: '#FFE033', padding: '0 6px', border: '2px solid #000' }}>MONITOR</span>
+              {tr("INTERNET SPEED")}<br /><span style={{ background: '#FFE033', padding: '0 6px', border: '2px solid #000' }}>{tr("MONITOR")}</span>
             </h2>
 
             <div className="card" style={{
@@ -501,35 +501,34 @@ export default function HomePage() {
               {/* Speed value */}
               <div style={{ textAlign: 'center', marginBottom: '0.25rem' }}>
                 <span className="speed-metric-num" style={{ fontFamily: "'Public Sans', sans-serif", fontWeight: 900, fontSize: '2.8rem', lineHeight: 1 }}>—</span>
-                <span className="speed-metric-unit" style={{ fontSize: '1.1rem', fontWeight: 800, marginLeft: '6px' }}>Mbps</span>
+                <span className="speed-metric-unit" style={{ fontSize: '1.1rem', fontWeight: 800, marginLeft: '6px' }}>{tr("Mbps")}</span>
               </div>
               <div className="speed-sub-status" style={{ textAlign: 'center', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-                Ready to benchmark connection
-              </div>
+                {tr("Ready to benchmark connection\n              ")}</div>
 
               {/* Stats row */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1rem' }}>
                 <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
-                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>↓ Download</div>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>{tr("↓ Download")}</div>
                   <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
                 <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
-                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>↑ Upload</div>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>{tr("↑ Upload")}</div>
                   <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
                 <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
-                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>Ping Latency</div>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>{tr("Ping Latency")}</div>
                   <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
                 <div className="speed-stat-box" style={{ padding: '0.75rem' }}>
-                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>Jitter</div>
+                  <div className="speed-stat-label" style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase' }}>{tr("Jitter")}</div>
                   <div className="speed-stat-val" style={{ fontSize: '1.35rem', fontWeight: 900 }}>—</div>
                 </div>
               </div>
 
               {/* CTA buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.5rem' }}>
-                <Link href="/internet-speed" className="btn btn-primary" style={{
+                <Link href={localeHref('/internet-speed')} className="btn btn-primary" style={{
                   background: '#FFE033',
                   color: '#000000',
                   border: '3px solid #000000',
@@ -538,9 +537,8 @@ export default function HomePage() {
                   fontWeight: 900,
                   textAlign: 'center',
                 }}>
-                  RUN FULL SPEED TEST →
-                </Link>
-                <Link href="/benchmark" className="btn btn-secondary" style={{
+                  {tr("RUN FULL SPEED TEST →\n                ")}</Link>
+                <Link href={localeHref('/benchmark')} className="btn btn-secondary" style={{
                   background: '#FFFFFF',
                   color: '#000000',
                   border: '3px solid #000000',
@@ -549,17 +547,16 @@ export default function HomePage() {
                   fontWeight: 800,
                   textAlign: 'center',
                 }}>
-                  VIEW BENCHMARK HUB
-                </Link>
+                  {tr("VIEW BENCHMARK HUB\n                ")}</Link>
               </div>
             </div>
           </div>
 
           {/* RIGHT: Why It Matters */}
           <div>
-            <div className="section-label">WHY IT MATTERS</div>
+            <div className="section-label">{tr("WHY IT MATTERS")}</div>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-              KNOW YOUR<br /><span style={{ background: '#74B9FF', padding: '0 6px', border: '2px solid #000' }}>CONNECTION</span>
+              {tr("KNOW YOUR")}<br /><span style={{ background: '#74B9FF', padding: '0 6px', border: '2px solid #000' }}>{tr("CONNECTION")}</span>
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
@@ -595,26 +592,21 @@ export default function HomePage() {
       {/* ── 5. PLATFORM INTRO & BENCHMARK GUIDE (SEO CONTENT) ── */}
       <section style={{ marginTop: '2rem', marginBottom: '2rem' }}>
         <div className="why-matter-card" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
-          <div className="section-label">ABOUT FIXED AIM</div>
+          <div className="section-label">{tr("ABOUT FIXED AIM")}</div>
           <h2 style={{ fontSize: 'clamp(1.6rem, 3.2vw, 2.2rem)', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.25rem', lineHeight: 1.15 }}>
-            BROWSER-BASED GAMING BENCHMARKS, TYPING DRILLS &amp; HARDWARE DIAGNOSTICS
-          </h2>
+            {tr("BROWSER-BASED GAMING BENCHMARKS, TYPING DRILLS &amp; HARDWARE DIAGNOSTICS\n          ")}</h2>
           <div className="why-matter-desc" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', fontSize: '0.95rem', fontWeight: 600, lineHeight: 1.7 }}>
             <div>
               <p style={{ marginTop: 0 }}>
-                <strong>FixedAim</strong> is a free, zero-signup browser benchmark suite built for competitive FPS players, Minecraft PvP specialists, speed typists, and everyday PC users who want accurate, real-time performance measurements without installing heavy desktop software. Every tool runs natively in your browser using high-resolution JavaScript timing APIs so your clicks, keystrokes, and reaction intervals are recorded down to the millisecond.
-              </p>
+                <strong>FixedAim</strong> {tr("is a free, zero-signup browser benchmark suite built for competitive FPS players, Minecraft PvP specialists, speed typists, and everyday PC users who want accurate, real-time performance measurements without installing heavy desktop software. Every tool runs natively in your browser using high-resolution JavaScript timing APIs so your clicks, keystrokes, and reaction intervals are recorded down to the millisecond.\n              ")}</p>
               <p style={{ marginBottom: 0 }}>
-                Whether you are testing raw clicking endurance on our <Link href="/cps-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>CPS Test</Link> with 1-second to 100-second timers, diagnosing mouse microswitch chatter in the <Link href="/double-click" style={{ textDecoration: 'underline', fontWeight: 800 }}>Double Click Test</Link>, or building muscle memory in our <Link href="/3d-aim-trainer" style={{ textDecoration: 'underline', fontWeight: 800 }}>3D Aim Trainer</Link>, your browser becomes a complete training arena.
-              </p>
+                {tr("Whether you are testing raw clicking endurance on our ")}<Link href={localeHref('/cps-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("CPS Test")}</Link> {tr("with 1-second to 100-second timers, diagnosing mouse microswitch chatter in the ")}<Link href={localeHref('/double-click')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Double Click Test")}</Link>{tr(", or building muscle memory in our ")}<Link href={localeHref('/3d-aim-trainer')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("3D Aim Trainer")}</Link>{tr(", your browser becomes a complete training arena.\n              ")}</p>
             </div>
             <div>
               <p style={{ marginTop: 0 }}>
-                For keyboard players and writers, the <Link href="/typing-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Typing Speed Test</Link> measures net WPM, raw WPM, and character accuracy across customizable drills, while the <Link href="/key-visualizer" style={{ textDecoration: 'underline', fontWeight: 800 }}>Key Visualizer</Link> verifies full N-key rollover (NKRO) and detects ghosting across a live 104-key matrix.
-              </p>
+                {tr("For keyboard players and writers, the ")}<Link href={localeHref('/typing-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Typing Speed Test")}</Link> {tr("measures net WPM, raw WPM, and character accuracy across customizable drills, while the ")}<Link href={localeHref('/key-visualizer')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Key Visualizer")}</Link> {tr("verifies full N-key rollover (NKRO) and detects ghosting across a live 104-key matrix.\n              ")}</p>
               <p style={{ marginBottom: 0 }}>
-                Beyond mouse and keyboard training, FixedAim includes hardware and network diagnostics: verify your monitor&apos;s true refresh rate with the <Link href="/hz-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Screen Hz Test</Link>, inspect panels for stuck subpixels on the <Link href="/dead-pixel-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Dead Pixel Test</Link>, check stereo channel separation with the <Link href="/speaker-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Speaker Test</Link>, and measure download throughput, ping, and jitter with the <Link href="/internet-speed" style={{ textDecoration: 'underline', fontWeight: 800 }}>Internet Speed Test</Link>. No accounts, no paywalls, and no downloads required.
-              </p>
+                {tr("Beyond mouse and keyboard training, FixedAim includes hardware and network diagnostics: verify your monitor&apos;s true refresh rate with the ")}<Link href={localeHref('/hz-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Screen Hz Test")}</Link>{tr(", inspect panels for stuck subpixels on the ")}<Link href={localeHref('/dead-pixel-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Dead Pixel Test")}</Link>{tr(", check stereo channel separation with the ")}<Link href={localeHref('/speaker-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Speaker Test")}</Link>{tr(", and measure download throughput, ping, and jitter with the ")}<Link href={localeHref('/internet-speed')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Internet Speed Test")}</Link>{tr(". No accounts, no paywalls, and no downloads required.\n              ")}</p>
             </div>
           </div>
         </div>

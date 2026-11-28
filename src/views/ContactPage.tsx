@@ -1,28 +1,17 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/ContactPage.json';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useLang } from '../contexts/LanguageContext';
 
 export default function ContactPage() {
-  useEffect(() => {
-    document.title = 'Contact Us | FixedAim';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Get in touch with the FixedAim team. Have questions, feedback, or a bug report? We typically respond within 1–3 business days.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Get in touch with the FixedAim team. Have questions, feedback, or a bug report? We typically respond within 1–3 business days.';
-      document.head.appendChild(meta);
-    }
-    return () => {
-      document.title = 'Fixed Aim – Free CPS Test, Aim Trainer & Gaming Tools';
-    };
-  }, []);
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
 
   return (
     <div style={{ maxWidth: '680px', margin: '0 auto', padding: '3rem 1.5rem', color: '#000000' }}>
-      <Link href="/" className="btn" style={{
+      <Link href={localeHref("/")} className="btn" style={{
         background: '#FFE033',
         color: '#000000',
         textDecoration: 'none',
@@ -36,18 +25,15 @@ export default function ContactPage() {
         border: '3px solid #000000',
         boxShadow: '3px 3px 0 0 #000000',
       }}>
-        ← BACK TO HOME
-      </Link>
+        {tr("← BACK TO HOME\n      ")}</Link>
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-        <div className="section-label">GET IN TOUCH</div>
+        <div className="section-label">{tr("GET IN TOUCH")}</div>
         <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '0.75rem', color: '#000000', textTransform: 'uppercase' }}>
-          CONTACT US
-        </h1>
+          {tr("CONTACT US\n        ")}</h1>
         <p style={{ color: '#2D3436', fontWeight: 600, lineHeight: '1.7', fontSize: '1.05rem', maxWidth: '500px', margin: '0 auto' }}>
-          Have a question, bug report, or feedback about our tools? We'd love to hear from you.
-        </p>
+          {tr("Have a question, bug report, or feedback about our tools? We'd love to hear from you.\n        ")}</p>
       </div>
 
       {/* Email Card */}
@@ -61,8 +47,7 @@ export default function ContactPage() {
       }}>
         <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>📧</div>
         <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#485460', marginBottom: '0.5rem', fontWeight: 800 }}>
-          OFFICIAL SUPPORT EMAIL
-        </div>
+          {tr("OFFICIAL SUPPORT EMAIL\n        ")}</div>
         <a
           href="mailto:supportfixedaim@gmail.com"
           style={{
@@ -77,11 +62,9 @@ export default function ContactPage() {
             boxShadow: '3px 3px 0 0 #000000',
           }}
         >
-          supportfixedaim@gmail.com
-        </a>
+          {tr("supportfixedaim@gmail.com\n        ")}</a>
         <p style={{ color: '#485460', fontSize: '0.88rem', marginTop: '1rem', marginBottom: 0, fontWeight: 600 }}>
-          We typically respond within 1–3 business days.
-        </p>
+          {tr("We typically respond within 1–3 business days.\n        ")}</p>
       </div>
 
       {/* What to include */}
@@ -93,13 +76,12 @@ export default function ContactPage() {
         marginBottom: '1.75rem'
       }}>
         <h2 style={{ color: '#000000', fontSize: '1.15rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1rem', marginTop: 0, borderBottom: '2px solid #000', paddingBottom: '4px', display: 'inline-block' }}>
-          💡 WHAT TO INCLUDE IN YOUR MESSAGE
-        </h2>
+          {tr("💡 WHAT TO INCLUDE IN YOUR MESSAGE\n        ")}</h2>
         <ul style={{ color: '#1E272E', fontWeight: 600, paddingLeft: '1.25rem', lineHeight: '2', margin: 0, fontSize: '0.95rem' }}>
-          <li>Your browser and operating system (e.g. Chrome on Windows 11)</li>
-          <li>The tool or page where you experienced the issue</li>
-          <li>A brief description of the problem or suggestion</li>
-          <li>Any screenshots if relevant</li>
+          <li>{tr("Your browser and operating system (e.g. Chrome on Windows 11)")}</li>
+          <li>{tr("The tool or page where you experienced the issue")}</li>
+          <li>{tr("A brief description of the problem or suggestion")}</li>
+          <li>{tr("Any screenshots if relevant")}</li>
         </ul>
       </div>
 
@@ -126,8 +108,7 @@ export default function ContactPage() {
 
       {/* Footer note */}
       <p style={{ color: '#485460', fontSize: '0.85rem', fontWeight: 700, textAlign: 'center', lineHeight: '1.7' }}>
-        Fixed Aim is a free, independent platform. We appreciate your feedback and use it to build better tools for everyone. ⚡
-      </p>
+        {tr("Fixed Aim is a free, independent platform. We appreciate your feedback and use it to build better tools for everyone. ⚡\n      ")}</p>
     </div>
   );
 }

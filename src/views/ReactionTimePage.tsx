@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/ReactionTimePage.json';
 import { useState, useRef, useCallback, useEffect } from 'react';
 
 // ─── More Tools ───────────────────────────────────────────────────────────────
@@ -323,6 +325,7 @@ function FAQItem({
 // FAQ ACCORDION SECTION
 // ============================================================
 function FAQSection() {
+  const { tr } = usePageI18n(pageDict);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (i: number) => {
@@ -332,7 +335,7 @@ function FAQSection() {
   return (
     <div
       className="faq-wrapper"
-      aria-label="Frequently Asked Questions"
+      aria-label={tr("Frequently Asked Questions")}
       style={{
         marginTop: '2.5rem',
         borderRadius: '0px',
@@ -350,8 +353,7 @@ function FAQSection() {
           marginTop: 0,
         }}
       >
-        Frequently Asked Questions (FAQs)
-      </h2>
+        {tr("Frequently Asked Questions (FAQs)\r\n      ")}</h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         {FAQ_DATA.map(({ q, a }, i) => (
@@ -372,6 +374,7 @@ function FAQSection() {
 // MAIN PAGE COMPONENT
 // ============================================================
 export default function ReactionTimePage() {
+  const { tr } = usePageI18n(pageDict);
   const [phase, setPhase] = useState<Phase>('idle');
   const [reactionTime, setReactionTime] = useState<number | null>(null);
   const [results, setResults] = useState<number[]>([]);
@@ -461,9 +464,9 @@ export default function ReactionTimePage() {
 
         {/* ---- HEADER ---- */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="section-label">Reaction Tool</div>
-          <h1 className="tool-title">Reaction Time Test</h1>
-          <p className="tool-subtitle">Test your reflexes — how fast do you respond to visual stimuli?</p>
+          <div className="section-label">{tr("Reaction Tool")}</div>
+          <h1 className="tool-title">{tr("Reaction Time Test")}</h1>
+          <p className="tool-subtitle">{tr("Test your reflexes — how fast do you respond to visual stimuli?")}</p>
 
           <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
             <button
@@ -536,23 +539,22 @@ export default function ReactionTimePage() {
           {phase === 'idle' && (
             <>
               <span style={{ fontSize: '4rem' }}>⚡</span>
-              <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--neon-cyan)' }}>Click to Start</span>
+              <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--neon-cyan)' }}>{tr("Click to Start")}</span>
               <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                {MAX_ROUNDS} rounds • Wait for green, then click!
-              </span>
+                {MAX_ROUNDS} {tr("rounds • Wait for green, then click!\r\n              ")}</span>
             </>
           )}
           {phase === 'waiting' && (
             <>
               <span style={{ fontSize: '4rem' }}>🔴</span>
-              <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--neon-orange)' }}>Wait for it...</span>
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Don't click yet!</span>
+              <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--neon-orange)' }}>{tr("Wait for it...")}</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{tr("Don't click yet!")}</span>
             </>
           )}
           {phase === 'ready' && (
             <>
               <span style={{ fontSize: '4rem' }}>🟢</span>
-              <span style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--neon-green)' }}>CLICK NOW!</span>
+              <span style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--neon-green)' }}>{tr("CLICK NOW!")}</span>
             </>
           )}
           {phase === 'clicked' && reactionTime !== null && (
@@ -560,7 +562,7 @@ export default function ReactionTimePage() {
               <span style={{ fontSize: '3rem' }}>✅</span>
               <div style={{ fontSize: 'clamp(3rem, 10vw, 5rem)', fontWeight: '900', color: 'var(--neon-cyan)' }}>
                 {reactionTime}
-                <span style={{ fontSize: '1.5rem', color: 'var(--text-muted)', marginLeft: '0.25rem' }}>ms</span>
+                <span style={{ fontSize: '1.5rem', color: 'var(--text-muted)', marginLeft: '0.25rem' }}>{tr("ms")}</span>
               </div>
               <div style={{
                 padding: '0.4rem 1rem',
@@ -580,10 +582,9 @@ export default function ReactionTimePage() {
           {phase === 'early' && (
             <>
               <span style={{ fontSize: '3rem' }}>❌</span>
-              <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--neon-red)' }}>Too Early!</span>
+              <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--neon-red)' }}>{tr("Too Early!")}</span>
               <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                Wait for the green signal. Click to retry.
-              </span>
+                {tr("Wait for the green signal. Click to retry.\r\n              ")}</span>
             </>
           )}
         </div>
@@ -608,8 +609,7 @@ export default function ReactionTimePage() {
         {results.length > 0 && (
           <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden', marginBottom: '1.5rem' }}>
             <div style={{ padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border)', fontWeight: '700', fontSize: '0.85rem', color: 'var(--neon-cyan)' }}>
-              📊 Round Results
-            </div>
+              {tr("📊 Round Results\r\n            ")}</div>
             <div style={{ padding: '1rem', display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
               {results.map((r, i) => (
                 <div key={i} style={{
@@ -621,8 +621,7 @@ export default function ReactionTimePage() {
                   fontWeight: '700',
                   color: getRating(r).color,
                 }}>
-                  R{i + 1}: {r}ms
-                </div>
+                  R{i + 1}: {r}{tr("ms\r\n                ")}</div>
               ))}
             </div>
           </div>
@@ -631,8 +630,7 @@ export default function ReactionTimePage() {
         {/* ---- REFERENCE BOX ---- */}
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden', marginBottom: '1.5rem' }}>
           <div style={{ padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border)', fontWeight: '700', fontSize: '0.85rem', color: 'var(--neon-cyan)' }}>
-            📈 Reaction Time Reference
-          </div>
+            {tr("📈 Reaction Time Reference\r\n          ")}</div>
           <div style={{ padding: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem' }}>
             {[
               { range: '< 150ms',   label: 'Inhuman',    color: 'var(--neon-red)' },
@@ -657,16 +655,15 @@ export default function ReactionTimePage() {
 
         {/* ---- RESET BUTTON ---- */}
         <button className="btn btn-secondary" onClick={handleReset}>
-          🔄 Reset
-        </button>
+          {tr("🔄 Reset\r\n        ")}</button>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '3.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -736,211 +733,163 @@ export default function ReactionTimePage() {
 
                 {/* ─── 1 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '0' }}>
-                  What Is a Reaction Time Test?
-                </h2>
+                  {tr("What Is a Reaction Time Test?\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  A <strong>reaction time test</strong> is a psychomotor assessment that measures how quickly a person responds to an external stimulus. In this free online reflex speed tester, the stimulus is a visual color change—when the zone shifts from red to green, you click as fast as possible. The tool records the precise number of milliseconds between the color change and your mouse click, giving you a clear, quantifiable measurement of your visual reaction speed.
-                </p>
+                  A <strong>{tr("reaction time test")}</strong> {tr("is a psychomotor assessment that measures how quickly a person responds to an external stimulus. In this free online reflex speed tester, the stimulus is a visual color change—when the zone shifts from red to green, you click as fast as possible. The tool records the precise number of milliseconds between the color change and your mouse click, giving you a clear, quantifiable measurement of your visual reaction speed.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Reaction time research has been a pillar of experimental psychology since the 19th century, when Dutch physiologist Franciscus Donders first systematically studied human response latencies in his landmark 1869 paper{' '}
+                  {tr("Reaction time research has been a pillar of experimental psychology since the 19th century, when Dutch physiologist Franciscus Donders first systematically studied human response latencies in his landmark 1869 paper")}{' '}
                   <a href="https://link.springer.com/article/10.1007/BF02702918" target="_blank" rel="noopener noreferrer" style={RL}>
-                    "On the speed of mental processes"↗
-                  </a>. Modern digital tools like this one carry that tradition forward, making high-quality <strong>reaction speed testing</strong> accessible to anyone with a browser.
-                </p>
+                    {tr("\"On the speed of mental processes\"↗\r\n                  ")}</a>{tr(". Modern digital tools like this one carry that tradition forward, making high-quality ")}<strong>{tr("reaction speed testing")}</strong> {tr("accessible to anyone with a browser.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Unlike simple perception tests, a reaction time assessment captures the complete cycle of information processing: visual input → neural transmission → decision making → motor output. Every millisecond in that chain contributes to your final score, making it a surprisingly deep window into your neurological health and cognitive fitness.
-                </p>
+                  {tr("Unlike simple perception tests, a reaction time assessment captures the complete cycle of information processing: visual input → neural transmission → decision making → motor output. Every millisecond in that chain contributes to your final score, making it a surprisingly deep window into your neurological health and cognitive fitness.\r\n                ")}</p>
 
                 {/* ─── 2 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Why Reaction Time Matters in Everyday Life
-                </h2>
+                  {tr("Why Reaction Time Matters in Everyday Life\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Reaction time isn't just relevant for gamers. It is a fundamental component of safety and performance across dozens of real-world scenarios. A driver's ability to slam the brakes within milliseconds when a child runs into the road can mean the difference between life and death. Research from the{' '}
+                  {tr("Reaction time isn't just relevant for gamers. It is a fundamental component of safety and performance across dozens of real-world scenarios. A driver's ability to slam the brakes within milliseconds when a child runs into the road can mean the difference between life and death. Research from the")}{' '}
                   <a href="https://www.nhtsa.gov/sites/nhtsa.gov/files/811298.pdf" target="_blank" rel="noopener noreferrer" style={RL}>
-                    National Highway Traffic Safety Administration (NHTSA)↗
-                  </a>{' '}
-                  identifies driver perception-reaction time as one of the leading factors in collision severity. When a surgeon's hand begins an unintended motion during a procedure, a swift corrective reflex prevents harm. When a fighter pilot responds to an incoming threat, fast visual processing is mission-critical.
-                </p>
+                    {tr("National Highway Traffic Safety Administration (NHTSA)↗\r\n                  ")}</a>{' '}
+                  {tr("identifies driver perception-reaction time as one of the leading factors in collision severity. When a surgeon's hand begins an unintended motion during a procedure, a swift corrective reflex prevents harm. When a fighter pilot responds to an incoming threat, fast visual processing is mission-critical.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  In sports, <strong>reflex speed</strong> is often the key differentiator between athletes of otherwise equal skill. A baseball batter has roughly 400ms to process a 90mph fastball and decide whether to swing. A tennis player returning a 130mph serve has under 250ms from ball contact to the moment they must initiate their swing. These scenarios make it clear that shaving even 20ms off your reaction time has tangible, meaningful real-world benefits.
-                </p>
+                  {tr("In sports, ")}<strong>{tr("reflex speed")}</strong> {tr("is often the key differentiator between athletes of otherwise equal skill. A baseball batter has roughly 400ms to process a 90mph fastball and decide whether to swing. A tennis player returning a 130mph serve has under 250ms from ball contact to the moment they must initiate their swing. These scenarios make it clear that shaving even 20ms off your reaction time has tangible, meaningful real-world benefits.\r\n                ")}</p>
 
                 {/* ─── 3 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Average Human Reaction Time: What the Research Says
-                </h2>
+                  {tr("Average Human Reaction Time: What the Research Says\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The most frequently cited benchmark for <strong>average human reaction time</strong> to a visual stimulus is <strong>250 milliseconds</strong>. A large-scale meta-analysis by Jain et al. (2015) published in the{' '}
+                  {tr("The most frequently cited benchmark for ")}<strong>{tr("average human reaction time")}</strong> {tr("to a visual stimulus is ")}<strong>{tr("250 milliseconds")}</strong>{tr(". A large-scale meta-analysis by Jain et al. (2015) published in the")}{' '}
                   <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4424208/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Indian Journal of Physiology and Pharmacology↗
-                  </a>{' '}
-                  confirmed this figure across thousands of participants, while noting significant variation by age, gender, and training status. However, the distribution is wide: a perfectly healthy adult might measure anywhere from 180ms to 400ms depending on conditions.
-                </p>
+                    {tr("Indian Journal of Physiology and Pharmacology↗\r\n                  ")}</a>{' '}
+                  {tr("confirmed this figure across thousands of participants, while noting significant variation by age, gender, and training status. However, the distribution is wide: a perfectly healthy adult might measure anywhere from 180ms to 400ms depending on conditions.\r\n                ")}</p>
                 <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-red)' }}>🔥 Inhuman (&lt; 150ms):</strong> Exceptional — consistent performance here suggests elite neurological wiring or significant anticipation. Rare even among professionals.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-orange)' }}>⚡ Elite (150–200ms):</strong> Professional tier. Top esports competitors operate in this range during peak performance.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-cyan)' }}>🎯 Great (200–250ms):</strong> High-skilled amateur. You can comfortably compete at high ranks in most titles.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-green)' }}>✅ Average (250–300ms):</strong> Where the majority of dedicated gamers score. Improvement with training is very achievable.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--text-muted)' }}>🐢 Slow (300ms+):</strong> Room for improvement. Hardware optimization and consistent training will produce noticeable gains.</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-red)' }}>{tr("🔥 Inhuman (&lt; 150ms):")}</strong> {tr("Exceptional — consistent performance here suggests elite neurological wiring or significant anticipation. Rare even among professionals.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-orange)' }}>{tr("⚡ Elite (150–200ms):")}</strong> {tr("Professional tier. Top esports competitors operate in this range during peak performance.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-cyan)' }}>{tr("🎯 Great (200–250ms):")}</strong> {tr("High-skilled amateur. You can comfortably compete at high ranks in most titles.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--neon-green)' }}>{tr("✅ Average (250–300ms):")}</strong> {tr("Where the majority of dedicated gamers score. Improvement with training is very achievable.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: 'var(--text-muted)' }}>{tr("🐢 Slow (300ms+):")}</strong> {tr("Room for improvement. Hardware optimization and consistent training will produce noticeable gains.")}</li>
                 </ul>
 
                 {/* ─── 4 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  How to Use the Reaction Time Test
-                </h2>
+                  {tr("How to Use the Reaction Time Test\r\n                ")}</h2>
                 <ol style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem' }}>
-                  <li style={{ marginBottom: '0.5rem' }}>Click the <strong>large zone</strong> to start the test.</li>
-                  <li style={{ marginBottom: '0.5rem' }}>Wait patiently while the zone shows red — do NOT click yet.</li>
-                  <li style={{ marginBottom: '0.5rem' }}>The moment the zone turns <strong>green</strong>, click as fast as you can.</li>
-                  <li style={{ marginBottom: '0.5rem' }}>Your reaction time in milliseconds is recorded and rated.</li>
-                  <li style={{ marginBottom: '0.5rem' }}>Complete all 5 rounds to build a reliable average score.</li>
-                  <li style={{ marginBottom: '0.5rem' }}>Press <strong>Reset</strong> to clear results and start a new session.</li>
+                  <li style={{ marginBottom: '0.5rem' }}>{tr("Click the ")}<strong>{tr("large zone")}</strong> {tr("to start the test.")}</li>
+                  <li style={{ marginBottom: '0.5rem' }}>{tr("Wait patiently while the zone shows red — do NOT click yet.")}</li>
+                  <li style={{ marginBottom: '0.5rem' }}>{tr("The moment the zone turns ")}<strong>{tr("green")}</strong>{tr(", click as fast as you can.")}</li>
+                  <li style={{ marginBottom: '0.5rem' }}>{tr("Your reaction time in milliseconds is recorded and rated.")}</li>
+                  <li style={{ marginBottom: '0.5rem' }}>{tr("Complete all 5 rounds to build a reliable average score.")}</li>
+                  <li style={{ marginBottom: '0.5rem' }}>{tr("Press ")}<strong>{tr("Reset")}</strong> {tr("to clear results and start a new session.")}</li>
                 </ol>
 
                 {/* ─── 5 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  How Reaction Time Is Measured in This Tool
-                </h2>
+                  {tr("How Reaction Time Is Measured in This Tool\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  This <strong>online reaction test</strong> uses JavaScript's <code>performance.now()</code> API, which provides sub-millisecond precision timing directly within the browser. When the green stimulus appears, the precise timestamp is recorded internally. When you click, another timestamp is captured. The difference between these two values—rounded to the nearest millisecond—is your reaction time.
-                </p>
+                  {tr("This ")}<strong>{tr("online reaction test")}</strong> {tr("uses JavaScript's ")}<code>performance.now()</code> {tr("API, which provides sub-millisecond precision timing directly within the browser. When the green stimulus appears, the precise timestamp is recorded internally. When you click, another timestamp is captured. The difference between these two values—rounded to the nearest millisecond—is your reaction time.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The random delay between 1.5 and 5 seconds before each stimulus is deliberately variable. This design prevents your brain from timing the green appearance, ensuring each click represents genuine reactive speed rather than anticipatory guessing. This is the same principle used in professional sports testing facilities and academic research protocols.
-                </p>
+                  {tr("The random delay between 1.5 and 5 seconds before each stimulus is deliberately variable. This design prevents your brain from timing the green appearance, ensuring each click represents genuine reactive speed rather than anticipatory guessing. This is the same principle used in professional sports testing facilities and academic research protocols.\r\n                ")}</p>
 
                 {/* ─── 6 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Visual vs Auditory Reaction Time: Key Differences
-                </h2>
+                  {tr("Visual vs Auditory Reaction Time: Key Differences\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  This tool measures <strong>visual reaction time</strong>, which is the most widely studied form. However, auditory and tactile reaction times also play critical roles in real-world performance. Research consistently shows that human beings respond to sounds approximately 20–50ms faster than to visual stimuli. A foundational study by{' '}
+                  {tr("This tool measures ")}<strong>{tr("visual reaction time")}</strong>{tr(", which is the most widely studied form. However, auditory and tactile reaction times also play critical roles in real-world performance. Research consistently shows that human beings respond to sounds approximately 20–50ms faster than to visual stimuli. A foundational study by")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/6859656/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Welford (1980) in Ergonomics↗
-                  </a>{' '}
-                  documented this cross-modal difference across multiple experimental paradigms.
-                </p>
+                    {tr("Welford (1980) in Ergonomics↗\r\n                  ")}</a>{' '}
+                  {tr("documented this cross-modal difference across multiple experimental paradigms.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The reason is anatomical. Visual information must travel from the retina through the optic nerve to the visual cortex — a relatively long neural pathway. Auditory signals travel from the cochlea to the auditory cortex via a shorter route and also benefit from bilateral processing (both ears simultaneously). This is why sprinters react to a starting pistol blast faster than they would react to a starting light.
-                </p>
+                  {tr("The reason is anatomical. Visual information must travel from the retina through the optic nerve to the visual cortex — a relatively long neural pathway. Auditory signals travel from the cochlea to the auditory cortex via a shorter route and also benefit from bilateral processing (both ears simultaneously). This is why sprinters react to a starting pistol blast faster than they would react to a starting light.\r\n                ")}</p>
 
                 {/* ─── 7 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  The Neuroscience Behind Reaction Time
-                </h2>
+                  {tr("The Neuroscience Behind Reaction Time\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  When you see the green signal, photoreceptors in your retina fire, sending electrochemical signals through the optic nerve to the primary visual cortex (V1) in the occipital lobe. From there, the signal branches: one pathway (the dorsal stream) carries spatial information about where the stimulus is, while the ventral stream identifies what it is. These signals then converge in the premotor cortex, which prepares the motor command.
-                </p>
+                  {tr("When you see the green signal, photoreceptors in your retina fire, sending electrochemical signals through the optic nerve to the primary visual cortex (V1) in the occipital lobe. From there, the signal branches: one pathway (the dorsal stream) carries spatial information about where the stimulus is, while the ventral stream identifies what it is. These signals then converge in the premotor cortex, which prepares the motor command.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The entire sequence—from photon hitting the retina to finger muscle contracting—involves at least 8–10 distinct neural relay stations. Research published in{' '}
+                  {tr("The entire sequence—from photon hitting the retina to finger muscle contracting—involves at least 8–10 distinct neural relay stations. Research published in")}{' '}
                   <a href="https://www.nature.com/articles/nn.2112" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Nature Neuroscience by Shadlen & Newsome↗
-                  </a>{' '}
-                  demonstrated that neurons in the lateral intraparietal area (LIP) accumulate evidence over time and trigger motor decisions once a threshold is reached — a process directly observable in reaction time variability across trials.
-                </p>
+                    {tr("Nature Neuroscience by Shadlen & Newsome↗\r\n                  ")}</a>{' '}
+                  {tr("demonstrated that neurons in the lateral intraparietal area (LIP) accumulate evidence over time and trigger motor decisions once a threshold is reached — a process directly observable in reaction time variability across trials.\r\n                ")}</p>
 
                 {/* ─── 8 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Factors That Affect Your Reaction Time Score
-                </h2>
+                  {tr("Factors That Affect Your Reaction Time Score\r\n                ")}</h2>
                 <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Alertness and arousal level:</strong> Being awake and mentally active is essential. Testing immediately after waking up will yield significantly slower scores than testing after 30 minutes of mental engagement.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Temperature:</strong> Warmer environments slightly speed up neural conduction velocity. Cold hands and fingers have more sluggish muscle fiber response.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Distractions:</strong> Noise, notifications, and visual clutter consume cognitive resources needed for focused reaction. Studies show dual-task interference can add 50–100ms to baseline reaction times.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Anticipation vs. reaction:</strong> Knowing a stimulus is "soon" creates a state of heightened readiness. Fully random delays prevent anticipatory guessing from inflating scores.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Practice effect:</strong> Simply becoming familiar with a specific test reduces cognitive overhead, improving scores over early trials—even without genuine reflex improvement.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Hardware quality:</strong> Display refresh rate, mouse polling rate, and USB port quality all contribute to measured end-to-end latency.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Hydration:</strong> Even mild dehydration (1–2% body weight) measurably slows neural transmission. Always test when properly hydrated.</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Alertness and arousal level:")}</strong> {tr("Being awake and mentally active is essential. Testing immediately after waking up will yield significantly slower scores than testing after 30 minutes of mental engagement.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Temperature:")}</strong> {tr("Warmer environments slightly speed up neural conduction velocity. Cold hands and fingers have more sluggish muscle fiber response.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Distractions:")}</strong> {tr("Noise, notifications, and visual clutter consume cognitive resources needed for focused reaction. Studies show dual-task interference can add 50–100ms to baseline reaction times.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Anticipation vs. reaction:")}</strong> {tr("Knowing a stimulus is \"soon\" creates a state of heightened readiness. Fully random delays prevent anticipatory guessing from inflating scores.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Practice effect:")}</strong> {tr("Simply becoming familiar with a specific test reduces cognitive overhead, improving scores over early trials—even without genuine reflex improvement.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Hardware quality:")}</strong> {tr("Display refresh rate, mouse polling rate, and USB port quality all contribute to measured end-to-end latency.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Hydration:")}</strong> {tr("Even mild dehydration (1–2% body weight) measurably slows neural transmission. Always test when properly hydrated.")}</li>
                 </ul>
 
                 {/* ─── 9 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Sleep Deprivation and Reflex Speed: The Research
-                </h2>
+                  {tr("Sleep Deprivation and Reflex Speed: The Research\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Of all the controllable variables affecting <strong>reflex speed</strong>, sleep quality and duration stand out as the most impactful and most overlooked. The relationship between sleep and neural processing speed is both direct and well-documented. The brain consolidates procedural learning and motor skills during slow-wave sleep, which is precisely why athletes, soldiers, and gamers all perform better when properly rested.
-                </p>
+                  {tr("Of all the controllable variables affecting ")}<strong>{tr("reflex speed")}</strong>{tr(", sleep quality and duration stand out as the most impactful and most overlooked. The relationship between sleep and neural processing speed is both direct and well-documented. The brain consolidates procedural learning and motor skills during slow-wave sleep, which is precisely why athletes, soldiers, and gamers all perform better when properly rested.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  A landmark study by Van Dongen et al., published in{' '}
+                  {tr("A landmark study by Van Dongen et al., published in")}{' '}
                   <a href="https://academic.oup.com/sleep/article/26/2/117/2708922" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Sleep (2003)↗
-                  </a>{' '}
-                  found that restricting nightly sleep to 6 hours for two weeks produced cognitive deficits equivalent to two full nights of total sleep deprivation — and crucially, subjects were largely unaware of their own impairment. This means you may feel fine but still be operating with meaningfully slower reaction times. A follow-up study in{' '}
+                    {tr("Sleep (2003)↗\r\n                  ")}</a>{' '}
+                  {tr("found that restricting nightly sleep to 6 hours for two weeks produced cognitive deficits equivalent to two full nights of total sleep deprivation — and crucially, subjects were largely unaware of their own impairment. This means you may feel fine but still be operating with meaningfully slower reaction times. A follow-up study in")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/9415946/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Journal of Sleep Research↗
-                  </a>{' '}
-                  confirmed that even a single night of partial sleep loss (5 hours) significantly increases visual reaction time and error rate.
-                </p>
+                    {tr("Journal of Sleep Research↗\r\n                  ")}</a>{' '}
+                  {tr("confirmed that even a single night of partial sleep loss (5 hours) significantly increases visual reaction time and error rate.\r\n                ")}</p>
 
                 {/* ─── 10 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Caffeine, Stimulants, and Reaction Speed
-                </h2>
+                  {tr("Caffeine, Stimulants, and Reaction Speed\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Caffeine is the world's most widely consumed psychoactive substance. By blocking adenosine receptors in the brain, caffeine promotes wakefulness and increases dopamine activity, which sharpens focus and motor readiness. A meta-analysis by{' '}
+                  {tr("Caffeine is the world's most widely consumed psychoactive substance. By blocking adenosine receptors in the brain, caffeine promotes wakefulness and increases dopamine activity, which sharpens focus and motor readiness. A meta-analysis by")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/20492310/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Heckman et al. published in Critical Reviews in Food Science and Nutrition↗
-                  </a>{' '}
-                  demonstrated that moderate caffeine consumption — roughly 100–200mg — reduces visual reaction time by 10–30ms on average, with effects peaking 30–60 minutes after ingestion.
-                </p>
+                    {tr("Heckman et al. published in Critical Reviews in Food Science and Nutrition↗\r\n                  ")}</a>{' '}
+                  {tr("demonstrated that moderate caffeine consumption — roughly 100–200mg — reduces visual reaction time by 10–30ms on average, with effects peaking 30–60 minutes after ingestion.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  However, the relationship is nonlinear. Excessive caffeine intake causes sympathetic nervous system overstimulation, leading to hand tremors, elevated anxiety, and paradoxically slower reaction times due to increased error rates. Individual caffeine sensitivity also varies significantly based on CYP1A2 enzyme genetics.
-                </p>
+                  {tr("However, the relationship is nonlinear. Excessive caffeine intake causes sympathetic nervous system overstimulation, leading to hand tremors, elevated anxiety, and paradoxically slower reaction times due to increased error rates. Individual caffeine sensitivity also varies significantly based on CYP1A2 enzyme genetics.\r\n                ")}</p>
 
                 {/* ─── 11 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Age and Reaction Time: When Do We Peak?
-                </h2>
+                  {tr("Age and Reaction Time: When Do We Peak?\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Neurological research consistently indicates that raw reaction speed peaks between ages 18 and 24, then gradually declines throughout adulthood. A large cross-sectional study by{' '}
+                  {tr("Neurological research consistently indicates that raw reaction speed peaks between ages 18 and 24, then gradually declines throughout adulthood. A large cross-sectional study by")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/24077939/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Silverman (2014) in PLOS ONE↗
-                  </a>{' '}
-                  analyzing over 3,000 participants found that reaction time increases by approximately 8ms per decade after age 24, with the decline accelerating markedly after 60. Interestingly, cognitive experience often compensates for age-related neural slowdown — a 35-year-old veteran gamer may score comparably to a 20-year-old novice because they have internalized pattern recognition and decision shortcuts.
-                </p>
+                    {tr("Silverman (2014) in PLOS ONE↗\r\n                  ")}</a>{' '}
+                  {tr("analyzing over 3,000 participants found that reaction time increases by approximately 8ms per decade after age 24, with the decline accelerating markedly after 60. Interestingly, cognitive experience often compensates for age-related neural slowdown — a 35-year-old veteran gamer may score comparably to a 20-year-old novice because they have internalized pattern recognition and decision shortcuts.\r\n                ")}</p>
 
                 {/* ─── 12 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Video Games and Reflex Improvement: Peer-Reviewed Evidence
-                </h2>
+                  {tr("Video Games and Reflex Improvement: Peer-Reviewed Evidence\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The idea that video games improve reflexes is no longer just gamer folklore — it is backed by a growing body of peer-reviewed research. A landmark study by{' '}
+                  {tr("The idea that video games improve reflexes is no longer just gamer folklore — it is backed by a growing body of peer-reviewed research. A landmark study by")}{' '}
                   <a href="https://www.nature.com/articles/nature02677" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Green & Bavelier published in Nature (2003)↗
-                  </a>{' '}
-                  found that players of action video games make correct perceptual decisions 25% faster than non-gamers without sacrificing accuracy. A follow-up study by the same authors in{' '}
+                    {tr("Green & Bavelier published in Nature (2003)↗\r\n                  ")}</a>{' '}
+                  {tr("found that players of action video games make correct perceptual decisions 25% faster than non-gamers without sacrificing accuracy. A follow-up study by the same authors in")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/17991858/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Psychological Science (2007)↗
-                  </a>{' '}
-                  showed that non-gamers trained for just 10 hours on an action game showed significant improvement in visual attention and reaction speed.
-                </p>
+                    {tr("Psychological Science (2007)↗\r\n                  ")}</a>{' '}
+                  {tr("showed that non-gamers trained for just 10 hours on an action game showed significant improvement in visual attention and reaction speed.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  FPS games in particular are uniquely demanding for reaction time development, requiring players to identify, track, and respond to fast-moving targets in environments with multiple simultaneous stimuli — a condition researchers call "multiple-object tracking under time pressure."
-                </p>
+                  {tr("FPS games in particular are uniquely demanding for reaction time development, requiring players to identify, track, and respond to fast-moving targets in environments with multiple simultaneous stimuli — a condition researchers call \"multiple-object tracking under time pressure.\"\r\n                ")}</p>
 
                 {/* ─── 13 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Physical Exercise and Neural Processing Speed
-                </h2>
+                  {tr("Physical Exercise and Neural Processing Speed\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Research published in{' '}
+                  {tr("Research published in")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/17337212/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Neuropsychologia by Hillman et al. (2006)↗
-                  </a>{' '}
-                  established a strong link between aerobic fitness and faster neural processing speed. The mechanism involves increased cerebral blood flow, elevated BDNF (brain-derived neurotrophic factor) levels, and enhanced white matter connectivity — all of which reduce the time required to transmit electrochemical signals across the neural chain involved in reactive decisions.
-                </p>
+                    {tr("Neuropsychologia by Hillman et al. (2006)↗\r\n                  ")}</a>{' '}
+                  {tr("established a strong link between aerobic fitness and faster neural processing speed. The mechanism involves increased cerebral blood flow, elevated BDNF (brain-derived neurotrophic factor) levels, and enhanced white matter connectivity — all of which reduce the time required to transmit electrochemical signals across the neural chain involved in reactive decisions.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  A meta-analysis in{' '}
+                  {tr("A meta-analysis in")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/23820470/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    British Journal of Sports Medicine↗
-                  </a>{' '}
-                  found that even moderate exercise (30 minutes of moderate-intensity cardio, 3x per week) produced statistically significant improvements in reaction time after 8 weeks. High-intensity interval training (HIIT) produced the fastest gains in the shortest timeframe.
-                </p>
+                    {tr("British Journal of Sports Medicine↗\r\n                  ")}</a>{' '}
+                  {tr("found that even moderate exercise (30 minutes of moderate-intensity cardio, 3x per week) produced statistically significant improvements in reaction time after 8 weeks. High-intensity interval training (HIIT) produced the fastest gains in the shortest timeframe.\r\n                ")}</p>
 
                 {/* ─── 14 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Mouse Latency, Monitor Refresh Rate & Input Hardware
-                </h2>
+                  {tr("Mouse Latency, Monitor Refresh Rate & Input Hardware\r\n                ")}</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                   {[
                     { title: '🖱️ Mouse Latency', points: ['Gaming mice: <1ms click latency', 'Office mice: 5–20ms', 'USB 1000Hz polling rate ideal', 'Wired > Wireless (Bluetooth)', 'Switch actuation force matters'] },
@@ -955,169 +904,131 @@ export default function ReactionTimePage() {
                   ))}
                 </div>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Hardware-side latency testing by{' '}
+                  {tr("Hardware-side latency testing by")}{' '}
                   <a href="https://www.rtings.com/monitor/tests/motion/input-lag" target="_blank" rel="noopener noreferrer" style={RL}>
-                    RTINGS.com's display lab↗
-                  </a>{' '}
-                  shows that monitor input lag ranges from under 1ms on top gaming displays to over 50ms on budget TVs used as monitors — a difference that can overwhelm your actual neurological reaction time. If you're scoring 280ms and can't break below 250ms, your hardware latency may be the bottleneck.
-                </p>
+                    {tr("RTINGS.com's display lab↗\r\n                  ")}</a>{' '}
+                  {tr("shows that monitor input lag ranges from under 1ms on top gaming displays to over 50ms on budget TVs used as monitors — a difference that can overwhelm your actual neurological reaction time. If you're scoring 280ms and can't break below 250ms, your hardware latency may be the bottleneck.\r\n                ")}</p>
 
                 {/* ─── 15 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Stress, Anxiety, and the Fight-or-Flight Response
-                </h2>
+                  {tr("Stress, Anxiety, and the Fight-or-Flight Response\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The relationship between stress and reaction time is complex and dose-dependent. Moderate acute stress activates the sympathetic nervous system, triggering adrenaline release that sharpens alertness and can temporarily improve reaction time by 10–20ms — a phenomenon known as "stress-enhanced attention." Research by{' '}
+                  {tr("The relationship between stress and reaction time is complex and dose-dependent. Moderate acute stress activates the sympathetic nervous system, triggering adrenaline release that sharpens alertness and can temporarily improve reaction time by 10–20ms — a phenomenon known as \"stress-enhanced attention.\" Research by")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/16750580/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Sapolsky et al. in Nature Reviews Neuroscience↗
-                  </a>{' '}
-                  describes this as an inverted-U relationship: optimal performance occurs at moderate arousal levels, with both under-arousal (drowsiness) and over-arousal (panic) degrading reaction speed.
-                </p>
+                    {tr("Sapolsky et al. in Nature Reviews Neuroscience↗\r\n                  ")}</a>{' '}
+                  {tr("describes this as an inverted-U relationship: optimal performance occurs at moderate arousal levels, with both under-arousal (drowsiness) and over-arousal (panic) degrading reaction speed.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Chronic stress, however, has the opposite effect. Sustained elevated cortisol damages hippocampal neurons, disrupts working memory, and measurably slows processing speed. Competitive gamers who "tilt" — entering a state of high emotional frustration — consistently show degraded performance metrics, including reaction time, during and after the tilt episode.
-                </p>
+                  {tr("Chronic stress, however, has the opposite effect. Sustained elevated cortisol damages hippocampal neurons, disrupts working memory, and measurably slows processing speed. Competitive gamers who \"tilt\" — entering a state of high emotional frustration — consistently show degraded performance metrics, including reaction time, during and after the tilt episode.\r\n                ")}</p>
 
                 {/* ─── 16 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Reaction Time in Professional Esports
-                </h2>
+                  {tr("Reaction Time in Professional Esports\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Professional esports athletes undergo systematic reflex training as part of their performance regimens. A study published in the{' '}
+                  {tr("Professional esports athletes undergo systematic reflex training as part of their performance regimens. A study published in the")}{' '}
                   <a href="https://www.tandfonline.com/doi/full/10.1080/02640414.2019.1603991" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Journal of Sports Sciences (2019)↗
-                  </a>{' '}
-                  found that elite esports competitors exhibit significantly faster simple reaction times (avg. 194ms) and choice reaction times compared to non-gaming controls (avg. 268ms). The study also found that top-ranked players showed lower intra-individual variability — meaning more consistent reactions round-to-round — as a key differentiator.
-                </p>
+                    {tr("Journal of Sports Sciences (2019)↗\r\n                  ")}</a>{' '}
+                  {tr("found that elite esports competitors exhibit significantly faster simple reaction times (avg. 194ms) and choice reaction times compared to non-gaming controls (avg. 268ms). The study also found that top-ranked players showed lower intra-individual variability — meaning more consistent reactions round-to-round — as a key differentiator.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Professional teams now employ dedicated performance coaches and use tools like{' '}
+                  {tr("Professional teams now employ dedicated performance coaches and use tools like")}{' '}
                   <a href="https://aimlab.gg" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Aim Lab↗
-                  </a>{' '}
-                  and{' '}
+                    {tr("Aim Lab↗\r\n                  ")}</a>{' '}
+                  {tr("and")}{' '}
                   <a href="https://kovaaks.com" target="_blank" rel="noopener noreferrer" style={RL}>
-                    KovaaK's FPS Aim Trainer↗
-                  </a>{' '}
-                  to build structured training plans. These tools allow players to isolate and drill specific scenarios — flick shots, tracking, micro-adjustments — in a measurable, progressive framework that mirrors athletic periodization.
-                </p>
+                    {tr("KovaaK's FPS Aim Trainer↗\r\n                  ")}</a>{' '}
+                  {tr("to build structured training plans. These tools allow players to isolate and drill specific scenarios — flick shots, tracking, micro-adjustments — in a measurable, progressive framework that mirrors athletic periodization.\r\n                ")}</p>
 
                 {/* ─── 17 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Gender Differences in Reaction Time
-                </h2>
+                  {tr("Gender Differences in Reaction Time\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Multiple large-scale studies have found that males, on average, exhibit slightly faster simple reaction times than females — a difference of approximately 20–30ms — though the gap narrows substantially when controlling for gaming experience and practice history. A comprehensive review by{' '}
+                  {tr("Multiple large-scale studies have found that males, on average, exhibit slightly faster simple reaction times than females — a difference of approximately 20–30ms — though the gap narrows substantially when controlling for gaming experience and practice history. A comprehensive review by")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/20423319/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Der & Deary (2006) in Neuropsychologia↗
-                  </a>{' '}
-                  analyzing data from over 7,000 participants found that this difference is largely attributable to differences in motor preparation speed rather than perceptual processing speed. Importantly, the study found that training eliminates most of this gap — highly trained female athletes consistently outperform untrained males.
-                </p>
+                    {tr("Der & Deary (2006) in Neuropsychologia↗\r\n                  ")}</a>{' '}
+                  {tr("analyzing data from over 7,000 participants found that this difference is largely attributable to differences in motor preparation speed rather than perceptual processing speed. Importantly, the study found that training eliminates most of this gap — highly trained female athletes consistently outperform untrained males.\r\n                ")}</p>
 
                 {/* ─── 18 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Nutrition and Cognitive Performance: What Helps Reaction Time
-                </h2>
+                  {tr("Nutrition and Cognitive Performance: What Helps Reaction Time\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Beyond caffeine, several nutritional factors meaningfully influence neural processing speed. Omega-3 fatty acids (DHA in particular) are structural components of neuronal membranes and synapse receptors. A randomized controlled trial published in{' '}
+                  {tr("Beyond caffeine, several nutritional factors meaningfully influence neural processing speed. Omega-3 fatty acids (DHA in particular) are structural components of neuronal membranes and synapse receptors. A randomized controlled trial published in")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/20329590/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    PLOS ONE by Stonehouse et al.↗
-                  </a>{' '}
-                  found that DHA supplementation significantly improved reaction time in healthy young adults over 6 months.
-                </p>
+                    {tr("PLOS ONE by Stonehouse et al.↗\r\n                  ")}</a>{' '}
+                  {tr("found that DHA supplementation significantly improved reaction time in healthy young adults over 6 months.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Adequate iron levels matter too — iron deficiency (even without anemia) impairs myelination of nerve fibers, slowing signal conduction velocity. Magnesium supports NMDA receptor function critical for synaptic plasticity. And proper hydration is non-negotiable: research in the{' '}
+                  {tr("Adequate iron levels matter too — iron deficiency (even without anemia) impairs myelination of nerve fibers, slowing signal conduction velocity. Magnesium supports NMDA receptor function critical for synaptic plasticity. And proper hydration is non-negotiable: research in the")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/22190027/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Journal of Nutrition↗
-                  </a>{' '}
-                  showed that just 1.36% dehydration increased reaction time and self-reported fatigue in young women.
-                </p>
+                    {tr("Journal of Nutrition↗\r\n                  ")}</a>{' '}
+                  {tr("showed that just 1.36% dehydration increased reaction time and self-reported fatigue in young women.\r\n                ")}</p>
 
                 {/* ─── 19 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  How to Improve Your Reaction Time: A Structured Plan
-                </h2>
+                  {tr("How to Improve Your Reaction Time: A Structured Plan\r\n                ")}</h2>
                 <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Daily reaction training (5–10 min):</strong> Use this test every morning. Track your 5-round average daily to identify trends over weeks.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Aim trainer sessions (15–20 min, 4x/week):</strong> Tools like{' '}<a href="https://aimlab.gg" target="_blank" rel="noopener noreferrer" style={RL}>Aim Lab↗</a>{' '}add target acquisition and tracking to pure reaction speed.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Aerobic exercise (30 min, 3x/week):</strong> Running, cycling, or swimming at moderate intensity demonstrably improves neural processing speed within 8 weeks.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Optimize sleep hygiene:</strong> Target 7–9 hours per night with consistent sleep/wake times. Sleep is when motor memory consolidates.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Upgrade your monitor:</strong> Moving from 60Hz to 144Hz is the single most impactful hardware change for competitive gaming and test accuracy.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Mindfulness and focus training:</strong> Short mindfulness sessions (10 min/day) have been shown in{' '}<a href="https://pubmed.ncbi.nlm.nih.gov/19460998/" target="_blank" rel="noopener noreferrer" style={RL}>research by Jha et al.↗</a>{' '}to significantly improve attentional control, which directly reduces reaction time.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Warm up before testing:</strong> A 2–3 minute warm-up period of light clicking or casual gaming primes your motor system and yields more accurate baseline scores.</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Daily reaction training (5–10 min):")}</strong> {tr("Use this test every morning. Track your 5-round average daily to identify trends over weeks.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Aim trainer sessions (15–20 min, 4x/week):")}</strong> {tr("Tools like")}{' '}<a href="https://aimlab.gg" target="_blank" rel="noopener noreferrer" style={RL}>{tr("Aim Lab↗")}</a>{' '}{tr("add target acquisition and tracking to pure reaction speed.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Aerobic exercise (30 min, 3x/week):")}</strong> {tr("Running, cycling, or swimming at moderate intensity demonstrably improves neural processing speed within 8 weeks.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Optimize sleep hygiene:")}</strong> {tr("Target 7–9 hours per night with consistent sleep/wake times. Sleep is when motor memory consolidates.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Upgrade your monitor:")}</strong> {tr("Moving from 60Hz to 144Hz is the single most impactful hardware change for competitive gaming and test accuracy.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Mindfulness and focus training:")}</strong> {tr("Short mindfulness sessions (10 min/day) have been shown in")}{' '}<a href="https://pubmed.ncbi.nlm.nih.gov/19460998/" target="_blank" rel="noopener noreferrer" style={RL}>{tr("research by Jha et al.↗")}</a>{' '}{tr("to significantly improve attentional control, which directly reduces reaction time.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Warm up before testing:")}</strong> {tr("A 2–3 minute warm-up period of light clicking or casual gaming primes your motor system and yields more accurate baseline scores.")}</li>
                 </ul>
 
                 {/* ─── 20 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Reaction Time in Driving Safety Research
-                </h2>
+                  {tr("Reaction Time in Driving Safety Research\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Driving is one of the highest-stakes real-world applications of reaction time. The standard assumption in traffic engineering is a "perception-reaction time" of 1.5 seconds (1500ms) — far longer than the raw neurological reaction time of 200–300ms. This accounts for the time needed to perceive a hazard (not just notice it), decide to brake, and then physically move the foot from accelerator to brake pedal.
-                </p>
+                  {tr("Driving is one of the highest-stakes real-world applications of reaction time. The standard assumption in traffic engineering is a \"perception-reaction time\" of 1.5 seconds (1500ms) — far longer than the raw neurological reaction time of 200–300ms. This accounts for the time needed to perceive a hazard (not just notice it), decide to brake, and then physically move the foot from accelerator to brake pedal.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Research by{' '}
+                  {tr("Research by")}{' '}
                   <a href="https://www.sciencedirect.com/science/article/pii/S0001457503000988" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Green (2000) in Accident Analysis and Prevention↗
-                  </a>{' '}
-                  showed that driver reaction time varies enormously — from 0.7 seconds in highly alert, anticipated braking to over 3 seconds in unexpected scenarios. Phone distraction, alcohol, and sleep deprivation each add 200–500ms to driver reaction time. Autonomous emergency braking (AEB) systems in modern vehicles intervene in as little as 50–100ms — faster than any human can respond — demonstrating why hardware reaction time will increasingly supplement human reflexes in safety-critical contexts.
-                </p>
+                    {tr("Green (2000) in Accident Analysis and Prevention↗\r\n                  ")}</a>{' '}
+                  {tr("showed that driver reaction time varies enormously — from 0.7 seconds in highly alert, anticipated braking to over 3 seconds in unexpected scenarios. Phone distraction, alcohol, and sleep deprivation each add 200–500ms to driver reaction time. Autonomous emergency braking (AEB) systems in modern vehicles intervene in as little as 50–100ms — faster than any human can respond — demonstrating why hardware reaction time will increasingly supplement human reflexes in safety-critical contexts.\r\n                ")}</p>
 
                 {/* ─── 21 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Reaction Time as a Cognitive Health Biomarker
-                </h2>
+                  {tr("Reaction Time as a Cognitive Health Biomarker\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Beyond gaming and sports, reaction time is increasingly used as a sensitive biomarker for overall cognitive health and neurological status. A groundbreaking longitudinal study by{' '}
+                  {tr("Beyond gaming and sports, reaction time is increasingly used as a sensitive biomarker for overall cognitive health and neurological status. A groundbreaking longitudinal study by")}{' '}
                   <a href="https://pubmed.ncbi.nlm.nih.gov/16997147/" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Deary et al. (2006) in the British Medical Journal↗
-                  </a>{' '}
-                  found that reaction time measured in childhood was a significant predictor of all-cause mortality 20+ years later, independent of other risk factors. Faster reaction time correlated with better cardiovascular health, lower obesity risk, and reduced risk of accidental death.
-                </p>
+                    {tr("Deary et al. (2006) in the British Medical Journal↗\r\n                  ")}</a>{' '}
+                  {tr("found that reaction time measured in childhood was a significant predictor of all-cause mortality 20+ years later, independent of other risk factors. Faster reaction time correlated with better cardiovascular health, lower obesity risk, and reduced risk of accidental death.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  In clinical settings, reaction time tests are used to screen for early cognitive decline in Alzheimer's and Parkinson's disease, to assess concussion recovery in athletes, and to evaluate medication side effects on motor function. Tracking your reaction time over months and years is therefore not just a gaming metric — it's a window into your brain's health trajectory.
-                </p>
+                  {tr("In clinical settings, reaction time tests are used to screen for early cognitive decline in Alzheimer's and Parkinson's disease, to assess concussion recovery in athletes, and to evaluate medication side effects on motor function. Tracking your reaction time over months and years is therefore not just a gaming metric — it's a window into your brain's health trajectory.\r\n                ")}</p>
 
                 {/* ─── 22 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Common Mistakes During Reaction Time Testing
-                </h2>
+                  {tr("Common Mistakes During Reaction Time Testing\r\n                ")}</h2>
                 <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Testing while fatigued:</strong> Scores taken during mental or physical fatigue can be 30–80ms slower than your rested baseline. Always note your energy level alongside your score.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Clicking before the signal:</strong> Anticipatory clicking (false starts) doesn't reflect your actual reaction time and skews your average downward artificially.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Using a trackpad instead of a mouse:</strong> Laptop trackpads have higher latency and significantly inflate scores. Always use a wired mouse for accurate results.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Tensing up excessively:</strong> Over-gripping your mouse increases muscle fatigue and slows fine motor commands. Keep a relaxed grip.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Testing in a cluttered environment:</strong> Background noise and distracting visuals significantly increase cognitive load and slow response time.</li>
-                  <li style={{ marginBottom: '0.6rem' }}><strong>Ignoring warm-up:</strong> Your first 1–2 rounds are always slower. The test's 5-round format accounts for this, but avoid drawing conclusions from a single attempt.</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Testing while fatigued:")}</strong> {tr("Scores taken during mental or physical fatigue can be 30–80ms slower than your rested baseline. Always note your energy level alongside your score.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Clicking before the signal:")}</strong> {tr("Anticipatory clicking (false starts) doesn't reflect your actual reaction time and skews your average downward artificially.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Using a trackpad instead of a mouse:")}</strong> {tr("Laptop trackpads have higher latency and significantly inflate scores. Always use a wired mouse for accurate results.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Tensing up excessively:")}</strong> {tr("Over-gripping your mouse increases muscle fatigue and slows fine motor commands. Keep a relaxed grip.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Testing in a cluttered environment:")}</strong> {tr("Background noise and distracting visuals significantly increase cognitive load and slow response time.")}</li>
+                  <li style={{ marginBottom: '0.6rem' }}><strong>{tr("Ignoring warm-up:")}</strong> {tr("Your first 1–2 rounds are always slower. The test's 5-round format accounts for this, but avoid drawing conclusions from a single attempt.")}</li>
                 </ul>
 
                 {/* ─── 23 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Accuracy and Limitations of Browser-Based Reaction Tests
-                </h2>
+                  {tr("Accuracy and Limitations of Browser-Based Reaction Tests\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  This tool uses <code>performance.now()</code>, which provides high-resolution timing in modern browsers. However, browser-based tests have inherent limitations that users should be aware of. A technical analysis by{' '}
+                  {tr("This tool uses ")}<code>performance.now()</code>{tr(", which provides high-resolution timing in modern browsers. However, browser-based tests have inherent limitations that users should be aware of. A technical analysis by")}{' '}
                   <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" target="_blank" rel="noopener noreferrer" style={RL}>
-                    Mozilla MDN documentation↗
-                  </a>{' '}
-                  notes that browsers may throttle timer resolution to 1ms (Firefox) or apply small random jitter (up to 0.1ms) as a Spectre vulnerability mitigation — meaning individual measurements have a ±1–2ms margin of error.
-                </p>
+                    {tr("Mozilla MDN documentation↗\r\n                  ")}</a>{' '}
+                  {tr("notes that browsers may throttle timer resolution to 1ms (Firefox) or apply small random jitter (up to 0.1ms) as a Spectre vulnerability mitigation — meaning individual measurements have a ±1–2ms margin of error.\r\n                ")}</p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  Additional variance comes from browser render pipeline delays (V-sync alignment of the green signal), JavaScript garbage collection pauses, and OS thread scheduling. For personal benchmarking and tracking improvement over time, these tools are excellent. For clinical or scientific research purposes, hardware-level measurement devices (e.g., MediaLab or custom Arduino setups) with sub-millisecond precision are required.
-                </p>
+                  {tr("Additional variance comes from browser render pipeline delays (V-sync alignment of the green signal), JavaScript garbage collection pauses, and OS thread scheduling. For personal benchmarking and tracking improvement over time, these tools are excellent. For clinical or scientific research purposes, hardware-level measurement devices (e.g., MediaLab or custom Arduino setups) with sub-millisecond precision are required.\r\n                ")}</p>
 
                 {/* ─── 24 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Browser Compatibility
-                </h2>
+                  {tr("Browser Compatibility\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  This Reaction Time Test uses the <code>performance.now()</code> Web API for high-resolution timing, supported in all modern browsers: <strong>Chrome 24+, Firefox 15+, Safari 8+, Edge 12+, and Opera 15+</strong>. No plugins or downloads are required. JavaScript must be enabled. Mobile browsers are supported, though touchscreen latency will add 20–70ms to results compared to a wired mouse.
-                </p>
+                  {tr("This Reaction Time Test uses the ")}<code>performance.now()</code> {tr("Web API for high-resolution timing, supported in all modern browsers: ")}<strong>{tr("Chrome 24+, Firefox 15+, Safari 8+, Edge 12+, and Opera 15+")}</strong>{tr(". No plugins or downloads are required. JavaScript must be enabled. Mobile browsers are supported, though touchscreen latency will add 20–70ms to results compared to a wired mouse.\r\n                ")}</p>
 
                 {/* ─── 25 ─────────────────────────────────── */}
                 <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '2.5rem' }}>
-                  Privacy Statement
-                </h2>
+                  {tr("Privacy Statement\r\n                ")}</h2>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  This tool operates entirely within your browser using client-side JavaScript. <strong>No click data, timing results, or personal information is collected, stored, or transmitted to any server.</strong> All statistics exist only in your browser memory and are cleared when you reset the tool or close the tab. There are no cookies, trackers, or third-party analytics associated with the test itself.
-                </p>
+                  {tr("This tool operates entirely within your browser using client-side JavaScript. ")}<strong>{tr("No click data, timing results, or personal information is collected, stored, or transmitted to any server.")}</strong> {tr("All statistics exist only in your browser memory and are cleared when you reset the tool or close the tab. There are no cookies, trackers, or third-party analytics associated with the test itself.\r\n                ")}</p>
 
                 {/* ─── Research References Box ─────────────── */}
                 <div style={{
@@ -1129,8 +1040,7 @@ export default function ReactionTimePage() {
                   padding: '1.25rem 1.5rem',
                 }}>
                   <h2 style={{ color: 'var(--neon-cyan)', fontSize: '1rem', fontWeight: '700', marginTop: 0, marginBottom: '1rem' }}>
-                    📚 Key Research References
-                  </h2>
+                    {tr("📚 Key Research References\r\n                  ")}</h2>
                   <ol style={{ paddingLeft: '1.25rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
                     {[
                       { text: 'Donders, F.C. (1969). On the speed of mental processes.', href: 'https://link.springer.com/article/10.1007/BF02702918' },
@@ -1151,8 +1061,7 @@ export default function ReactionTimePage() {
                       <li key={i} style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.55 }}>
                         {text}{' '}
                         <a href={href} target="_blank" rel="noopener noreferrer" style={{ ...RL, fontSize: '0.8rem' }}>
-                          View↗
-                        </a>
+                          {tr("View↗\r\n                        ")}</a>
                       </li>
                     ))}
                   </ol>

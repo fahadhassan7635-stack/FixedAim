@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/AimPage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 
@@ -11,7 +13,8 @@ const tools = [
 ];
 
 export default function AimPage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <script
@@ -118,28 +121,27 @@ export default function AimPage() {
   }
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div className="section-label">Category</div>
+        <div className="section-label">{tr("Category")}</div>
         <h1 translate="no" className="tool-title">{t.hubs.aim.h1}</h1>
         <p translate="no" className="tool-subtitle">{t.hubs.aim.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {tools.map(tool => (
-          <Link key={tool.to} href={tool.to} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
+          <Link key={tool.to} href={localeHref(tool.to)} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
             <div>
-              <div className="cod-hub-title" style={{ color: tool.color }}>{tool.title}</div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{tool.desc}</p>
+              <div className="cod-hub-title" style={{ color: tool.color }}>{tr(tool.title)}</div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{tr(tool.desc)}</p>
             </div>
-            <span className="cod-hub-cta" style={{ color: tool.color }}>Start Test →</span>
+            <span className="cod-hub-cta" style={{ color: tool.color }}>{tr("Start Test →")}</span>
           </Link>
         ))}
       </div>
 
       <div className="cod-tip-box">
-        <div className="cod-tip-title" style={{ color: '#fb923c' }}>Reaction Time Science</div>
+        <div className="cod-tip-title" style={{ color: '#fb923c' }}>{tr("Reaction Time Science")}</div>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.7', marginBottom: '1.25rem' }}>
-          Human reaction time averages ~250ms for visual stimuli. Elite gamers achieve 150–200ms through training, proper sleep, and warm-up routines.
-        </p>
+          {tr("Human reaction time averages ~250ms for visual stimuli. Elite gamers achieve 150–200ms through training, proper sleep, and warm-up routines.\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { t: 'Sleep Quality', d: '7–9 hours improves reaction by up to 30%.' },
@@ -147,9 +149,9 @@ export default function AimPage() {
             { t: 'Caffeine', d: 'Small doses improve alertness and reaction speed.' },
             { t: 'Hydration', d: 'Even mild dehydration slows reaction time significantly.' },
           ].map(tip => (
-            <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title" style={{ color: '#fb923c' }}>{tip.t}</div>
-              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tip.d}</div>
+            <div key={tr(tip.t)} className="cod-tip-item">
+              <div className="cod-tip-item-title" style={{ color: '#fb923c' }}>{tr(tip.t)}</div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.5' }}>{tr(tip.d)}</div>
             </div>
           ))}
         </div>
@@ -157,14 +159,11 @@ export default function AimPage() {
 
       <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
-          Train FPS Flicks, Tracking &amp; Sub-200ms Reflexes
-        </h2>
+          {tr("Train FPS Flicks, Tracking &amp; Sub-200ms Reflexes\n        ")}</h2>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-          Consistent aim in tactical shooters like Valorant, CS2, and Apex Legends combines fast visual processing with clean mouse muscle memory. Start your warm-up with the <Link href="/reaction-time" style={{ textDecoration: 'underline', fontWeight: 800 }}>Reaction Time Test</Link> or <Link href="/f1-reaction" style={{ textDecoration: 'underline', fontWeight: 800 }}>F1 Reaction Test</Link> to establish your baseline visual reflex speed in milliseconds.
-        </p>
+          {tr("Consistent aim in tactical shooters like Valorant, CS2, and Apex Legends combines fast visual processing with clean mouse muscle memory. Start your warm-up with the ")}<Link href={localeHref('/reaction-time')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Reaction Time Test")}</Link> {tr("or ")}<Link href={localeHref('/f1-reaction')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("F1 Reaction Test")}</Link> {tr("to establish your baseline visual reflex speed in milliseconds.\n        ")}</p>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
-          Once warmed up, move into the <Link href="/aim-trainer" style={{ textDecoration: 'underline', fontWeight: 800 }}>2D Aim Trainer</Link> for rapid target acquisition and click timing, or launch the full-screen <Link href="/3d-aim-trainer" style={{ textDecoration: 'underline', fontWeight: 800 }}>3D Aim Trainer</Link> to practice 360-degree crosshair placement, pistol flicks, sniper scoping, and tracking without installing large game clients.
-        </p>
+          {tr("Once warmed up, move into the ")}<Link href={localeHref('/aim-trainer')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("2D Aim Trainer")}</Link> {tr("for rapid target acquisition and click timing, or launch the full-screen ")}<Link href={localeHref('/3d-aim-trainer')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("3D Aim Trainer")}</Link> {tr("to practice 360-degree crosshair placement, pistol flicks, sniper scoping, and tracking without installing large game clients.\n        ")}</p>
       </article>
     </div>
   );

@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/BenchmarkPage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 
@@ -37,7 +39,8 @@ const benchmarks = [
 ];
 
 export default function BenchmarkPage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem', minHeight: '80vh' }}>
       <script
@@ -165,7 +168,7 @@ export default function BenchmarkPage() {
       `}</style>
 
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div className="section-label">Category</div>
+        <div className="section-label">{tr("Category")}</div>
         <h1 translate="no" className="tool-title">{t.hubs.benchmark.h1}</h1>
         <p translate="no" className="tool-subtitle">
           {t.hubs.benchmark.sub}
@@ -174,21 +177,20 @@ export default function BenchmarkPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {benchmarks.map((tool) => (
-          <Link key={tool.to} href={tool.to} className="cod-hub-card">
+          <Link key={tool.to} href={localeHref(tool.to)} className="cod-hub-card">
             <div>
-              <div className="cod-hub-title">{tool.title}</div>
-              <p className="cod-hub-desc">{tool.desc}</p>
+              <div className="cod-hub-title">{tr(tool.title)}</div>
+              <p className="cod-hub-desc">{tr(tool.desc)}</p>
             </div>
-            <span className="cod-hub-cta" style={{ color: tool.color }}>Start Benchmark →</span>
+            <span className="cod-hub-cta" style={{ color: tool.color }}>{tr("Start Benchmark →")}</span>
           </Link>
         ))}
       </div>
 
       <div className="cod-tip-box">
-        <div className="cod-tip-title" style={{ color: '#00f5ff' }}>System &amp; Network Benchmark Tips</div>
+        <div className="cod-tip-title" style={{ color: '#00f5ff' }}>{tr("System &amp; Network Benchmark Tips")}</div>
         <p style={{ color: 'inherit', opacity: 0.85, fontSize: '0.875rem', lineHeight: '1.7', marginBottom: '1.25rem' }}>
-          Reliable benchmark numbers require a clean testing environment. Follow these guidelines before testing your network.
-        </p>
+          {tr("Reliable benchmark numbers require a clean testing environment. Follow these guidelines before testing your network.\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { t: 'Close Background Apps', d: 'Background downloads and game updates introduce ping jitter and reduce bandwidth.' },
@@ -196,9 +198,9 @@ export default function BenchmarkPage() {
             { t: 'Monitor Polling Rate', d: 'Ensure your mouse and keyboard run at 1000Hz+ for sub-millisecond input.' },
             { t: 'Run Multiple Passes', d: 'Run tests 2–3 times to compute a representative average.' },
           ].map((tip) => (
-            <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title" style={{ color: '#00f5ff' }}>{tip.t}</div>
-              <div style={{ opacity: 0.85, fontSize: '0.8rem', lineHeight: '1.5' }}>{tip.d}</div>
+            <div key={tr(tip.t)} className="cod-tip-item">
+              <div className="cod-tip-item-title" style={{ color: '#00f5ff' }}>{tr(tip.t)}</div>
+              <div style={{ opacity: 0.85, fontSize: '0.8rem', lineHeight: '1.5' }}>{tr(tip.d)}</div>
             </div>
           ))}
         </div>
@@ -206,14 +208,11 @@ export default function BenchmarkPage() {
 
       <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
-          Evaluate Connection Stability &amp; Cognitive Recall Together
-        </h2>
+          {tr("Evaluate Connection Stability &amp; Cognitive Recall Together\n        ")}</h2>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-          Peak gaming and productivity performance requires both a rock-solid internet connection and sharp mental recall. Run the <Link href="/internet-speed" style={{ textDecoration: 'underline', fontWeight: 800 }}>Internet Speed Test</Link> to measure real-time download and upload throughput alongside ping latency, jitter, and packet loss—critical numbers for eliminating rubberbanding and hit-registration delays.
-        </p>
+          {tr("Peak gaming and productivity performance requires both a rock-solid internet connection and sharp mental recall. Run the ")}<Link href={localeHref('/internet-speed')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Internet Speed Test")}</Link> {tr("to measure real-time download and upload throughput alongside ping latency, jitter, and packet loss—critical numbers for eliminating rubberbanding and hit-registration delays.\n        ")}</p>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
-          Alongside network diagnostics, challenge your short-term visual and sequence recall in our <Link href="/memory-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Memory Test</Link> suite featuring card match, pattern echo, number span, and spatial recall modes. Looking for hardware checks? Visit the <Link href="/device" style={{ textDecoration: 'underline', fontWeight: 800 }}>Device Test Hub</Link> for screen and audio tools.
-        </p>
+          {tr("Alongside network diagnostics, challenge your short-term visual and sequence recall in our ")}<Link href={localeHref('/memory-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Memory Test")}</Link> {tr("suite featuring card match, pattern echo, number span, and spatial recall modes. Looking for hardware checks? Visit the ")}<Link href={localeHref('/device')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Device Test Hub")}</Link> {tr("for screen and audio tools.\n        ")}</p>
       </article>
     </div>
   );

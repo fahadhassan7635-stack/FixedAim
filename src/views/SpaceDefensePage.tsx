@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/SpaceDefensePage.json';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   Play,
@@ -300,6 +302,7 @@ function launchConfetti(canvas: HTMLCanvasElement) {
 // MAIN COMPONENT
 // ============================================================
 export default function SpaceDefensePage() {
+  const { tr } = usePageI18n(pageDict);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -941,13 +944,12 @@ export default function SpaceDefensePage() {
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '1rem', display: 'flex', justifyContent: 'space-between', pointerEvents: 'none' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', pointerEvents: 'auto' }}>
                 <div style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '0.6rem 1rem' }}>
-                  <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--neon-cyan)', fontWeight: '700', marginBottom: '0.2rem' }}>Score</div>
+                  <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--neon-cyan)', fontWeight: '700', marginBottom: '0.2rem' }}>{tr("Score")}</div>
                   <div style={{ fontSize: '1.5rem', fontFamily: 'monospace', fontWeight: '800', color: '#fff' }}>{score.toLocaleString()}</div>
                 </div>
                 <div style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '0.6rem 1rem' }}>
                   <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: '#ff4d4d', fontWeight: '700', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Heart size={11} fill="currentColor" /> Hull
-                  </div>
+                    <Heart size={11} fill="currentColor" /> {tr("Hull\n                  ")}</div>
                   <div style={{ display: 'flex', gap: '3px' }}>
                     {Array.from({ length: 10 }).map((_, i) => (
                       <div key={i} style={{ width: '7px', height: '14px', borderRadius: '2px', transition: 'all 0.3s', background: i < lives ? 'var(--neon-orange)' : 'rgba(255,255,255,0.1)', boxShadow: i < lives ? '0 0 6px var(--neon-orange)' : 'none' }} />
@@ -956,7 +958,7 @@ export default function SpaceDefensePage() {
                 </div>
                 {combo >= 2 && (
                   <div style={{ background: 'rgba(255,107,53,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,107,53,0.4)', borderRadius: '12px', padding: '0.4rem 0.8rem', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.6rem', color: 'var(--neon-orange)', fontWeight: '800', textTransform: 'uppercase' }}>Combo</div>
+                    <div style={{ fontSize: '0.6rem', color: 'var(--neon-orange)', fontWeight: '800', textTransform: 'uppercase' }}>{tr("Combo")}</div>
                     <div style={{ fontSize: '1.25rem', fontWeight: '900', color: '#fff', fontFamily: 'monospace' }}>{combo}x</div>
                   </div>
                 )}
@@ -982,7 +984,7 @@ export default function SpaceDefensePage() {
                 </div>
                 <div style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '0.4rem 0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Star size={14} color="var(--neon-yellow)" />
-                  <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#fff' }}>LVL {level}</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#fff' }}>{tr("LVL ")}{level}</span>
                 </div>
                 <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                   {activePowerUps.filter(p => p.endsAt > Date.now()).map(p => {
@@ -1004,7 +1006,7 @@ export default function SpaceDefensePage() {
           {showLevelUp && (
             <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ textAlign: 'center', animation: 'levelUpAnim 2s ease-out forwards' }}>
-                <div style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--neon-yellow)', textTransform: 'uppercase', letterSpacing: '0.3em' }}>Level Up!</div>
+                <div style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--neon-yellow)', textTransform: 'uppercase', letterSpacing: '0.3em' }}>{tr("Level Up!")}</div>
                 <div style={{ fontSize: '4rem', fontWeight: '900', color: '#fff', textShadow: '0 0 40px rgba(0,245,255,0.8)', fontFamily: 'monospace' }}>{levelUpNum}</div>
               </div>
               <style>{`@keyframes levelUpAnim { 0%{transform:scale(0.5);opacity:0} 30%{transform:scale(1.15);opacity:1} 70%{transform:scale(1);opacity:1} 100%{transform:scale(1.2);opacity:0} }`}</style>
@@ -1014,7 +1016,7 @@ export default function SpaceDefensePage() {
           {/* Combo Popup */}
           {showComboPopup && (
             <div style={{ position: 'absolute', top: '35%', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'none', textAlign: 'center', animation: 'comboAnim 0.8s ease-out forwards' }}>
-              <div style={{ fontSize: '2rem', fontWeight: '900', color: 'var(--neon-orange)', textShadow: '0 0 20px rgba(255,107,53,0.8)', fontFamily: 'monospace' }}>{comboPopupVal}x COMBO!</div>
+              <div style={{ fontSize: '2rem', fontWeight: '900', color: 'var(--neon-orange)', textShadow: '0 0 20px rgba(255,107,53,0.8)', fontFamily: 'monospace' }}>{comboPopupVal}{tr("x COMBO!")}</div>
               <style>{`@keyframes comboAnim { 0%{transform:translateX(-50%) translateY(0) scale(0.8);opacity:0} 30%{transform:translateX(-50%) translateY(-10px) scale(1.1);opacity:1} 100%{transform:translateX(-50%) translateY(-30px) scale(1);opacity:0} }`}</style>
             </div>
           )}
@@ -1055,19 +1057,16 @@ export default function SpaceDefensePage() {
               <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <Pause size={32} color="var(--neon-cyan)" />
-                  <h2 style={{ fontSize: '2.5rem', fontWeight: '900', color: '#fff', margin: 0 }}>PAUSED</h2>
+                  <h2 style={{ fontSize: '2.5rem', fontWeight: '900', color: '#fff', margin: 0 }}>{tr("PAUSED")}</h2>
                 </div>
-                <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0, fontSize: '0.9rem' }}>Press Esc to resume</p>
+                <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0, fontSize: '0.9rem' }}>{tr("Press Esc to resume")}</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '240px' }}>
                   <button onClick={resumeGame} style={{ padding: '0.875rem', background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-green))', color: '#000', fontWeight: '800', borderRadius: '12px', border: 'none', cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                    <Play size={18} fill="currentColor" /> RESUME
-                  </button>
+                    <Play size={18} fill="currentColor" /> {tr("RESUME\n                  ")}</button>
                   <button onClick={startCountdown} style={{ padding: '0.75rem', background: 'rgba(255,255,255,0.08)', color: '#fff', fontWeight: '700', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)', cursor: 'pointer', fontSize: '0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                    <RotateCcw size={16} /> RESTART
-                  </button>
+                    <RotateCcw size={16} /> {tr("RESTART\n                  ")}</button>
                   <button onClick={() => { setGameState('menu'); gameStateRef.current = 'menu'; }} style={{ padding: '0.75rem', background: 'transparent', color: 'rgba(255,255,255,0.5)', fontWeight: '600', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                    <Home size={16} /> MAIN MENU
-                  </button>
+                    <Home size={16} /> {tr("MAIN MENU\n                  ")}</button>
                 </div>
               </div>
             </div>
@@ -1087,12 +1086,11 @@ export default function SpaceDefensePage() {
 
               <div style={{ width: '100%', maxWidth: '360px', textAlign: 'center' }}>
                 <div style={{ display: 'inline-flex', backgroundColor: 'rgba(0,245,255,0.06)', border: '1px solid rgba(0,245,255,0.2)', color: 'var(--neon-cyan)', fontSize: '11px', fontWeight: 700, padding: '4px 12px', borderRadius: '20px', marginBottom: '0.6rem', letterSpacing: '0.5px' }}>
-                  METEOR SHOOTER
-                </div>
+                  {tr("METEOR SHOOTER\n                ")}</div>
                 <h1 style={{ fontSize: '2.2rem', fontWeight: 900, fontStyle: 'italic', letterSpacing: '-0.03em', color: '#fff', textShadow: '0 0 20px rgba(0,245,255,0.4)', margin: '0 0 0.3rem' }}>
-                  Space <span style={{ color: 'var(--neon-cyan)' }}>DEFENSE</span>
+                  {tr("Space ")}<span style={{ color: 'var(--neon-cyan)' }}>{tr("DEFENSE")}</span>
                 </h1>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', marginBottom: '1.4rem' }}>Test your CPS and survival skills</p>
+                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', marginBottom: '1.4rem' }}>{tr("Test your CPS and survival skills")}</p>
 
                 <div style={{ marginBottom: '1.4rem' }}>
                   <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
@@ -1125,22 +1123,20 @@ export default function SpaceDefensePage() {
                 </div>
 
                 <div style={{ marginBottom: '1.2rem', color: '#6b7280', fontSize: '0.8rem' }}>
-                  <strong style={{ color: '#2D3436' }}>WASD</strong> move · <strong style={{ color: '#2D3436' }}>F / Space</strong> shoot
-                </div>
+                  <strong style={{ color: '#2D3436' }}>{tr("WASD")}</strong> {tr("move · ")}<strong style={{ color: '#2D3436' }}>{tr("F / Space")}</strong> {tr("shoot\n                ")}</div>
 
                 {highScore.score > 0 && (
                   <div style={{ color: 'rgba(255,215,0,0.75)', fontSize: '0.78rem', marginBottom: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                    <Trophy size={13} color="gold" /> Best: {highScore.score.toLocaleString()} pts · Lv {highScore.level}
+                    <Trophy size={13} color="gold" /> {tr("Best: ")}{highScore.score.toLocaleString()} {tr("pts · Lv ")}{highScore.level}
                   </div>
                 )}
 
                 <button
                   onClick={startCountdown}
                   style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-green))', color: '#000', fontSize: '1rem', fontWeight: 900, borderRadius: '10px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 10px 30px rgba(0,245,255,0.3)' }}
-                  aria-label="Start game"
+                  aria-label={tr("Start game")}
                 >
-                  <Play fill="currentColor" size={16} /> START MISSION
-                </button>
+                  <Play fill="currentColor" size={16} /> {tr("START MISSION\n                ")}</button>
               </div>
             </div>
           )}
@@ -1151,11 +1147,10 @@ export default function SpaceDefensePage() {
               <div style={{ maxWidth: '380px', width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', padding: '1.5rem', textAlign: 'center' }}>
                 {isNewHighScore && (
                   <div style={{ background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.3)', borderRadius: '10px', padding: '0.5rem', marginBottom: '0.75rem', color: 'gold', fontWeight: '800', fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                    <Trophy size={16} /> NEW HIGH SCORE!
-                  </div>
+                    <Trophy size={16} /> {tr("NEW HIGH SCORE!\n                  ")}</div>
                 )}
-                <div style={{ color: '#ff4d4d', fontWeight: '900', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.2rem' }}>Mission Failed</div>
-                <h2 style={{ fontSize: '1.9rem', fontWeight: '900', color: '#fff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>GAME OVER</h2>
+                <div style={{ color: '#ff4d4d', fontWeight: '900', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.2rem' }}>{tr("Mission Failed")}</div>
+                <h2 style={{ fontSize: '1.9rem', fontWeight: '900', color: '#fff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>{tr("GAME OVER")}</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1rem' }}>
                   <GameOverStat label="Final Score" value={score.toLocaleString()} highlight="var(--neon-cyan)" />
                   <GameOverStat label="Meteors" value={meteorsDestroyed} icon={<Activity size={11} />} />
@@ -1166,15 +1161,15 @@ export default function SpaceDefensePage() {
                 </div>
                 <div style={{ background: 'rgba(255,215,0,0.05)', border: '1px solid rgba(255,215,0,0.15)', borderRadius: '10px', padding: '0.75rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-around' }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.6rem', color: 'rgba(255,215,0,0.6)', fontWeight: '700' }}>BEST SCORE</div>
+                    <div style={{ fontSize: '0.6rem', color: 'rgba(255,215,0,0.6)', fontWeight: '700' }}>{tr("BEST SCORE")}</div>
                     <div style={{ fontSize: '0.95rem', fontWeight: '800', color: 'gold', fontFamily: 'monospace' }}>{highScore.score.toLocaleString()}</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.6rem', color: 'rgba(255,215,0,0.6)', fontWeight: '700' }}>BEST TIME</div>
+                    <div style={{ fontSize: '0.6rem', color: 'rgba(255,215,0,0.6)', fontWeight: '700' }}>{tr("BEST TIME")}</div>
                     <div style={{ fontSize: '0.95rem', fontWeight: '800', color: 'gold', fontFamily: 'monospace' }}>{highScore.time}s</div>
                   </div>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.6rem', color: 'rgba(255,215,0,0.6)', fontWeight: '700' }}>BEST LEVEL</div>
+                    <div style={{ fontSize: '0.6rem', color: 'rgba(255,215,0,0.6)', fontWeight: '700' }}>{tr("BEST LEVEL")}</div>
                     <div style={{ fontSize: '0.95rem', fontWeight: '800', color: 'gold', fontFamily: 'monospace' }}>{highScore.level}</div>
                   </div>
                 </div>
@@ -1182,13 +1177,11 @@ export default function SpaceDefensePage() {
                   <button onClick={startCountdown} style={{ width: '100%', padding: '0.8rem', background: '#fff', color: '#000', fontSize: '0.9rem', fontWeight: '800', borderRadius: '12px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', transition: 'all 0.2s' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--neon-cyan)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#fff'; }}>
-                    <RotateCcw size={16} /> TRY AGAIN
-                  </button>
+                    <RotateCcw size={16} /> {tr("TRY AGAIN\n                  ")}</button>
                   <button onClick={() => { setGameState('menu'); gameStateRef.current = 'menu'; }} style={{ width: '100%', padding: '0.7rem', background: 'transparent', color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', fontWeight: '600', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#fff'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.6)'; }}>
-                    <Home size={15} /> MAIN MENU
-                  </button>
+                    <Home size={15} /> {tr("MAIN MENU\n                  ")}</button>
                 </div>
               </div>
             </div>
@@ -1198,12 +1191,12 @@ export default function SpaceDefensePage() {
       </div>
 
       {/* ── MORE TOOLS GRID ── */}
-      <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
+      <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
         <h2 style={{
           fontWeight: 800, fontSize: '1.5rem', color: '#fff',
           marginBottom: '1.5rem', textAlign: 'center',
           letterSpacing: '-0.3px',
-        }}>More Tools</h2>
+        }}>{tr("More Tools")}</h2>
         <div
           className="cps-games-grid"
           style={{
@@ -1266,28 +1259,20 @@ export default function SpaceDefensePage() {
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <h2 style={{ color: '#fff', fontSize: '2.2rem', fontWeight: 800, margin: '0 0 0.75rem', letterSpacing: '-0.5px' }}>
-              Space Defense: Meteor Shooter &amp; CPS Aim Trainer
-            </h2>
+              {tr("Space Defense: Meteor Shooter &amp; CPS Aim Trainer\n            ")}</h2>
             <p style={{ color: 'var(--neon-cyan)', fontSize: '1rem', fontWeight: 600, margin: 0 }}>
-              Master rapid targeting, burst clicking speed, and tactical evasion in deep space
-            </p>
+              {tr("Master rapid targeting, burst clicking speed, and tactical evasion in deep space\n            ")}</p>
           </div>
 
           <p style={{ marginBottom: '1.5rem', fontSize: '1.05rem', lineHeight: '1.8' }}>
-            <strong>Space Defense</strong> is an arcade space shooter and click speed trainer engineered to sharpen your{' '}
-            <strong>Clicks Per Second (CPS)</strong>, flick aim, and hand-eye coordination under pressure. Piloting a high-mobility 
-            fighter craft, you must eliminate incoming asteroid clusters, survive bullet-sponge Boss Meteors every 5 levels, 
-            and chain combo multipliers to conquer the leaderboard.
-          </p>
+            <strong>{tr("Space Defense")}</strong> {tr("is an arcade space shooter and click speed trainer engineered to sharpen your")}{' '}
+            <strong>{tr("Clicks Per Second (CPS)")}</strong>{tr(", flick aim, and hand-eye coordination under pressure. Piloting a high-mobility \n            fighter craft, you must eliminate incoming asteroid clusters, survive bullet-sponge Boss Meteors every 5 levels, \n            and chain combo multipliers to conquer the leaderboard.\n          ")}</p>
 
           {/* 1. What is Space Defense? */}
           <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: 800, marginTop: '2.5rem', marginBottom: '1rem' }}>
-            What is Space Defense?
-          </h2>
+            {tr("What is Space Defense?\n          ")}</h2>
           <p style={{ marginBottom: '1.25rem' }}>
-            Space Defense combines classic retro arcade shooters with modern micro-mechanics. Every asteroid destroyed 
-            requires split-second aim alignment and repeated trigger pulls, reinforcing the finger-tap endurance vital for competitive gaming:
-          </p>
+            {tr("Space Defense combines classic retro arcade shooters with modern micro-mechanics. Every asteroid destroyed \n            requires split-second aim alignment and repeated trigger pulls, reinforcing the finger-tap endurance vital for competitive gaming:\n          ")}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', margin: '1.5rem 0 2rem' }}>
             {[
               { title: 'Dynamic Meteor Defense', desc: 'Waves of procedural meteors scale in velocity, size, and hitpoints, requiring variable shot counts.' },
@@ -1304,56 +1289,47 @@ export default function SpaceDefensePage() {
 
           {/* 2. How Does Space Defense Work? */}
           <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: 800, marginTop: '2.5rem', marginBottom: '1rem' }}>
-            How Does This Space Defense Game Work?
-          </h2>
+            {tr("How Does This Space Defense Game Work?\n          ")}</h2>
           <p style={{ marginBottom: '1rem' }}>
-            The game runs on an optimized HTML5 Canvas physics engine with instantaneous input response. Here is the core combat loop:
-          </p>
+            {tr("The game runs on an optimized HTML5 Canvas physics engine with instantaneous input response. Here is the core combat loop:\n          ")}</p>
           <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', color: '#2D3436' }}>
-            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Dual Input Navigation:</strong> Maneuver your ship along the horizontal defense plane using <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>A / D</kbd>, <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>Left / Right Arrow</kbd>, or tap controls on mobile.</li>
-            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Flexible Firing Mechanics:</strong> Fire plasma bolts using <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>Left Mouse Click</kbd>, <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>Spacebar</kbd>, or the <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>F</kbd> key. Faster clicking produces immediate cyclic rate advantages.</li>
-            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Wave Scaling &amp; Boss Raids:</strong> Meteors speed up and cluster closer together each wave. Level 5, 10, 15, and beyond feature armored Bosses that demand concentrated 10+ CPS firing.</li>
-            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>Power-Up Drops:</strong> Destroying special meteors releases glowing power-up orbs. Collecting them grants immediate tactical perks like double projectile spread or 50% cooldown reductions.</li>
+            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>{tr("Dual Input Navigation:")}</strong> {tr("Maneuver your ship along the horizontal defense plane using ")}<kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>A / D</kbd>, <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>{tr("Left / Right Arrow")}</kbd>{tr(", or tap controls on mobile.")}</li>
+            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>{tr("Flexible Firing Mechanics:")}</strong> {tr("Fire plasma bolts using ")}<kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>{tr("Left Mouse Click")}</kbd>, <kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>{tr("Spacebar")}</kbd>{tr(", or the ")}<kbd style={{ background: '#111827', border: '1px solid #374151', padding: '2px 6px', borderRadius: '4px', color: '#00f5ff' }}>F</kbd> {tr("key. Faster clicking produces immediate cyclic rate advantages.")}</li>
+            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>{tr("Wave Scaling &amp; Boss Raids:")}</strong> {tr("Meteors speed up and cluster closer together each wave. Level 5, 10, 15, and beyond feature armored Bosses that demand concentrated 10+ CPS firing.")}</li>
+            <li style={{ marginBottom: '0.6rem' }}><strong style={{ color: '#fff' }}>{tr("Power-Up Drops:")}</strong> {tr("Destroying special meteors releases glowing power-up orbs. Collecting them grants immediate tactical perks like double projectile spread or 50% cooldown reductions.")}</li>
           </ul>
 
           {/* 3. How Space Defense Improves Your CPS & Aim */}
           <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: 800, marginTop: '2.5rem', marginBottom: '1rem' }}>
-            How Does Space Defense Help You Improve Your CPS &amp; Aim?
-          </h2>
+            {tr("How Does Space Defense Help You Improve Your CPS &amp; Aim?\n          ")}</h2>
           <p style={{ marginBottom: '1rem' }}>
-            Standard static CPS click tests measure isolated clicking speed in a vacuum. Space Defense takes click speed testing into an active combat environment:
-          </p>
+            {tr("Standard static CPS click tests measure isolated clicking speed in a vacuum. Space Defense takes click speed testing into an active combat environment:\n          ")}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1.5rem 0 2rem' }}>
             <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
-              <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>🎯 Precision Flick Aiming</h3>
+              <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>{tr("🎯 Precision Flick Aiming")}</h3>
               <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
-                Meteors spawn at unpredictable angles across the screen. Lining up shots trains target acquisition and micro-flick muscle memory similar to tactical shooters.
-              </p>
+                {tr("Meteors spawn at unpredictable angles across the screen. Lining up shots trains target acquisition and micro-flick muscle memory similar to tactical shooters.\n              ")}</p>
             </div>
             <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
-              <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>⚡ High-CPS Burst Discipline</h3>
+              <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>{tr("⚡ High-CPS Burst Discipline")}</h3>
               <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
-                Overwhelming meteor swarms and tough bosses require rapid 8–12+ CPS bursts without tensing your forearm to the point of losing steering control.
-              </p>
+                {tr("Overwhelming meteor swarms and tough bosses require rapid 8–12+ CPS bursts without tensing your forearm to the point of losing steering control.\n              ")}</p>
             </div>
             <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
-              <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>🕹️ Multitask Coordination</h3>
+              <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>{tr("🕹️ Multitask Coordination")}</h3>
               <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
-                Simultaneously strafing with keyboard keys while hammering mouse clicks simulates the cognitive workload of high-stakes battle royales and Minecraft PvP.
-              </p>
+                {tr("Simultaneously strafing with keyboard keys while hammering mouse clicks simulates the cognitive workload of high-stakes battle royales and Minecraft PvP.\n              ")}</p>
             </div>
             <div style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.15)', borderRadius: '12px', padding: '1.1rem' }}>
-              <h3 style={{ color: '#c084fc', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>🧠 Real-Time Biofeedback</h3>
+              <h3 style={{ color: '#c084fc', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>{tr("🧠 Real-Time Biofeedback")}</h3>
               <p style={{ fontSize: '0.85rem', color: '#2D3436', margin: 0, lineHeight: 1.6 }}>
-                Immediate audio cues and visual particle explosions validate every confirmed hit, training your nervous system to sustain steady rhythmic tempo.
-              </p>
+                {tr("Immediate audio cues and visual particle explosions validate every confirmed hit, training your nervous system to sustain steady rhythmic tempo.\n              ")}</p>
             </div>
           </div>
 
           {/* 4. Difficulty Comparison */}
           <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: 800, marginTop: '2.5rem', marginBottom: '1rem' }}>
-            Space Defense Difficulty Comparison
-          </h2>
+            {tr("Space Defense Difficulty Comparison\n          ")}</h2>
           <div style={{ overflowX: 'auto', margin: '1.25rem 0 2rem' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', minWidth: '550px' }}>
               <thead>
@@ -1384,8 +1360,7 @@ export default function SpaceDefensePage() {
           {/* 5. FAQs */}
           <div style={{ margin: '3rem 0 0' }}>
             <h2 style={{ color: 'var(--text-primary)', fontSize: '1.9rem', fontWeight: '800', marginBottom: '1.5rem', textAlign: 'center' }}>
-              Frequently Asked Questions
-            </h2>
+              {tr("Frequently Asked Questions\n            ")}</h2>
             <FaqAccordion items={FAQ_ITEMS} />
           </div>
 

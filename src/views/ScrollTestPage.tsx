@@ -1,6 +1,7 @@
 "use client";
-
-﻿import { useState, useRef, useEffect, useCallback } from 'react';
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/ScrollTestPage.json';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 // ─── More Tools ───────────────────────────────────────────────────────────────
 interface ToolLink { label: string; href: string; icon: React.ReactNode; }
@@ -35,6 +36,7 @@ const MORE_TOOLS: ToolLink[] = [
 const DURATIONS = [5, 10, 15, 30];
 
 export default function ScrollTestPage() {
+  const { tr } = usePageI18n(pageDict);
   const [scrollCount, setScrollCount] = useState(0);
   const [direction, setDirection] = useState<'up' | 'down' | null>(null);
   const [phase, setPhase] = useState<'idle' | 'running' | 'done'>('idle');
@@ -316,9 +318,9 @@ export default function ScrollTestPage() {
       `}</style>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <div className="section-label">Mouse Tool</div>
-        <h1 className="tool-title">Scroll Wheel Test</h1>
-        <p className="tool-subtitle">Test your scroll wheel speed and sensitivity — now with sound feedback</p>
+        <div className="section-label">{tr("Mouse Tool")}</div>
+        <h1 className="tool-title">{tr("Scroll Wheel Test")}</h1>
+        <p className="tool-subtitle">{tr("Test your scroll wheel speed and sensitivity — now with sound feedback")}</p>
       </div>
 
       {/* Duration selector with Custom Input + Sound toggle */}
@@ -341,13 +343,13 @@ export default function ScrollTestPage() {
           background: 'var(--bg-card)', border: '1px solid var(--border)',
           borderRadius: '8px', padding: '0.2rem 0.2rem 0.2rem 0.6rem'
         }}>
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>Custom:</span>
+          <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>{tr("Custom:")}</span>
           <input
             type="number"
             value={customTime}
             onChange={(e) => setCustomTime(e.target.value)}
             disabled={phase === 'running'}
-            placeholder="sec"
+            placeholder={tr("sec")}
             style={{
               width: '50px', background: 'transparent', border: 'none',
               color: 'var(--neon-cyan)', fontWeight: '700', outline: 'none',
@@ -363,7 +365,7 @@ export default function ScrollTestPage() {
               color: 'var(--neon-cyan)', fontWeight: '700', cursor: phase === 'running' || !customTime ? 'not-allowed' : 'pointer',
               fontSize: '0.8rem', transition: 'all 0.2s',
             }}
-          >Set</button>
+          >{tr("Set")}</button>
         </div>
 
         <button
@@ -418,8 +420,8 @@ export default function ScrollTestPage() {
         {phase === 'idle' && (
           <>
             <div style={{ fontSize: '4rem' }}>🔄</div>
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--neon-cyan)' }}>Click to Start</span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Then scroll your mouse wheel as fast as possible!</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--neon-cyan)' }}>{tr("Click to Start")}</span>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>{tr("Then scroll your mouse wheel as fast as possible!")}</span>
           </>
         )}
 
@@ -432,7 +434,7 @@ export default function ScrollTestPage() {
               color: direction === 'up' ? 'var(--neon-green)' : direction === 'down' ? 'var(--neon-orange)' : 'var(--text-secondary)',
             }}>🔄</div>
             <div style={{ fontSize: '4rem', fontWeight: '900', color: 'var(--neon-cyan)', fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{scrollCount}</div>
-            <span style={{ color: 'var(--text-secondary)' }}>🔄 Keep scrolling inside this box!</span>
+            <span style={{ color: 'var(--text-secondary)' }}>{tr("🔄 Keep scrolling inside this box!")}</span>
             <span style={{ color: 'var(--neon-orange)', fontWeight: '700' }}>{timeLeft.toFixed(1)}s</span>
           </>
         )}
@@ -444,11 +446,10 @@ export default function ScrollTestPage() {
               {parseFloat(finalCps).toFixed(2)} <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--text-secondary)' }}>CPS</span>
             </div>
             <div style={{ fontSize: '1.1rem', fontWeight: '700', color: currentRank.color }}>
-              Rank: {currentRank.name}
+              {tr("Rank: ")}{currentRank.name}
             </div>
             <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-              You scrolled <strong>{scrollCount}</strong> times in {duration} seconds.
-            </span>
+              {tr("You scrolled ")}<strong>{scrollCount}</strong> {tr("times in ")}{duration} {tr("seconds.\r\n            ")}</span>
           </div>
         )}
       </div>
@@ -478,8 +479,7 @@ export default function ScrollTestPage() {
                 <path d="M3 3v5h5"></path>
               </svg>
             </div>
-            Reset
-          </button>
+            {tr("Reset\r\n          ")}</button>
         </div>
       )}
 
@@ -523,8 +523,7 @@ export default function ScrollTestPage() {
 
               <div style={{ textAlign: 'left' }}>
                 <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Your Rank is
-                </div>
+                  {tr("Your Rank is\r\n                ")}</div>
                 <div style={{ fontSize: '2.2rem', fontWeight: '900', color: currentRank.color, fontStyle: 'italic', margin: '0.1rem 0' }}>
                   {currentRank.name}!
                 </div>
@@ -538,7 +537,7 @@ export default function ScrollTestPage() {
                 </div>
 
                 <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-                  You Scrolled with the speed of <strong style={{ color: '#fff', fontSize: '1.15rem', fontVariantNumeric: 'tabular-nums' }}>{parseFloat(finalCps).toFixed(2)}</strong> CPS
+                  {tr("You Scrolled with the speed of ")}<strong style={{ color: '#fff', fontSize: '1.15rem', fontVariantNumeric: 'tabular-nums' }}>{parseFloat(finalCps).toFixed(2)}</strong> CPS
                 </div>
               </div>
             </div>
@@ -573,27 +572,25 @@ export default function ScrollTestPage() {
                 onClick={() => resetGame()}
                 style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', flex: 1, maxWidth: '160px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}
               >
-                🔄 Reset
-              </button>
+                {tr("🔄 Reset\r\n              ")}</button>
               <button
                 className="btn btn-primary"
                 onClick={() => { resetGame(); setTimeout(() => start(), 100); }}
                 style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', flex: 1, maxWidth: '160px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', backgroundColor: currentRank.color, borderColor: currentRank.color, color: '#000', fontWeight: '700' }}
               >
-                ▶ Try Again
-              </button>
+                {tr("▶ Try Again\r\n              ")}</button>
             </div>
           </div>
         </>
       )}
 
       {/* ── MORE TOOLS GRID ── */}
-      <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
+      <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
         <h2 style={{
           fontWeight: 800, fontSize: '1.5rem', color: '#fff',
           marginBottom: '1.5rem', textAlign: 'center',
           letterSpacing: '-0.3px',
-        }}>More Tools</h2>
+        }}>{tr("More Tools")}</h2>
         <div
           className="cps-games-grid"
           style={{
@@ -667,52 +664,50 @@ export default function ScrollTestPage() {
 
         {/* Rank Reference Table */}
         <h2 style={{ color: '#fff', fontSize: '1.3rem', fontWeight: '700', marginBottom: '0.75rem', marginTop: '2rem' }}>
-          Scroll Speed (CPS) Performance Hierarchy
-        </h2>
+          {tr("Scroll Speed (CPS) Performance Hierarchy\r\n        ")}</h2>
         <div style={{ overflowX: 'auto', marginBottom: '1.5rem' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border)', color: '#fff' }}>
-                <th style={{ padding: '0.5rem 0.75rem' }}>Rank Badge</th>
-                <th style={{ padding: '0.5rem 0.75rem' }}>CPS Threshold</th>
-                <th style={{ padding: '0.5rem 0.75rem' }}>Skill Summary</th>
+                <th style={{ padding: '0.5rem 0.75rem' }}>{tr("Rank Badge")}</th>
+                <th style={{ padding: '0.5rem 0.75rem' }}>{tr("CPS Threshold")}</th>
+                <th style={{ padding: '0.5rem 0.75rem' }}>{tr("Skill Summary")}</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: '#94a3b8' }}>Snail</td>
-                <td style={{ padding: '0.6rem 0.75rem' }}>Less than 15 CPS</td>
-                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>Casual web browsing pace. Normal physical finger movement.</td>
+                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: '#94a3b8' }}>{tr("Snail")}</td>
+                <td style={{ padding: '0.6rem 0.75rem' }}>{tr("Less than 15 CPS")}</td>
+                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>{tr("Casual web browsing pace. Normal physical finger movement.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-green)' }}>Turtle</td>
-                <td style={{ padding: '0.6rem 0.75rem' }}>15 - 24 CPS</td>
-                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>Standard gaming reflexes. Clean wheel step coordination.</td>
+                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-green)' }}>{tr("Turtle")}</td>
+                <td style={{ padding: '0.6rem 0.75rem' }}>{tr("15 - 24 CPS")}</td>
+                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>{tr("Standard gaming reflexes. Clean wheel step coordination.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-cyan)' }}>Fox</td>
-                <td style={{ padding: '0.6rem 0.75rem' }}>25 - 34 CPS</td>
-                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>Advanced finger flicking techniques or high-spec mechanical encoders.</td>
+                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-cyan)' }}>{tr("Fox")}</td>
+                <td style={{ padding: '0.6rem 0.75rem' }}>{tr("25 - 34 CPS")}</td>
+                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>{tr("Advanced finger flicking techniques or high-spec mechanical encoders.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-orange)' }}>Cheetah</td>
-                <td style={{ padding: '0.6rem 0.75rem' }}>35 - 44 CPS</td>
-                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>Exceptional mechanics. Typically reached via advanced mouse hyper-scrolling.</td>
+                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-orange)' }}>{tr("Cheetah")}</td>
+                <td style={{ padding: '0.6rem 0.75rem' }}>{tr("35 - 44 CPS")}</td>
+                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>{tr("Exceptional mechanics. Typically reached via advanced mouse hyper-scrolling.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-purple)' }}>Machine</td>
-                <td style={{ padding: '0.6rem 0.75rem' }}>45+ CPS</td>
-                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>Top-tier physical burst limits or automated free-spin infinite wheel options.</td>
+                <td style={{ padding: '0.6rem 0.75rem', fontWeight: '700', color: 'var(--neon-purple)' }}>{tr("Machine")}</td>
+                <td style={{ padding: '0.6rem 0.75rem' }}>{tr("45+ CPS")}</td>
+                <td style={{ padding: '0.6rem 0.75rem', color: 'var(--text-muted)' }}>{tr("Top-tier physical burst limits or automated free-spin infinite wheel options.")}</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         {/* FAQ Section: 30+ entries */}
-        <div className="faq-wrapper" aria-label="Frequently Asked Questions" style={{ marginTop: '2.5rem', border: '3px solid #000000', padding: '1.5rem', boxShadow: '5px 5px 0 0 #000000' }}>
+        <div className="faq-wrapper" aria-label={tr("Frequently Asked Questions")} style={{ marginTop: '2.5rem', border: '3px solid #000000', padding: '1.5rem', boxShadow: '5px 5px 0 0 #000000' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '1.25rem', marginTop: '0', textTransform: 'uppercase', borderBottom: '3px solid #000000', paddingBottom: '0.75rem' }}>
-            Frequently Asked Questions (FAQs)
-          </h2>
+            {tr("Frequently Asked Questions (FAQs)\r\n          ")}</h2>
 
           <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {faqs.map((item, i) => {

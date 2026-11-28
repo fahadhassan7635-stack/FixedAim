@@ -3,7 +3,6 @@ import "./globals.css";
 import ClientLayout from "../components/ClientLayout";
 import Footer from "../components/Footer";
 import { LanguageProvider } from "../contexts/LanguageContext";
-import AutoPageTranslator from "../components/AutoPageTranslator";
 
 const SITE_URL = "https://fixedaim.com";
 
@@ -79,13 +78,12 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('fixedaim-theme');var sys=window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||(s!=='light'&&sys)?'dark':'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-theme-setting',s||'system');}catch(e){}})();`,
+            __html: `(function(){try{var s=localStorage.getItem('fixedaim-theme');var sys=window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s==='dark'||(s!=='light'&&sys)?'dark':'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-theme-setting',s||'system');var m=window.location.pathname.match(/^\\/(es|pt|de|fr|ja|id|ru|ar|ko)(?:\\/|$)/);var l=m?m[1]:'en';document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');}catch(e){}})();`,
           }}
         />
       </head>
       <body>
         <LanguageProvider>
-          <AutoPageTranslator />
           <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%' }}>
             <ClientLayout>{children}</ClientLayout>
             <Footer />

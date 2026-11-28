@@ -1,5 +1,9 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/SpaceWavesGame.json';
+import { useLang } from '../contexts/LanguageContext';
+
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   Play, RotateCcw, Pause, LogOut, ExternalLink, ChevronDown, ChevronUp,
@@ -152,18 +156,19 @@ const SEOHead: React.FC = () => {
 
 // ─── Breadcrumb ─────────────────────────────────────────────────────────────
 function Breadcrumb() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 w-full">
+    <nav aria-label={tr("Breadcrumb")} className="mb-6 w-full">
       <ol className="flex items-center gap-1.5 text-sm text-slate-500 list-none p-0 m-0">
         <li>
-          <a href="/" className="flex items-center gap-1 text-slate-500 hover:text-cyan-300 no-underline">
-            <Home size={13} /> Home
-          </a>
+          <a href={localeHref("/")} className="flex items-center gap-1 text-slate-500 hover:text-cyan-300 no-underline">
+            <Home size={13} /> {tr("Home\r\n          ")}</a>
         </li>
         <li aria-hidden="true"><ChevronRight size={12} className="text-slate-700" /></li>
-        <li><a href="/games" className="text-slate-500 hover:text-cyan-300 no-underline">Games</a></li>
+        <li><a href={localeHref("/games")} className="text-slate-500 hover:text-cyan-300 no-underline">{tr("Games")}</a></li>
         <li aria-hidden="true"><ChevronRight size={12} className="text-slate-700" /></li>
-        <li aria-current="page" className="text-cyan-300 font-bold">Space Waves</li>
+        <li aria-current="page" className="text-cyan-300 font-bold">{tr("Space Waves")}</li>
       </ol>
     </nav>
   );
@@ -195,6 +200,8 @@ function FaqAccordion() {
 }
 
 export default function SpaceWavesGame() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameContainerRef = useRef<HTMLDivElement>(null);
   const [gameState, setGameState] = useState<GameState>('START');
@@ -903,8 +910,8 @@ export default function SpaceWavesGame() {
         <Breadcrumb />
 
         <div className="sw-page-header">
-          <span className="sw-page-badge">Mouse &amp; Keyboard Speed Test</span>
-          <h1 className="sw-page-title">SPACE WAVES</h1>
+          <span className="sw-page-badge">{tr("Mouse &amp; Keyboard Speed Test")}</span>
+          <h1 className="sw-page-title">{tr("SPACE WAVES")}</h1>
         </div>
 
         <div
@@ -934,11 +941,11 @@ export default function SpaceWavesGame() {
           {/* HUD */}
           <div className="absolute top-3 left-3 right-16 flex justify-between pointer-events-none z-10">
             <div className="sw-hud-box">
-              <div className="sw-hud-label">ATTEMPTS</div>
+              <div className="sw-hud-label">{tr("ATTEMPTS")}</div>
               <div className="sw-hud-value">{attempts}</div>
             </div>
             <div className="sw-hud-box">
-              <div className="sw-hud-label">PROGRESS</div>
+              <div className="sw-hud-label">{tr("PROGRESS")}</div>
               <div className="sw-hud-value" ref={progressTextRef}>{progress.toFixed(0)}%</div>
             </div>
           </div>
@@ -949,7 +956,7 @@ export default function SpaceWavesGame() {
               onMouseDown={(e) => e.stopPropagation()}
               onTouchStart={(e) => e.stopPropagation()}
               className="sw-btn-pause absolute top-3 right-3 z-20"
-              aria-label="Pause"
+              aria-label={tr("Pause")}
             >
               <Pause size={16} />
             </button>
@@ -979,15 +986,13 @@ export default function SpaceWavesGame() {
 
           {gameState === 'START' && (
             <div className="sw-overlay">
-              <h2 className="sw-overlay-title">SPACE WAVES</h2>
+              <h2 className="sw-overlay-title">{tr("SPACE WAVES")}</h2>
               <p className="sw-overlay-sub" style={{ lineHeight: 1.7 }}>
-                Hold Space or Click to go UP<br />
-                Release to go DOWN
-              </p>
+                {tr("Hold Space or Click to go UP")}<br />
+                {tr("Release to go DOWN\r\n              ")}</p>
               <button className="sw-btn-primary" onClick={() => { playClickSound(); startGame(); }}>
                 <Play fill="currentColor" size={22} />
-                PLAY NOW
-              </button>
+                {tr("PLAY NOW\r\n              ")}</button>
             </div>
           )}
 
@@ -1006,47 +1011,43 @@ export default function SpaceWavesGame() {
 
           {gameState === 'PAUSED' && (
             <div className="sw-overlay">
-              <h2 className="sw-overlay-title">PAUSED</h2>
+              <h2 className="sw-overlay-title">{tr("PAUSED")}</h2>
               <p className="sw-overlay-sub" style={{ marginBottom: '32px', fontSize: '0.85rem' }}>
-                Progress: {progress.toFixed(1)}%
+                {tr("Progress: ")}{progress.toFixed(1)}%
               </p>
               <div style={{ display: 'flex', gap: '16px' }}>
                 <button className="sw-btn-primary" onClick={resumeGame}>
                   <Play fill="currentColor" size={20} />
-                  RESUME
-                </button>
+                  {tr("RESUME\r\n                ")}</button>
                 <button className="sw-btn-outline" onClick={exitToMenu}>
                   <LogOut size={20} />
-                  EXIT
-                </button>
+                  {tr("EXIT\r\n                ")}</button>
               </div>
-              <p className="sw-overlay-hint">Press Esc or P to resume</p>
+              <p className="sw-overlay-hint">{tr("Press Esc or P to resume")}</p>
             </div>
           )}
 
           {gameState === 'GAMEOVER' && (
             <div className="sw-overlay">
-              <h2 className="sw-overlay-title">CRASHED!</h2>
-              <p className="sw-overlay-sub">Progress: {progress.toFixed(1)}%</p>
+              <h2 className="sw-overlay-title">{tr("CRASHED!")}</h2>
+              <p className="sw-overlay-sub">{tr("Progress: ")}{progress.toFixed(1)}%</p>
               <button onClick={() => { playClickSound(); startGame(); }} className="sw-btn-primary">
                 <RotateCcw size={22} />
-                TRY AGAIN
-              </button>
-              <p className="sw-overlay-hint">Press Space to restart</p>
+                {tr("TRY AGAIN\r\n              ")}</button>
+              <p className="sw-overlay-hint">{tr("Press Space to restart")}</p>
             </div>
           )}
 
           {gameState === 'VICTORY' && (
             <div className="sw-overlay">
-              <h2 className="sw-overlay-title">LEVEL CLEARED!</h2>
-              <p className="sw-overlay-sub">Attempts: {attempts}</p>
+              <h2 className="sw-overlay-title">{tr("LEVEL CLEARED!")}</h2>
+              <p className="sw-overlay-sub">{tr("Attempts: ")}{attempts}</p>
               <button
                 onClick={() => { playClickSound(); setAttempts(1); startGame(); }}
                 className="sw-btn-primary"
               >
                 <Play fill="currentColor" size={22} />
-                PLAY AGAIN
-              </button>
+                {tr("PLAY AGAIN\r\n              ")}</button>
             </div>
           )}
         </div>
@@ -1063,15 +1064,14 @@ export default function SpaceWavesGame() {
 
         {gameState === 'PLAYING' ? (
           <p className="text-center text-slate-600 text-xs mt-3 mb-8">
-            Press <kbd className="bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-slate-500 font-mono">ESC</kbd> to pause
-          </p>
+            {tr("Press ")}<kbd className="bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-slate-500 font-mono">{tr("ESC")}</kbd> {tr("to pause\r\n          ")}</p>
         ) : (
           <div className="mb-8" />
         )}
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" className="w-full max-w-[800px] mb-14">
-          <h2 className="text-2xl font-black text-white mb-6 text-center">More Tools</h2>
+        <section aria-label={tr("More Tools")} className="w-full max-w-[800px] mb-14">
+          <h2 className="text-2xl font-black text-white mb-6 text-center">{tr("More Tools")}</h2>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
             {MORE_TOOLS.map(({ label, href, icon }) => (
               <a key={href} href={href} className="sw-tool-card">
@@ -1085,11 +1085,9 @@ export default function SpaceWavesGame() {
         <article style={{ borderTop: '1px solid var(--border)', paddingTop: '3rem' }}>
       <section style={{ color: 'var(--text-secondary)', fontSize: '0.91rem', lineHeight: '1.78' }}>
         <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.5rem', fontWeight: '700', margin: '0 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
-          How to Play Space Waves
-        </h2>
+          {tr("How to Play Space Waves\n        ")}</h2>
         <p style={{ marginBottom: '1.25rem', color: '#9ca3af' }}>
-          Space Waves is a rhythm-based geometry dodging game that tests your click timing and obstacle avoidance skills. Navigate your ship through increasingly difficult waves of barriers by clicking to change direction. This game is perfect for improving your click timing, patience, and visual processing speed under pressure.
-        </p>
+          {tr("Space Waves is a rhythm-based geometry dodging game that tests your click timing and obstacle avoidance skills. Navigate your ship through increasingly difficult waves of barriers by clicking to change direction. This game is perfect for improving your click timing, patience, and visual processing speed under pressure.\n        ")}</p>
       </section>
     </article>
       </div>

@@ -1,28 +1,8 @@
 import type { Metadata } from 'next';
 import SpaceDefensePage from '@/views/SpaceDefensePage';
+import { buildLocalizedMetadata } from '@/lib/seo-i18n';
 
-export const metadata: Metadata = {
-  title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
-  description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
-  alternates: {
-    canonical: "https://fixedaim.com/space-defense",
-  },
-  openGraph: {
-    title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
-    description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
-    url: "https://fixedaim.com/space-defense",
-    siteName: "FixedAim",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Space Defense - Meteor Shooter & CPS Aim Game | FixedAim",
-    description: "Defend your spaceship from meteor swarms in this arcade shooter. Train your CPS, flick aim, and reflexes with boss battles, 5 power-ups, and custom modes.",
-    images: ["/og-image.jpg"],
-  },
-};
+export const metadata: Metadata = buildLocalizedMetadata('space-defense', 'en');
 
 export default function Page() {
   return <SpaceDefensePage />;

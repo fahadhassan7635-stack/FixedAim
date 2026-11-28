@@ -1,5 +1,9 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/CpsRush.json';
+import { useLang } from '../contexts/LanguageContext';
+
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   MousePointer2, Keyboard, Play, RotateCcw, Trophy, Zap, Shield,
@@ -366,20 +370,26 @@ const FaqAccordion: React.FC = () => {
 };
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
-const Breadcrumb: React.FC = () => (
-  <nav aria-label="Breadcrumb" style={{ marginBottom: '1.5rem' }}>
+const Breadcrumb: React.FC = () => {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
+  return (
+  <nav aria-label={tr("Breadcrumb")} style={{ marginBottom: '1.5rem' }}>
     <ol style={{ display: 'flex', alignItems: 'center', gap: '6px', listStyle: 'none', padding: 0, margin: 0, fontSize: '0.85rem' }}>
-      <li><a href="/" style={{ color: '#6b7280', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }} aria-label="Home"><Home size={13} />Home</a></li>
+      <li><a href={localeHref("/")} style={{ color: '#6b7280', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }} aria-label={tr("Home")}><Home size={13} />{tr("Home")}</a></li>
       <li aria-hidden="true"><ChevronRight size={12} color="#374151" /></li>
-      <li><a href="/cps-test" style={{ color: '#6b7280', textDecoration: 'none' }}>CPS Test</a></li>
+      <li><a href={localeHref("/cps-test")} style={{ color: '#6b7280', textDecoration: 'none' }}>{tr("CPS Test")}</a></li>
       <li aria-hidden="true"><ChevronRight size={12} color="#374151" /></li>
-      <li aria-current="page" style={{ color: '#00f0ff', fontWeight: 700 }}>CPS Rush</li>
+      <li aria-current="page" style={{ color: '#00f0ff', fontWeight: 700 }}>{tr("CPS Rush")}</li>
     </ol>
   </nav>
-);
+  );
+};
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function CpsRush() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameContainerRef = useRef<HTMLDivElement>(null);
   const [gameState, setGameState] = useState<GameState>('menu');
@@ -719,11 +729,9 @@ export default function CpsRush() {
           {/* Header */}
           <header style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
             <div style={{ display: 'inline-flex', backgroundColor: 'rgba(0,240,255,0.06)', border: '1px solid rgba(0,240,255,0.2)', color: '#00f0ff', fontSize: '11px', fontWeight: 700, padding: '4px 12px', borderRadius: '20px', marginBottom: '0.5rem', letterSpacing: '0.5px' }}>
-              MOUSE &amp; KEYBOARD SPEED TEST
-            </div>
+              {tr("MOUSE &amp; KEYBOARD SPEED TEST\n            ")}</div>
             <h1 style={{ fontSize: '2.4rem', fontWeight: 900, margin: 0, color: '#00f0ff', letterSpacing: '-0.5px' }}>
-              CPS RUSH
-            </h1>
+              {tr("CPS RUSH\n            ")}</h1>
           </header>
 
           {/* ── GAME CANVAS WRAPPER ─────────────────────────────────────────── */}
@@ -737,7 +745,7 @@ export default function CpsRush() {
               width={CANVAS_WIDTH}
               height={CANVAS_HEIGHT}
               style={{ width: '100%', height: '100%', display: 'block' }}
-              aria-label="CPS Rush game canvas"
+              aria-label={tr("CPS Rush game canvas")}
               role="img"
             />
 
@@ -748,11 +756,11 @@ export default function CpsRush() {
                 <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff', marginTop: '2px' }}>{cps}</div>
               </div>
               <div style={{ background: 'rgba(4,9,20,0.75)', backdropFilter: 'blur(8px)', border: '1px solid rgba(219,39,119,0.3)', borderRadius: '14px', width: '85px', padding: '8px 0', textAlign: 'center' }}>
-                <div style={{ fontSize: '10px', fontWeight: 800, color: '#db2777' }}>Score</div>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#db2777' }}>{tr("Score")}</div>
                 <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff', marginTop: '2px' }} ref={scoreDomRef}>{score}</div>
               </div>
               <div style={{ background: 'rgba(4,9,20,0.75)', backdropFilter: 'blur(8px)', border: '1px solid rgba(236,72,153,0.3)', borderRadius: '14px', minWidth: '95px', padding: '8px 6px', textAlign: 'center' }}>
-                <div style={{ fontSize: '10px', fontWeight: 800, color: '#ec4899' }}>Finish</div>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#ec4899' }}>{tr("Finish")}</div>
                 <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff', marginTop: '2px' }}><span ref={distanceDomRef}>{distanceToFinish}</span><span style={{ fontSize: '15px', color: '#cbcbcb', marginLeft: '1px' }}>m</span></div>
               </div>
             </div>
@@ -778,29 +786,25 @@ export default function CpsRush() {
             {/* ── MENU OVERLAY ──────────────────────────────────────────────── */}
             {gameState === 'menu' && (
               <div style={overlayStyle}>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.2rem', color: '#fff' }}>SELECT INPUT MODE</h2>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.2rem', color: '#fff' }}>{tr("SELECT INPUT MODE")}</h2>
                 <div style={{ display: 'flex', gap: '12px', marginBottom: '1.8rem', width: '100%', maxWidth: '340px' }}>
                   <button
                     onClick={() => { setInputMode('mouse'); audioRef.current.click(); }}
                     aria-pressed={inputMode === 'mouse'}
                     style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '10px', borderRadius: '8px', border: '1px solid', cursor: 'pointer', fontWeight: 'bold', backgroundColor: inputMode === 'mouse' ? 'rgba(0,240,255,0.08)' : '#0b111e', borderColor: inputMode === 'mouse' ? '#00f0ff' : '#1f2937', color: inputMode === 'mouse' ? '#00f0ff' : '#9ca3af' }}
                   >
-                    <MousePointer2 size={14} /> Mouse
-                  </button>
+                    <MousePointer2 size={14} /> {tr("Mouse\n                  ")}</button>
                   <button
                     onClick={() => { setInputMode('keyboard'); audioRef.current.click(); }}
                     aria-pressed={inputMode === 'keyboard'}
                     style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '10px', borderRadius: '8px', border: '1px solid', cursor: 'pointer', fontWeight: 'bold', backgroundColor: inputMode === 'keyboard' ? 'rgba(0,240,255,0.08)' : '#0b111e', borderColor: inputMode === 'keyboard' ? '#00f0ff' : '#1f2937', color: inputMode === 'keyboard' ? '#00f0ff' : '#9ca3af' }}
                   >
-                    <Keyboard size={14} /> Spacebar
-                  </button>
+                    <Keyboard size={14} /> {tr("Spacebar\n                  ")}</button>
                 </div>
                 <div style={{ marginBottom: '10px', color: '#6b7280', fontSize: '0.82rem', textAlign: 'center' }}>
-                  Use <strong style={{ color: '#2D3436' }}>A / D</strong> or <strong style={{ color: '#2D3436' }}>Arrow Keys</strong> to move
-                </div>
-                <button onClick={startCountdown} style={btnPrimary} aria-label="Start game">
-                  <Play fill="currentColor" size={12} /> START GAME
-                </button>
+                  {tr("Use ")}<strong style={{ color: '#2D3436' }}>A / D</strong> {tr("or ")}<strong style={{ color: '#2D3436' }}>{tr("Arrow Keys")}</strong> {tr("to move\n                ")}</div>
+                <button onClick={startCountdown} style={btnPrimary} aria-label={tr("Start game")}>
+                  <Play fill="currentColor" size={12} /> {tr("START GAME\n                ")}</button>
               </div>
             )}
 
@@ -823,52 +827,48 @@ export default function CpsRush() {
                   {countdownValue}
                 </div>
                 {countdownValue !== 'GO!' && (
-                  <p style={{ color: '#6b7280', marginTop: '1rem', fontSize: '0.9rem' }}>Get ready…</p>
+                  <p style={{ color: '#6b7280', marginTop: '1rem', fontSize: '0.9rem' }}>{tr("Get ready…")}</p>
                 )}
               </div>
             )}
 
             {/* ── PAUSED OVERLAY ────────────────────────────────────────────── */}
             {gameState === 'paused' && (
-              <div style={overlayStyle} role="dialog" aria-modal="true" aria-label="Game paused">
+              <div style={overlayStyle} role="dialog" aria-modal="true" aria-label={tr("Game paused")}>
                 <Pause size={32} style={{ color: '#00f0ff', marginBottom: '12px' }} />
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '1.5rem' }}>PAUSED</h2>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '1.5rem' }}>{tr("PAUSED")}</h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', maxWidth: '200px' }}>
                   <button
                     onClick={() => { setGameState('playing'); audioRef.current.click(); }}
                     style={btnPrimary}
-                    aria-label="Resume game"
+                    aria-label={tr("Resume game")}
                   >
-                    <Play fill="currentColor" size={12} /> RESUME
-                  </button>
+                    <Play fill="currentColor" size={12} /> {tr("RESUME\n                  ")}</button>
                   <button
                     onClick={() => { startCountdown(); }}
                     style={btnSecondary}
-                    aria-label="Restart game"
+                    aria-label={tr("Restart game")}
                   >
-                    <RotateCcw size={14} /> RESTART
-                  </button>
+                    <RotateCcw size={14} /> {tr("RESTART\n                  ")}</button>
                   <button
                     onClick={() => { setGameState('menu'); audioRef.current.click(); }}
                     style={btnSecondary}
-                    aria-label="Exit to menu"
+                    aria-label={tr("Exit to menu")}
                   >
-                    <Home size={14} /> EXIT
-                  </button>
+                    <Home size={14} /> {tr("EXIT\n                  ")}</button>
                 </div>
-                <p style={{ color: '#374151', fontSize: '0.8rem', marginTop: '1.2rem' }}>Press ESC to resume</p>
+                <p style={{ color: '#374151', fontSize: '0.8rem', marginTop: '1.2rem' }}>{tr("Press ESC to resume")}</p>
               </div>
             )}
 
             {/* ── WIN OVERLAY ───────────────────────────────────────────────── */}
             {gameState === 'won' && (
-              <div style={overlayStyle} role="dialog" aria-modal="true" aria-label="Level complete">
+              <div style={overlayStyle} role="dialog" aria-modal="true" aria-label={tr("Level complete")}>
                 <Trophy size={28} style={{ color: '#00f0ff', marginBottom: '12px' }} />
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>FINISHED!</h2>
-                <p style={{ color: '#2D3436', marginBottom: '1.5rem' }}>Score: <span style={{ color: '#00f0ff', fontWeight: 700 }}>{score}</span></p>
-                <button onClick={startCountdown} style={btnPrimary} aria-label="Play again">
-                  <RotateCcw size={14} /> PLAY AGAIN
-                </button>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>{tr("FINISHED!")}</h2>
+                <p style={{ color: '#2D3436', marginBottom: '1.5rem' }}>{tr("Score: ")}<span style={{ color: '#00f0ff', fontWeight: 700 }}>{score}</span></p>
+                <button onClick={startCountdown} style={btnPrimary} aria-label={tr("Play again")}>
+                  <RotateCcw size={14} /> {tr("PLAY AGAIN\n                ")}</button>
               </div>
             )}
           </div>
@@ -876,18 +876,17 @@ export default function CpsRush() {
           {/* ESC hint */}
           {gameState === 'playing' && (
             <p style={{ textAlign: 'center', color: '#374151', fontSize: '0.78rem', marginBottom: '3rem' }}>
-              Press <kbd style={{ background: '#111827', border: '1px solid #1f2937', padding: '1px 6px', borderRadius: '4px', color: '#6b7280', fontFamily: 'monospace' }}>ESC</kbd> to pause
-            </p>
+              {tr("Press ")}<kbd style={{ background: '#111827', border: '1px solid #1f2937', padding: '1px 6px', borderRadius: '4px', color: '#6b7280', fontFamily: 'monospace' }}>{tr("ESC")}</kbd> {tr("to pause\n            ")}</p>
           )}
           {gameState !== 'playing' && <div style={{ marginBottom: '3rem' }} />}
 
           {/* ── MORE TOOLS GRID ── */}
-          <section aria-label="More Tools" style={{ marginBottom: '3.5rem' }}>
+          <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem' }}>
             <h2 style={{
               fontWeight: 800, fontSize: '1.5rem', color: '#fff',
               marginBottom: '1.5rem', textAlign: 'center',
               letterSpacing: '-0.3px',
-            }}>More Tools</h2>
+            }}>{tr("More Tools")}</h2>
             <div
               className="cps-games-grid"
               style={{
@@ -947,147 +946,126 @@ export default function CpsRush() {
               
               {/* ── 1. WHAT IS CPS RUSH? ── */}
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '0 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
-                What is CPS Rush? (The Click-Speed Platformer Game)
-              </h2>
+                {tr("What is CPS Rush? (The Click-Speed Platformer Game)\n              ")}</h2>
               <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
-                <strong>CPS Rush</strong> is a high-octane browser game that turns traditional click speed testing into an interactive, physics-based platformer. Instead of clicking into a sterile, static box, your real-time <strong>Clicks Per Second (CPS)</strong> directly drives your in-game runner's horizontal velocity and jumping power. The faster and more consistently you click, the faster your character rushes across floating neon platforms, soars over bottomless chasms, and races toward the finish line.
-              </p>
+                <strong>{tr("CPS Rush")}</strong> {tr("is a high-octane browser game that turns traditional click speed testing into an interactive, physics-based platformer. Instead of clicking into a sterile, static box, your real-time ")}<strong>{tr("Clicks Per Second (CPS)")}</strong> {tr("directly drives your in-game runner's horizontal velocity and jumping power. The faster and more consistently you click, the faster your character rushes across floating neon platforms, soars over bottomless chasms, and races toward the finish line.\n              ")}</p>
 
               {/* ── 2. HOW DOES THIS CPS RUSH GAME WORK? ── */}
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
-                How Does This CPS Rush Game Work? (Physics &amp; Mechanics)
-              </h2>
+                {tr("How Does This CPS Rush Game Work? (Physics &amp; Mechanics)\n              ")}</h2>
               <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
-                CPS Rush combines arcade runner physics with real-time hardware input monitoring. Here is exactly how the game mechanics function under the hood:
-              </p>
+                {tr("CPS Rush combines arcade runner physics with real-time hardware input monitoring. Here is exactly how the game mechanics function under the hood:\n              ")}</p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', margin: '1.25rem 0 1.5rem' }}>
                 <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
-                  <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⚡ Click-to-Velocity Engine</h3>
+                  <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("⚡ Click-to-Velocity Engine")}</h3>
                   <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-                    Every click you register accelerates your character horizontally. Dropping below 6 CPS slows your runner down, while sustaining 12–20+ CPS unleashes blinding hyper-speed across the terrain.
-                  </p>
+                    {tr("Every click you register accelerates your character horizontally. Dropping below 6 CPS slows your runner down, while sustaining 12–20+ CPS unleashes blinding hyper-speed across the terrain.\n                  ")}</p>
                 </div>
                 <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
-                  <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🚀 Dynamic Jump Boost Multipliers</h3>
+                  <h3 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🚀 Dynamic Jump Boost Multipliers")}</h3>
                   <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-                    When leaping off platform edges, your live CPS provides an instant vertical jump multiplier (scaling with your peak burst speed), allowing skilled clickers to clear massive gaps effortlessly.
-                  </p>
+                    {tr("When leaping off platform edges, your live CPS provides an instant vertical jump multiplier (scaling with your peak burst speed), allowing skilled clickers to clear massive gaps effortlessly.\n                  ")}</p>
                 </div>
                 <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
-                  <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🎮 Dual Input Modes (Mouse &amp; Spacebar)</h3>
+                  <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🎮 Dual Input Modes (Mouse &amp; Spacebar)")}</h3>
                   <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-                    You can switch seamlessly between Mouse Mode (primary/secondary mouse buttons) and Keyboard Mode (Spacebar tapping). Train both your trigger finger and keyboard thumb dexterity.
-                  </p>
+                    {tr("You can switch seamlessly between Mouse Mode (primary/secondary mouse buttons) and Keyboard Mode (Spacebar tapping). Train both your trigger finger and keyboard thumb dexterity.\n                  ")}</p>
                 </div>
                 <div style={{ background: 'rgba(168,85,247,0.04)', border: '1px solid rgba(168,85,247,0.15)', borderRadius: '10px', padding: '1rem' }}>
-                  <h3 style={{ color: '#a855f7', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🏁 Distance Countdown &amp; Score</h3>
+                  <h3 style={{ color: '#a855f7', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🏁 Distance Countdown &amp; Score")}</h3>
                   <p style={{ fontSize: '0.88rem', color: '#2D3436', margin: 0, lineHeight: '1.6' }}>
-                    A real-time HUD tracks your remaining distance to the finish platform (reducing to 0m). Your final score factors in total speed, peak burst CPS, and platform completion time.
-                  </p>
+                    {tr("A real-time HUD tracks your remaining distance to the finish platform (reducing to 0m). Your final score factors in total speed, peak burst CPS, and platform completion time.\n                  ")}</p>
                 </div>
               </div>
 
               {/* ── 3. HOW DOES CPS RUSH HELP YOU IMPROVE YOUR CPS? ── */}
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
-                How Does CPS Rush Help You to Improve Your CPS?
-              </h2>
+                {tr("How Does CPS Rush Help You to Improve Your CPS?\n              ")}</h2>
               <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
-                Many players hit a plateau when practicing on standard 5-second CPS tests because clicking into a static box does not reflect actual gaming conditions. CPS Rush solves this by introducing dynamic physical stakes:
-              </p>
+                {tr("Many players hit a plateau when practicing on standard 5-second CPS tests because clicking into a static box does not reflect actual gaming conditions. CPS Rush solves this by introducing dynamic physical stakes:\n              ")}</p>
               <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#2D3436', lineHeight: '1.85' }}>
                 <li>
-                  <strong style={{ color: '#fff' }}>1. Real-Time Biofeedback (Consequence-Driven Training):</strong>
-                  In standard tests, you only see a score after the timer expires. In CPS Rush, if your clicking speed drops by even 2–3 CPS, your character immediately decelerates, falling short of incoming jumps. This visual feedback trains your nervous system to maintain an unbroken clicking rhythm.
-                </li>
+                  <strong style={{ color: '#fff' }}>{tr("1. Real-Time Biofeedback (Consequence-Driven Training):")}</strong>
+                  {tr("In standard tests, you only see a score after the timer expires. In CPS Rush, if your clicking speed drops by even 2–3 CPS, your character immediately decelerates, falling short of incoming jumps. This visual feedback trains your nervous system to maintain an unbroken clicking rhythm.\n                ")}</li>
                 <li>
-                  <strong style={{ color: '#fff' }}>2. Building Muscular Stamina &amp; Twitch Endurance:</strong>
-                  While anyone can spam clicks for 1 or 2 seconds, maintaining 12–16+ CPS across an entire 20–30 second platformer run pushes your forearm tendons and fast-twitch muscle fibers to adapt, drastically reducing mid-game finger fatigue.
-                </li>
+                  <strong style={{ color: '#fff' }}>{tr("2. Building Muscular Stamina &amp; Twitch Endurance:")}</strong>
+                  {tr("While anyone can spam clicks for 1 or 2 seconds, maintaining 12–16+ CPS across an entire 20–30 second platformer run pushes your forearm tendons and fast-twitch muscle fibers to adapt, drastically reducing mid-game finger fatigue.\n                ")}</li>
                 <li>
-                  <strong style={{ color: '#fff' }}>3. Simulates Real Gaming Multitasking (Minecraft &amp; FPS):</strong>
-                  In competitive Minecraft 1.8 PvP, you never click in isolation—you must click rapidly while tracking opponents, sprint-jumping, and judging distances. CPS Rush forces your brain to process visual obstacles simultaneously with maximum hand actuation.
-                </li>
+                  <strong style={{ color: '#fff' }}>{tr("3. Simulates Real Gaming Multitasking (Minecraft &amp; FPS):")}</strong>
+                  {tr("In competitive Minecraft 1.8 PvP, you never click in isolation—you must click rapidly while tracking opponents, sprint-jumping, and judging distances. CPS Rush forces your brain to process visual obstacles simultaneously with maximum hand actuation.\n                ")}</li>
                 <li>
-                  <strong style={{ color: '#fff' }}>4. Speed Pacing &amp; Burst Timing:</strong>
-                  You learn how to alternate between a sustainable baseline speed (8–10 CPS) during flat runs and explosive burst clicking (15–20+ CPS) right before launching across wide hazards.
-                </li>
+                  <strong style={{ color: '#fff' }}>{tr("4. Speed Pacing &amp; Burst Timing:")}</strong>
+                  {tr("You learn how to alternate between a sustainable baseline speed (8–10 CPS) during flat runs and explosive burst clicking (15–20+ CPS) right before launching across wide hazards.\n                ")}</li>
               </ul>
 
               {/* ── 4. PLAYING WITH JITTER CLICK & BUTTERFLY CLICK ── */}
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
-                Play CPS Rush Games with Jitter Click &amp; Butterfly Click
-              </h2>
+                {tr("Play CPS Rush Games with Jitter Click &amp; Butterfly Click\n              ")}</h2>
               <p style={{ marginBottom: '1.25rem', color: '#2D3436' }}>
-                CPS Rush is the ultimate training arena to test and master competitive clicking techniques. Here is how to apply jitter clicking and butterfly clicking for maximum in-game performance:
-              </p>
+                {tr("CPS Rush is the ultimate training arena to test and master competitive clicking techniques. Here is how to apply jitter clicking and butterfly clicking for maximum in-game performance:\n              ")}</p>
 
               <h3 style={{ color: 'var(--neon-orange, #ff9f43)', fontSize: '1.15rem', fontWeight: 700, margin: '1.5rem 0 0.5rem' }}>
-                ⚡ How to Play CPS Rush with Jitter Clicking
-              </h3>
+                {tr("⚡ How to Play CPS Rush with Jitter Clicking\n              ")}</h3>
               <p style={{ marginBottom: '1.1rem', color: '#2D3436' }}>
-                In jitter clicking, you tense the flexor and extensor muscles in your forearm to induce high-frequency micro-tremors, channeling those rapid spasms into your fingertip:
-              </p>
+                {tr("In jitter clicking, you tense the flexor and extensor muscles in your forearm to induce high-frequency micro-tremors, channeling those rapid spasms into your fingertip:\n              ")}</p>
               <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#2D3436', lineHeight: '1.85' }}>
-                <li><strong>Grip &amp; Stabilization:</strong> Rest your wrist firmly on your desk or mousepad. Use a firm claw or fingertip grip to prevent the mouse sensor from drifting while your arm vibrates.</li>
-                <li><strong>Pacing in CPS Rush:</strong> Keep jitter bursts timed with upcoming jump ramps. Since jitter clicking induces forearm muscle fatigue faster than other methods, maintain a steady 10–12 CPS during straight stretches and spike to 14+ CPS on major gap leaps.</li>
-                <li><strong>Safety Tip:</strong> Limit jitter sessions to short runs. If you feel tightness or wrist ache, pause the game (ESC key) and stretch your forearm muscles.</li>
+                <li><strong>{tr("Grip &amp; Stabilization:")}</strong> {tr("Rest your wrist firmly on your desk or mousepad. Use a firm claw or fingertip grip to prevent the mouse sensor from drifting while your arm vibrates.")}</li>
+                <li><strong>{tr("Pacing in CPS Rush:")}</strong> {tr("Keep jitter bursts timed with upcoming jump ramps. Since jitter clicking induces forearm muscle fatigue faster than other methods, maintain a steady 10–12 CPS during straight stretches and spike to 14+ CPS on major gap leaps.")}</li>
+                <li><strong>{tr("Safety Tip:")}</strong> {tr("Limit jitter sessions to short runs. If you feel tightness or wrist ache, pause the game (ESC key) and stretch your forearm muscles.")}</li>
               </ul>
 
               <h3 style={{ color: 'var(--neon-cyan, #00f5ff)', fontSize: '1.15rem', fontWeight: 700, margin: '1.5rem 0 0.5rem' }}>
-                🦋 How to Play CPS Rush with Butterfly Clicking
-              </h3>
+                {tr("🦋 How to Play CPS Rush with Butterfly Clicking\n              ")}</h3>
               <p style={{ marginBottom: '1.1rem', color: '#2D3436' }}>
-                Butterfly clicking involves placing two fingers (index and middle) on the primary mouse button and rapidly alternating taps in a flutter motion:
-              </p>
+                {tr("Butterfly clicking involves placing two fingers (index and middle) on the primary mouse button and rapidly alternating taps in a flutter motion:\n              ")}</p>
               <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.4rem', color: '#2D3436', lineHeight: '1.85' }}>
-                <li><strong>Unrivaled Acceleration (15–25+ CPS):</strong> Butterfly clicking generates the highest sustained velocity in CPS Rush. With mouse debounce set to low (0–4ms), each finger tap can register double actuations, rocketing your character across the map.</li>
-                <li><strong>Lower Muscular Strain:</strong> Because butterfly clicking relies on relaxed tendon agility rather than sustained isometric arm tension, you can complete multiple consecutive runs without wrist exhaustion.</li>
-                <li><strong>Rhythm Discipline:</strong> Establish a metronome-like see-saw rhythm between your index and middle finger. Irregular flutters can cause micro-stutters in momentum right at the takeoff edge.</li>
+                <li><strong>{tr("Unrivaled Acceleration (15–25+ CPS):")}</strong> {tr("Butterfly clicking generates the highest sustained velocity in CPS Rush. With mouse debounce set to low (0–4ms), each finger tap can register double actuations, rocketing your character across the map.")}</li>
+                <li><strong>{tr("Lower Muscular Strain:")}</strong> {tr("Because butterfly clicking relies on relaxed tendon agility rather than sustained isometric arm tension, you can complete multiple consecutive runs without wrist exhaustion.")}</li>
+                <li><strong>{tr("Rhythm Discipline:")}</strong> {tr("Establish a metronome-like see-saw rhythm between your index and middle finger. Irregular flutters can cause micro-stutters in momentum right at the takeoff edge.")}</li>
               </ul>
 
               {/* ── 5. COMPARISON TABLE ── */}
               <h2 style={{ color: 'var(--neon-green, #00ff88)', fontSize: '1.45rem', fontWeight: 700, margin: '2.5rem 0 1rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '0.5rem' }}>
-                Techniques Comparison in CPS Rush
-              </h2>
+                {tr("Techniques Comparison in CPS Rush\n              ")}</h2>
               <div style={{ overflowX: 'auto', margin: '1.25rem 0 2rem' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left', minWidth: '640px' }}>
                   <thead>
                     <tr style={{ borderBottom: '2px solid rgba(0,245,255,0.3)', color: '#fff', background: 'rgba(0,245,255,0.06)' }}>
-                      <th style={{ padding: '0.75rem 0.85rem' }}>Click Technique</th>
-                      <th style={{ padding: '0.75rem 0.85rem' }}>CPS in Game</th>
-                      <th style={{ padding: '0.75rem 0.85rem' }}>Runner Speed</th>
-                      <th style={{ padding: '0.75rem 0.85rem' }}>Jump Boost Clearance</th>
-                      <th style={{ padding: '0.75rem 0.85rem' }}>Fatigue Rate</th>
+                      <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Click Technique")}</th>
+                      <th style={{ padding: '0.75rem 0.85rem' }}>{tr("CPS in Game")}</th>
+                      <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Runner Speed")}</th>
+                      <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Jump Boost Clearance")}</th>
+                      <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Fatigue Rate")}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-green, #00ff88)' }}>Normal Clicking</td>
-                      <td style={{ padding: '0.7rem 0.85rem' }}>6 – 9 CPS</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Moderate Pace</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>Standard Gaps</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Very Low</td>
+                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-green, #00ff88)' }}>{tr("Normal Clicking")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem' }}>{tr("6 – 9 CPS")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Moderate Pace")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>{tr("Standard Gaps")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Very Low")}</td>
                     </tr>
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-orange, #ff9f43)' }}>Jitter Clicking</td>
-                      <td style={{ padding: '0.7rem 0.85rem' }}>10 – 14 CPS</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: 'var(--neon-orange, #ff9f43)' }}>High Speed</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>High Jump Boost</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>High (Forearm Strain)</td>
+                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-orange, #ff9f43)' }}>{tr("Jitter Clicking")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem' }}>{tr("10 – 14 CPS")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: 'var(--neon-orange, #ff9f43)' }}>{tr("High Speed")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("High Jump Boost")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>{tr("High (Forearm Strain)")}</td>
                     </tr>
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-cyan, #00f5ff)' }}>Butterfly Clicking</td>
-                      <td style={{ padding: '0.7rem 0.85rem' }}>15 – 25+ CPS</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: 'var(--neon-cyan, #00f5ff)' }}>Maximum Hyper-Speed</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: 'var(--neon-cyan, #00f5ff)' }}>Extreme Airtime</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>Moderate</td>
+                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-cyan, #00f5ff)' }}>{tr("Butterfly Clicking")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem' }}>{tr("15 – 25+ CPS")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: 'var(--neon-cyan, #00f5ff)' }}>{tr("Maximum Hyper-Speed")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: 'var(--neon-cyan, #00f5ff)' }}>{tr("Extreme Airtime")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>{tr("Moderate")}</td>
                     </tr>
                     <tr>
-                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#a855f7' }}>Keyboard Spacebar Mode</td>
-                      <td style={{ padding: '0.7rem 0.85rem' }}>8 – 16+ CPS</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#a855f7' }}>Fast &amp; Stable</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>High Clearance</td>
-                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Low (Two-Handed)</td>
+                      <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#a855f7' }}>{tr("Keyboard Spacebar Mode")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem' }}>{tr("8 – 16+ CPS")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#a855f7' }}>{tr("Fast &amp; Stable")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("High Clearance")}</td>
+                      <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Low (Two-Handed)")}</td>
                     </tr>
                   </tbody>
                 </table>

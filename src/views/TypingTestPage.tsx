@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/TypingTestPage.json';
 import { useState, useRef, useEffect, useCallback, useMemo, memo } from 'react';
 
 // ─── Word Lists ───────────────────────────────────────────────────────────────
@@ -491,6 +493,7 @@ const RATING_SCALE = [
 
 // ─── FAQ Accordion (chevron-style, matches CPS test design) ──────────────────
 const FaqSection = memo(() => {
+  const { tr } = usePageI18n(pageDict);
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -512,8 +515,7 @@ const FaqSection = memo(() => {
           marginTop: '0',
         }}
       >
-        Frequently Asked Questions
-      </h2>
+        {tr("Frequently Asked Questions\r\n      ")}</h2>
 
       <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {FAQ_ITEMS.map((item, i) => {
@@ -585,6 +587,7 @@ FaqSection.displayName = 'FaqSection';
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function TypingTestPage() {
+  const { tr } = usePageI18n(pageDict);
   const [difficulty, setDifficulty]       = useState<Difficulty>('medium');
   const [typingMode, setTypingMode]       = useState<TypingMode>('words');
   const [duration, setDuration]           = useState(60);
@@ -925,13 +928,13 @@ export default function TypingTestPage() {
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="section-label">Keyboard Tool</div>
-          <h1 className="tool-title">Typing Speed Test</h1>
-          <p className="tool-subtitle">Test your WPM — Words Per Minute</p>
+          <div className="section-label">{tr("Keyboard Tool")}</div>
+          <h1 className="tool-title">{tr("Typing Speed Test")}</h1>
+          <p className="tool-subtitle">{tr("Test your WPM — Words Per Minute")}</p>
         </header>
 
         {/* ── Mode Selector ──────────────────────────────────────────────── */}
-        <nav aria-label="Typing mode" style={{ marginBottom: '1rem' }}>
+        <nav aria-label={tr("Typing mode")} style={{ marginBottom: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
             {modeOptions.map(m => (
               <button
@@ -1058,7 +1061,7 @@ export default function TypingTestPage() {
                 fontSize: '0.8rem',
                 transition: 'all 0.2s',
               }}
-            >Custom</button>
+            >{tr("Custom")}</button>
           </div>
 
           {/* Sound Toggle */}
@@ -1095,11 +1098,11 @@ export default function TypingTestPage() {
               type="number"
               min={10}
               max={600}
-              placeholder="10 to 600 seconds"
+              placeholder={tr("10 to 600 seconds")}
               value={customDuration}
               onChange={e => { setCustomDuration(e.target.value); setCustomError(''); }}
               onKeyDown={e => { if (e.key === 'Enter') applyCustomDuration(); }}
-              aria-label="Custom duration in seconds"
+              aria-label={tr("Custom duration in seconds")}
               style={{
                 padding: '0.4rem 0.8rem',
                 borderRadius: '8px',
@@ -1125,7 +1128,7 @@ export default function TypingTestPage() {
                 cursor: 'pointer',
                 fontSize: '0.8rem',
               }}
-            >Apply</button>
+            >{tr("Apply")}</button>
             {customError && (
               <span role="alert" style={{ color: 'var(--neon-red, #ff2d55)', fontSize: '0.78rem' }}>
                 {customError}
@@ -1231,7 +1234,7 @@ export default function TypingTestPage() {
         {phase !== 'done' && (
           <div
             role="region"
-            aria-label="Text to type"
+            aria-label={tr("Text to type")}
             onClick={() => inputRef.current?.focus()}
             onContextMenu={handleContextMenu}
             onDrop={handleDrop}
@@ -1337,7 +1340,7 @@ export default function TypingTestPage() {
           autoCapitalize="off"
           spellCheck={false}
           inputMode="text"
-          aria-label="Type here"
+          aria-label={tr("Type here")}
         />
 
         {/* ── Click-to-type Hint ──────────────────────────────────────────── */}
@@ -1368,8 +1371,7 @@ export default function TypingTestPage() {
         {/* ── Action Buttons ──────────────────────────────────────────────── */}
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
           <button className="btn btn-secondary" onClick={() => reset()}>
-            New Text
-          </button>
+            {tr("New Text\r\n          ")}</button>
         </div>
 
         {/* ── Results Modal ───────────────────────────────────────────────── */}
@@ -1391,7 +1393,7 @@ export default function TypingTestPage() {
             <div
               role="dialog"
               aria-modal="true"
-              aria-label="Test Results"
+              aria-label={tr("Test Results")}
               style={{
                 position: 'fixed', top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
@@ -1410,7 +1412,7 @@ export default function TypingTestPage() {
             >
               <button
                 onClick={() => reset()}
-                aria-label="Close results"
+                aria-label={tr("Close results")}
                 style={{
                   position: 'absolute', top: '0.5rem', right: '0.5rem',
                   background: 'rgba(0,245,255,0.1)',
@@ -1425,8 +1427,7 @@ export default function TypingTestPage() {
               >X</button>
 
               <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.1rem' }}>
-                Your Result
-              </div>
+                {tr("Your Result\r\n              ")}</div>
 
               <div style={{
                 fontSize: 'clamp(1.9rem, 5.5vw, 3rem)',
@@ -1505,7 +1506,7 @@ export default function TypingTestPage() {
                 <div style={{
                   fontSize: '0.6rem', color: 'var(--text-muted)', marginBottom: '0.2rem',
                   textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600',
-                }}>WPM Rating Scale</div>
+                }}>{tr("WPM Rating Scale")}</div>
                 {RATING_SCALE.map(r => (
                   <div key={r.range} style={{
                     display: 'flex', justifyContent: 'space-between',
@@ -1523,12 +1524,12 @@ export default function TypingTestPage() {
                   className="btn btn-secondary"
                   onClick={() => reset()}
                   style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
-                >Reset</button>
+                >{tr("Reset")}</button>
                 <button
                   className="btn btn-primary"
                   onClick={() => { reset(); setTimeout(() => inputRef.current?.focus(), 150); }}
                   style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
-                >Try Again</button>
+                >{tr("Try Again")}</button>
               </div>
             </div>
 
@@ -1548,7 +1549,7 @@ export default function TypingTestPage() {
         {/* ── Session History ─────────────────────────────────────────────── */}
         {history.length > 0 && (
           <section
-            aria-label="Session History"
+            aria-label={tr("Session History")}
             style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
@@ -1564,8 +1565,7 @@ export default function TypingTestPage() {
               fontSize: '0.9rem',
               color: 'var(--neon-cyan)',
             }}>
-              Session History
-            </div>
+              {tr("Session History\r\n            ")}</div>
             {history.map((h, i) => (
               <div
                 key={i}
@@ -1578,7 +1578,7 @@ export default function TypingTestPage() {
               >
                 <span style={{ color: 'var(--text-muted)' }}>#{history.length - i}</span>
                 <span style={{ color: 'var(--neon-cyan)', fontWeight: '700' }}>{h.wpm} WPM</span>
-                <span style={{ color: 'var(--neon-green)' }}>{h.acc}% acc</span>
+                <span style={{ color: 'var(--neon-green)' }}>{h.acc}{tr("% acc")}</span>
                 <span style={{ color: 'var(--text-muted)', textTransform: 'capitalize' }}>{h.diff}</span>
                 <span style={{ color: 'var(--neon-purple, #a855f7)', fontSize: '0.75rem', textTransform: 'capitalize' }}>{h.mode}</span>
                 <span style={{ color: 'var(--text-muted)' }}>{h.dur}s</span>
@@ -1588,12 +1588,12 @@ export default function TypingTestPage() {
         )}
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginBottom: '3.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -1652,246 +1652,159 @@ export default function TypingTestPage() {
             {/* What Is a Typing Speed Test */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--neon-cyan)', marginTop: '0' }}>
-                What Is a Typing Speed Test?
-              </h2>
+                {tr("What Is a Typing Speed Test?\r\n              ")}</h2>
               <p style={{ marginBottom: '1rem' }}>
-                A <strong>typing speed test</strong> is a <a href="https://en.wikipedia.org/wiki/Words_per_minute" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>standardized evaluation <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> that measures how quickly and
-                accurately you can transcribe text using a keyboard. Unlike casual typing, a structured test
-                isolates your raw throughput under controlled conditions, giving you a reproducible performance
-                benchmark you can track over time.
-              </p>
+                A <strong>{tr("typing speed test")}</strong> {tr("is a ")}<a href="https://en.wikipedia.org/wiki/Words_per_minute" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("standardized evaluation ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> {tr("that measures how quickly and\r\n                accurately you can transcribe text using a keyboard. Unlike casual typing, a structured test\r\n                isolates your raw throughput under controlled conditions, giving you a reproducible performance\r\n                benchmark you can track over time.\r\n              ")}</p>
               <p style={{ marginBottom: '1.5rem' }}>
-                Modern typing tests support multiple <strong>modes</strong> including random words, real-world
-                paragraphs, famous quotes, programming snippets, scientific terminology, number sequences, and
-                symbol patterns to simulate the diverse typing demands of professional work environments.
-              </p>
+                {tr("Modern typing tests support multiple ")}<strong>{tr("modes")}</strong> {tr("including random words, real-world\r\n                paragraphs, famous quotes, programming snippets, scientific terminology, number sequences, and\r\n                symbol patterns to simulate the diverse typing demands of professional work environments.\r\n              ")}</p>
             </section>
 
             {/* How WPM Is Calculated */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                How WPM Is Calculated
-              </h2>
+                {tr("How WPM Is Calculated\r\n              ")}</h2>
               <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', marginTop: '1.25rem' }}>
-                The Standard Formula
-              </h3>
+                {tr("The Standard Formula\r\n              ")}</h3>
               <p style={{ marginBottom: '1rem' }}>
-                The globally accepted standard defines one <strong>word</strong> as exactly{' '}
-                <strong>five characters</strong>, regardless of actual word length. This normalization ensures
-                consistent comparison across languages, keyboard layouts, and content types.
-              </p>
+                {tr("The globally accepted standard defines one ")}<strong>{tr("word")}</strong> {tr("as exactly")}{' '}
+                <strong>{tr("five characters")}</strong>{tr(", regardless of actual word length. This normalization ensures\r\n                consistent comparison across languages, keyboard layouts, and content types.\r\n              ")}</p>
               <p style={{ margin: '1rem 0 1.5rem 0', fontWeight: '500', color: 'var(--text-primary, #fff)' }}>
-                Gross WPM = (Total Typed Characters divided by 5) divided by Time Elapsed in Minutes<br />
-                Net WPM = (Correct Characters divided by 5) divided by Time Elapsed in Minutes<br />
-                Accuracy = (Correct Characters divided by Total Typed Characters) multiplied by 100
-              </p>
+                {tr("Gross WPM = (Total Typed Characters divided by 5) divided by Time Elapsed in Minutes")}<br />
+                {tr("Net WPM = (Correct Characters divided by 5) divided by Time Elapsed in Minutes")}<br />
+                {tr("Accuracy = (Correct Characters divided by Total Typed Characters) multiplied by 100\r\n              ")}</p>
               <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', marginTop: '1.25rem' }}>
-                Gross WPM vs. Net WPM
-              </h3>
+                {tr("Gross WPM vs. Net WPM\r\n              ")}</h3>
               <p style={{ marginBottom: '1.5rem' }}>
-                <strong>Gross WPM</strong> counts every character you type, including errors.{' '}
-                <strong>Net WPM</strong> counts only correctly typed characters, providing a truer reflection of
-                your productive output. This test calculates and displays Net WPM so your score is never
-                artificially inflated by uncorrected mistakes.
-              </p>
+                <strong>{tr("Gross WPM")}</strong> {tr("counts every character you type, including errors.")}{' '}
+                <strong>{tr("Net WPM")}</strong> {tr("counts only correctly typed characters, providing a truer reflection of\r\n                your productive output. This test calculates and displays Net WPM so your score is never\r\n                artificially inflated by uncorrected mistakes.\r\n              ")}</p>
             </section>
 
             {/* Average Typing Speed */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                Average Typing Speed Benchmarks
-              </h2>
+                {tr("Average Typing Speed Benchmarks\r\n              ")}</h2>
               <p style={{ marginBottom: '1rem' }}>
-                Understanding where your speed sits relative to global benchmarks helps you set realistic
-                improvement goals:
-              </p>
+                {tr("Understanding where your speed sits relative to global benchmarks helps you set realistic\r\n                improvement goals:\r\n              ")}</p>
               <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <strong style={{ color: 'var(--text-secondary, #94a3b8)' }}>1 to 39 WPM — Beginner:</strong>{' '}
-                  Typical of those learning to type or who type with fewer than four fingers.
-                </li>
+                  <strong style={{ color: 'var(--text-secondary, #94a3b8)' }}>{tr("1 to 39 WPM — Beginner:")}</strong>{' '}
+                  {tr("Typical of those learning to type or who type with fewer than four fingers.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <strong style={{ color: 'var(--neon-green, #10b981)' }}>40 to 59 WPM — Average:</strong>{' '}
-                  The global average for casual typists who have developed basic keyboard habits.
-                </li>
+                  <strong style={{ color: 'var(--neon-green, #10b981)' }}>{tr("40 to 59 WPM — Average:")}</strong>{' '}
+                  {tr("The global average for casual typists who have developed basic keyboard habits.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <strong style={{ color: 'var(--neon-cyan, #00f5ff)' }}>60 to 79 WPM — Proficient:</strong>{' '}
-                  Comfortable for most professional roles. Emails, reports, and documents feel effortless.
-                </li>
+                  <strong style={{ color: 'var(--neon-cyan, #00f5ff)' }}>{tr("60 to 79 WPM — Proficient:")}</strong>{' '}
+                  {tr("Comfortable for most professional roles. Emails, reports, and documents feel effortless.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <strong style={{ color: 'var(--neon-orange, #f97316)' }}>80 to 119 WPM — Speed Typist:</strong>{' '}
-                  Well above average. Developers, writers, and power users typically fall in this range.
-                </li>
+                  <strong style={{ color: 'var(--neon-orange, #f97316)' }}>{tr("80 to 119 WPM — Speed Typist:")}</strong>{' '}
+                  {tr("Well above average. Developers, writers, and power users typically fall in this range.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <strong style={{ color: 'var(--neon-red, #ff2d55)' }}>120+ WPM — Blazing Fast:</strong>{' '}
-                  Elite territory. Professional court reporters and <a href="https://www.guinnessworldrecords.com/world-records/fastest-typist" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>competitive typists <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> regularly exceed 120 WPM.
-                </li>
+                  <strong style={{ color: 'var(--neon-red, #ff2d55)' }}>{tr("120+ WPM — Blazing Fast:")}</strong>{' '}
+                  {tr("Elite territory. Professional court reporters and ")}<a href="https://www.guinnessworldrecords.com/world-records/fastest-typist" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("competitive typists ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> {tr("regularly exceed 120 WPM.\r\n                ")}</li>
               </ul>
             </section>
 
             {/* Tips to Improve */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                Tips to Improve Your Typing Speed
-              </h2>
+                {tr("Tips to Improve Your Typing Speed\r\n              ")}</h2>
               <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', marginTop: '1.25rem' }}>
-                1. Accuracy Before Speed
-              </h3>
+                {tr("1. Accuracy Before Speed\r\n              ")}</h3>
               <p style={{ marginBottom: '1rem' }}>
-                Chasing speed while making frequent errors trains bad habits. Every mistake you make at high
-                speed must later be unlearned. Start deliberately slow, aiming for{' '}
-                <strong>98 percent accuracy</strong>, then allow speed to develop naturally through repetition.
-              </p>
+                {tr("Chasing speed while making frequent errors trains bad habits. Every mistake you make at high\r\n                speed must later be unlearned. Start deliberately slow, aiming for")}{' '}
+                <strong>{tr("98 percent accuracy")}</strong>{tr(", then allow speed to develop naturally through repetition.\r\n              ")}</p>
               <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', marginTop: '1.25rem' }}>
-                2. Use All Ten Fingers
-              </h3>
+                {tr("2. Use All Ten Fingers\r\n              ")}</h3>
               <p style={{ marginBottom: '1rem' }}>
-                Many self-taught typists rely on six or fewer fingers, creating cognitive bottlenecks. Training
-                all ten fingers to handle their assigned keyboard zones distributes the load evenly, unlocking
-                dramatic speed improvements over time.
-              </p>
+                {tr("Many self-taught typists rely on six or fewer fingers, creating cognitive bottlenecks. Training\r\n                all ten fingers to handle their assigned keyboard zones distributes the load evenly, unlocking\r\n                dramatic speed improvements over time.\r\n              ")}</p>
               <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', marginTop: '1.25rem' }}>
-                3. Practice with Varied Content
-              </h3>
+                {tr("3. Practice with Varied Content\r\n              ")}</h3>
               <p style={{ marginBottom: '1rem' }}>
-                Exclusive practice on common short words builds a limited skill set. Use this test multiple
-                modes including quotes, technology, programming, science, numbers, and symbols to develop
-                fluency across the full character range your work demands.
-              </p>
+                {tr("Exclusive practice on common short words builds a limited skill set. Use this test multiple\r\n                modes including quotes, technology, programming, science, numbers, and symbols to develop\r\n                fluency across the full character range your work demands.\r\n              ")}</p>
               <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem', marginTop: '1.25rem' }}>
-                4. Consistent Short Sessions Beat Marathon Practice
-              </h3>
+                {tr("4. Consistent Short Sessions Beat Marathon Practice\r\n              ")}</h3>
               <p style={{ marginBottom: '1.5rem' }}>
-                Research on <a href="https://en.wikipedia.org/wiki/Motor_learning" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>skill acquisition <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> consistently shows that fifteen to thirty minutes of focused daily
-                practice produces more durable improvements than occasional two-hour sessions. The brain
-                consolidates muscle memory during rest periods between practice sessions.
-              </p>
+                {tr("Research on ")}<a href="https://en.wikipedia.org/wiki/Motor_learning" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("skill acquisition ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> {tr("consistently shows that fifteen to thirty minutes of focused daily\r\n                practice produces more durable improvements than occasional two-hour sessions. The brain\r\n                consolidates muscle memory during rest periods between practice sessions.\r\n              ")}</p>
             </section>
 
             {/* Touch Typing Guide */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                Touch Typing Guide: The Foundation of Fast Typing
-              </h2>
+                {tr("Touch Typing Guide: The Foundation of Fast Typing\r\n              ")}</h2>
               <p style={{ marginBottom: '1rem' }}>
-                <strong>Touch typing</strong> is the technique of typing using all ten fingers without looking
-                at the keyboard, relying entirely on <a href="https://en.wikipedia.org/wiki/Muscle_memory" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>muscle memory <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>. It is the single most impactful skill you
-                can develop to break through speed plateaus.
-              </p>
+                <strong>{tr("Touch typing")}</strong> {tr("is the technique of typing using all ten fingers without looking\r\n                at the keyboard, relying entirely on ")}<a href="https://en.wikipedia.org/wiki/Muscle_memory" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("muscle memory ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>{tr(". It is the single most impactful skill you\r\n                can develop to break through speed plateaus.\r\n              ")}</p>
               <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
                 <li style={{ marginBottom: '0.6rem' }}>
-                  <strong>Master the Home Row:</strong> Rest your left fingers on A S D F and your right
-                  fingers on J K L semicolon. The raised bumps on F and J are your tactile anchors. Always
-                  return to this position after every keystroke sequence.
-                </li>
+                  <strong>{tr("Master the Home Row:")}</strong> {tr("Rest your left fingers on A S D F and your right\r\n                  fingers on J K L semicolon. The raised bumps on F and J are your tactile anchors. Always\r\n                  return to this position after every keystroke sequence.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.6rem' }}>
-                  <strong>Assign Keys to Fingers:</strong> Each finger is responsible for a specific column of
-                  keys. Never reach across with the wrong finger. This discipline is what makes touch typing
-                  faster than hunt-and-peck at scale.
-                </li>
+                  <strong>{tr("Assign Keys to Fingers:")}</strong> {tr("Each finger is responsible for a specific column of\r\n                  keys. Never reach across with the wrong finger. This discipline is what makes touch typing\r\n                  faster than hunt-and-peck at scale.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.6rem' }}>
-                  <strong>Keep Your Eyes on the Screen:</strong> Resist glancing at the keyboard. Cover your
-                  hands with a cloth if needed during early training. Visual dependency on keys is a hard habit
-                  to break the longer it persists.
-                </li>
+                  <strong>{tr("Keep Your Eyes on the Screen:")}</strong> {tr("Resist glancing at the keyboard. Cover your\r\n                  hands with a cloth if needed during early training. Visual dependency on keys is a hard habit\r\n                  to break the longer it persists.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.6rem' }}>
-                  <strong>Maintain Neutral Posture:</strong> Sit with your back straight, elbows at
-                  approximately ninety degrees, and wrists hovering slightly above the keyboard. Poor <a href="https://www.osha.gov/ergonomics" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>ergonomics <svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                  causes fatigue that caps your speed and can damage joints over time.
-                </li>
+                  <strong>{tr("Maintain Neutral Posture:")}</strong> {tr("Sit with your back straight, elbows at\r\n                  approximately ninety degrees, and wrists hovering slightly above the keyboard. Poor ")}<a href="https://www.osha.gov/ergonomics" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-cyan)', textDecoration: 'none', fontWeight: '500' }}>{tr("ergonomics ")}<svg xmlns="http://www.w3.org/2000/svg" width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign: 'text-bottom', marginLeft: '0.1rem', marginBottom: '0.1rem'}}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                  {tr("causes fatigue that caps your speed and can damage joints over time.\r\n                ")}</li>
               </ul>
             </section>
 
             {/* Difficulty & Modes */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                Difficulty Levels and Typing Modes Explained
-              </h2>
+                {tr("Difficulty Levels and Typing Modes Explained\r\n              ")}</h2>
               <p style={{ marginBottom: '1rem' }}>
-                This test offers six difficulty levels for word mode, each calibrated to build progressively
-                more demanding muscle memory patterns:
-              </p>
+                {tr("This test offers six difficulty levels for word mode, each calibrated to build progressively\r\n                more demanding muscle memory patterns:\r\n              ")}</p>
               <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.25rem', listStyleType: 'disc' }}>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Easy:</strong> High-frequency two-to-four-letter words. Ideal for beginners building
-                  foundational habits.
-                </li>
+                  <strong>{tr("Easy:")}</strong> {tr("High-frequency two-to-four-letter words. Ideal for beginners building\r\n                  foundational habits.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Medium:</strong> Common five-to-eight-letter words appearing in everyday professional
-                  writing.
-                </li>
+                  <strong>{tr("Medium:")}</strong> {tr("Common five-to-eight-letter words appearing in everyday professional\r\n                  writing.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Hard:</strong> Multi-syllable vocabulary encountered in formal documents and academic
-                  writing.
-                </li>
+                  <strong>{tr("Hard:")}</strong> {tr("Multi-syllable vocabulary encountered in formal documents and academic\r\n                  writing.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Expert:</strong> Uncommon, sophisticated vocabulary drawn from literature and advanced
-                  discourse.
-                </li>
+                  <strong>{tr("Expert:")}</strong> {tr("Uncommon, sophisticated vocabulary drawn from literature and advanced\r\n                  discourse.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Impossible:</strong> Technical and scientific terminology including long compound words
-                  that challenge even elite typists.
-                </li>
+                  <strong>{tr("Impossible:")}</strong> {tr("Technical and scientific terminology including long compound words\r\n                  that challenge even elite typists.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Random:</strong> A chaotic blend of all difficulty levels, simulating the
-                  unpredictable vocabulary range of real-world typing tasks.
-                </li>
+                  <strong>{tr("Random:")}</strong> {tr("A chaotic blend of all difficulty levels, simulating the\r\n                  unpredictable vocabulary range of real-world typing tasks.\r\n                ")}</li>
               </ul>
               <p style={{ marginBottom: '1.5rem' }}>
-                Beyond words, you can test yourself on real paragraph content from technology, programming,
-                science, and fiction; on number sequences that simulate data-entry scenarios; and on symbol
-                patterns that mirror code punctuation and special character requirements.
-              </p>
+                {tr("Beyond words, you can test yourself on real paragraph content from technology, programming,\r\n                science, and fiction; on number sequences that simulate data-entry scenarios; and on symbol\r\n                patterns that mirror code punctuation and special character requirements.\r\n              ")}</p>
             </section>
 
             {/* Useful Resources */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                Useful Typing Resources
-              </h2>
+                {tr("Useful Typing Resources\r\n              ")}</h2>
               <p style={{ marginBottom: '1rem' }}>
-                Looking to practice more or learn touch typing from scratch? Check out these excellent free resources:
-              </p>
+                {tr("Looking to practice more or learn touch typing from scratch? Check out these excellent free resources:\r\n              ")}</p>
               <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <a href="https://www.typingclub.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>TypingClub</a> — Comprehensive touch typing courses for all skill levels.
-                </li>
+                  <a href="https://www.typingclub.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>{tr("TypingClub")}</a> {tr("— Comprehensive touch typing courses for all skill levels.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <a href="https://monkeytype.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>Monkeytype</a> — Highly customizable minimalistic typing test.
-                </li>
+                  <a href="https://monkeytype.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>{tr("Monkeytype")}</a> {tr("— Highly customizable minimalistic typing test.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <a href="https://www.keybr.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>Keybr</a> — Algorithm-based typing practice focusing on weak keys.
-                </li>
+                  <a href="https://www.keybr.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>{tr("Keybr")}</a> {tr("— Algorithm-based typing practice focusing on weak keys.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <a href="https://10fastfingers.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>10FastFingers</a> — Competitive typing tests and multiplayer typing races.
-                </li>
+                  <a href="https://10fastfingers.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>{tr("10FastFingers")}</a> {tr("— Competitive typing tests and multiplayer typing races.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <a href="https://play.typeracer.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>TypeRacer</a> — A gamified typing competition where you race cars by typing.
-                </li>
+                  <a href="https://play.typeracer.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--neon-green)', textDecoration: 'none', fontWeight: '600' }}>{tr("TypeRacer")}</a> {tr("— A gamified typing competition where you race cars by typing.\r\n                ")}</li>
               </ul>
             </section>
 
             {/* IELTS Section */}
             <section>
               <h2 style={{ fontWeight: '700', fontSize: '1.4rem', marginBottom: '0.75rem', color: 'var(--neon-cyan)', marginTop: '2rem' }}>
-                Typing Test for IELTS (CDI) & TOEFL
-              </h2>
+                {tr("Typing Test for IELTS (CDI) & TOEFL\r\n              ")}</h2>
               <p style={{ marginBottom: '1rem' }}>
-                If you are preparing for the Computer-Delivered IELTS (CDI) or the TOEFL iBT, your typing speed and accuracy will directly impact your score in the Writing modules. In these exams, you must type essays and reports within a strict time limit (e.g., 150 words in 20 minutes for IELTS Task 1, and 250 words in 40 minutes for Task 2).
-              </p>
+                {tr("If you are preparing for the Computer-Delivered IELTS (CDI) or the TOEFL iBT, your typing speed and accuracy will directly impact your score in the Writing modules. In these exams, you must type essays and reports within a strict time limit (e.g., 150 words in 20 minutes for IELTS Task 1, and 250 words in 40 minutes for Task 2).\r\n              ")}</p>
               <p style={{ marginBottom: '1rem' }}>
-                A slow typing speed means you spend less time thinking about vocabulary, grammar, and paragraph structure, and more time hunting for keys. 
-              </p>
+                {tr("A slow typing speed means you spend less time thinking about vocabulary, grammar, and paragraph structure, and more time hunting for keys. \r\n              ")}</p>
               <ul style={{ paddingLeft: '1.25rem', marginBottom: '1.5rem', listStyleType: 'disc' }}>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Target Speed:</strong> Aim for at least <strong>35-40 WPM</strong> with high accuracy. This ensures you can comfortably finish your IELTS essays with 5-10 minutes left for proofreading and correcting spelling mistakes.
-                </li>
+                  <strong>{tr("Target Speed:")}</strong> {tr("Aim for at least ")}<strong>{tr("35-40 WPM")}</strong> {tr("with high accuracy. This ensures you can comfortably finish your IELTS essays with 5-10 minutes left for proofreading and correcting spelling mistakes.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>How to Practice:</strong> Use our <em>Paragraph Mode</em> to simulate the real exam environment. Try typing complex academic passages to get used to the vocabulary and punctuation (commas, periods, capital letters) required in IELTS and TOEFL.
-                </li>
+                  <strong>{tr("How to Practice:")}</strong> {tr("Use our ")}<em>{tr("Paragraph Mode")}</em> {tr("to simulate the real exam environment. Try typing complex academic passages to get used to the vocabulary and punctuation (commas, periods, capital letters) required in IELTS and TOEFL.\r\n                ")}</li>
                 <li style={{ marginBottom: '0.4rem' }}>
-                  <strong>Accuracy Over Speed:</strong> In language tests, spelling errors will lower your Lexical Resource score. Use our tool to track your accuracy and backspace usage to ensure you are typing correctly the first time.
-                </li>
+                  <strong>{tr("Accuracy Over Speed:")}</strong> {tr("In language tests, spelling errors will lower your Lexical Resource score. Use our tool to track your accuracy and backspace usage to ensure you are typing correctly the first time.\r\n                ")}</li>
               </ul>
             </section>
 

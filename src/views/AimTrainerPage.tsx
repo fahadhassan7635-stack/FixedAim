@@ -1,7 +1,6 @@
-﻿"use client";
-
-
-
+"use client";
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/AimTrainerPage.json';
 import {
   useState, useRef, useCallback, useEffect, useReducer, memo
 } from 'react';
@@ -465,6 +464,7 @@ const MORE_TOOLS: ToolLink[] = [
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function AimTrainerPage() {
+  const { tr } = usePageI18n(pageDict);
   // Settings
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [volume, setVolume] = useState<number>(0.5);
@@ -940,18 +940,15 @@ export default function AimTrainerPage() {
             fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.12em',
             color: '#2dd4bf', textTransform: 'uppercase',
           }}>
-            2D Aim Tool
-          </div>
+            {tr("2D Aim Tool\n          ")}</div>
           <h1 style={{
             fontWeight: 900, fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', lineHeight: 1.1,
             margin: '0 0 0.85rem', letterSpacing: '-0.02em',
             color: '#2dd4bf', textShadow: '0 0 40px rgba(45,212,191,0.25)',
           }}>
-            2D Aim Trainer
-          </h1>
+            {tr("2D Aim Trainer\n          ")}</h1>
           <p style={{ margin: 0, fontSize: '1.02rem', color: '#2D3436', fontWeight: 400 }}>
-            Track and hit the small moving target — precision matters!
-          </p>
+            {tr("Track and hit the small moving target — precision matters!\n          ")}</p>
         </header>
 
         {/* ── Top bar ── */}
@@ -970,7 +967,7 @@ export default function AimTrainerPage() {
               <line x1="1" y1="12" x2="5.5" y2="12" stroke={activeCfg.color} strokeWidth="1.5" />
               <line x1="18.5" y1="12" x2="23" y2="12" stroke={activeCfg.color} strokeWidth="1.5" />
             </svg>
-            <span style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.04em', color: '#fff' }}>AIM</span>
+            <span style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.04em', color: '#fff' }}>{tr("AIM")}</span>
           </div>
 
           <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.1)', margin: '0 0.25rem' }} />
@@ -1066,7 +1063,7 @@ export default function AimTrainerPage() {
           {soundEnabled && (
             <input type="range" min="0" max="1" step="0.05" value={volume}
               onChange={e => setVolume(parseFloat(e.target.value))}
-              aria-label="Volume" style={{ width: '64px', accentColor: activeCfg.color, cursor: 'pointer' }}
+              aria-label={tr("Volume")} style={{ width: '64px', accentColor: activeCfg.color, cursor: 'pointer' }}
             />
           )}
 
@@ -1093,8 +1090,7 @@ export default function AimTrainerPage() {
                 color: '#f87171', transition: 'all 0.15s ease',
               }}
             >
-              ↺ Reset
-            </button>
+              {tr("↺ Reset\n            ")}</button>
           )}
         </div>
 
@@ -1150,8 +1146,7 @@ export default function AimTrainerPage() {
               boxShadow: '0 0 16px rgba(245,158,11,0.2)',
               animation: 'pulse-soft 1.5s ease infinite alternate',
             }}>
-              ⚡ ×{multiplier} MULTIPLIER
-            </span>
+              ⚡ ×{multiplier} {tr("MULTIPLIER\n            ")}</span>
           </div>
         )}
 
@@ -1199,7 +1194,7 @@ export default function AimTrainerPage() {
           {isFullscreen && (
             <button
               onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
-              aria-label="Exit fullscreen"
+              aria-label={tr("Exit fullscreen")}
               style={{
                 position: 'absolute', top: '1rem', right: '1rem', zIndex: 50,
                 background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px',
@@ -1219,20 +1214,19 @@ export default function AimTrainerPage() {
             }}>
               {phase === 'done' ? (
                 <>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.12em', color: '#55556a', textTransform: 'uppercase' }}>Session Complete</div>
+                  <div style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.12em', color: '#55556a', textTransform: 'uppercase' }}>{tr("Session Complete")}</div>
                   <div style={{ fontWeight: 800, fontSize: '3rem', lineHeight: 1, color: lastResult ? gradeColors[lastResult.grade] : '#fff' }}>
                     {lastResult?.grade}
                   </div>
                   <div style={{ fontSize: '0.95rem', color: '#8888a0', fontWeight: 500 }}>
-                    {lastResult?.score.toLocaleString()} pts · {lastResult?.accuracy}% accuracy
-                  </div>
+                    {lastResult?.score.toLocaleString()} {tr("pts · ")}{lastResult?.accuracy}{tr("% accuracy\n                  ")}</div>
                   <button onClick={e => { e.stopPropagation(); beginCountdown(); }} style={{
                     fontFamily: 'inherit', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.05em',
                     padding: '0.65rem 2rem', borderRadius: '12px', cursor: 'pointer',
                     background: `rgba(${activeCfg.accentRgb},0.15)`, border: `1px solid rgba(${activeCfg.accentRgb},0.4)`,
                     color: activeCfg.color, transition: 'all 0.2s ease',
-                  }}>▶ RUN IT BACK</button>
-                  <div style={{ fontSize: '0.72rem', color: '#33334a' }}>or press Space</div>
+                  }}>{tr("▶ RUN IT BACK")}</button>
+                  <div style={{ fontSize: '0.72rem', color: '#33334a' }}>{tr("or press Space")}</div>
                 </>
               ) : (
                 <>
@@ -1248,8 +1242,8 @@ export default function AimTrainerPage() {
                       <circle cx="12" cy="12" r="2.2" fill={activeCfg.color} />
                     </svg>
                   </div>
-                  <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#aaaabc', letterSpacing: '0.04em' }}>Click anywhere to start</div>
-                  <div style={{ fontSize: '0.72rem', color: '#33334a', letterSpacing: '0.06em' }}>or press Space</div>
+                  <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#aaaabc', letterSpacing: '0.04em' }}>{tr("Click anywhere to start")}</div>
+                  <div style={{ fontSize: '0.72rem', color: '#33334a', letterSpacing: '0.06em' }}>{tr("or press Space")}</div>
                 </>
               )}
             </div>
@@ -1282,13 +1276,13 @@ export default function AimTrainerPage() {
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem',
               background: 'rgba(10,15,24,0.75)', backdropFilter: 'blur(12px)', borderRadius: 'inherit',
             }}>
-              <div style={{ fontWeight: 800, fontSize: '1.8rem', letterSpacing: '0.06em', color: '#fff' }}>PAUSED</div>
+              <div style={{ fontWeight: 800, fontSize: '1.8rem', letterSpacing: '0.06em', color: '#fff' }}>{tr("PAUSED")}</div>
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <PremiumButton onClick={resume} variant="primary" color={activeCfg.color} rgb={activeCfg.accentRgb}>▶ Resume</PremiumButton>
-                <PremiumButton onClick={resetSession} variant="ghost">↺ Restart</PremiumButton>
-                <PremiumButton onClick={exitToIdle} variant="danger">✕ Exit</PremiumButton>
+                <PremiumButton onClick={resume} variant="primary" color={activeCfg.color} rgb={activeCfg.accentRgb}>{tr("▶ Resume")}</PremiumButton>
+                <PremiumButton onClick={resetSession} variant="ghost">{tr("↺ Restart")}</PremiumButton>
+                <PremiumButton onClick={exitToIdle} variant="danger">{tr("✕ Exit")}</PremiumButton>
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#33334a' }}>P or Esc to resume</div>
+              <div style={{ fontSize: '0.72rem', color: '#33334a' }}>{tr("P or Esc to resume")}</div>
             </div>
           )}
 
@@ -1324,7 +1318,7 @@ export default function AimTrainerPage() {
           {phase === 'running' && (
             <button
               onClick={e => { e.stopPropagation(); pause(); }}
-              aria-label="Pause"
+              aria-label={tr("Pause")}
               style={{
                 position: 'absolute', bottom: '12px', right: '12px', zIndex: 25,
                 background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)',
@@ -1350,8 +1344,7 @@ export default function AimTrainerPage() {
                 letterSpacing: '0.04em', transition: 'all 0.15s ease',
               }}
             >
-              ■ Stop
-            </button>
+              {tr("■ Stop\n            ")}</button>
           )}
 
           {/* Difficulty + tier badge */}
@@ -1404,7 +1397,7 @@ export default function AimTrainerPage() {
                   color: MODE_CONFIG[lastResult.difficulty as ModeKey]?.color || '#ffffff',
                   transition: 'all 0.15s ease',
                 }}
-              >▶ Run It Back</button>
+              >{tr("▶ Run It Back")}</button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px,1fr))', gap: '0.55rem' }}>
               {[
@@ -1445,8 +1438,7 @@ export default function AimTrainerPage() {
                 marginBottom: '0.65rem', display: 'flex', alignItems: 'center', gap: '0.4rem',
               }}
             >
-              {showHistory ? '▾' : '▸'} Session History
-              <span style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '20px', padding: '0 0.45rem', fontSize: '0.7rem' }}>{history.length}</span>
+              {showHistory ? '▾' : '▸'} {tr("Session History\n              ")}<span style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '20px', padding: '0 0.45rem', fontSize: '0.7rem' }}>{history.length}</span>
             </button>
             {showHistory && (
               <div style={{
@@ -1461,7 +1453,7 @@ export default function AimTrainerPage() {
                       background: 'transparent', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '6px',
                       padding: '0.25rem 0.65rem', color: 'rgba(239,68,68,0.7)', cursor: 'pointer',
                     }}
-                  >Clear</button>
+                  >{tr("Clear")}</button>
                 </div>
                 <div style={{ maxHeight: '260px', overflowY: 'auto', padding: '0.5rem 0.75rem 0.75rem' }}>
                   {history.slice(0, 20).map(s => (
@@ -1494,11 +1486,11 @@ export default function AimTrainerPage() {
         </div>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginTop: '1rem', marginBottom: '2.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginTop: '1rem', marginBottom: '2.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center', letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div className="more-tools-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
@@ -1549,27 +1541,20 @@ export default function AimTrainerPage() {
         {/* ══════════════════════════════════════════════════════════
             SEO ARTICLE — 20+ H2 headings
         ══════════════════════════════════════════════════════════ */}
-        <article aria-label="Aim trainer guide and FAQ" style={{ paddingBottom: '3rem' }}>
+        <article aria-label={tr("Aim trainer guide and FAQ")} style={{ paddingBottom: '3rem' }}>
 
           <SeoHero accentColor={activeCfg.color} accentRgb={activeCfg.accentRgb} />
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>How This 2D Aim Trainer Works</h2>
+            <h2 style={h2Style}>{tr("How This 2D Aim Trainer Works")}</h2>
             <p style={pStyle}>
-              Every match runs on a lightweight engine built for one job: spawn a target, measure how fast
-              and how precisely you click it in a 2D plane, then repeat. A short countdown primes your reflexes, targets
-              appear one at a time or several at once depending on difficulty, and a live stats bar tracks
-              score, accuracy, combo, and reaction time as you play — no page reload, no waiting between hits.
-            </p>
+              {tr("Every match runs on a lightweight engine built for one job: spawn a target, measure how fast\n              and how precisely you click it in a 2D plane, then repeat. A short countdown primes your reflexes, targets\n              appear one at a time or several at once depending on difficulty, and a live stats bar tracks\n              score, accuracy, combo, and reaction time as you play — no page reload, no waiting between hits.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Difficulty Tiers, From Easy to Impossible</h2>
+            <h2 style={h2Style}>{tr("Difficulty Tiers, From Easy to Impossible")}</h2>
             <p style={pStyle}>
-              Five tiers scale five variables together — target size, lifetime, spawn rate, movement, and
-              score multiplier — so the jump between tiers feels meaningfully different rather than just
-              "smaller circle."
-            </p>
+              {tr("Five tiers scale five variables together — target size, lifetime, spawn rate, movement, and\n              score multiplier — so the jump between tiers feels meaningfully different rather than just\n              \"smaller circle.\"\n            ")}</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px,1fr))', gap: '0.6rem', marginTop: '1rem' }}>
               {MODE_ORDER.map(k => {
                 const d = MODE_CONFIG[k];
@@ -1580,7 +1565,7 @@ export default function AimTrainerPage() {
                   }}>
                     <div style={{ color: d.color, fontWeight: 800, fontSize: '0.85rem', marginBottom: '0.35rem' }}>{d.label}</div>
                     <div style={{ color: '#8888a0', fontSize: '0.72rem', lineHeight: 1.6 }}>
-                      ×{d.multiplier} score · {d.maxConcurrent} on screen · {0 > 0 ? 'moving' : 'stationary'}
+                      ×{d.multiplier} {tr("score · ")}{d.maxConcurrent} {tr("on screen · ")}{0 > 0 ? 'moving' : 'stationary'}
                     </div>
                   </div>
                 );
@@ -1589,68 +1574,45 @@ export default function AimTrainerPage() {
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Understanding the Scoring Formula</h2>
+            <h2 style={h2Style}>{tr("Understanding the Scoring Formula")}</h2>
             <p style={pStyle}>
-              Smaller, shorter-lived targets are worth more base points than large, forgiving ones. That base
-              value is multiplied by the active difficulty's score multiplier, then again by whatever combo
-              multiplier you've earned, before being rounded into your running total.
-            </p>
+              {tr("Smaller, shorter-lived targets are worth more base points than large, forgiving ones. That base\n              value is multiplied by the active difficulty's score multiplier, then again by whatever combo\n              multiplier you've earned, before being rounded into your running total.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>The Combo Multiplier System Explained</h2>
+            <h2 style={h2Style}>{tr("The Combo Multiplier System Explained")}</h2>
             <p style={pStyle}>
-              Landing 5 hits in a row raises your multiplier to ×1.5. Ten in a row reaches ×2, twenty reaches
-              ×2.5, and a 35-hit streak caps it at ×3. A single misclick or expired target snaps the combo
-              — and the multiplier — straight back to zero, so consistency is rewarded far more than isolated
-              bursts of speed.
-            </p>
+              {tr("Landing 5 hits in a row raises your multiplier to ×1.5. Ten in a row reaches ×2, twenty reaches\n              ×2.5, and a 35-hit streak caps it at ×3. A single misclick or expired target snaps the combo\n              — and the multiplier — straight back to zero, so consistency is rewarded far more than isolated\n              bursts of speed.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>What the S–F Grade Actually Measures</h2>
+            <h2 style={h2Style}>{tr("What the S–F Grade Actually Measures")}</h2>
             <p style={pStyle}>
-              Grades combine accuracy with a per-difficulty bonus, since a 90% accuracy run on Impossible
-              represents a very different skill level than 90% on Easy. Reaching an S grade additionally
-              requires an average reaction time under 380 milliseconds — rewarding players who are fast and
-              precise together, not one at the expense of the other.
-            </p>
+              {tr("Grades combine accuracy with a per-difficulty bonus, since a 90% accuracy run on Impossible\n              represents a very different skill level than 90% on Easy. Reaching an S grade additionally\n              requires an average reaction time under 380 milliseconds — rewarding players who are fast and\n              precise together, not one at the expense of the other.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Choosing a Match Duration</h2>
+            <h2 style={h2Style}>{tr("Choosing a Match Duration")}</h2>
             <p style={pStyle}>
-              Short 1–5 second sprints are built for pure reaction-time testing. The 10 and 30 second presets
-              suit a standard training rep. A custom length up to 600 seconds fits longer endurance sessions,
-              and Unlimited mode removes the clock entirely — the match runs until you choose to stop it.
-            </p>
+              {tr("Short 1–5 second sprints are built for pure reaction-time testing. The 10 and 30 second presets\n              suit a standard training rep. A custom length up to 600 seconds fits longer endurance sessions,\n              and Unlimited mode removes the clock entirely — the match runs until you choose to stop it.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Visual and Audio Feedback</h2>
+            <h2 style={h2Style}>{tr("Visual and Audio Feedback")}</h2>
             <p style={pStyle}>
-              Every hit fires a canvas-rendered particle burst, an expanding ripple ring, and a floating
-              points label, layered with a zero-dependency Web Audio sound engine — distinct tones for hits,
-              misses, expired targets, combo unlocks, and the closing fanfare. Sound and particle effects
-              respect your system's reduced-motion setting automatically.
-            </p>
+              {tr("Every hit fires a canvas-rendered particle burst, an expanding ripple ring, and a floating\n              points label, layered with a zero-dependency Web Audio sound engine — distinct tones for hits,\n              misses, expired targets, combo unlocks, and the closing fanfare. Sound and particle effects\n              respect your system's reduced-motion setting automatically.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Tracking Your Progress With Session History</h2>
+            <h2 style={h2Style}>{tr("Tracking Your Progress With Session History")}</h2>
             <p style={pStyle}>
-              Your last 30 sessions are saved locally, each recording score, accuracy, grade, peak combo, and
-              average reaction time. Comparing runs over a few weeks is the clearest way to see whether your
-              training is actually paying off, rather than relying on how a single session felt.
-            </p>
+              {tr("Your last 30 sessions are saved locally, each recording score, accuracy, grade, peak combo, and\n              average reaction time. Comparing runs over a few weeks is the clearest way to see whether your\n              training is actually paying off, rather than relying on how a single session felt.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Games Where This 2D Training Transfers</h2>
+            <h2 style={h2Style}>{tr("Games Where This 2D Training Transfers")}</h2>
             <p style={{ ...pStyle, marginBottom: '1.5rem' }}>
-              Precise, fast 2D cursor control matters in almost every top-down competitive game, MOBA, ARPG, and rhythm game.
-              Regular reps here carry over most directly to:
-            </p>
+              {tr("Precise, fast 2D cursor control matters in almost every top-down competitive game, MOBA, ARPG, and rhythm game.\n              Regular reps here carry over most directly to:\n            ")}</p>
             <ul style={{
               display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
               gap: '0.75rem', padding: 0, listStyle: 'none', margin: 0,
@@ -1668,230 +1630,105 @@ export default function AimTrainerPage() {
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Best 2D Aim Training Tips for MOBA and osu! Players</h2>
+            <h2 style={h2Style}>{tr("Best 2D Aim Training Tips for MOBA and osu! Players")}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '0.5rem' }}>
               <div>
-                <h3 style={h3Style}>Warm up before you grind Impossible</h3>
-                <p style={pStyle}>Start each session on Easy or Normal for a minute before pushing into harder tiers — cold reflexes make small, fast targets feel far worse than they are.</p>
+                <h3 style={h3Style}>{tr("Warm up before you grind Impossible")}</h3>
+                <p style={pStyle}>{tr("Start each session on Easy or Normal for a minute before pushing into harder tiers — cold reflexes make small, fast targets feel far worse than they are.")}</p>
               </div>
               <div>
-                <h3 style={h3Style}>Focus on cursor path efficiency</h3>
-                <p style={pStyle}>In 2D games, moving your cursor in straight lines between targets is crucial. Avoid curving your cursor path, as it increases travel time and causes overshooting.</p>
+                <h3 style={h3Style}>{tr("Focus on cursor path efficiency")}</h3>
+                <p style={pStyle}>{tr("In 2D games, moving your cursor in straight lines between targets is crucial. Avoid curving your cursor path, as it increases travel time and causes overshooting.")}</p>
               </div>
               <div>
-                <h3 style={h3Style}>Protect your combo over chasing risky clicks</h3>
-                <p style={pStyle}>Since the multiplier resets on any miss, a controlled 20-hit streak at ×2.5 often out-scores several short bursts interrupted by misclicks.</p>
+                <h3 style={h3Style}>{tr("Protect your combo over chasing risky clicks")}</h3>
+                <p style={pStyle}>{tr("Since the multiplier resets on any miss, a controlled 20-hit streak at ×2.5 often out-scores several short bursts interrupted by misclicks.")}</p>
               </div>
               <div>
-                <h3 style={h3Style}>Match your real desktop sensitivity</h3>
-                <p style={pStyle}>Training at a sensitivity you don't actually play with builds muscle memory that won't transfer. Keep your Windows pointer speed and mouse DPI identical to your game settings.</p>
+                <h3 style={h3Style}>{tr("Match your real desktop sensitivity")}</h3>
+                <p style={pStyle}>{tr("Training at a sensitivity you don't actually play with builds muscle memory that won't transfer. Keep your Windows pointer speed and mouse DPI identical to your game settings.")}</p>
               </div>
               <div>
-                <h3 style={h3Style}>Watch your accuracy trend, not just your score</h3>
-                <p style={pStyle}>Score rewards difficulty and combo as much as raw precision. Accuracy is the cleaner signal for whether your mouse control fundamentals are actually improving.</p>
+                <h3 style={h3Style}>{tr("Watch your accuracy trend, not just your score")}</h3>
+                <p style={pStyle}>{tr("Score rewards difficulty and combo as much as raw precision. Accuracy is the cleaner signal for whether your mouse control fundamentals are actually improving.")}</p>
               </div>
             </div>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>The Science of Reaction Time</h2>
+            <h2 style={h2Style}>{tr("The Science of Reaction Time")}</h2>
             <p style={pStyle}>
-              Reaction time is the gap between a stimulus appearing and your muscles actually responding to
-              it, and it is made up of several distinct stages: the eye detecting the target, the visual
-              signal traveling to the brain, the brain deciding on and issuing a motor command, and the
-              signal traveling back down to the hand. According to general <SourceLink href="https://en.wikipedia.org/wiki/Mental_chronometry">mental chronometry research</SourceLink>,
-              simple visual reaction time in healthy young adults typically falls in the 150–250 millisecond
-              range, with choice reaction time — picking the correct target among several — running noticeably
-              slower because the decision stage takes longer to resolve.
-            </p>
+              {tr("Reaction time is the gap between a stimulus appearing and your muscles actually responding to\n              it, and it is made up of several distinct stages: the eye detecting the target, the visual\n              signal traveling to the brain, the brain deciding on and issuing a motor command, and the\n              signal traveling back down to the hand. According to general ")}<SourceLink href="https://en.wikipedia.org/wiki/Mental_chronometry">{tr("mental chronometry research")}</SourceLink>{tr(",\n              simple visual reaction time in healthy young adults typically falls in the 150–250 millisecond\n              range, with choice reaction time — picking the correct target among several — running noticeably\n              slower because the decision stage takes longer to resolve.\n            ")}</p>
             <p style={pStyle}>
-              This is why the trainer's grading system treats a sub-380ms average as an S-tier benchmark
-              rather than expecting sub-150ms scores: by the time you factor in target acquisition, aiming
-              correction, and the physical click itself on top of raw neural reaction time, 380ms represents
-              genuinely fast, well-trained performance rather than a theoretical floor. Reaction time also has
-              a hard biological limit — no amount of practice will get a healthy adult meaningfully below the
-              150ms mark, so gains from training come almost entirely from the surrounding stages: faster
-              target detection, cleaner aim correction, and more efficient motor commands, not from shaving
-              time off the nervous system's basic signal-transmission speed.
-            </p>
+              {tr("This is why the trainer's grading system treats a sub-380ms average as an S-tier benchmark\n              rather than expecting sub-150ms scores: by the time you factor in target acquisition, aiming\n              correction, and the physical click itself on top of raw neural reaction time, 380ms represents\n              genuinely fast, well-trained performance rather than a theoretical floor. Reaction time also has\n              a hard biological limit — no amount of practice will get a healthy adult meaningfully below the\n              150ms mark, so gains from training come almost entirely from the surrounding stages: faster\n              target detection, cleaner aim correction, and more efficient motor commands, not from shaving\n              time off the nervous system's basic signal-transmission speed.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>How Muscle Memory and Motor Learning Actually Form</h2>
+            <h2 style={h2Style}>{tr("How Muscle Memory and Motor Learning Actually Form")}</h2>
             <p style={pStyle}>
-              What gamers casually call "muscle memory" is really a form of procedural learning that happens
-              in the brain, not the muscles themselves. Repeating a specific movement — like gliding your cursor to a
-              small target and clicking — strengthens the neural pathways responsible for that exact motion,
-              gradually shifting execution from a slow, consciously-monitored process to a fast, largely
-              automatic one. Broad overviews of <SourceLink href="https://en.wikipedia.org/wiki/Motor_learning">motor learning</SourceLink> describe
-              this shift as moving through cognitive, associative, and autonomous stages, with the autonomous
-              stage being where a movement finally feels "automatic" and requires little conscious attention.
-            </p>
+              {tr("What gamers casually call \"muscle memory\" is really a form of procedural learning that happens\n              in the brain, not the muscles themselves. Repeating a specific movement — like gliding your cursor to a\n              small target and clicking — strengthens the neural pathways responsible for that exact motion,\n              gradually shifting execution from a slow, consciously-monitored process to a fast, largely\n              automatic one. Broad overviews of ")}<SourceLink href="https://en.wikipedia.org/wiki/Motor_learning">{tr("motor learning")}</SourceLink> {tr("describe\n              this shift as moving through cognitive, associative, and autonomous stages, with the autonomous\n              stage being where a movement finally feels \"automatic\" and requires little conscious attention.\n            ")}</p>
             <p style={pStyle}>
-              This has a practical implication for how you should structure aim training: motor learning is
-              driven by the specificity of the movement being repeated, which is exactly why matching your
-              real desktop sensitivity here matters so much. Practicing thousands of clicks at one sensitivity
-              and then switching to another for actual MOBA or ARPG matches partially wastes that repetition, since the
-              precise combination of hand movement and cursor displacement your brain just optimized for no
-              longer applies. Short, frequent practice sessions spread across several days also tend to
-              consolidate motor skills more effectively than a single marathon session, since a meaningful
-              part of motor learning consolidation happens during rest and sleep rather than during the
-              practice itself.
-            </p>
+              {tr("This has a practical implication for how you should structure aim training: motor learning is\n              driven by the specificity of the movement being repeated, which is exactly why matching your\n              real desktop sensitivity here matters so much. Practicing thousands of clicks at one sensitivity\n              and then switching to another for actual MOBA or ARPG matches partially wastes that repetition, since the\n              precise combination of hand movement and cursor displacement your brain just optimized for no\n              longer applies. Short, frequent practice sessions spread across several days also tend to\n              consolidate motor skills more effectively than a single marathon session, since a meaningful\n              part of motor learning consolidation happens during rest and sleep rather than during the\n              practice itself.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Hand-Eye Coordination and Visuomotor Tracking</h2>
+            <h2 style={h2Style}>{tr("Hand-Eye Coordination and Visuomotor Tracking")}</h2>
             <p style={pStyle}>
-              Hitting a moving target on Hard, Pro, or Impossible difficulty depends heavily on visuomotor
-              tracking — the continuous, real-time process of your visual system feeding position and
-              velocity information to the motor system that controls your hand. General material on <SourceLink href="https://en.wikipedia.org/wiki/Eye%E2%80%93hand_coordination">eye-hand coordination</SourceLink> describes
-              this as a closed feedback loop: the eyes track the target, the brain continuously updates its
-              prediction of where the target will be, and the hand adjusts its trajectory mid-movement based
-              on that updated prediction, rather than aiming once and committing blindly.
-            </p>
+              {tr("Hitting a moving target on Hard, Pro, or Impossible difficulty depends heavily on visuomotor\n              tracking — the continuous, real-time process of your visual system feeding position and\n              velocity information to the motor system that controls your hand. General material on ")}<SourceLink href="https://en.wikipedia.org/wiki/Eye%E2%80%93hand_coordination">{tr("eye-hand coordination")}</SourceLink> {tr("describes\n              this as a closed feedback loop: the eyes track the target, the brain continuously updates its\n              prediction of where the target will be, and the hand adjusts its trajectory mid-movement based\n              on that updated prediction, rather than aiming once and committing blindly.\n            ")}</p>
             <p style={pStyle}>
-              This is also why the trainer's tip to "react to what you see, not what you predict" holds up
-              scientifically for slower targets but breaks down slightly at the highest speeds: against very
-              fast, erratic movement, some degree of short-horizon prediction becomes unavoidable simply
-              because the visual feedback loop cannot update fast enough to correct a pure reactive movement
-              in time. The practical skill worth training, then, is not eliminating prediction entirely but
-              learning to weight it correctly — trusting direct tracking on Easy and Normal targets, and
-              blending in light prediction only once a target's speed genuinely outpaces your visual
-              feedback loop on Pro and Impossible.
-            </p>
+              {tr("This is also why the trainer's tip to \"react to what you see, not what you predict\" holds up\n              scientifically for slower targets but breaks down slightly at the highest speeds: against very\n              fast, erratic movement, some degree of short-horizon prediction becomes unavoidable simply\n              because the visual feedback loop cannot update fast enough to correct a pure reactive movement\n              in time. The practical skill worth training, then, is not eliminating prediction entirely but\n              learning to weight it correctly — trusting direct tracking on Easy and Normal targets, and\n              blending in light prediction only once a target's speed genuinely outpaces your visual\n              feedback loop on Pro and Impossible.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Mouse Sensitivity, DPI, and Why Consistency Beats "Pro" Settings</h2>
+            <h2 style={h2Style}>{tr("Mouse Sensitivity, DPI, and Why Consistency Beats \"Pro\" Settings")}</h2>
             <p style={pStyle}>
-              Mouse sensitivity determines how far your cursor travels relative to how far you physically
-              move the mouse, and it is a product of two separate settings: the mouse's own DPI (dots per
-              inch) and the in-game or in-tool sensitivity multiplier applied on top of it. Overviews of <SourceLink href="https://en.wikipedia.org/wiki/Dots_per_inch">DPI as a measurement concept</SourceLink> explain
-              that a higher DPI simply means the sensor reports more counts per inch of physical movement,
-              which is not inherently better or worse — it only changes how finely that raw movement gets
-              divided before the in-game multiplier is applied on top of it.
-            </p>
+              {tr("Mouse sensitivity determines how far your cursor travels relative to how far you physically\n              move the mouse, and it is a product of two separate settings: the mouse's own DPI (dots per\n              inch) and the in-game or in-tool sensitivity multiplier applied on top of it. Overviews of ")}<SourceLink href="https://en.wikipedia.org/wiki/Dots_per_inch">{tr("DPI as a measurement concept")}</SourceLink> {tr("explain\n              that a higher DPI simply means the sensor reports more counts per inch of physical movement,\n              which is not inherently better or worse — it only changes how finely that raw movement gets\n              divided before the in-game multiplier is applied on top of it.\n            ")}</p>
             <p style={pStyle}>
-              Chasing a professional player's exact DPI and sensitivity number is one of the most common
-              mistakes newer players make, because the "right" sensitivity is really a function of your own
-              arm length, desk space, and preferred aiming style — a low-sensitivity player physically
-              sweeping their whole arm across a large mousepad is optimizing for a completely different
-              motor pattern than a high-sensitivity player making small wrist flicks. What matters far more
-              than the specific number is holding it constant: switching sensitivity frequently forces your
-              motor system to relearn the mapping between hand movement and cursor movement from scratch,
-              which directly undermines the muscle-memory consolidation described above.
-            </p>
+              {tr("Chasing a professional player's exact DPI and sensitivity number is one of the most common\n              mistakes newer players make, because the \"right\" sensitivity is really a function of your own\n              arm length, desk space, and preferred aiming style — a low-sensitivity player physically\n              sweeping their whole arm across a large mousepad is optimizing for a completely different\n              motor pattern than a high-sensitivity player making small wrist flicks. What matters far more\n              than the specific number is holding it constant: switching sensitivity frequently forces your\n              motor system to relearn the mapping between hand movement and cursor movement from scratch,\n              which directly undermines the muscle-memory consolidation described above.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Monitor Refresh Rate, Input Lag, and Perceived Responsiveness</h2>
+            <h2 style={h2Style}>{tr("Monitor Refresh Rate, Input Lag, and Perceived Responsiveness")}</h2>
             <p style={pStyle}>
-              A monitor's refresh rate, measured in Hertz, determines how many times per second the display
-              redraws its image. General references on <SourceLink href="https://en.wikipedia.org/wiki/Refresh_rate">display refresh rate</SourceLink> note
-              that a 60Hz panel redraws every 16.7ms, while a 144Hz panel redraws every 6.9ms and a 240Hz
-              panel every 4.2ms — meaning a higher refresh rate shows a moving target's updated position
-              sooner and more frequently, which shortens the time between the target actually moving and you
-              seeing that movement on screen.
-            </p>
+              {tr("A monitor's refresh rate, measured in Hertz, determines how many times per second the display\n              redraws its image. General references on ")}<SourceLink href="https://en.wikipedia.org/wiki/Refresh_rate">{tr("display refresh rate")}</SourceLink> {tr("note\n              that a 60Hz panel redraws every 16.7ms, while a 144Hz panel redraws every 6.9ms and a 240Hz\n              panel every 4.2ms — meaning a higher refresh rate shows a moving target's updated position\n              sooner and more frequently, which shortens the time between the target actually moving and you\n              seeing that movement on screen.\n            ")}</p>
             <p style={pStyle}>
-              This does not change your underlying biological reaction time, but it does reduce one specific
-              source of delay in the full input-to-feedback chain, which is why competitive players often
-              report that high-refresh-rate monitors make tracking feel smoother even though their raw
-              reflexes have not changed. The gain is real but bounded: moving from 60Hz to 144Hz produces a
-              far larger practical improvement than moving from 144Hz to 240Hz, since the marginal reduction
-              in frame time shrinks quickly at the high end. A 60Hz display is still perfectly usable for
-              training and for tracking your own progress over time — differences of a few milliseconds in
-              display latency are dwarfed by the natural session-to-session variance in your own performance.
-            </p>
+              {tr("This does not change your underlying biological reaction time, but it does reduce one specific\n              source of delay in the full input-to-feedback chain, which is why competitive players often\n              report that high-refresh-rate monitors make tracking feel smoother even though their raw\n              reflexes have not changed. The gain is real but bounded: moving from 60Hz to 144Hz produces a\n              far larger practical improvement than moving from 144Hz to 240Hz, since the marginal reduction\n              in frame time shrinks quickly at the high end. A 60Hz display is still perfectly usable for\n              training and for tracking your own progress over time — differences of a few milliseconds in\n              display latency are dwarfed by the natural session-to-session variance in your own performance.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Fatigue, Overtraining, and the Case for Shorter Sessions</h2>
+            <h2 style={h2Style}>{tr("Fatigue, Overtraining, and the Case for Shorter Sessions")}</h2>
             <p style={pStyle}>
-              Aim performance degrades with both physical and mental fatigue, and the two compound each
-              other during a long training block. General discussion of <SourceLink href="https://en.wikipedia.org/wiki/Overtraining">overtraining</SourceLink> in
-              athletic contexts describes how pushing volume without adequate recovery leads to diminishing,
-              and eventually negative, returns — a pattern that shows up in aim training as slowly climbing
-              misclick rates and shrinking combo streaks late in a long session, even though the player feels
-              like they are "trying just as hard" as they were at the start.
-            </p>
+              {tr("Aim performance degrades with both physical and mental fatigue, and the two compound each\n              other during a long training block. General discussion of ")}<SourceLink href="https://en.wikipedia.org/wiki/Overtraining">{tr("overtraining")}</SourceLink> {tr("in\n              athletic contexts describes how pushing volume without adequate recovery leads to diminishing,\n              and eventually negative, returns — a pattern that shows up in aim training as slowly climbing\n              misclick rates and shrinking combo streaks late in a long session, even though the player feels\n              like they are \"trying just as hard\" as they were at the start.\n            ")}</p>
             <p style={pStyle}>
-              The practical takeaway is that a focused 15–20 minute block, broken into several short matches
-              with brief rests between them, generally produces better measurable results than a single
-              unbroken hour of grinding Impossible difficulty. Watching your own accuracy trend within a
-              session is a simple, personal way to find your fatigue point: once accuracy starts dropping two
-              or three matches in a row despite no change in difficulty, that is a reasonable signal to end
-              the session rather than push through with degraded technique that risks reinforcing bad habits
-              instead of good ones.
-            </p>
+              {tr("The practical takeaway is that a focused 15–20 minute block, broken into several short matches\n              with brief rests between them, generally produces better measurable results than a single\n              unbroken hour of grinding Impossible difficulty. Watching your own accuracy trend within a\n              session is a simple, personal way to find your fatigue point: once accuracy starts dropping two\n              or three matches in a row despite no change in difficulty, that is a reasonable signal to end\n              the session rather than push through with degraded technique that risks reinforcing bad habits\n              instead of good ones.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Repetitive Strain Injury Prevention for Mouse and Keyboard Use</h2>
+            <h2 style={h2Style}>{tr("Repetitive Strain Injury Prevention for Mouse and Keyboard Use")}</h2>
             <p style={pStyle}>
-              Any repeated high-frequency clicking motion carries some risk of cumulative strain if done
-              without attention to posture, grip, or rest. General clinical overviews of <SourceLink href="https://www.ncbi.nlm.nih.gov/books/NBK441882/">repetitive strain conditions</SourceLink> describe
-              early warning signs — persistent tingling, numbness, or joint soreness — as signals to stop the
-              activity and rest rather than push through discomfort, since continuing to train through those
-              symptoms is what typically turns a minor strain into a longer-term injury.
-            </p>
+              {tr("Any repeated high-frequency clicking motion carries some risk of cumulative strain if done\n              without attention to posture, grip, or rest. General clinical overviews of ")}<SourceLink href="https://www.ncbi.nlm.nih.gov/books/NBK441882/">{tr("repetitive strain conditions")}</SourceLink> {tr("describe\n              early warning signs — persistent tingling, numbness, or joint soreness — as signals to stop the\n              activity and rest rather than push through discomfort, since continuing to train through those\n              symptoms is what typically turns a minor strain into a longer-term injury.\n            ")}</p>
             <p style={pStyle}>
-              Keeping your wrist in a neutral, floating position rather than resting it against a hard desk
-              edge, using a claw or fingertip grip that minimizes unnecessary forearm tension, and taking a
-              short break every 20–30 minutes of active clicking are all low-effort habits that meaningfully
-              reduce strain risk over a long training program. Because this tool's difficulty tiers can push
-              click rates well above casual browsing speeds, especially on Pro and Impossible, treating longer
-              sessions with the same care you would give any other repetitive physical activity is a sensible
-              default rather than an overreaction.
-            </p>
+              {tr("Keeping your wrist in a neutral, floating position rather than resting it against a hard desk\n              edge, using a claw or fingertip grip that minimizes unnecessary forearm tension, and taking a\n              short break every 20–30 minutes of active clicking are all low-effort habits that meaningfully\n              reduce strain risk over a long training program. Because this tool's difficulty tiers can push\n              click rates well above casual browsing speeds, especially on Pro and Impossible, treating longer\n              sessions with the same care you would give any other repetitive physical activity is a sensible\n              default rather than an overreaction.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>The Psychology Behind Combo Multipliers and Streaks</h2>
+            <h2 style={h2Style}>{tr("The Psychology Behind Combo Multipliers and Streaks")}</h2>
             <p style={pStyle}>
-              The combo system's escalating multiplier — resetting instantly on any miss — is deliberately
-              designed around a well-studied behavioral principle: rewards that arrive on an uncertain,
-              streak-dependent schedule tend to produce stronger engagement and more careful behavior than
-              rewards that arrive predictably every time. General psychology references on <SourceLink href="https://en.wikipedia.org/wiki/Reinforcement">reinforcement schedules</SourceLink> describe
-              how variable and streak-based reward structures encourage sustained, careful effort precisely
-              because the player knows a single mistake wipes out the accumulated bonus.
-            </p>
+              {tr("The combo system's escalating multiplier — resetting instantly on any miss — is deliberately\n              designed around a well-studied behavioral principle: rewards that arrive on an uncertain,\n              streak-dependent schedule tend to produce stronger engagement and more careful behavior than\n              rewards that arrive predictably every time. General psychology references on ")}<SourceLink href="https://en.wikipedia.org/wiki/Reinforcement">{tr("reinforcement schedules")}</SourceLink> {tr("describe\n              how variable and streak-based reward structures encourage sustained, careful effort precisely\n              because the player knows a single mistake wipes out the accumulated bonus.\n            ")}</p>
             <p style={pStyle}>
-              From a training perspective, this mechanic has a genuine side benefit beyond simply making the
-              game feel more exciting: because misclicks are punished so directly through combo loss, players
-              tend to naturally self-correct toward more controlled, deliberate clicking rather than wild,
-              rapid-fire flailing at every target on screen. Treating the multiplier as a built-in accuracy
-              coach — deliberately playing a notch more cautiously whenever your combo climbs past 10 or 20 —
-              is a simple way to use the scoring system itself as a technique-improvement tool rather than
-              just a scorekeeping gimmick.
-            </p>
+              {tr("From a training perspective, this mechanic has a genuine side benefit beyond simply making the\n              game feel more exciting: because misclicks are punished so directly through combo loss, players\n              tend to naturally self-correct toward more controlled, deliberate clicking rather than wild,\n              rapid-fire flailing at every target on screen. Treating the multiplier as a built-in accuracy\n              coach — deliberately playing a notch more cautiously whenever your combo climbs past 10 or 20 —\n              is a simple way to use the scoring system itself as a technique-improvement tool rather than\n              just a scorekeeping gimmick.\n            ")}</p>
           </SeoSection>
 
           <SeoSection accentColor={activeCfg.color}>
-            <h2 style={h2Style}>Esports Training Science and Structured Practice</h2>
+            <h2 style={h2Style}>{tr("Esports Training Science and Structured Practice")}</h2>
             <p style={pStyle}>
-              Organized esports programs increasingly borrow training structures from traditional sports
-              science, including periodized practice blocks, dedicated warm-up routines, and objective
-              performance benchmarking rather than relying purely on hours of unstructured match play.
-              Broader overviews of <SourceLink href="https://en.wikipedia.org/wiki/Esports">competitive esports</SourceLink> note
-              that as prize pools and professionalism have grown, so has the adoption of structured physical
-              and cognitive training methods borrowed from conventional athletics, including isolated
-              mechanical drills that mirror exactly what a tool like this aim trainer provides.
-            </p>
+              {tr("Organized esports programs increasingly borrow training structures from traditional sports\n              science, including periodized practice blocks, dedicated warm-up routines, and objective\n              performance benchmarking rather than relying purely on hours of unstructured match play.\n              Broader overviews of ")}<SourceLink href="https://en.wikipedia.org/wiki/Esports">{tr("competitive esports")}</SourceLink> {tr("note\n              that as prize pools and professionalism have grown, so has the adoption of structured physical\n              and cognitive training methods borrowed from conventional athletics, including isolated\n              mechanical drills that mirror exactly what a tool like this aim trainer provides.\n            ")}</p>
             <p style={pStyle}>
-              The appeal of an isolated benchmark like this one is that it strips away the noisy, unpredictable
-              variables of an actual match — teammates, enemy decisions, map layout — leaving a single, clean
-              measurement of raw mechanical performance that can be tracked consistently across weeks or
-              months. Used alongside regular in-game play rather than as a replacement for it, a short daily
-              aim-training block gives you a controlled way to isolate whether a slump in your actual matches
-              stems from mechanical execution or from something else entirely, like decision-making or
-              positioning, which this kind of targeted, repeatable benchmarking can't measure on its own.
-            </p>
+              {tr("The appeal of an isolated benchmark like this one is that it strips away the noisy, unpredictable\n              variables of an actual match — teammates, enemy decisions, map layout — leaving a single, clean\n              measurement of raw mechanical performance that can be tracked consistently across weeks or\n              months. Used alongside regular in-game play rather than as a replacement for it, a short daily\n              aim-training block gives you a controlled way to isolate whether a slump in your actual matches\n              stems from mechanical execution or from something else entirely, like decision-making or\n              positioning, which this kind of targeted, repeatable benchmarking can't measure on its own.\n            ")}</p>
           </SeoSection>
 
           <section aria-labelledby="faq-heading-main" style={{ marginTop: '1rem' }}>
-            <h2 id="faq-heading-main" style={{ ...h2Style, marginBottom: '1.25rem' }}>Frequently Asked Questions</h2>
+            <h2 id="faq-heading-main" style={{ ...h2Style, marginBottom: '1.25rem' }}>{tr("Frequently Asked Questions")}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {FAQ_ENTRIES.map(entry => (
                 <FaqAccordionRow
@@ -1992,6 +1829,7 @@ const pStyle: React.CSSProperties = {
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 function SeoHero({ accentColor, accentRgb }: { accentColor: string; accentRgb: string }) {
+  const { tr } = usePageI18n(pageDict);
   return (
     <header style={{ padding: '2.5rem 0 2rem', textAlign: 'center' }}>
       <div style={{
@@ -2000,18 +1838,14 @@ function SeoHero({ accentColor, accentRgb }: { accentColor: string; accentRgb: s
         borderRadius: '20px', padding: '0.3rem 0.9rem', fontSize: '0.7rem', fontWeight: 700,
         letterSpacing: '0.1em', color: accentColor, textTransform: 'uppercase',
       }}>
-        Free Online 2D Aim Trainer
-      </div>
+        {tr("Free Online 2D Aim Trainer\n      ")}</div>
       <h2 style={{
         fontWeight: 900, fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', color: '#fff',
         margin: '0 0 0.75rem', letterSpacing: '-0.02em', lineHeight: 1.15,
       }}>
-        Train Faster, More Accurate Aim
-      </h2>
+        {tr("Train Faster, More Accurate Aim\n      ")}</h2>
       <p style={{ color: '#8888a0', fontSize: '1rem', maxWidth: '620px', margin: '0 auto', lineHeight: 1.7 }}>
-        A browser-based 2D aim trainer with five difficulty tiers, combo multipliers, S–F grading, and full
-        session history — built to sharpen the click accuracy and reaction speed that competitive shooters demand.
-      </p>
+        {tr("A browser-based 2D aim trainer with five difficulty tiers, combo multipliers, S–F grading, and full\n        session history — built to sharpen the click accuracy and reaction speed that competitive shooters demand.\n      ")}</p>
     </header>
   );
 }

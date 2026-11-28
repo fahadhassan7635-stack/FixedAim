@@ -1,6 +1,7 @@
 "use client";
-
-﻿/**
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/SpacebarPage.json';
+/**
  * SpacebarPage.tsx
  * - Full SEO: meta, OG, Twitter, JSON-LD, breadcrumb, FAQ
  * - Real spacebar animation (spring physics)
@@ -316,6 +317,7 @@ const SpacebarKey = memo(({ isPressed, phase }: {
   isPressed: boolean;
   phase: Phase;
 }) => {
+  const { tr } = usePageI18n(pageDict);
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -392,8 +394,7 @@ const SpacebarKey = memo(({ isPressed, phase }: {
             ].join(', '),
           }}
         >
-          SPACEBAR
-        </div>
+          {tr("SPACEBAR\n        ")}</div>
       </div>
     </div>
   );
@@ -414,6 +415,7 @@ interface ResultModalProps {
 const ResultModal = memo(({
   rating, count, finalSps, maxSps, duration, onReset, onTryAgain,
 }: ResultModalProps) => {
+  const { tr } = usePageI18n(pageDict);
   const dialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(true, dialogRef);
 
@@ -468,7 +470,7 @@ const ResultModal = memo(({
         <button
           onClick={onReset}
           disabled={cooldown}
-          aria-label="Close result dialog"
+          aria-label={tr("Close result dialog")}
           style={{
             position: 'absolute', top: '0.75rem', right: '0.75rem',
             background: 'rgba(255,255,255,0.03)',
@@ -507,8 +509,7 @@ const ResultModal = memo(({
           </div>
           <div style={{ textAlign: 'left' }}>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Your Rank is
-            </div>
+              {tr("Your Rank is\n            ")}</div>
             <div style={{ fontSize: '2.2rem', fontWeight: '900', color: rating.color, fontStyle: 'italic', margin: '0.1rem 0' }}>
               {rating.label}!
             </div>
@@ -521,7 +522,7 @@ const ResultModal = memo(({
               ))}
             </div>
             <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-              You pressed at{' '}
+              {tr("You pressed at")}{' '}
               <strong style={{ color: '#fff', fontSize: '1.15rem', fontVariantNumeric: 'tabular-nums' }}>
                 {finalSps.toFixed(2)}
               </strong>{' '}
@@ -569,8 +570,7 @@ const ResultModal = memo(({
             disabled={cooldown}
             style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', flex: 1, maxWidth: '160px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', opacity: cooldown ? 0.5 : 1, cursor: cooldown ? 'not-allowed' : 'pointer' }}
           >
-            🔄 Reset
-          </button>
+            {tr("🔄 Reset\n          ")}</button>
           <button
             className="btn btn-primary"
             onClick={onTryAgain}
@@ -582,8 +582,7 @@ const ResultModal = memo(({
               opacity: cooldown ? 0.5 : 1, cursor: cooldown ? 'not-allowed' : 'pointer'
             }}
           >
-            ▶ Try Again
-          </button>
+            {tr("▶ Try Again\n          ")}</button>
         </div>
       </div>
     </>
@@ -629,6 +628,7 @@ SourceLink.displayName = 'SourceLink';
 
 // ─── FAQ Section (accordion) ─────────────────────────────────────────────────
 function FaqSection() {
+  const { tr } = usePageI18n(pageDict);
   // -1 means nothing open; only one panel open at a time (accordion behavior)
   const [openIndex, setOpenIndex] = useState<number>(-1);
 
@@ -649,8 +649,7 @@ function FaqSection() {
       }}
     >
       <h2 style={{ color: 'var(--neon-cyan)', fontSize: '1.35rem', fontWeight: '700', marginBottom: '1.5rem', marginTop: '0' }}>
-        Frequently Asked Questions (FAQs)
-      </h2>
+        {tr("Frequently Asked Questions (FAQs)\n      ")}</h2>
 
       {FAQ_ITEMS.map(({ q, a }, index) => (
         <FaqAccordionItem
@@ -668,6 +667,7 @@ function FaqSection() {
 
 // ─── SEO Article ─────────────────────────────────────────────────────────────
 function SpacebarArticleContent() {
+  const { tr } = usePageI18n(pageDict);
   const h2: React.CSSProperties = {
     color: 'var(--neon-cyan)',
     fontSize: '1.4rem',
@@ -711,183 +711,167 @@ function SpacebarArticleContent() {
       <article style={{ borderTop: '1px solid var(--border)', paddingTop: '3rem' }}>
       <section style={{ color: 'var(--text-secondary)', fontSize: '0.91rem', lineHeight: '1.78' }}>
         
-        <h2 style={{ ...h2, marginTop: 0 }}>What is a Spacebar Counter (CPS Test)?</h2>
+        <h2 style={{ ...h2, marginTop: 0 }}>{tr("What is a Spacebar Counter (CPS Test)?")}</h2>
         <p style={p}>
-          A Spacebar Counter is a simple and effective tool that measures how fast you can press the spacebar key within a specific time limit. This speed is typically measured in <strong>Clicks Per Second (CPS)</strong>. By using this tool, gamers and typists can accurately track their finger speed, stamina, and reaction time in real-time.
-        </p>
+          {tr("A Spacebar Counter is a simple and effective tool that measures how fast you can press the spacebar key within a specific time limit. This speed is typically measured in ")}<strong>{tr("Clicks Per Second (CPS)")}</strong>{tr(". By using this tool, gamers and typists can accurately track their finger speed, stamina, and reaction time in real-time.\n        ")}</p>
 
-        <h2 style={h2}>How to Use the Spacebar Test</h2>
+        <h2 style={h2}>{tr("How to Use the Spacebar Test")}</h2>
         <ul style={ul}>
-          <li style={li}><strong>Select a Timer:</strong> Choose your preferred time limit from the buttons above (1s, 5s, 10s, up to 100s).</li>
-          <li style={li}><strong>Start Clicking:</strong> Press the spacebar as fast as you can. The timer starts automatically on your first press.</li>
-          <li style={li}><strong>Review Your Score:</strong> Once the timer hits zero, a popup will display your final CPS score and performance rank.</li>
-          <li style={li}><strong>Try Again:</strong> Click the "Try Again" button or hit Enter to quickly restart the test and beat your previous high score.</li>
+          <li style={li}><strong>{tr("Select a Timer:")}</strong> {tr("Choose your preferred time limit from the buttons above (1s, 5s, 10s, up to 100s).")}</li>
+          <li style={li}><strong>{tr("Start Clicking:")}</strong> {tr("Press the spacebar as fast as you can. The timer starts automatically on your first press.")}</li>
+          <li style={li}><strong>{tr("Review Your Score:")}</strong> {tr("Once the timer hits zero, a popup will display your final CPS score and performance rank.")}</li>
+          <li style={li}><strong>{tr("Try Again:")}</strong> {tr("Click the \"Try Again\" button or hit Enter to quickly restart the test and beat your previous high score.")}</li>
         </ul>
 
-        <h2 style={h2}>What is a Good Spacebar CPS Score?</h2>
+        <h2 style={h2}>{tr("What is a Good Spacebar CPS Score?")}</h2>
         <p style={p}>
-          Your spacebar clicking speed can be categorized into different performance tiers based on your CPS score:
-        </p>
+          {tr("Your spacebar clicking speed can be categorized into different performance tiers based on your CPS score:\n        ")}</p>
         <ul style={ul}>
-          <li style={li}><strong>Turtle (0 - 4 CPS):</strong> Beginner level. This is the average speed for casual computer users pressing with one finger.</li>
-          <li style={li}><strong>Rabbit (5 - 7 CPS):</strong> Intermediate level. You have good finger agility and can click significantly faster than the average user.</li>
-          <li style={li}><strong>Cheetah (8 - 10 CPS):</strong> Advanced level. Excellent for gaming, showing fast reflexes and developed muscle memory.</li>
-          <li style={li}><strong>Alien (10+ CPS):</strong> Pro level. Typically achieved by competitive gamers using advanced techniques like "jitter clicking" or "butterfly clicking" on the spacebar.</li>
+          <li style={li}><strong>{tr("Turtle (0 - 4 CPS):")}</strong> {tr("Beginner level. This is the average speed for casual computer users pressing with one finger.")}</li>
+          <li style={li}><strong>{tr("Rabbit (5 - 7 CPS):")}</strong> {tr("Intermediate level. You have good finger agility and can click significantly faster than the average user.")}</li>
+          <li style={li}><strong>{tr("Cheetah (8 - 10 CPS):")}</strong> {tr("Advanced level. Excellent for gaming, showing fast reflexes and developed muscle memory.")}</li>
+          <li style={li}><strong>{tr("Alien (10+ CPS):")}</strong> {tr("Pro level. Typically achieved by competitive gamers using advanced techniques like \"jitter clicking\" or \"butterfly clicking\" on the spacebar.")}</li>
         </ul>
 
         {/* ── 1. WHAT IS BUTTERFLY SPACEBAR TEST? ── */}
-        <h2 style={h2}>What is a Butterfly Spacebar Test? (Dual-Finger Flutter Technique)</h2>
+        <h2 style={h2}>{tr("What is a Butterfly Spacebar Test? (Dual-Finger Flutter Technique)")}</h2>
         <p style={p}>
-          A <strong>Butterfly Spacebar Test</strong> measures your ability to execute the butterfly clicking technique on a computer keyboard's space key. Rather than pressing with a single thumb, a user alternates two fingers in rapid succession over the spacebar in a fluid flutter motion resembling butterfly wings.
-        </p>
+          A <strong>{tr("Butterfly Spacebar Test")}</strong> {tr("measures your ability to execute the butterfly clicking technique on a computer keyboard's space key. Rather than pressing with a single thumb, a user alternates two fingers in rapid succession over the spacebar in a fluid flutter motion resembling butterfly wings.\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', margin: '1rem 0 1.5rem' }}>
           <div style={{ background: 'rgba(0,245,255,0.04)', border: '1px solid rgba(0,245,255,0.15)', borderRadius: '10px', padding: '1rem' }}>
-            <h3 style={{ color: 'var(--neon-cyan)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>👐 Two-Handed Alternating</h3>
+            <h3 style={{ color: 'var(--neon-cyan)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("👐 Two-Handed Alternating")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
-              Place your left index finger on the left side of the spacebar and your right index finger on the right side. Alternating left-right taps at high frequency can easily double or triple your CPS to <strong>10–16+ CPS</strong>.
+              {tr("Place your left index finger on the left side of the spacebar and your right index finger on the right side. Alternating left-right taps at high frequency can easily double or triple your CPS to ")}<strong>{tr("10–16+ CPS")}</strong>.
             </p>
           </div>
           <div style={{ background: 'rgba(0,255,136,0.04)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: '10px', padding: '1rem' }}>
-            <h3 style={{ color: 'var(--neon-green)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>✌️ Single-Hand Index &amp; Middle</h3>
+            <h3 style={{ color: 'var(--neon-green)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("✌️ Single-Hand Index &amp; Middle")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
-              Position both your index and middle finger of your dominant hand over the center section of the spacebar, rapidly fluttering between fingers while keeping your wrist elevated.
-            </p>
+              {tr("Position both your index and middle finger of your dominant hand over the center section of the spacebar, rapidly fluttering between fingers while keeping your wrist elevated.\n            ")}</p>
           </div>
           <div style={{ background: 'rgba(255,159,67,0.04)', border: '1px solid rgba(255,159,67,0.15)', borderRadius: '10px', padding: '1rem' }}>
-            <h3 style={{ color: 'var(--neon-orange)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⌨️ Why the Spacebar Excels at Butterfly</h3>
+            <h3 style={{ color: 'var(--neon-orange)', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("⌨️ Why the Spacebar Excels at Butterfly")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>
-              Unlike mouse buttons which are narrow, a standard 6.25u keyboard spacebar offers a wide physical strike zone supported by steel stabilizers, providing ample room for multi-finger flutter tapping.
-            </p>
+              {tr("Unlike mouse buttons which are narrow, a standard 6.25u keyboard spacebar offers a wide physical strike zone supported by steel stabilizers, providing ample room for multi-finger flutter tapping.\n            ")}</p>
           </div>
         </div>
         <p style={p}>
-          <strong>Performance Range:</strong> Normal single-thumb clicking averages 4–7 CPS, whereas butterfly spacebar tapping routinely delivers <strong>8 to 15+ CPS</strong>. For best results, use linear mechanical switches with short actuation distance (e.g. Cherry MX Speed Silver or Gateron Red) and well-lubricated stabilizers to prevent keycap binding.
-        </p>
+          <strong>{tr("Performance Range:")}</strong> {tr("Normal single-thumb clicking averages 4–7 CPS, whereas butterfly spacebar tapping routinely delivers ")}<strong>{tr("8 to 15+ CPS")}</strong>{tr(". For best results, use linear mechanical switches with short actuation distance (e.g. Cherry MX Speed Silver or Gateron Red) and well-lubricated stabilizers to prevent keycap binding.\n        ")}</p>
 
         {/* ── 2. WHAT IS JITTER CLICK COUNTER ON SPACEBAR? ── */}
-        <h2 style={h2}>What is a Jitter Spacebar Test? (Forearm Vibration Method)</h2>
+        <h2 style={h2}>{tr("What is a Jitter Spacebar Test? (Forearm Vibration Method)")}</h2>
         <p style={p}>
-          A <strong>Jitter Spacebar Test</strong> (or Jitter Click Counter on Spacebar) benchmarks how fast you can actuate the spacebar using rapid physical forearm contractions. In jitter clicking, you deliberately tense your wrist and forearm muscles until they produce rapid, controlled micro-spasms. These tremors are channeled into your fingertip resting gently on the spacebar switch.
-        </p>
+          A <strong>{tr("Jitter Spacebar Test")}</strong> {tr("(or Jitter Click Counter on Spacebar) benchmarks how fast you can actuate the spacebar using rapid physical forearm contractions. In jitter clicking, you deliberately tense your wrist and forearm muscles until they produce rapid, controlled micro-spasms. These tremors are channeled into your fingertip resting gently on the spacebar switch.\n        ")}</p>
         <ul style={ul}>
-          <li style={li}><strong>Average Speed:</strong> <span style={{ color: 'var(--neon-cyan)', fontWeight: 700 }}>8 to 12+ CPS</span> with a single finger or thumb.</li>
-          <li style={li}><strong>Execution on Keyboard:</strong> Anchor your palm or wrist firmly on the desk or keyboard wrist rest to provide a stable foundation. Hover your index finger or thumb lightly above the spacebar keycap, tense your forearm, and let the tremors trigger rapid switch actuations without bottoming out the key completely.</li>
-          <li style={li}><strong>Feathering the Actuation Point:</strong> Unlike mouse switches with sub-millimeter travel, mechanical keyboard switches have 2.0–4.0mm of key travel. Skilled jitter tappers "feather" the switch near its actuation reset point instead of bottoming out, conserving stamina and boosting frequency.</li>
+          <li style={li}><strong>{tr("Average Speed:")}</strong> <span style={{ color: 'var(--neon-cyan)', fontWeight: 700 }}>{tr("8 to 12+ CPS")}</span> {tr("with a single finger or thumb.")}</li>
+          <li style={li}><strong>{tr("Execution on Keyboard:")}</strong> {tr("Anchor your palm or wrist firmly on the desk or keyboard wrist rest to provide a stable foundation. Hover your index finger or thumb lightly above the spacebar keycap, tense your forearm, and let the tremors trigger rapid switch actuations without bottoming out the key completely.")}</li>
+          <li style={li}><strong>{tr("Feathering the Actuation Point:")}</strong> {tr("Unlike mouse switches with sub-millimeter travel, mechanical keyboard switches have 2.0–4.0mm of key travel. Skilled jitter tappers \"feather\" the switch near its actuation reset point instead of bottoming out, conserving stamina and boosting frequency.")}</li>
         </ul>
         <div style={{ background: 'rgba(255,159,67,0.06)', borderLeft: '4px solid var(--neon-orange)', padding: '0.9rem 1.25rem', borderRadius: '0 8px 8px 0', margin: '1rem 0 1.5rem' }}>
-          <strong style={{ color: 'var(--neon-orange)', display: 'block', marginBottom: '0.3rem' }}>⚠️ Ergonomics &amp; Health Precaution:</strong>
+          <strong style={{ color: 'var(--neon-orange)', display: 'block', marginBottom: '0.3rem' }}>{tr("⚠️ Ergonomics &amp; Health Precaution:")}</strong>
           <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-            Jitter clicking on a keyboard places significant strain on the tendons in your forearm and wrist. Limit jitter spacebar practice to short 5–10 second burst sessions. Always stretch your wrists, and stop immediately if you feel pain, fatigue, or tingling.
-          </p>
+            {tr("Jitter clicking on a keyboard places significant strain on the tendons in your forearm and wrist. Limit jitter spacebar practice to short 5–10 second burst sessions. Always stretch your wrists, and stop immediately if you feel pain, fatigue, or tingling.\n          ")}</p>
         </div>
 
         {/* ── 3. WHERE CAN WE USE A SPACEBAR COUNTER? ── */}
-        <h2 style={h2}>Where Can We Use a Spacebar Counter? (Top Games &amp; Practical Applications)</h2>
+        <h2 style={h2}>{tr("Where Can We Use a Spacebar Counter? (Top Games &amp; Practical Applications)")}</h2>
         <p style={p}>
-          A spacebar click counter is far more than an isolated speed game—spacebar velocity and timing precision are foundational skills across numerous gaming genres, typing workflows, and hardware diagnostics:
-        </p>
+          {tr("A spacebar click counter is far more than an isolated speed game—spacebar velocity and timing precision are foundational skills across numerous gaming genres, typing workflows, and hardware diagnostics:\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem', margin: '1.25rem 0 1.75rem' }}>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem' }}>
-            <h3 style={{ color: 'var(--neon-green)', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🎮 Minecraft Parkour, Bunny Hopping &amp; PvP</h3>
+            <h3 style={{ color: 'var(--neon-green)', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🎮 Minecraft Parkour, Bunny Hopping &amp; PvP")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.65' }}>
-              In Minecraft, timing your spacebar presses determines sprint-jump momentum, neo-jump clearance, ladder clutching, and water bucket landings. Fast spacebar tapping allows instant recovery jumps when taking knockback in Bedwars, Skywars, and 1.8 PvP.
-            </p>
+              {tr("In Minecraft, timing your spacebar presses determines sprint-jump momentum, neo-jump clearance, ladder clutching, and water bucket landings. Fast spacebar tapping allows instant recovery jumps when taking knockback in Bedwars, Skywars, and 1.8 PvP.\n            ")}</p>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem' }}>
-            <h3 style={{ color: 'var(--neon-cyan)', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🎵 Rhythm &amp; Arcade Games (Geometry Dash, Osu!, FNF)</h3>
+            <h3 style={{ color: 'var(--neon-cyan)', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🎵 Rhythm &amp; Arcade Games (Geometry Dash, Osu!, FNF)")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.65' }}>
-              Games like <em>Geometry Dash</em>, <em>Osu! Mania</em>, and <em>Friday Night Funkin'</em> demand precise spacebar actuation. High CPS and microsecond rhythm control allow you to clear spam sections, wave spamming, and ultra-dense obstacle clusters without falling out of sync.
-            </p>
+              {tr("Games like ")}<em>{tr("Geometry Dash")}</em>, <em>{tr("Osu! Mania")}</em>{tr(", and ")}<em>{tr("Friday Night Funkin'")}</em> {tr("demand precise spacebar actuation. High CPS and microsecond rhythm control allow you to clear spam sections, wave spamming, and ultra-dense obstacle clusters without falling out of sync.\n            ")}</p>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem' }}>
-            <h3 style={{ color: 'var(--neon-orange)', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🦖 Browser Classics (Chrome Dino &amp; Flappy Bird)</h3>
+            <h3 style={{ color: 'var(--neon-orange)', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🦖 Browser Classics (Chrome Dino &amp; Flappy Bird)")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.65' }}>
-              Classic reflex games like Google Chrome's offline Dinosaur T-Rex Runner and Flappy Bird rely solely on spacebar inputs. Training your spacebar trigger finger improves short-hop versus full-jump height modulation.
-            </p>
+              {tr("Classic reflex games like Google Chrome's offline Dinosaur T-Rex Runner and Flappy Bird rely solely on spacebar inputs. Training your spacebar trigger finger improves short-hop versus full-jump height modulation.\n            ")}</p>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem' }}>
-            <h3 style={{ color: '#ff3838', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🔫 Tactical Shooters (CS2, Valorant &amp; Apex Legends)</h3>
+            <h3 style={{ color: '#ff3838', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🔫 Tactical Shooters (CS2, Valorant &amp; Apex Legends)")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.65' }}>
-              In competitive tactical shooters, mastering the spacebar rhythm is essential for bunny hopping (bhop chains), silent jump-spotting over cover, slide-jumping in Apex Legends, and super-glides.
-            </p>
+              {tr("In competitive tactical shooters, mastering the spacebar rhythm is essential for bunny hopping (bhop chains), silent jump-spotting over cover, slide-jumping in Apex Legends, and super-glides.\n            ")}</p>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem' }}>
-            <h3 style={{ color: '#38bdf8', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>⌨️ Typing Speed &amp; Words Per Minute (WPM)</h3>
+            <h3 style={{ color: '#38bdf8', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("⌨️ Typing Speed &amp; Words Per Minute (WPM)")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.65' }}>
-              The spacebar is statistically the most frequently pressed key on any keyboard, representing <strong>18% to 20% of all keystrokes</strong>. Thumb sluggishness on the spacebar creates bottleneck pauses between words; improving thumb actuation speed noticeably lifts overall typing WPM.
-            </p>
+              {tr("The spacebar is statistically the most frequently pressed key on any keyboard, representing ")}<strong>{tr("18% to 20% of all keystrokes")}</strong>{tr(". Thumb sluggishness on the spacebar creates bottleneck pauses between words; improving thumb actuation speed noticeably lifts overall typing WPM.\n            ")}</p>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem' }}>
-            <h3 style={{ color: '#a855f7', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>🛠️ Mechanical Keyboard &amp; Switch Diagnostics</h3>
+            <h3 style={{ color: '#a855f7', fontSize: '1.05rem', fontWeight: 700, margin: '0 0 0.5rem' }}>{tr("🛠️ Mechanical Keyboard &amp; Switch Diagnostics")}</h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.65' }}>
-              Use the spacebar counter to diagnose hardware health. Rapid tapping reveals switch chattering (accidental double inputs), stabilizer rattle, uneven wire balance, or unresponsive switch leaf contacts on custom mechanical builds.
-            </p>
+              {tr("Use the spacebar counter to diagnose hardware health. Rapid tapping reveals switch chattering (accidental double inputs), stabilizer rattle, uneven wire balance, or unresponsive switch leaf contacts on custom mechanical builds.\n            ")}</p>
           </div>
         </div>
 
         {/* ── 4. WHY DRAG CLICKING DOES NOT APPLY TO SPACEBAR ── */}
-        <h2 style={h2}>Why Drag Clicking is Not Recommended on Keyboard Spacebars</h2>
+        <h2 style={h2}>{tr("Why Drag Clicking is Not Recommended on Keyboard Spacebars")}</h2>
         <p style={p}>
-          While drag clicking is widely famous for gaming mice in Minecraft god-bridging, it <strong>does not translate effectively to a keyboard spacebar</strong> for several structural reasons:
-        </p>
+          {tr("While drag clicking is widely famous for gaming mice in Minecraft god-bridging, it ")}<strong>{tr("does not translate effectively to a keyboard spacebar")}</strong> {tr("for several structural reasons:\n        ")}</p>
         <ul style={ul}>
-          <li style={li}><strong>Key Travel Distance:</strong> Mouse switches actuate in less than 0.5mm, enabling tiny skin-friction bounces. In contrast, mechanical keyboard switches have 2.0mm to 4.0mm of travel, making surface-friction drag bouncing physically ineffective.</li>
-          <li style={li}><strong>Heavy Return Springs &amp; Stabilizers:</strong> Keyboard spacebars use 50g–70g return springs and wide steel wire stabilizers. Attempting to drag-click across a spacebar creates diagonal torque that can bend stabilizer wires or bind the switch stem rather than actuating smoothly.</li>
-          <li style={li}><strong>Recommended Alternatives:</strong> For high-frequency spacebar tapping, competitive gamers stick exclusively to <em>Butterfly Tapping</em> or <em>Two-Hand Alternating</em>, which are ergonomic, reliable, and produce up to 15+ CPS without hardware strain.</li>
+          <li style={li}><strong>{tr("Key Travel Distance:")}</strong> {tr("Mouse switches actuate in less than 0.5mm, enabling tiny skin-friction bounces. In contrast, mechanical keyboard switches have 2.0mm to 4.0mm of travel, making surface-friction drag bouncing physically ineffective.")}</li>
+          <li style={li}><strong>{tr("Heavy Return Springs &amp; Stabilizers:")}</strong> {tr("Keyboard spacebars use 50g–70g return springs and wide steel wire stabilizers. Attempting to drag-click across a spacebar creates diagonal torque that can bend stabilizer wires or bind the switch stem rather than actuating smoothly.")}</li>
+          <li style={li}><strong>{tr("Recommended Alternatives:")}</strong> {tr("For high-frequency spacebar tapping, competitive gamers stick exclusively to ")}<em>{tr("Butterfly Tapping")}</em> {tr("or ")}<em>{tr("Two-Hand Alternating")}</em>{tr(", which are ergonomic, reliable, and produce up to 15+ CPS without hardware strain.")}</li>
         </ul>
 
         {/* ── 5. COMPARISON TABLE ── */}
-        <h2 style={h2}>Spacebar Tapping Techniques Comparison Table</h2>
+        <h2 style={h2}>{tr("Spacebar Tapping Techniques Comparison Table")}</h2>
         <div style={{ overflowX: 'auto', margin: '1.25rem 0 2rem' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left', minWidth: '640px' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid rgba(0,245,255,0.3)', color: '#fff', background: 'rgba(0,245,255,0.06)' }}>
-                <th style={{ padding: '0.75rem 0.85rem' }}>Technique</th>
-                <th style={{ padding: '0.75rem 0.85rem' }}>Typical CPS</th>
-                <th style={{ padding: '0.75rem 0.85rem' }}>Hand / Finger Setup</th>
-                <th style={{ padding: '0.75rem 0.85rem' }}>Strain Level</th>
-                <th style={{ padding: '0.75rem 0.85rem' }}>Best For</th>
+                <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Technique")}</th>
+                <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Typical CPS")}</th>
+                <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Hand / Finger Setup")}</th>
+                <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Strain Level")}</th>
+                <th style={{ padding: '0.75rem 0.85rem' }}>{tr("Best For")}</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-green)' }}>Single Thumb (Normal)</td>
-                <td style={{ padding: '0.7rem 0.85rem' }}>4 – 7 CPS</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>Dominant thumb only</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Very Low</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>Daily typing, casual gaming</td>
+                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-green)' }}>{tr("Single Thumb (Normal)")}</td>
+                <td style={{ padding: '0.7rem 0.85rem' }}>{tr("4 – 7 CPS")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>{tr("Dominant thumb only")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Very Low")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>{tr("Daily typing, casual gaming")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-cyan)' }}>Butterfly Spacebar</td>
-                <td style={{ padding: '0.7rem 0.85rem' }}>8 – 15+ CPS</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>Index + Middle or 2 Index fingers</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>Moderate</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>Geometry Dash spam, high CPS tests</td>
+                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-cyan)' }}>{tr("Butterfly Spacebar")}</td>
+                <td style={{ padding: '0.7rem 0.85rem' }}>{tr("8 – 15+ CPS")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>{tr("Index + Middle or 2 Index fingers")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: '#ff9f43' }}>{tr("Moderate")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>{tr("Geometry Dash spam, high CPS tests")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-orange)' }}>Jitter Spacebar</td>
-                <td style={{ padding: '0.7rem 0.85rem' }}>8 – 12 CPS</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>Tensed forearm vibration into thumb/finger</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>High (RSI Risk)</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>Short combat bursts, burst tests</td>
+                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: 'var(--neon-orange)' }}>{tr("Jitter Spacebar")}</td>
+                <td style={{ padding: '0.7rem 0.85rem' }}>{tr("8 – 12 CPS")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>{tr("Tensed forearm vibration into thumb/finger")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: '#ff3838' }}>{tr("High (RSI Risk)")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>{tr("Short combat bursts, burst tests")}</td>
               </tr>
               <tr>
-                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#38bdf8' }}>Two-Hand Alternating</td>
-                <td style={{ padding: '0.7rem 0.85rem' }}>10 – 16+ CPS</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>Both thumbs or left/right index fingers</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>Low</td>
-                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>Rhythm games, breaking personal records</td>
+                <td style={{ padding: '0.7rem 0.85rem', fontWeight: 700, color: '#38bdf8' }}>{tr("Two-Hand Alternating")}</td>
+                <td style={{ padding: '0.7rem 0.85rem' }}>{tr("10 – 16+ CPS")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-secondary)' }}>{tr("Both thumbs or left/right index fingers")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: '#10ac84' }}>{tr("Low")}</td>
+                <td style={{ padding: '0.7rem 0.85rem', color: 'var(--text-muted)' }}>{tr("Rhythm games, breaking personal records")}</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h2 style={h2}>Tips to Improve Your Spacebar Speed</h2>
+        <h2 style={h2}>{tr("Tips to Improve Your Spacebar Speed")}</h2>
         <ul style={ul}>
-          <li style={li}><strong>Keyboard Angle &amp; Rest:</strong> Keep your keyboard flat or slightly negative-tilted to keep wrists straight and prevent carpal pressure.</li>
-          <li style={li}><strong>Light Linear Switches:</strong> Switches with 45g actuation (Cherry Speed Silver, Gateron Yellow/Red) reset significantly faster than heavy tactile switches.</li>
-          <li style={li}><strong>Lube Your Stabilizers:</strong> Unlubricated spacebar wire stabilizers cause friction rattles that sap click rhythm. A well-tuned stabilizer allows effortless flutter taps.</li>
-          <li style={li}><strong>Interval Training:</strong> Practice in 5-second max-effort sprint sets followed by 20 seconds of rest to build twitch muscle endurance.</li>
+          <li style={li}><strong>{tr("Keyboard Angle &amp; Rest:")}</strong> {tr("Keep your keyboard flat or slightly negative-tilted to keep wrists straight and prevent carpal pressure.")}</li>
+          <li style={li}><strong>{tr("Light Linear Switches:")}</strong> {tr("Switches with 45g actuation (Cherry Speed Silver, Gateron Yellow/Red) reset significantly faster than heavy tactile switches.")}</li>
+          <li style={li}><strong>{tr("Lube Your Stabilizers:")}</strong> {tr("Unlubricated spacebar wire stabilizers cause friction rattles that sap click rhythm. A well-tuned stabilizer allows effortless flutter taps.")}</li>
+          <li style={li}><strong>{tr("Interval Training:")}</strong> {tr("Practice in 5-second max-effort sprint sets followed by 20 seconds of rest to build twitch muscle endurance.")}</li>
         </ul>
 
       </section>
@@ -898,6 +882,7 @@ function SpacebarArticleContent() {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function SpacebarPage() {
+  const { tr } = usePageI18n(pageDict);
   const [count,        setCount]       = useState(0);
   const [timeLeft,     setTimeLeft]    = useState(10);
   const [phase,        setPhase]       = useState<Phase>('idle');
@@ -1080,21 +1065,20 @@ export default function SpacebarPage() {
       <main
         style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}
         role="main"
-        aria-label="Spacebar Counter CPS Test"
+        aria-label={tr("Spacebar Counter CPS Test")}
       >
         <style>{GLOBAL_STYLES}</style>
 
 
         {/* ── Header ── */}
         <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="section-label">Keyboard Tool</div>
+          <div className="section-label">{tr("Keyboard Tool")}</div>
           <h1 className="tool-title">
-            Spacebar Counter{' '}
+            {tr("Spacebar Counter")}{' '}
             <span style={{ fontSize: '0.5em', color: 'var(--neon-cyan)', fontWeight: '700' }}>
-              (KPS Test)
-            </span>
+              {tr("(KPS Test)\n            ")}</span>
           </h1>
-          <p className="tool-subtitle">Hit that spacebar as fast as you can!</p>
+          <p className="tool-subtitle">{tr("Hit that spacebar as fast as you can!")}</p>
         </header>
 
         {/* ── Duration selector + Sound toggle ── */}
@@ -1140,8 +1124,7 @@ export default function SpacebarPage() {
             borderRadius: '8px', padding: '0.2rem 0.2rem 0.2rem 0.6rem',
           }}>
             <label htmlFor="custom-time" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
-              Custom:
-            </label>
+              {tr("Custom:\n            ")}</label>
             <input
               id="custom-time"
               type="text"
@@ -1149,10 +1132,10 @@ export default function SpacebarPage() {
               value={customTime}
               onChange={handleCustomTimeChange}
               disabled={phase === 'running'}
-              placeholder="sec"
+              placeholder={tr("sec")}
               maxLength={4}
               autoComplete="off"
-              aria-label="Custom duration in seconds"
+              aria-label={tr("Custom duration in seconds")}
               style={{
                 width: '50px', background: 'transparent', border: 'none',
                 color: 'var(--neon-cyan)', fontWeight: '700', outline: 'none',
@@ -1169,7 +1152,7 @@ export default function SpacebarPage() {
                 cursor: phase === 'running' || !customTime ? 'not-allowed' : 'pointer',
                 fontSize: '0.8rem', transition: 'all 0.2s',
               }}
-            >Set</button>
+            >{tr("Set")}</button>
           </div>
 
           {/* Sound toggle */}
@@ -1214,7 +1197,7 @@ export default function SpacebarPage() {
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(progress)}
-          aria-label="Test progress"
+          aria-label={tr("Test progress")}
           style={{ marginBottom: '1.5rem' }}
         >
           <div className="progress-fill" style={{ width: `${progress}%` }} />
@@ -1249,8 +1232,7 @@ export default function SpacebarPage() {
               <>
                 <span style={{ fontSize: '3rem' }} aria-hidden="true">▭</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--neon-cyan)' }}>
-                  Press SPACE to Start
-                </span>
+                  {tr("Press SPACE to Start\n                ")}</span>
               </>
             )}
             {phase === 'running' && (
@@ -1261,15 +1243,14 @@ export default function SpacebarPage() {
                 }}>
                   {count}
                 </div>
-                <div style={{ color: 'var(--text-secondary)' }}>Keep pressing SPACE! ⚡</div>
+                <div style={{ color: 'var(--text-secondary)' }}>{tr("Keep pressing SPACE! ⚡")}</div>
               </>
             )}
             {phase === 'done' && (
               <>
                 <span style={{ fontSize: '3rem' }} aria-hidden="true">🏁</span>
                 <span style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--neon-orange)' }}>
-                  Test Complete!
-                </span>
+                  {tr("Test Complete!\n                ")}</span>
               </>
             )}
           </div>
@@ -1289,7 +1270,7 @@ export default function SpacebarPage() {
           }}>
             <button
               onClick={e => { e.stopPropagation(); resetTest(); }}
-              aria-label="Reset test"
+              aria-label={tr("Reset test")}
               style={{
                 display: 'flex', alignItems: 'center', gap: '0.5rem',
                 background: '#1e2235', border: '1px solid #2a3047',
@@ -1321,8 +1302,7 @@ export default function SpacebarPage() {
                   <path d="M3 3v5h5" />
                 </svg>
               </div>
-              Reset
-            </button>
+              {tr("Reset\n            ")}</button>
           </div>
         )}
 
@@ -1345,7 +1325,7 @@ export default function SpacebarPage() {
         {/* ── Session History ── */}
         {history.length > 0 && (
           <section
-            aria-label="Session history"
+            aria-label={tr("Session history")}
             style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
@@ -1360,8 +1340,7 @@ export default function SpacebarPage() {
               fontWeight: '700', fontSize: '0.9rem',
               color: 'var(--neon-cyan)',
             }}>
-              📊 Session History
-            </div>
+              {tr("📊 Session History\n            ")}</div>
             {history.map((h, i) => (
               <div
                 key={i}
@@ -1374,7 +1353,7 @@ export default function SpacebarPage() {
               >
                 <span style={{ color: 'var(--text-muted)' }}>#{history.length - i}</span>
                 <span style={{ color: 'var(--neon-cyan)', fontWeight: '700' }}>{h.sps} CPS</span>
-                <span style={{ color: 'var(--text-secondary)' }}>{h.count} presses</span>
+                <span style={{ color: 'var(--text-secondary)' }}>{h.count} {tr("presses")}</span>
                 <span style={{ color: 'var(--text-muted)' }}>{h.duration}s</span>
                 <span style={{ color: getRating(h.sps).color, fontWeight: '600' }}>
                   {getRating(h.sps).label}
@@ -1385,11 +1364,11 @@ export default function SpacebarPage() {
         )}
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginTop: '3rem', marginBottom: '2.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginTop: '3rem', marginBottom: '2.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center', letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
@@ -1460,8 +1439,7 @@ export default function SpacebarPage() {
             borderRadius: '16px', padding: '2rem',
             textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem',
           }}>
-            Loading…
-          </div>
+            {tr("Loading…\n          ")}</div>
         }>
           <SpacebarArticleContent />
         </Suspense>

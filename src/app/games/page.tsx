@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import GamesPage from '@/views/GamesPage';
+import { buildHreflangLanguages } from '@/lib/seo-i18n';
 
 export const metadata: Metadata = {
   title: "Free Browser Skill Games - Arcade Reflex Tests | FixedAim",
   description: "Play free browser arcade and reflex skill games on FixedAim. Challenge your spatial awareness, multi-target defense, and focus with zero signup needed.",
   alternates: {
     canonical: "https://fixedaim.com/games",
+    languages: buildHreflangLanguages('/games'),
   },
   openGraph: {
     title: "Free Browser Skill Games - Arcade Reflex Tests | FixedAim",

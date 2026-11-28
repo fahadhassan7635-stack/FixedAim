@@ -1,5 +1,7 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/MousePage.json';
 import Link from 'next/link';
 import { useLang } from '../contexts/LanguageContext';
 const tools = [
@@ -10,7 +12,8 @@ const tools = [
 ];
 
 export default function MousePage() {
-  const { t } = useLang();
+  const { tr } = usePageI18n(pageDict);
+  const { t, localeHref } = useLang();
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem' }}>
       <style>{`
@@ -114,28 +117,27 @@ export default function MousePage() {
   }
 `}</style>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <div className="section-label">Category</div>
+        <div className="section-label">{tr("Category")}</div>
         <h1 translate="no" className="tool-title">{t.hubs.mouse.h1}</h1>
         <p translate="no" className="tool-subtitle">{t.hubs.mouse.sub}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
         {tools.map(tool => (
-          <Link key={tool.to} href={tool.to} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
+          <Link key={tool.to} href={localeHref(tool.to)} className="cod-hub-card" style={{ ['--ch-accent' as string]: tool.color }}>
             <div>
-              <div className="cod-hub-title" style={{ color: tool.color }}>{tool.title}</div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{tool.desc}</p>
+              <div className="cod-hub-title" style={{ color: tool.color }}>{tr(tool.title)}</div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>{tr(tool.desc)}</p>
             </div>
-            <span className="cod-hub-cta" style={{ color: tool.color }}>Start Test →</span>
+            <span className="cod-hub-cta" style={{ color: tool.color }}>{tr("Start Test →")}</span>
           </Link>
         ))}
       </div>
 
       <div className="cod-tip-box">
-        <div className="cod-tip-title">Mouse Performance Tips</div>
+        <div className="cod-tip-title">{tr("Mouse Performance Tips")}</div>
         <p className="cod-tip-desc" style={{ fontSize: '0.92rem', lineHeight: '1.7', marginBottom: '1.5rem', fontWeight: 600 }}>
-          Optimizing your mouse settings can drastically improve your aim. Professional gamers carefully tune their DPI, polling rate, and grip styles.
-        </p>
+          {tr("Optimizing your mouse settings can drastically improve your aim. Professional gamers carefully tune their DPI, polling rate, and grip styles.\n        ")}</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {[
             { t: 'DPI Settings', d: 'Most pro gamers use 400–1600 DPI. Lower DPI = more precision.' },
@@ -143,9 +145,9 @@ export default function MousePage() {
             { t: 'Mouse Grip', d: 'Claw grip allows faster clicking; palm grip is more ergonomic.' },
             { t: 'Surface Matters', d: 'A quality mousepad reduces jitter and improves accuracy.' },
           ].map(tip => (
-            <div key={tip.t} className="cod-tip-item">
-              <div className="cod-tip-item-title">{tip.t}</div>
-              <div className="cod-tip-item-desc" style={{ fontSize: '0.85rem', lineHeight: '1.55', fontWeight: 500 }}>{tip.d}</div>
+            <div key={tr(tip.t)} className="cod-tip-item">
+              <div className="cod-tip-item-title">{tr(tip.t)}</div>
+              <div className="cod-tip-item-desc" style={{ fontSize: '0.85rem', lineHeight: '1.55', fontWeight: 500 }}>{tr(tip.d)}</div>
             </div>
           ))}
         </div>
@@ -153,14 +155,11 @@ export default function MousePage() {
 
       <article style={{ marginTop: '2.5rem', background: 'var(--bg-card, #FFFFFF)', border: '3px solid #000000', boxShadow: '5px 5px 0 0 #000000', padding: '1.75rem' }}>
         <h2 style={{ fontSize: '1.35rem', fontWeight: 900, textTransform: 'uppercase', marginTop: 0, marginBottom: '0.85rem' }}>
-          Complete Mouse Speed, Switch Health &amp; Precision Testing
-        </h2>
+          {tr("Complete Mouse Speed, Switch Health &amp; Precision Testing\n        ")}</h2>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-          Competitive mouse performance depends on more than raw click speed. Use the <Link href="/cps-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>CPS Test</Link> to measure your clicks per second across 1-second to 100-second intervals using regular, jitter, or butterfly clicking. If you suspect worn mechanical switches or accidental multi-registration, run the <Link href="/double-click" style={{ textDecoration: 'underline', fontWeight: 800 }}>Double Click Test</Link> to inspect microswitch chatter down to the millisecond.
-        </p>
+          {tr("Competitive mouse performance depends on more than raw click speed. Use the ")}<Link href={localeHref('/cps-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("CPS Test")}</Link> {tr("to measure your clicks per second across 1-second to 100-second intervals using regular, jitter, or butterfly clicking. If you suspect worn mechanical switches or accidental multi-registration, run the ")}<Link href={localeHref('/double-click')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Double Click Test")}</Link> {tr("to inspect microswitch chatter down to the millisecond.\n        ")}</p>
         <p style={{ fontSize: '0.94rem', lineHeight: 1.7, marginBottom: 0 }}>
-          For FPS and MOBA players, pair your click speed drills with the <Link href="/mouse-accuracy" style={{ textDecoration: 'underline', fontWeight: 800 }}>Mouse Accuracy Test</Link> and <Link href="/scroll-test" style={{ textDecoration: 'underline', fontWeight: 800 }}>Scroll Wheel Test</Link> to evaluate cursor tracking, encoder steps, and overall sensor consistency directly in your browser.
-        </p>
+          {tr("For FPS and MOBA players, pair your click speed drills with the ")}<Link href={localeHref('/mouse-accuracy')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Mouse Accuracy Test")}</Link> {tr("and ")}<Link href={localeHref('/scroll-test')} style={{ textDecoration: 'underline', fontWeight: 800 }}>{tr("Scroll Wheel Test")}</Link> {tr("to evaluate cursor tracking, encoder steps, and overall sensor consistency directly in your browser.\n        ")}</p>
       </article>
     </div>
   );

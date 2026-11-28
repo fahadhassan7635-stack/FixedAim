@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import BenchmarkPage from '@/views/BenchmarkPage';
+import { buildHreflangLanguages } from '@/lib/seo-i18n';
 
 export const metadata: Metadata = {
   title: "Benchmark Hub – Internet Speed Test | FixedAim",
   description: "Benchmark your internet connection speed with real-time download, upload, ping, jitter & packet loss tests. Free, no sign-up required — FixedAim.",
   alternates: {
     canonical: "https://fixedaim.com/benchmark",
+    languages: buildHreflangLanguages('/benchmark'),
   },
   openGraph: {
     title: "Benchmark Hub – Internet Speed Test | FixedAim",

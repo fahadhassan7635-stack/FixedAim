@@ -1,7 +1,10 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/ApmDrillPage.json';
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import {
   Volume2, VolumeX, RotateCcw, Home, ChevronRight, Zap, Target,
   Trophy, HelpCircle, ChevronDown, ChevronUp, Activity, Award
@@ -186,6 +189,8 @@ const FAQS = [
 ];
 
 export default function ApmDrillPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const [mounted, setMounted] = useState(false);
   const [mode, setMode] = useState<'g3' | 'g4' | 'g5' | 'kb'>('g3');
   const [dur, setDur] = useState<number>(60);
@@ -685,14 +690,13 @@ export default function ApmDrillPage() {
       />
 
       {/* BREADCRUMB */}
-      <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
-        <Link href="/" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-          <Home size={14} /> Home
-        </Link>
+      <nav aria-label={tr("Breadcrumb")} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+        <Link href={localeHref("/")} style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+          <Home size={14} /> {tr("Home\r\n        ")}</Link>
         <ChevronRight size={13} />
-        <Link href="/games" style={{ color: 'inherit', textDecoration: 'none' }}>Games</Link>
+        <Link href={localeHref("/games")} style={{ color: 'inherit', textDecoration: 'none' }}>{tr("Games")}</Link>
         <ChevronRight size={13} />
-        <span style={{ color: 'var(--neon-cyan)', fontWeight: 600 }}>APM Drill</span>
+        <span style={{ color: 'var(--neon-cyan)', fontWeight: 600 }}>{tr("APM Drill")}</span>
       </nav>
 
       {/* HEADER SECTION */}
@@ -709,8 +713,7 @@ export default function ApmDrillPage() {
           padding: '4px 14px',
           marginBottom: '0.75rem'
         }}>
-          SPEED TEST & DRILL
-        </span>
+          {tr("SPEED TEST & DRILL\r\n        ")}</span>
         <h1 style={{
           fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
           fontWeight: 800,
@@ -719,8 +722,7 @@ export default function ApmDrillPage() {
           textShadow: '0 0 24px rgba(0,245,255,0.4)',
           letterSpacing: '-0.02em'
         }}>
-          APM Drill
-        </h1>
+          {tr("APM Drill\r\n        ")}</h1>
         <p style={{
           margin: '0 auto',
           maxWidth: '620px',
@@ -728,12 +730,11 @@ export default function ApmDrillPage() {
           fontSize: '1rem',
           lineHeight: '1.6'
         }}>
-          Measure your actions per minute with surgical precision. Pick a grid or keyboard drill, then click or type as fast and cleanly as you can.
-        </p>
+          {tr("Measure your actions per minute with surgical precision. Pick a grid or keyboard drill, then click or type as fast and cleanly as you can.\r\n        ")}</p>
       </header>
 
       {/* TOOLBAR */}
-      <section aria-label="Test settings" style={{
+      <section aria-label={tr("Test settings")} style={{
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
@@ -832,7 +833,7 @@ export default function ApmDrillPage() {
             disabled={!soundOn}
             onChange={(e) => handleVolumeChange(Number(e.target.value))}
             style={{ width: '70px', accentColor: 'var(--neon-cyan)', cursor: 'pointer' }}
-            aria-label="Click sound volume"
+            aria-label={tr("Click sound volume")}
           />
 
           <select
@@ -850,10 +851,10 @@ export default function ApmDrillPage() {
               cursor: 'pointer'
             }}
           >
-            <option value="pop" style={{ background: '#111823' }}>Soft pop</option>
-            <option value="thock" style={{ background: '#111823' }}>Keyboard thock</option>
-            <option value="blip" style={{ background: '#111823' }}>Arcade blip</option>
-            <option value="tick" style={{ background: '#111823' }}>Sharp tick</option>
+            <option value="pop" style={{ background: '#111823' }}>{tr("Soft pop")}</option>
+            <option value="thock" style={{ background: '#111823' }}>{tr("Keyboard thock")}</option>
+            <option value="blip" style={{ background: '#111823' }}>{tr("Arcade blip")}</option>
+            <option value="tick" style={{ background: '#111823' }}>{tr("Sharp tick")}</option>
           </select>
         </div>
       </section>
@@ -876,19 +877,19 @@ export default function ApmDrillPage() {
               <div style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--neon-cyan)' }}>{liveApm}</div>
             </div>
             <div>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Accuracy</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Accuracy")}</div>
               <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{currentAccuracy}%</div>
             </div>
             <div>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Peak</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Peak")}</div>
               <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{peak}</div>
             </div>
             <div>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Hits</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Hits")}</div>
               <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{hits}</div>
             </div>
             <div>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Time Left</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Time Left")}</div>
               <div style={{ fontSize: '1.75rem', fontWeight: 800, color: timeLeft <= 5 && status === 'running' ? '#ff6b5e' : 'inherit' }}>
                 {status === 'idle' ? `${dur}s` : `${timeLeft}s`}
               </div>
@@ -908,15 +909,13 @@ export default function ApmDrillPage() {
           {/* HINT TEXT */}
           <p style={{ margin: '12px 0 0', fontSize: '0.88rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
             {status === 'done' ? (
-              <span><b>Time is up!</b> Check your results and click Play Again.</span>
+              <span><b>{tr("Time is up!")}</b> {tr("Check your results and click Play Again.")}</span>
             ) : status === 'idle' ? (
               <span>
-                <b>Hit the highlighted {curMode.type === 'grid' ? 'cyan tile' : 'letter'}</b> to start the {dur}s clock.
-              </span>
+                <b>{tr("Hit the highlighted ")}{curMode.type === 'grid' ? 'cyan tile' : 'letter'}</b> {tr("to start the ")}{dur}{tr("s clock.\r\n              ")}</span>
             ) : (
               <span>
-                <b>Keep going!</b> Hit the highlighted {curMode.type === 'grid' ? 'tile' : 'letter'} as fast as possible.
-              </span>
+                <b>{tr("Keep going!")}</b> {tr("Hit the highlighted ")}{curMode.type === 'grid' ? 'tile' : 'letter'} {tr("as fast as possible.\r\n              ")}</span>
             )}
           </p>
 
@@ -1061,8 +1060,7 @@ export default function ApmDrillPage() {
                     {finalStats.apm}
                   </p>
                   <p style={{ margin: '0 0 8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                    actions per minute
-                  </p>
+                    {tr("actions per minute\r\n                  ")}</p>
 
                   <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
                     <span style={{ fontSize: '0.85rem', fontWeight: 700, padding: '4px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.08)', color: 'var(--text-primary)' }}>
@@ -1070,27 +1068,26 @@ export default function ApmDrillPage() {
                     </span>
                     {finalStats.isBest && (
                       <span style={{ fontSize: '0.85rem', fontWeight: 700, padding: '4px 14px', borderRadius: '999px', background: 'var(--neon-cyan)', color: '#000' }}>
-                        ⭐ New Best!
-                      </span>
+                        {tr("⭐ New Best!\r\n                      ")}</span>
                     )}
                   </div>
 
                   {/* MINI STATS */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '8px', width: '100%', marginBottom: '16px' }}>
                     <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '10px', padding: '8px 4px' }}>
-                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Accuracy</div>
+                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Accuracy")}</div>
                       <div style={{ fontSize: '1.15rem', fontWeight: 800 }}>{finalStats.acc}%</div>
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '10px', padding: '8px 4px' }}>
-                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Hits</div>
+                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Hits")}</div>
                       <div style={{ fontSize: '1.15rem', fontWeight: 800 }}>{finalStats.hits}</div>
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '10px', padding: '8px 4px' }}>
-                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Misses</div>
+                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Misses")}</div>
                       <div style={{ fontSize: '1.15rem', fontWeight: 800, color: finalStats.misses > 0 ? '#ff6b5e' : 'inherit' }}>{finalStats.misses}</div>
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '10px', padding: '8px 4px' }}>
-                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Peak</div>
+                      <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>{tr("Peak")}</div>
                       <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--neon-cyan)' }}>{finalStats.peak}</div>
                     </div>
                   </div>
@@ -1112,8 +1109,7 @@ export default function ApmDrillPage() {
                       gap: '8px'
                     }}
                   >
-                    <RotateCcw size={16} /> Play Again
-                  </button>
+                    <RotateCcw size={16} /> {tr("Play Again\r\n                  ")}</button>
                 </div>
               </div>
             )}
@@ -1130,7 +1126,7 @@ export default function ApmDrillPage() {
             padding: '16px'
           }}>
             <h2 style={{ margin: '0 0 12px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Trophy size={14} color="var(--neon-cyan)" /> Your Best · {curMode.label}
+              <Trophy size={14} color="var(--neon-cyan)" /> {tr("Your Best · ")}{curMode.label}
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '6px' }}>
               {DURATIONS.map((d) => {
@@ -1177,8 +1173,7 @@ export default function ApmDrillPage() {
               {confirmReset ? 'Click again to confirm' : 'Reset bests for this mode'}
             </button>
             <p style={{ margin: '8px 0 0', fontSize: '0.72rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
-              Saved locally in this browser.
-            </p>
+              {tr("Saved locally in this browser.\r\n            ")}</p>
           </section>
 
           {/* RANK SCALE */}
@@ -1189,8 +1184,7 @@ export default function ApmDrillPage() {
             padding: '16px'
           }}>
             <h2 style={{ margin: '0 0 12px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Award size={14} color="var(--neon-cyan)" /> Rank Scale
-            </h2>
+              <Award size={14} color="var(--neon-cyan)" /> {tr("Rank Scale\r\n            ")}</h2>
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
               {TIERS.map((t, idx) => {
                 const isActive = liveApm >= t.min && (idx === TIERS.length - 1 || liveApm < TIERS[idx + 1].min) && status !== 'idle';
@@ -1234,21 +1228,18 @@ export default function ApmDrillPage() {
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px 16px', marginBottom: '12px' }}>
           <h2 style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Activity size={16} color="var(--neon-cyan)" /> Real-Time APM Curve
-          </h2>
+            <Activity size={16} color="var(--neon-cyan)" /> {tr("Real-Time APM Curve\r\n          ")}</h2>
           <div style={{ display: 'flex', gap: '16px', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <i style={{ width: '14px', height: '3px', borderRadius: '2px', background: 'var(--neon-cyan)', display: 'inline-block' }} /> Live APM
-            </span>
+              <i style={{ width: '14px', height: '3px', borderRadius: '2px', background: 'var(--neon-cyan)', display: 'inline-block' }} /> {tr("Live APM\r\n            ")}</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <i style={{ width: '14px', height: '3px', borderRadius: '2px', background: '#9a7bff', display: 'inline-block' }} /> Average APM
-            </span>
+              <i style={{ width: '14px', height: '3px', borderRadius: '2px', background: '#9a7bff', display: 'inline-block' }} /> {tr("Average APM\r\n            ")}</span>
           </div>
         </div>
         <canvas
           ref={chartCanvasRef}
           role="img"
-          aria-label="Line chart of live and average APM during run"
+          aria-label={tr("Line chart of live and average APM during run")}
           style={{ display: 'block', width: '100%', height: '200px' }}
         />
       </section>
@@ -1256,110 +1247,104 @@ export default function ApmDrillPage() {
       {/* COMPREHENSIVE SEO CONTENT & GUIDES */}
       <article style={{ maxWidth: '860px', margin: '0 auto', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.75' }}>
         <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: 'var(--neon-cyan)', margin: '2rem 0 1rem' }}>
-          What Is an APM Test?
-        </h2>
+          {tr("What Is an APM Test?\r\n        ")}</h2>
         <p>
-          APM stands for <strong>actions per minute</strong>. Unlike raw CPS (clicks per second) which only counts rapid button mashing, APM measures every intentional click and keystroke performed over an extended period. Strategy gamers (StarCraft, Age of Empires), MOBA competitors (League of Legends, Dota 2), and precision FPS players rely on high APM to issue commands, navigate menus, and react swiftly during heated skirmishes.
-        </p>
+          {tr("APM stands for ")}<strong>{tr("actions per minute")}</strong>{tr(". Unlike raw CPS (clicks per second) which only counts rapid button mashing, APM measures every intentional click and keystroke performed over an extended period. Strategy gamers (StarCraft, Age of Empires), MOBA competitors (League of Legends, Dota 2), and precision FPS players rely on high APM to issue commands, navigate menus, and react swiftly during heated skirmishes.\r\n        ")}</p>
         <p>
-          The FixedAim APM Drill gamifies this metric into a structured training tool. As glowing targets appear, you must quickly identify, target, and acquire them without hesitation. While wrong clicks or keys still register as actions, they penalize your overall accuracy score—ensuring that speed never comes at the cost of precision.
-        </p>
+          {tr("The FixedAim APM Drill gamifies this metric into a structured training tool. As glowing targets appear, you must quickly identify, target, and acquire them without hesitation. While wrong clicks or keys still register as actions, they penalize your overall accuracy score—ensuring that speed never comes at the cost of precision.\r\n        ")}</p>
 
         <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', margin: '1.75rem 0 0.75rem' }}>
-          🎮 How to Master the FixedAim APM Test
-        </h3>
+          {tr("🎮 How to Master the FixedAim APM Test\r\n        ")}</h3>
         <ul style={{ paddingLeft: '1.25rem', margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <li><strong>Select your target mode:</strong> Choose from 3×3 (classic short-range grid), 4×4 (balanced search), 5×5 (wide-angle mouse precision), or the 26-letter Keyboard Drill.</li>
-          <li><strong>Select your session length:</strong> Warm up with 15s or 30s, or test your true endurance with a competitive 60s or 120s marathon.</li>
-          <li><strong>Zero-latency start:</strong> The countdown clock begins only when you land your first valid hit, giving you ample time to settle in.</li>
-          <li><strong>Target acquisition:</strong> Click the lit neon tile or tap the highlighted key. Immediately look for the next target as it spawns.</li>
-          <li><strong>Analyze your analytics:</strong> Review final APM, accuracy percentage, peak 3-second burst, and your progression curve on the real-time canvas chart.</li>
+          <li><strong>{tr("Select your target mode:")}</strong> {tr("Choose from 3×3 (classic short-range grid), 4×4 (balanced search), 5×5 (wide-angle mouse precision), or the 26-letter Keyboard Drill.")}</li>
+          <li><strong>{tr("Select your session length:")}</strong> {tr("Warm up with 15s or 30s, or test your true endurance with a competitive 60s or 120s marathon.")}</li>
+          <li><strong>{tr("Zero-latency start:")}</strong> {tr("The countdown clock begins only when you land your first valid hit, giving you ample time to settle in.")}</li>
+          <li><strong>{tr("Target acquisition:")}</strong> {tr("Click the lit neon tile or tap the highlighted key. Immediately look for the next target as it spawns.")}</li>
+          <li><strong>{tr("Analyze your analytics:")}</strong> {tr("Review final APM, accuracy percentage, peak 3-second burst, and your progression curve on the real-time canvas chart.")}</li>
         </ul>
 
         <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: 'var(--neon-cyan)', margin: '2.5rem 0 1rem' }}>
-          APM Test Modes Compared
-        </h2>
+          {tr("APM Test Modes Compared\r\n        ")}</h2>
         <div style={{ overflowX: 'auto', marginBottom: '2rem', border: '1px solid var(--border, #243245)', borderRadius: '12px', background: 'var(--bg-card, #111823)' }}>
           <table style={{ width: '100%', minWidth: '580px', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--neon-cyan)' }}>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Mode</th>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Targets</th>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Primary Skill</th>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Difficulty</th>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Best For</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Mode")}</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Targets")}</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Primary Skill")}</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Difficulty")}</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Best For")}</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: 'var(--neon-cyan)' }}>3×3 Grid</td>
-                <td style={{ padding: '12px 16px' }}>9 tiles</td>
-                <td style={{ padding: '12px 16px', color: '#9a7bff' }}>Short rapid flicks</td>
-                <td style={{ padding: '12px 16px' }}>Easy</td>
-                <td style={{ padding: '12px 16px' }}>Warm-up & beginners</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: 'var(--neon-cyan)' }}>{tr("3×3 Grid")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("9 tiles")}</td>
+                <td style={{ padding: '12px 16px', color: '#9a7bff' }}>{tr("Short rapid flicks")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Easy")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Warm-up & beginners")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ffb347' }}>4×4 Grid</td>
-                <td style={{ padding: '12px 16px' }}>16 tiles</td>
-                <td style={{ padding: '12px 16px', color: 'var(--neon-cyan)' }}>Target spotting</td>
-                <td style={{ padding: '12px 16px' }}>Medium</td>
-                <td style={{ padding: '12px 16px' }}>Daily speed training</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ffb347' }}>{tr("4×4 Grid")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("16 tiles")}</td>
+                <td style={{ padding: '12px 16px', color: 'var(--neon-cyan)' }}>{tr("Target spotting")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Medium")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Daily speed training")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ff6b5e' }}>5×5 Grid</td>
-                <td style={{ padding: '12px 16px' }}>25 tiles</td>
-                <td style={{ padding: '12px 16px', color: '#ffb347' }}>Range & spatial focus</td>
-                <td style={{ padding: '12px 16px' }}>Hard</td>
-                <td style={{ padding: '12px 16px' }}>Mouse precision & aim</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ff6b5e' }}>{tr("5×5 Grid")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("25 tiles")}</td>
+                <td style={{ padding: '12px 16px', color: '#ffb347' }}>{tr("Range & spatial focus")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Hard")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Mouse precision & aim")}</td>
               </tr>
               <tr>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#9a7bff' }}>Keyboard Drill</td>
-                <td style={{ padding: '12px 16px' }}>26 keys</td>
-                <td style={{ padding: '12px 16px', color: '#ff6b5e' }}>Key recall & finger speed</td>
-                <td style={{ padding: '12px 16px' }}>Medium</td>
-                <td style={{ padding: '12px 16px' }}>RTS, MOBA & FPS keybinds</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#9a7bff' }}>{tr("Keyboard Drill")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("26 keys")}</td>
+                <td style={{ padding: '12px 16px', color: '#ff6b5e' }}>{tr("Key recall & finger speed")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Medium")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("RTS, MOBA & FPS keybinds")}</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: 'var(--neon-cyan)', margin: '2.5rem 0 1rem' }}>
-          APM Rank Classification
-        </h2>
+          {tr("APM Rank Classification\r\n        ")}</h2>
         <div style={{ overflowX: 'auto', marginBottom: '2.5rem', border: '1px solid var(--border, #243245)', borderRadius: '12px', background: 'var(--bg-card, #111823)' }}>
           <table style={{ width: '100%', minWidth: '500px', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--neon-cyan)' }}>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Rank Tier</th>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>APM Range</th>
-                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>Description & Player Level</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Rank Tier")}</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("APM Range")}</th>
+                <th style={{ padding: '12px 16px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>{tr("Description & Player Level")}</th>
               </tr>
             </thead>
             <tbody>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700 }}>Warming up</td>
-                <td style={{ padding: '12px 16px' }}>Below 65</td>
-                <td style={{ padding: '12px 16px' }}>Getting familiar with grid layouts and basic hand coordination.</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700 }}>{tr("Warming up")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Below 65")}</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Getting familiar with grid layouts and basic hand coordination.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: 'var(--neon-cyan)' }}>Beginner</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: 'var(--neon-cyan)' }}>{tr("Beginner")}</td>
                 <td style={{ padding: '12px 16px' }}>65 – 110</td>
-                <td style={{ padding: '12px 16px' }}>Consistent fundamental rhythm. Focus on maintaining 95%+ accuracy.</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Consistent fundamental rhythm. Focus on maintaining 95%+ accuracy.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#9a7bff' }}>Skilled</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#9a7bff' }}>{tr("Skilled")}</td>
                 <td style={{ padding: '12px 16px' }}>111 – 160</td>
-                <td style={{ padding: '12px 16px' }}>Rapid muscle memory and sharp hand-eye coordination. Competitive gamer benchmark.</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Rapid muscle memory and sharp hand-eye coordination. Competitive gamer benchmark.")}</td>
               </tr>
               <tr style={{ borderBottom: '1px solid var(--border, #243245)' }}>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ffb347' }}>Expert</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ffb347' }}>{tr("Expert")}</td>
                 <td style={{ padding: '12px 16px' }}>161 – 199</td>
-                <td style={{ padding: '12px 16px' }}>Elite reaction speed with virtually zero wasted clicks or hesitation.</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Elite reaction speed with virtually zero wasted clicks or hesitation.")}</td>
               </tr>
               <tr>
-                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ff6b5e' }}>Master</td>
+                <td style={{ padding: '12px 16px', fontWeight: 700, color: '#ff6b5e' }}>{tr("Master")}</td>
                 <td style={{ padding: '12px 16px' }}>200+</td>
-                <td style={{ padding: '12px 16px' }}>Professional esports echelon. Peak burst capacity maintained over full duration.</td>
+                <td style={{ padding: '12px 16px' }}>{tr("Professional esports echelon. Peak burst capacity maintained over full duration.")}</td>
               </tr>
             </tbody>
           </table>
@@ -1367,8 +1352,7 @@ export default function ApmDrillPage() {
 
         {/* FREQUENTLY ASKED QUESTIONS */}
         <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: 'var(--neon-cyan)', margin: '2.5rem 0 1rem' }}>
-          Frequently Asked Questions
-        </h2>
+          {tr("Frequently Asked Questions\r\n        ")}</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '3rem' }}>
           {FAQS.map((faq, idx) => {
             const isOpen = !!faqOpen[idx];
@@ -1424,11 +1408,11 @@ export default function ApmDrillPage() {
         </div>
 
                 {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginTop: '3.5rem', marginBottom: '2.5rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginTop: '3.5rem', marginBottom: '2.5rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center', letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{

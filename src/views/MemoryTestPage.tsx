@@ -1,7 +1,10 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/MemoryTestPage.json';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { useLang } from '../contexts/LanguageContext';
 import { Home, ChevronRight, RotateCcw, Volume2, VolumeX, ArrowLeft, Trophy, Sparkles, Brain, Check, RefreshCw } from 'lucide-react';
 
 interface ToolLink { label: string; href: string; icon: React.ReactNode; }
@@ -53,6 +56,8 @@ const GAMES: GameDef[] = [
 ];
 
 export default function MemoryTestPage() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const [diff, setDiff] = useState<Difficulty>('normal');
   const [sound, setSound] = useState<boolean>(true);
   const [bestScores, setBestScores] = useState<Record<string, number>>({});
@@ -197,18 +202,15 @@ export default function MemoryTestPage() {
       />
 
       {/* Breadcrumb */}
-      <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.875rem', fontWeight: 700, marginBottom: '1.25rem' }}>
-        <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', color: '#000', background: '#FFE033', padding: '3px 8px', border: '2px solid #000', boxShadow: '2px 2px 0 #000' }}>
-          <Home size={14} /> Home
-        </Link>
+      <nav aria-label={tr("Breadcrumb")} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.875rem', fontWeight: 700, marginBottom: '1.25rem' }}>
+        <Link href={localeHref("/")} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', color: '#000', background: '#FFE033', padding: '3px 8px', border: '2px solid #000', boxShadow: '2px 2px 0 #000' }}>
+          <Home size={14} /> {tr("Home\n        ")}</Link>
         <ChevronRight size={14} />
-        <Link href="/benchmark" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', color: '#000', background: '#FFE033', padding: '3px 8px', border: '2px solid #000', boxShadow: '2px 2px 0 #000' }}>
-          Benchmark
-        </Link>
+        <Link href={localeHref("/benchmark")} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', color: '#000', background: '#FFE033', padding: '3px 8px', border: '2px solid #000', boxShadow: '2px 2px 0 #000' }}>
+          {tr("Benchmark\n        ")}</Link>
         <ChevronRight size={14} />
         <span style={{ color: '#000', background: '#FFF', padding: '3px 8px', border: '2px solid #000', boxShadow: '2px 2px 0 #000' }}>
-          Memory Test
-        </span>
+          {tr("Memory Test\n        ")}</span>
       </nav>
 
       {/* Header Bar */}
@@ -223,14 +225,11 @@ export default function MemoryTestPage() {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#6C4AB6', color: '#FFF', border: '2px solid #000', padding: '2px 8px', fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '6px' }}>
-              <Brain size={14} /> 4 Cognitive Brain Games
-            </div>
+              <Brain size={14} /> {tr("4 Cognitive Brain Games\n            ")}</div>
             <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.3rem)', fontWeight: 900, margin: '2px 0 6px', fontFamily: "'Barlow Condensed', 'Public Sans', sans-serif", letterSpacing: '-0.02em' }}>
-              Free Online Memory Test
-            </h1>
+              {tr("Free Online Memory Test\n            ")}</h1>
             <p style={{ margin: 0, color: '#555', fontSize: '0.95rem', fontWeight: 600 }}>
-              Test and train your visual, sequence, short-term, and spatial memory with instant scoring.
-            </p>
+              {tr("Test and train your visual, sequence, short-term, and spatial memory with instant scoring.\n            ")}</p>
           </div>
 
           {/* Controls Bar */}
@@ -274,7 +273,7 @@ export default function MemoryTestPage() {
                 boxShadow: '3px 3px 0 #000',
                 cursor: 'pointer'
               }}
-              title="Toggle Audio Feedback"
+              title={tr("Toggle Audio Feedback")}
             >
               {sound ? <Volume2 size={16} /> : <VolumeX size={16} />}
               <span>{sound ? 'Sound On' : 'Sound Off'}</span>
@@ -296,10 +295,10 @@ export default function MemoryTestPage() {
                 boxShadow: '3px 3px 0 #000',
                 cursor: 'pointer'
               }}
-              title="Reset All High Scores"
+              title={tr("Reset All High Scores")}
             >
               <RotateCcw size={15} />
-              <span>Reset</span>
+              <span>{tr("Reset")}</span>
             </button>
           </div>
         </div>
@@ -370,7 +369,7 @@ export default function MemoryTestPage() {
                     marginTop: '8px'
                   }}>
                     <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#333' }}>
-                      Best ({diff}): <strong style={{ color: g.color }}>{bestVal !== undefined ? g.fmt(bestVal) : 'Not played'}</strong>
+                      {tr("Best (")}{diff}): <strong style={{ color: g.color }}>{bestVal !== undefined ? g.fmt(bestVal) : 'Not played'}</strong>
                     </span>
                     <button
                       style={{
@@ -384,8 +383,7 @@ export default function MemoryTestPage() {
                         cursor: 'pointer'
                       }}
                     >
-                      PLAY →
-                    </button>
+                      {tr("PLAY →\n                    ")}</button>
                   </div>
                 </div>
               );
@@ -418,12 +416,11 @@ export default function MemoryTestPage() {
                   cursor: 'pointer'
                 }}
               >
-                <ArrowLeft size={16} /> All Games
-              </button>
+                <ArrowLeft size={16} /> {tr("All Games\n              ")}</button>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', background: '#000', color: '#FFF', padding: '3px 10px', borderRadius: '4px' }}>
-                  Mode: {diff}
+                  {tr("Mode: ")}{diff}
                 </span>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', background: '#FFE033', color: '#000', border: '2px solid #000', padding: '2px 8px' }}>
                   {GAMES.find(g => g.id === activeGame)?.name}
@@ -494,81 +491,65 @@ export default function MemoryTestPage() {
         lineHeight: 1.7
       }}>
         <h2 style={{ fontSize: '1.75rem', fontWeight: 900, margin: '0 0 12px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          Test Your Memory Online with FixedAim
-        </h2>
+          {tr("Test Your Memory Online with FixedAim\n        ")}</h2>
         <p style={{ margin: '0 0 16px', color: '#333', fontSize: '1rem' }}>
-          Welcome to the FixedAim memory test, a free set of online cognitive memory games that lets you check how well you remember pictures, numbers, positions and patterns. Each round takes only a few minutes, making it ideal as a daily mental warm-up before competitive gaming, esports practice, or study sessions. Choose a game above, pick Easy, Normal or Hard, and try to beat your own best score.
-        </p>
+          {tr("Welcome to the FixedAim memory test, a free set of online cognitive memory games that lets you check how well you remember pictures, numbers, positions and patterns. Each round takes only a few minutes, making it ideal as a daily mental warm-up before competitive gaming, esports practice, or study sessions. Choose a game above, pick Easy, Normal or Hard, and try to beat your own best score.\n        ")}</p>
         <p style={{ margin: '0 0 24px', color: '#333', fontSize: '1rem' }}>
-          Memory is not a single isolated muscle. Your brain relies on distinct neural pathways to hold a phone number for several seconds (working short-term memory), to memorize coordinates and map layouts (spatial recall), or to repeat complex ability combos (sequential memory). That is why our test is divided into four distinct cognitive disciplines rather than a generic puzzle.
-        </p>
+          {tr("Memory is not a single isolated muscle. Your brain relies on distinct neural pathways to hold a phone number for several seconds (working short-term memory), to memorize coordinates and map layouts (spatial recall), or to repeat complex ability combos (sequential memory). That is why our test is divided into four distinct cognitive disciplines rather than a generic puzzle.\n        ")}</p>
 
         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, margin: '24px 0 12px', fontFamily: "'Barlow Condensed', sans-serif", borderTop: '2px solid #000', paddingTop: '18px' }}>
-          The Four Memory Games Explained
-        </h2>
+          {tr("The Four Memory Games Explained\n        ")}</h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', margin: '16px 0 24px' }}>
           <div style={{ background: '#F8FAFC', border: '2px solid #000', padding: '14px', borderRadius: '8px' }}>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 900, margin: '0 0 6px', color: '#6C4AB6' }}>
-              1. Card Match: Visual Memory
-            </h3>
+              {tr("1. Card Match: Visual Memory\n            ")}</h3>
             <p style={{ margin: 0, fontSize: '0.9rem', color: '#444' }}>
-              Flip two cards at a time and find every matching pair. To finish in fewer moves, you need to remember which symbol was where. This game trains visual memory and the habit of paying attention to what you have already seen.
-            </p>
+              {tr("Flip two cards at a time and find every matching pair. To finish in fewer moves, you need to remember which symbol was where. This game trains visual memory and the habit of paying attention to what you have already seen.\n            ")}</p>
           </div>
 
           <div style={{ background: '#F8FAFC', border: '2px solid #000', padding: '14px', borderRadius: '8px' }}>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 900, margin: '0 0 6px', color: '#2B4EDB' }}>
-              2. Pattern Echo: Sequence Memory
-            </h3>
+              {tr("2. Pattern Echo: Sequence Memory\n            ")}</h3>
             <p style={{ margin: 0, fontSize: '0.9rem', color: '#444' }}>
-              Watch a sequence of coloured pads light up, then repeat it in the same order. Every round adds one more step. It is a classic test of sequence memory and concentration, because one lost step breaks the whole pattern.
-            </p>
+              {tr("Watch a sequence of coloured pads light up, then repeat it in the same order. Every round adds one more step. It is a classic test of sequence memory and concentration, because one lost step breaks the whole pattern.\n            ")}</p>
           </div>
 
           <div style={{ background: '#F8FAFC', border: '2px solid #000', padding: '14px', borderRadius: '8px' }}>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 900, margin: '0 0 6px', color: '#E8577A' }}>
-              3. Number Span: Short-Term Recall
-            </h3>
+              {tr("3. Number Span: Short-Term Recall\n            ")}</h3>
             <p style={{ margin: 0, fontSize: '0.9rem', color: '#444' }}>
-              A number appears for a short time and then disappears. Type it back exactly. Number span tasks are widely used in psychology to explore working memory capacity (Miller&apos;s Law of 7±2 chunks).
-            </p>
+              {tr("A number appears for a short time and then disappears. Type it back exactly. Number span tasks are widely used in psychology to explore working memory capacity (Miller&apos;s Law of 7±2 chunks).\n            ")}</p>
           </div>
 
           <div style={{ background: '#F8FAFC', border: '2px solid #000', padding: '14px', borderRadius: '8px' }}>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 900, margin: '0 0 6px', color: '#10B981' }}>
-              4. Spot the Tiles: Spatial Recall
-            </h3>
+              {tr("4. Spot the Tiles: Spatial Recall\n            ")}</h3>
             <p style={{ margin: 0, fontSize: '0.9rem', color: '#444' }}>
-              Several tiles on a grid flash and hide. Tap the same tiles from memory. The grid grows as you level up, which makes this an exceptional challenge for spatial orientation and visual coordinate tracking.
-            </p>
+              {tr("Several tiles on a grid flash and hide. Tap the same tiles from memory. The grid grows as you level up, which makes this an exceptional challenge for spatial orientation and visual coordinate tracking.\n            ")}</p>
           </div>
         </div>
 
         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, margin: '24px 0 12px', fontFamily: "'Barlow Condensed', sans-serif", borderTop: '2px solid #000', paddingTop: '18px' }}>
-          How to Get a Better Memory Test Score
-        </h2>
+          {tr("How to Get a Better Memory Test Score\n        ")}</h2>
         <ol style={{ paddingLeft: '1.25rem', margin: '0 0 24px', fontSize: '0.95rem', color: '#333' }}>
-          <li style={{ marginBottom: '8px' }}><strong>Use Chunking:</strong> Split long digit chains into small groups (e.g. &apos;48 27 91&apos; instead of individual isolated digits).</li>
-          <li style={{ marginBottom: '8px' }}><strong>Visualize and Create Stories:</strong> Link colors, positions, and emojis into a rapid mental scene. Images are recalled far faster than raw symbols.</li>
-          <li style={{ marginBottom: '8px' }}><strong>Rehearse Sub-vocally:</strong> Quietly whisper or repeat numbers in your mind while the input screen loads.</li>
-          <li style={{ marginBottom: '8px' }}><strong>Eliminate Distractions:</strong> Close background tabs, silence notifications, and play in a steady, calm environment.</li>
-          <li style={{ marginBottom: '8px' }}><strong>Play in Short, Focused Sessions:</strong> 5 to 10 minutes of intense focus beats hours of fatigue.</li>
-          <li style={{ marginBottom: '8px' }}><strong>Support Physical Well-being:</strong> Hydration, adequate sleep, and brief eye breaks directly improve cognitive processing speeds.</li>
+          <li style={{ marginBottom: '8px' }}><strong>{tr("Use Chunking:")}</strong> {tr("Split long digit chains into small groups (e.g. &apos;48 27 91&apos; instead of individual isolated digits).")}</li>
+          <li style={{ marginBottom: '8px' }}><strong>{tr("Visualize and Create Stories:")}</strong> {tr("Link colors, positions, and emojis into a rapid mental scene. Images are recalled far faster than raw symbols.")}</li>
+          <li style={{ marginBottom: '8px' }}><strong>{tr("Rehearse Sub-vocally:")}</strong> {tr("Quietly whisper or repeat numbers in your mind while the input screen loads.")}</li>
+          <li style={{ marginBottom: '8px' }}><strong>{tr("Eliminate Distractions:")}</strong> {tr("Close background tabs, silence notifications, and play in a steady, calm environment.")}</li>
+          <li style={{ marginBottom: '8px' }}><strong>{tr("Play in Short, Focused Sessions:")}</strong> {tr("5 to 10 minutes of intense focus beats hours of fatigue.")}</li>
+          <li style={{ marginBottom: '8px' }}><strong>{tr("Support Physical Well-being:")}</strong> {tr("Hydration, adequate sleep, and brief eye breaks directly improve cognitive processing speeds.")}</li>
         </ol>
 
         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, margin: '24px 0 12px', fontFamily: "'Barlow Condensed', sans-serif", borderTop: '2px solid #000', paddingTop: '18px' }}>
-          Why Memory & Focus Matter in Gaming & Daily Life
-        </h2>
+          {tr("Why Memory & Focus Matter in Gaming & Daily Life\n        ")}</h2>
         <p style={{ margin: '0 0 14px', color: '#333', fontSize: '0.95rem' }}>
-          In competitive esports (FPS, MOBA, RTS), players constantly track enemy cooldowns, minimap rotations, bullet counts, and team positions while reacting under millisecond time frames. A short cognitive warm-up sharpens situational awareness and prevents mental lag during clutch situations.
-        </p>
+          {tr("In competitive esports (FPS, MOBA, RTS), players constantly track enemy cooldowns, minimap rotations, bullet counts, and team positions while reacting under millisecond time frames. A short cognitive warm-up sharpens situational awareness and prevents mental lag during clutch situations.\n        ")}</p>
         <p style={{ margin: '0 0 14px', color: '#333', fontSize: '0.95rem' }}>
-          Because your best scores are recorded locally per difficulty, you can return daily to benchmark your focus, identify fatigue, and track personal cognitive consistency.
-        </p>
+          {tr("Because your best scores are recorded locally per difficulty, you can return daily to benchmark your focus, identify fatigue, and track personal cognitive consistency.\n        ")}</p>
 
         <p style={{ fontSize: '0.85rem', color: '#777', marginTop: '20px', borderTop: '1px solid #E2E8F0', paddingTop: '12px' }}>
-          <em>Disclaimer: These online games are created for entertainment, practice, and personal skill tracking. They are not intended as clinical diagnostic or IQ measurement tools.</em>
+          <em>{tr("Disclaimer: These online games are created for entertainment, practice, and personal skill tracking. They are not intended as clinical diagnostic or IQ measurement tools.")}</em>
         </p>
       </section>
 
@@ -582,8 +563,7 @@ export default function MemoryTestPage() {
         marginBottom: '2.5rem'
       }}>
         <h2 style={{ fontSize: '1.75rem', fontWeight: 900, margin: '0 0 16px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          Frequently Asked Questions (FAQ)
-        </h2>
+          {tr("Frequently Asked Questions (FAQ)\n        ")}</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {FAQS.map((faq, idx) => (
             <details
@@ -616,8 +596,7 @@ export default function MemoryTestPage() {
         padding: '2rem 1.75rem'
       }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, margin: '0 0 16px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          Explore More Speed, Aim & Benchmark Tools
-        </h2>
+          {tr("Explore More Speed, Aim & Benchmark Tools\n        ")}</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '10px' }}>
           {MORE_TOOLS.map((tool) => (
             <Link
@@ -672,6 +651,7 @@ interface CardItem {
 }
 
 function CardMatchGame({ diff, onFinish, bestScore, playBeep, playSuccess, playError, onBack }: CardMatchProps) {
+  const { tr } = usePageI18n(pageDict);
   const pairsCount = diff === 'easy' ? 6 : diff === 'normal' ? 8 : 12;
   const [cards, setCards] = useState<CardItem[]>([]);
   const [moves, setMoves] = useState(0);
@@ -774,18 +754,16 @@ function CardMatchGame({ diff, onFinish, bestScore, playBeep, playSuccess, playE
       <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <Trophy size={48} color="#FFE033" style={{ margin: '0 auto 12px' }} />
         <h3 style={{ fontSize: '2rem', fontWeight: 900, margin: '0 0 6px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          All Pairs Found!
-        </h3>
+          {tr("All Pairs Found!\n        ")}</h3>
         <p style={{ fontSize: '1.1rem', margin: '0 0 12px', color: '#444' }}>
-          Completed in <strong>{moves} moves</strong> ({Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}).
+          {tr("Completed in ")}<strong>{moves} {tr("moves")}</strong> ({Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}).
         </p>
         {isNewBest ? (
           <p style={{ color: '#10B981', fontWeight: 900, fontSize: '1.2rem', margin: '0 0 20px' }}>
-            🎉 New Best Record for {diff.toUpperCase()} mode!
-          </p>
+            {tr("🎉 New Best Record for ")}{diff.toUpperCase()} {tr("mode!\n          ")}</p>
         ) : (
           <p style={{ color: '#555', fontSize: '0.95rem', margin: '0 0 20px' }}>
-            Best on {diff}: {bestScore !== undefined ? `${bestScore} moves` : 'None'}
+            {tr("Best on ")}{diff}: {bestScore !== undefined ? `${bestScore} moves` : 'None'}
           </p>
         )}
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
@@ -802,8 +780,7 @@ function CardMatchGame({ diff, onFinish, bestScore, playBeep, playSuccess, playE
               cursor: 'pointer'
             }}
           >
-            Play Again
-          </button>
+            {tr("Play Again\n          ")}</button>
           <button
             onClick={onBack}
             style={{
@@ -817,8 +794,7 @@ function CardMatchGame({ diff, onFinish, bestScore, playBeep, playSuccess, playE
               cursor: 'pointer'
             }}
           >
-            All Games
-          </button>
+            {tr("All Games\n          ")}</button>
         </div>
       </div>
     );
@@ -827,9 +803,9 @@ function CardMatchGame({ diff, onFinish, bestScore, playBeep, playSuccess, playE
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', fontWeight: 700, fontSize: '0.95rem' }}>
-        <div>Moves: <span style={{ color: '#6C4AB6', fontWeight: 900 }}>{moves}</span></div>
-        <div>Time: <span style={{ color: '#333', fontWeight: 900 }}>{Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</span></div>
-        <div>Best: <span>{bestScore !== undefined ? `${bestScore} moves` : 'None'}</span></div>
+        <div>{tr("Moves: ")}<span style={{ color: '#6C4AB6', fontWeight: 900 }}>{moves}</span></div>
+        <div>{tr("Time: ")}<span style={{ color: '#333', fontWeight: 900 }}>{Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</span></div>
+        <div>{tr("Best: ")}<span>{bestScore !== undefined ? `${bestScore} moves` : 'None'}</span></div>
       </div>
 
       <div style={{
@@ -894,6 +870,7 @@ const PAD_COLORS = [
 ];
 
 function PatternEchoGame({ diff, onFinish, bestScore, playBeep, playSuccess, playError, onBack }: PatternEchoProps) {
+  const { tr } = usePageI18n(pageDict);
   const speed = diff === 'easy' ? 650 : diff === 'normal' ? 480 : 300;
   const [seq, setSeq] = useState<number[]>([]);
   const [playerPos, setPlayerPos] = useState(0);
@@ -985,18 +962,16 @@ function PatternEchoGame({ diff, onFinish, bestScore, playBeep, playSuccess, pla
       <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <Sparkles size={48} color="#E8577A" style={{ margin: '0 auto 12px' }} />
         <h3 style={{ fontSize: '2rem', fontWeight: 900, margin: '0 0 6px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          Pattern Broken!
-        </h3>
+          {tr("Pattern Broken!\n        ")}</h3>
         <p style={{ fontSize: '1.1rem', margin: '0 0 12px', color: '#444' }}>
-          You reached <strong>Round {finalScore}</strong>.
+          {tr("You reached ")}<strong>{tr("Round ")}{finalScore}</strong>.
         </p>
         {isNewBest && finalScore > 0 ? (
           <p style={{ color: '#10B981', fontWeight: 900, fontSize: '1.2rem', margin: '0 0 20px' }}>
-            🎉 New Best Record for {diff.toUpperCase()} mode!
-          </p>
+            {tr("🎉 New Best Record for ")}{diff.toUpperCase()} {tr("mode!\n          ")}</p>
         ) : (
           <p style={{ color: '#555', fontSize: '0.95rem', margin: '0 0 20px' }}>
-            Best on {diff}: {bestScore !== undefined ? `Round ${bestScore}` : 'None'}
+            {tr("Best on ")}{diff}: {bestScore !== undefined ? `Round ${bestScore}` : 'None'}
           </p>
         )}
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
@@ -1013,8 +988,7 @@ function PatternEchoGame({ diff, onFinish, bestScore, playBeep, playSuccess, pla
               cursor: 'pointer'
             }}
           >
-            Try Again
-          </button>
+            {tr("Try Again\n          ")}</button>
           <button
             onClick={onBack}
             style={{
@@ -1028,8 +1002,7 @@ function PatternEchoGame({ diff, onFinish, bestScore, playBeep, playSuccess, pla
               cursor: 'pointer'
             }}
           >
-            All Games
-          </button>
+            {tr("All Games\n          ")}</button>
         </div>
       </div>
     );
@@ -1038,8 +1011,8 @@ function PatternEchoGame({ diff, onFinish, bestScore, playBeep, playSuccess, pla
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', fontWeight: 700, fontSize: '0.95rem' }}>
-        <div>Current Round: <span style={{ color: '#2B4EDB', fontWeight: 900 }}>{round}</span></div>
-        <div>Best Record: <span>{bestScore !== undefined ? `Round ${bestScore}` : 'None'}</span></div>
+        <div>{tr("Current Round: ")}<span style={{ color: '#2B4EDB', fontWeight: 900 }}>{round}</span></div>
+        <div>{tr("Best Record: ")}<span>{bestScore !== undefined ? `Round ${bestScore}` : 'None'}</span></div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', maxWidth: '340px', margin: '0 auto 16px' }}>
@@ -1088,6 +1061,7 @@ interface NumberSpanProps {
 }
 
 function NumberSpanGame({ diff, onFinish, bestScore, playBeep, playSuccess, playError, onBack }: NumberSpanProps) {
+  const { tr } = usePageI18n(pageDict);
   const initialLen = diff === 'easy' ? 3 : diff === 'normal' ? 4 : 5;
   const displayMs = diff === 'hard' ? 300 : diff === 'normal' ? 450 : 650;
 
@@ -1182,18 +1156,16 @@ function NumberSpanGame({ diff, onFinish, bestScore, playBeep, playSuccess, play
       <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <Trophy size={48} color="#E8577A" style={{ margin: '0 auto 12px' }} />
         <h3 style={{ fontSize: '2rem', fontWeight: 900, margin: '0 0 6px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          Out of Lives!
-        </h3>
+          {tr("Out of Lives!\n        ")}</h3>
         <p style={{ fontSize: '1.1rem', margin: '0 0 12px', color: '#444' }}>
-          Longest number recalled: <strong>{maxRecalled} digits</strong>.
+          {tr("Longest number recalled: ")}<strong>{maxRecalled} {tr("digits")}</strong>.
         </p>
         {isNewBest && maxRecalled > 0 ? (
           <p style={{ color: '#10B981', fontWeight: 900, fontSize: '1.2rem', margin: '0 0 20px' }}>
-            🎉 New Best Record for {diff.toUpperCase()} mode!
-          </p>
+            {tr("🎉 New Best Record for ")}{diff.toUpperCase()} {tr("mode!\n          ")}</p>
         ) : (
           <p style={{ color: '#555', fontSize: '0.95rem', margin: '0 0 20px' }}>
-            Best on {diff}: {bestScore !== undefined ? `${bestScore} digits` : 'None'}
+            {tr("Best on ")}{diff}: {bestScore !== undefined ? `${bestScore} digits` : 'None'}
           </p>
         )}
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
@@ -1210,8 +1182,7 @@ function NumberSpanGame({ diff, onFinish, bestScore, playBeep, playSuccess, play
               cursor: 'pointer'
             }}
           >
-            Play Again
-          </button>
+            {tr("Play Again\n          ")}</button>
           <button
             onClick={onBack}
             style={{
@@ -1225,8 +1196,7 @@ function NumberSpanGame({ diff, onFinish, bestScore, playBeep, playSuccess, play
               cursor: 'pointer'
             }}
           >
-            All Games
-          </button>
+            {tr("All Games\n          ")}</button>
         </div>
       </div>
     );
@@ -1235,9 +1205,9 @@ function NumberSpanGame({ diff, onFinish, bestScore, playBeep, playSuccess, play
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', fontWeight: 700, fontSize: '0.95rem' }}>
-        <div>Length: <span style={{ color: '#E8577A', fontWeight: 900 }}>{len} digits</span></div>
-        <div>Lives: <span style={{ color: '#E8577A', fontSize: '1.1rem' }}>{'♥'.repeat(Math.max(0, lives))}{'♡'.repeat(3 - Math.max(0, lives))}</span></div>
-        <div>Best: <span>{bestScore !== undefined ? `${bestScore} digits` : 'None'}</span></div>
+        <div>{tr("Length: ")}<span style={{ color: '#E8577A', fontWeight: 900 }}>{len} {tr("digits")}</span></div>
+        <div>{tr("Lives: ")}<span style={{ color: '#E8577A', fontSize: '1.1rem' }}>{'♥'.repeat(Math.max(0, lives))}{'♡'.repeat(3 - Math.max(0, lives))}</span></div>
+        <div>{tr("Best: ")}<span>{bestScore !== undefined ? `${bestScore} digits` : 'None'}</span></div>
       </div>
 
       <div style={{
@@ -1302,8 +1272,7 @@ function NumberSpanGame({ diff, onFinish, bestScore, playBeep, playSuccess, play
             opacity: !isInputActive || inputVal.length === 0 ? 0.6 : 1
           }}
         >
-          Submit Answer
-        </button>
+          {tr("Submit Answer\n        ")}</button>
       </div>
     </div>
   );
@@ -1330,6 +1299,7 @@ interface TileState {
 }
 
 function SpotTheTilesGame({ diff, onFinish, bestScore, playBeep, playSuccess, playError, onBack }: SpotTheTilesProps) {
+  const { tr } = usePageI18n(pageDict);
   const initialLevel = diff === 'easy' ? 1 : diff === 'normal' ? 3 : 5;
   const showTime = diff === 'easy' ? 1400 : diff === 'normal' ? 1000 : 700;
 
@@ -1454,18 +1424,16 @@ function SpotTheTilesGame({ diff, onFinish, bestScore, playBeep, playSuccess, pl
       <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <Trophy size={48} color="#10B981" style={{ margin: '0 auto 12px' }} />
         <h3 style={{ fontSize: '2rem', fontWeight: 900, margin: '0 0 6px', fontFamily: "'Barlow Condensed', sans-serif" }}>
-          Out of Lives!
-        </h3>
+          {tr("Out of Lives!\n        ")}</h3>
         <p style={{ fontSize: '1.1rem', margin: '0 0 12px', color: '#444' }}>
-          You reached and cleared <strong>Level {maxLevel}</strong>.
+          {tr("You reached and cleared ")}<strong>{tr("Level ")}{maxLevel}</strong>.
         </p>
         {isNewBest && maxLevel > 0 ? (
           <p style={{ color: '#10B981', fontWeight: 900, fontSize: '1.2rem', margin: '0 0 20px' }}>
-            🎉 New Best Record for {diff.toUpperCase()} mode!
-          </p>
+            {tr("🎉 New Best Record for ")}{diff.toUpperCase()} {tr("mode!\n          ")}</p>
         ) : (
           <p style={{ color: '#555', fontSize: '0.95rem', margin: '0 0 20px' }}>
-            Best on {diff}: {bestScore !== undefined ? `Level ${bestScore}` : 'None'}
+            {tr("Best on ")}{diff}: {bestScore !== undefined ? `Level ${bestScore}` : 'None'}
           </p>
         )}
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
@@ -1482,8 +1450,7 @@ function SpotTheTilesGame({ diff, onFinish, bestScore, playBeep, playSuccess, pl
               cursor: 'pointer'
             }}
           >
-            Play Again
-          </button>
+            {tr("Play Again\n          ")}</button>
           <button
             onClick={onBack}
             style={{
@@ -1497,8 +1464,7 @@ function SpotTheTilesGame({ diff, onFinish, bestScore, playBeep, playSuccess, pl
               cursor: 'pointer'
             }}
           >
-            All Games
-          </button>
+            {tr("All Games\n          ")}</button>
         </div>
       </div>
     );
@@ -1507,9 +1473,9 @@ function SpotTheTilesGame({ diff, onFinish, bestScore, playBeep, playSuccess, pl
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', fontWeight: 700, fontSize: '0.95rem' }}>
-        <div>Level: <span style={{ color: '#10B981', fontWeight: 900 }}>{level}</span></div>
-        <div>Lives: <span style={{ color: '#E8577A', fontSize: '1.1rem' }}>{'♥'.repeat(Math.max(0, lives))}{'♡'.repeat(3 - Math.max(0, lives))}</span></div>
-        <div>Best: <span>{bestScore !== undefined ? `Level ${bestScore}` : 'None'}</span></div>
+        <div>{tr("Level: ")}<span style={{ color: '#10B981', fontWeight: 900 }}>{level}</span></div>
+        <div>{tr("Lives: ")}<span style={{ color: '#E8577A', fontSize: '1.1rem' }}>{'♥'.repeat(Math.max(0, lives))}{'♡'.repeat(3 - Math.max(0, lives))}</span></div>
+        <div>{tr("Best: ")}<span>{bestScore !== undefined ? `Level ${bestScore}` : 'None'}</span></div>
       </div>
 
       <div style={{

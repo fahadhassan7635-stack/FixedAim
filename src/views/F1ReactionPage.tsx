@@ -1,6 +1,7 @@
 "use client";
-
-﻿import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { usePageI18n } from '../lib/page-i18n';
+import pageDict from '../locales/pages/F1ReactionPage.json';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
 // ─── More Tools ───────────────────────────────────────────────────────────────
 interface ToolLink { label: string; href: string; icon: React.ReactNode; }
@@ -440,6 +441,7 @@ const trustedPerfNow: () => number = (() => {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function F1ReactionTimePage() {
+  const { tr } = usePageI18n(pageDict);
   const [phase, setPhase] = useState<Phase>('idle');
   const [mode, setMode] = useState<Mode>('Pro');
   const [lights, setLights] = useState<number>(0);
@@ -1006,8 +1008,7 @@ export default function F1ReactionTimePage() {
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: THEME.cyan }} />
-              F1 LIGHTS OUT
-            </div>
+              {tr("F1 LIGHTS OUT\r\n            ")}</div>
 
             <h1
               style={{
@@ -1019,19 +1020,18 @@ export default function F1ReactionTimePage() {
                 margin: '0 0 12px 0',
               }}
             >
-              F1 REACTION<br />
-              <span style={{ color: THEME.green }}>TIME TEST</span>
+              {tr("F1 REACTION")}<br />
+              <span style={{ color: THEME.green }}>{tr("TIME TEST")}</span>
             </h1>
 
             <p style={{ fontSize: 'clamp(0.85rem,2vw,0.95rem)', color: '#64748b', fontWeight: 400, maxWidth: '500px', lineHeight: 1.4, margin: 0 }}>
-              Wait for all 5 red lights — when they go out, react instantly.
-            </p>
+              {tr("Wait for all 5 red lights — when they go out, react instantly.\r\n            ")}</p>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginTop: '10px' }}>
             <div
               role="group"
-              aria-label="Difficulty mode"
+              aria-label={tr("Difficulty mode")}
               style={{
                 display: 'flex', backgroundColor: THEME.cardBg,
                 border: `1px solid ${THEME.border}`,
@@ -1161,8 +1161,7 @@ export default function F1ReactionTimePage() {
                 color: THEME.textMuted, textTransform: 'uppercase',
               }}
             >
-              Starting Lights Gantry
-            </div>
+              {tr("Starting Lights Gantry\r\n            ")}</div>
           </div>
 
           {/* Phase display */}
@@ -1178,14 +1177,12 @@ export default function F1ReactionTimePage() {
             {phase === 'idle' && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '.75rem' }}>
                 <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 'clamp(1.4rem,4vw,2.4rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px', color: '#fff', margin: 0 }}>
-                  Ready to Test?
-                </p>
+                  {tr("Ready to Test?\r\n                ")}</p>
                 <p style={{ fontSize: 'clamp(0.8rem,2vw,0.85rem)', color: THEME.textMuted, margin: 0 }}>
-                  Tap the screen or press SPACE when the lights go out.
-                </p>
+                  {tr("Tap the screen or press SPACE when the lights go out.\r\n                ")}</p>
                 <button
                   onPointerDown={(e) => { e.stopPropagation(); handleInteraction(); }}
-                  aria-label="Start the reaction test"
+                  aria-label={tr("Start the reaction test")}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
                     backgroundColor: THEME.green, color: '#000',
@@ -1199,8 +1196,7 @@ export default function F1ReactionTimePage() {
                     touchAction: 'manipulation',
                   }}
                 >
-                  🏁 Start Engine
-                </button>
+                  {tr("🏁 Start Engine\r\n                ")}</button>
               </div>
             )}
 
@@ -1214,8 +1210,7 @@ export default function F1ReactionTimePage() {
                   color: THEME.f1Red, margin: 0,
                 }}
               >
-                Wait For Lights...
-              </p>
+                {tr("Wait For Lights...\r\n              ")}</p>
             )}
 
             {phase === 'ready' && (
@@ -1230,8 +1225,7 @@ export default function F1ReactionTimePage() {
                   margin: 0,
                 }}
               >
-                TAP NOW!
-              </p>
+                {tr("TAP NOW!\r\n              ")}</p>
             )}
 
             {phase === 'foul' && (
@@ -1245,14 +1239,11 @@ export default function F1ReactionTimePage() {
                     letterSpacing: '2px', margin: 0,
                   }}
                 >
-                  ⛔ Jump Start!
-                </p>
+                  {tr("⛔ Jump Start!\r\n                ")}</p>
                 <p style={{ fontSize: 'clamp(0.8rem,2vw,0.85rem)', color: '#f87171', margin: 0 }}>
-                  You reacted before the lights went out.
-                </p>
+                  {tr("You reacted before the lights went out.\r\n                ")}</p>
                 <p style={{ fontSize: 'clamp(0.7rem,2vw,0.75rem)', color: THEME.textMuted, margin: '8px 0 0 0' }}>
-                  Tap anywhere to try again
-                </p>
+                  {tr("Tap anywhere to try again\r\n                ")}</p>
               </div>
             )}
 
@@ -1268,8 +1259,7 @@ export default function F1ReactionTimePage() {
                       textTransform: 'uppercase', margin: 0,
                     }}
                   >
-                    ★ New Personal Best ★
-                  </p>
+                    {tr("★ New Personal Best ★\r\n                  ")}</p>
                 )}
                 <div
                   aria-live="polite"
@@ -1282,15 +1272,15 @@ export default function F1ReactionTimePage() {
                   }}
                 >
                   {reactionTime}
-                  <span style={{ fontSize: 'clamp(1rem,3vw,2rem)', fontWeight: 400, color: THEME.textMuted, marginLeft: '4px' }}>ms</span>
+                  <span style={{ fontSize: 'clamp(1rem,3vw,2rem)', fontWeight: 400, color: THEME.textMuted, marginLeft: '4px' }}>{tr("ms")}</span>
                 </div>
                 <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 'clamp(0.9rem,2.5vw,1.1rem)', fontWeight: 700, letterSpacing: '1px', color: '#fff', textTransform: 'uppercase', margin: 0 }}>
-                  Rating: {getRating(reactionTime).text}
+                  {tr("Rating: ")}{getRating(reactionTime).text}
                 </p>
                 <div style={{ display: 'flex', gap: '10px', marginTop: '.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                   <button
                     onPointerDown={(e) => { e.stopPropagation(); startSequence(); }}
-                    aria-label="Retry the reaction test"
+                    aria-label={tr("Retry the reaction test")}
                     style={{
                       display: 'flex', alignItems: 'center', gap: '6px',
                       backgroundColor: '#1e293b', border: `1px solid ${THEME.border}`,
@@ -1302,8 +1292,7 @@ export default function F1ReactionTimePage() {
                       touchAction: 'manipulation',
                     }}
                   >
-                    ↺ Retry
-                  </button>
+                    {tr("↺ Retry\r\n                  ")}</button>
                   <button
                     onPointerDown={(e) => { e.stopPropagation(); shareScore(); }}
                     aria-label={copied ? 'Score copied to clipboard' : 'Share your score'}
@@ -1335,11 +1324,10 @@ export default function F1ReactionTimePage() {
             color: THEME.textMuted, letterSpacing: '.5px', marginTop: '.5rem',
           }}
         >
-          [SPACE / ENTER] React &nbsp;•&nbsp; [R] Restart &nbsp;•&nbsp; [S] Toggle Sound
-        </p>
+          {tr("[SPACE / ENTER] React &nbsp;•&nbsp; [R] Restart &nbsp;•&nbsp; [S] Toggle Sound\r\n        ")}</p>
 
         {/* ── Stats ── */}
-        <section aria-label="Performance statistics">
+        <section aria-label={tr("Performance statistics")}>
           <div
             style={{
               display: 'grid',
@@ -1403,7 +1391,7 @@ export default function F1ReactionTimePage() {
           }}
         >
           <section
-            aria-label="Achievements"
+            aria-label={tr("Achievements")}
             style={{
               background: THEME.cardBg, border: `1px solid ${THEME.border}`,
               borderRadius: '12px', padding: 'clamp(1rem,3vw,1.25rem)',
@@ -1420,8 +1408,7 @@ export default function F1ReactionTimePage() {
               }}
             >
               <span aria-hidden="true" style={{ fontSize: '16px' }}>🏅</span>
-              Achievements
-            </h2>
+              {tr("Achievements\r\n            ")}</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}>
               {unlockedAchievements.map((achv) => {
                 const isGold = achv.unlocked && (achv.id === 'a5' || achv.id === 'a8');
@@ -1451,7 +1438,7 @@ export default function F1ReactionTimePage() {
           </section>
 
           <section
-            aria-label="Recent race history"
+            aria-label={tr("Recent race history")}
             style={{
               background: THEME.cardBg, border: `1px solid ${THEME.border}`,
               borderRadius: '12px', padding: 'clamp(1rem,3vw,1.25rem)',
@@ -1468,13 +1455,11 @@ export default function F1ReactionTimePage() {
               }}
             >
               <span aria-hidden="true" style={{ fontSize: '16px' }}>📈</span>
-              Recent History
-            </h2>
+              {tr("Recent History\r\n            ")}</h2>
 
             {history.length === 0 ? (
               <p style={{ textAlign: 'center', padding: '2rem', color: THEME.textMuted, fontSize: '.85rem', margin: 0 }}>
-                Complete a race to see history.
-              </p>
+                {tr("Complete a race to see history.\r\n              ")}</p>
             ) : (
               <>
                 <div
@@ -1520,7 +1505,7 @@ export default function F1ReactionTimePage() {
                           #{history.length - i}
                         </span>
                         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '1rem', fontWeight: 700, color: rating.color, flexShrink: 0 }}>
-                          {h.time}ms{isPB ? ' ★' : ''}
+                          {h.time}{tr("ms")}{isPB ? ' ★' : ''}
                         </span>
                         <span style={{ fontSize: '.6rem', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: THEME.textMuted, backgroundColor: THEME.cardBg, padding: '2px 8px', borderRadius: '4px', border: `1px solid ${THEME.border}`, flexShrink: 0 }}>
                           {h.mode}
@@ -1535,12 +1520,12 @@ export default function F1ReactionTimePage() {
         </div>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -1600,35 +1585,21 @@ export default function F1ReactionTimePage() {
           }}
         >
           <p style={{ fontSize: 'clamp(0.9rem,2vw,1rem)', color: '#94a3b8', marginBottom: '1.5rem' }}>
-            In high-stakes competitive esports and real-life motorsports, victory is decided in fractions of a
-            millisecond. Whether you are aiming to land a precision headshot in an FPS title or execute the
-            perfect grid launch in Formula 1, your <strong>reaction time</strong> is the ultimate baseline.
-            Our professional <strong>F1 Reaction Time Test</strong> — popularly known as the{' '}
-            <em>F1 Lights Out Test</em> — faithfully replicates the official FIA Grand Prix starting-light
-            sequence to help casual gamers, pro esports players and enthusiasts measure, optimize, and
-            dominate their split-second cognitive response. This guide walks through exactly how the test
-            works, what the science says about human reaction speed, how the real Formula 1 start procedure
-            inspired this simulator, and a complete framework for training and tracking your improvement
-            over time.
-          </p>
+            {tr("In high-stakes competitive esports and real-life motorsports, victory is decided in fractions of a\r\n            millisecond. Whether you are aiming to land a precision headshot in an FPS title or execute the\r\n            perfect grid launch in Formula 1, your ")}<strong>{tr("reaction time")}</strong> {tr("is the ultimate baseline.\r\n            Our professional ")}<strong>{tr("F1 Reaction Time Test")}</strong> {tr("— popularly known as the")}{' '}
+            <em>{tr("F1 Lights Out Test")}</em> {tr("— faithfully replicates the official FIA Grand Prix starting-light\r\n            sequence to help casual gamers, pro esports players and enthusiasts measure, optimize, and\r\n            dominate their split-second cognitive response. This guide walks through exactly how the test\r\n            works, what the science says about human reaction speed, how the real Formula 1 start procedure\r\n            inspired this simulator, and a complete framework for training and tracking your improvement\r\n            over time.\r\n          ")}</p>
 
-          <h2 style={h2Style}>How to Use the F1 Reaction Time Test</h2>
+          <h2 style={h2Style}>{tr("How to Use the F1 Reaction Time Test")}</h2>
           <ol style={listStyle}>
-            <li><strong>Choose your difficulty</strong> — Rookie gives more time; F1 Elite pushes you to the limit with longer, more unpredictable delays.</li>
-            <li><strong>Press Start Engine</strong> (or tap the arena / press SPACE).</li>
-            <li><strong>Watch the five red lights</strong> illuminate one by one.</li>
-            <li><strong>React the instant all lights go out</strong> — tap, click, or press SPACE.</li>
-            <li><strong>Read your result</strong>, compare with your personal best, and share with friends.</li>
+            <li><strong>{tr("Choose your difficulty")}</strong> {tr("— Rookie gives more time; F1 Elite pushes you to the limit with longer, more unpredictable delays.")}</li>
+            <li><strong>{tr("Press Start Engine")}</strong> {tr("(or tap the arena / press SPACE).")}</li>
+            <li><strong>{tr("Watch the five red lights")}</strong> {tr("illuminate one by one.")}</li>
+            <li><strong>{tr("React the instant all lights go out")}</strong> {tr("— tap, click, or press SPACE.")}</li>
+            <li><strong>{tr("Read your result")}</strong>{tr(", compare with your personal best, and share with friends.")}</li>
           </ol>
           <p style={bodyText}>
-            Tapping before the lights go out registers a <em>Jump Start</em> (false start), just like in real
-            Formula 1. The randomized delay after the fifth light prevents pattern learning, keeping every
-            run genuinely challenging. Each completed attempt is timestamped, checksummed, and stored locally
-            so your history, personal best, and false-start count all persist between sessions on the same
-            device and browser.
-          </p>
+            {tr("Tapping before the lights go out registers a ")}<em>{tr("Jump Start")}</em> {tr("(false start), just like in real\r\n            Formula 1. The randomized delay after the fifth light prevents pattern learning, keeping every\r\n            run genuinely challenging. Each completed attempt is timestamped, checksummed, and stored locally\r\n            so your history, personal best, and false-start count all persist between sessions on the same\r\n            device and browser.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Keyboard Shortcuts</h2>
+          <h2 style={h2Style}>{tr("Keyboard Shortcuts")}</h2>
           <ul style={{ ...listStyle, listStyleType: 'none', paddingLeft: 0 }}>
             {[
               ['SPACE / ENTER', 'React / Start'],
@@ -1642,94 +1613,37 @@ export default function F1ReactionTimePage() {
             ))}
           </ul>
 
-          <h2 style={h2Style}>How the Real Formula 1 Start Lights Work</h2>
+          <h2 style={h2Style}>{tr("How the Real Formula 1 Start Lights Work")}</h2>
           <p style={bodyText}>
-            The five-light gantry used in this simulator is not an arbitrary design choice — it is a faithful
-            recreation of the official FIA Formula 1 race-start procedure. On an actual grid, five pairs of
-            red lights illuminate one column at a time, roughly one second apart, building tension across the
-            entire starting field. Once all five columns are lit, the lights hold for a period that is
-            deliberately randomized, typically between roughly one and a bit over four and a half seconds,
-            before extinguishing simultaneously. The randomization is the entire point: it exists specifically
-            to prevent drivers from anticipating the exact moment of release and jumping the start.
-          </p>
+            {tr("The five-light gantry used in this simulator is not an arbitrary design choice — it is a faithful\r\n            recreation of the official FIA Formula 1 race-start procedure. On an actual grid, five pairs of\r\n            red lights illuminate one column at a time, roughly one second apart, building tension across the\r\n            entire starting field. Once all five columns are lit, the lights hold for a period that is\r\n            deliberately randomized, typically between roughly one and a bit over four and a half seconds,\r\n            before extinguishing simultaneously. The randomization is the entire point: it exists specifically\r\n            to prevent drivers from anticipating the exact moment of release and jumping the start.\r\n          ")}</p>
           <p style={bodyText}>
-            A driver who moves before the lights go out commits a jump start, which is detected by sensors in
-            the car and grid position and results in a time penalty or drive-through penalty depending on the
-            severity. This simulator mirrors that exact philosophy: the five-light sequence, the randomized
-            hold, and the strict false-start penalty are not cosmetic choices, they are the mechanism that
-            makes the test a genuine measurement of reaction rather than pattern memorization or rhythmic
-            guessing.
-          </p>
+            {tr("A driver who moves before the lights go out commits a jump start, which is detected by sensors in\r\n            the car and grid position and results in a time penalty or drive-through penalty depending on the\r\n            severity. This simulator mirrors that exact philosophy: the five-light sequence, the randomized\r\n            hold, and the strict false-start penalty are not cosmetic choices, they are the mechanism that\r\n            makes the test a genuine measurement of reaction rather than pattern memorization or rhythmic\r\n            guessing.\r\n          ")}</p>
 
-          <h2 style={h2Style}>The Science Behind Reaction Time</h2>
+          <h2 style={h2Style}>{tr("The Science Behind Reaction Time")}</h2>
           <p style={bodyText}>
-            Reaction time is a measurable cognitive-motor process that begins the instant a stimulus is
-            detected by your sensory system and ends when your muscles execute a response. For a simple
-            visual reaction test like this one, the pathway runs from your retina, through the optic nerve,
-            into the visual cortex for initial processing, then to decision-related regions of the brain that
-            confirm "this is the signal to act," and finally down through the motor cortex and spinal cord to
-            the muscles in your hand or finger. Every one of those handoffs takes time, and the sum of all of
-            them is what you see displayed on screen in milliseconds.
-          </p>
+            {tr("Reaction time is a measurable cognitive-motor process that begins the instant a stimulus is\r\n            detected by your sensory system and ends when your muscles execute a response. For a simple\r\n            visual reaction test like this one, the pathway runs from your retina, through the optic nerve,\r\n            into the visual cortex for initial processing, then to decision-related regions of the brain that\r\n            confirm \"this is the signal to act,\" and finally down through the motor cortex and spinal cord to\r\n            the muscles in your hand or finger. Every one of those handoffs takes time, and the sum of all of\r\n            them is what you see displayed on screen in milliseconds.\r\n          ")}</p>
           <p style={bodyText}>
-            Researchers typically distinguish between several categories of reaction time. <strong>Simple
-            reaction time</strong> measures the response to a single, expected stimulus — exactly what this
-            F1 test measures, since there is only one action to take (react) and only one signal to watch for
-            (lights out). <strong>Choice reaction time</strong> is slower because it requires the brain to
-            first identify which of several possible stimuli appeared and then select the correct
-            corresponding response, adding an extra decision-making stage. <strong>Go/no-go reaction time</strong>
-            sits in between, requiring the participant to respond to one type of stimulus while withholding a
-            response to another, which trains impulse control alongside raw speed. Understanding which
-            category a test falls into matters because comparing a simple reaction score directly against a
-            choice reaction score is not an apples-to-apples comparison.
-          </p>
+            {tr("Researchers typically distinguish between several categories of reaction time. ")}<strong>{tr("Simple\r\n            reaction time")}</strong> {tr("measures the response to a single, expected stimulus — exactly what this\r\n            F1 test measures, since there is only one action to take (react) and only one signal to watch for\r\n            (lights out). ")}<strong>{tr("Choice reaction time")}</strong> {tr("is slower because it requires the brain to\r\n            first identify which of several possible stimuli appeared and then select the correct\r\n            corresponding response, adding an extra decision-making stage. ")}<strong>{tr("Go/no-go reaction time")}</strong>
+            {tr("sits in between, requiring the participant to respond to one type of stimulus while withholding a\r\n            response to another, which trains impulse control alongside raw speed. Understanding which\r\n            category a test falls into matters because comparing a simple reaction score directly against a\r\n            choice reaction score is not an apples-to-apples comparison.\r\n          ")}</p>
           <p style={bodyText}>
-            It is also worth understanding why a result under roughly 100 milliseconds is treated as invalid
-            rather than impressive. Human visual processing alone consumes a meaningful chunk of time before a
-            decision can even be made, so results that fast are almost always the product of anticipating the
-            timing of the lights rather than genuinely reacting to them — essentially a well-timed guess. The
-            test enforces a minimum threshold specifically to filter out these anticipatory taps and keep the
-            leaderboard reflective of authentic reaction speed.
-          </p>
+            {tr("It is also worth understanding why a result under roughly 100 milliseconds is treated as invalid\r\n            rather than impressive. Human visual processing alone consumes a meaningful chunk of time before a\r\n            decision can even be made, so results that fast are almost always the product of anticipating the\r\n            timing of the lights rather than genuinely reacting to them — essentially a well-timed guess. The\r\n            test enforces a minimum threshold specifically to filter out these anticipatory taps and keep the\r\n            leaderboard reflective of authentic reaction speed.\r\n          ")}</p>
 
-          <h2 style={h2Style}>What Is a Good Reaction Time?</h2>
+          <h2 style={h2Style}>{tr("What Is a Good Reaction Time?")}</h2>
           <p style={bodyText}>
-            The average human simple visual reaction time is approximately <strong>250 ms</strong>. Trained
-            esports athletes and motorsport professionals consistently achieve <strong>150–200 ms</strong>
-            through deliberate practice and optimized hardware. Sub-150 ms results are exceptionally rare
-            and place you in genuine F1-driver territory.
-          </p>
+            {tr("The average human simple visual reaction time is approximately ")}<strong>{tr("250 ms")}</strong>{tr(". Trained\r\n            esports athletes and motorsport professionals consistently achieve ")}<strong>{tr("150–200 ms")}</strong>
+            {tr("through deliberate practice and optimized hardware. Sub-150 ms results are exceptionally rare\r\n            and place you in genuine F1-driver territory.\r\n          ")}</p>
           <p style={bodyText}>
-            Many players believe that scaling up scores on a <strong>CPS Test (Clicks Per Second)</strong> is
-            purely about finger-muscle speed. In reality, clicking velocity is tethered to neuromuscular
-            response latency — the precise window between your brain registering a visual trigger and your
-            finger completing the motion. Reducing that window can help your click bursts start sooner.
-          </p>
+            {tr("Many players believe that scaling up scores on a ")}<strong>{tr("CPS Test (Clicks Per Second)")}</strong> {tr("is\r\n            purely about finger-muscle speed. In reality, clicking velocity is tethered to neuromuscular\r\n            response latency — the precise window between your brain registering a visual trigger and your\r\n            finger completing the motion. Reducing that window can help your click bursts start sooner.\r\n          ")}</p>
           <p style={bodyText}>
-            It is worth noting that reaction time is not a fixed number — it fluctuates from moment to moment
-            based on alertness, attention, and even the specific muscle group used to respond. A study
-            participant reacting with a foot pedal will typically register slower times than the same person
-            reacting with a finger tap, simply because the neural pathway to a finger is shorter and more
-            frequently exercised. This is one reason the test standardizes on a simple tap or click as the
-            response method — it keeps every attempt, and every comparison between players, consistent.
-          </p>
+            {tr("It is worth noting that reaction time is not a fixed number — it fluctuates from moment to moment\r\n            based on alertness, attention, and even the specific muscle group used to respond. A study\r\n            participant reacting with a foot pedal will typically register slower times than the same person\r\n            reacting with a finger tap, simply because the neural pathway to a finger is shorter and more\r\n            frequently exercised. This is one reason the test standardizes on a simple tap or click as the\r\n            response method — it keeps every attempt, and every comparison between players, consistent.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Reaction Time Across Age Groups</h2>
+          <h2 style={h2Style}>{tr("Reaction Time Across Age Groups")}</h2>
           <p style={bodyText}>
-            Reaction speed is not static across a lifetime. Children generally show slower reaction times than
-            adults because the neural pathways involved are still developing and myelination — the
-            insulating layer that speeds up nerve signal transmission — is incomplete. Reaction speed
-            typically sharpens through adolescence and reaches its peak in the late teens to mid-twenties,
-            when nerve conduction is fastest and motor coordination is most refined. From there, reaction
-            time tends to slow gradually, often by only a handful of milliseconds per decade, though the rate
-            of decline can be meaningfully slowed by staying physically active, mentally engaged, and
-            avoiding prolonged sedentary periods.
-          </p>
+            {tr("Reaction speed is not static across a lifetime. Children generally show slower reaction times than\r\n            adults because the neural pathways involved are still developing and myelination — the\r\n            insulating layer that speeds up nerve signal transmission — is incomplete. Reaction speed\r\n            typically sharpens through adolescence and reaches its peak in the late teens to mid-twenties,\r\n            when nerve conduction is fastest and motor coordination is most refined. From there, reaction\r\n            time tends to slow gradually, often by only a handful of milliseconds per decade, though the rate\r\n            of decline can be meaningfully slowed by staying physically active, mentally engaged, and\r\n            avoiding prolonged sedentary periods.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Reaction Time Score Chart</h2>
+          <h2 style={h2Style}>{tr("Reaction Time Score Chart")}</h2>
           <p style={{ ...bodyText, marginBottom: '1rem' }}>
-            Use this table to benchmark your result against competitive tiers:
-          </p>
+            {tr("Use this table to benchmark your result against competitive tiers:\r\n          ")}</p>
 
           <div
             className="table-scroll"
@@ -1737,13 +1651,13 @@ export default function F1ReactionTimePage() {
           >
             <table
               style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'clamp(0.8rem,2vw,0.95rem)', minWidth: '480px' }}
-              aria-label="Reaction time score benchmarks"
+              aria-label={tr("Reaction time score benchmarks")}
             >
               <thead>
                 <tr style={{ backgroundColor: '#1e293b', color: '#fff' }}>
-                  <th style={thStyle}>Reaction Time</th>
-                  <th style={thStyle}>Rating</th>
-                  <th style={thStyle}>Real-World Equivalent</th>
+                  <th style={thStyle}>{tr("Reaction Time")}</th>
+                  <th style={thStyle}>{tr("Rating")}</th>
+                  <th style={thStyle}>{tr("Real-World Equivalent")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -1758,317 +1672,144 @@ export default function F1ReactionTimePage() {
             </table>
           </div>
 
-          <h2 style={h2Style}>How to Improve Your Reaction Time</h2>
+          <h2 style={h2Style}>{tr("How to Improve Your Reaction Time")}</h2>
           <p style={{ ...bodyText, marginBottom: '1rem' }}>
-            Consistent, targeted training is the most reliable path to shaving milliseconds off your score:
-          </p>
+            {tr("Consistent, targeted training is the most reliable path to shaving milliseconds off your score:\r\n          ")}</p>
           <ul style={listStyle}>
-            <li><strong>Daily short sessions:</strong> Ten focused runs per day builds neural pathways more effectively than occasional marathon sessions.</li>
-            <li><strong>Optimize hardware:</strong> A monitor with 1 ms response time and 144 Hz+ refresh rate, paired with a high-polling-rate mouse (1000 Hz+), minimizes system-introduced latency.</li>
-            <li><strong>Physical readiness:</strong> Stay hydrated, warm your fingers before testing, and avoid testing when fatigued — reaction time degrades measurably with both.</li>
-            <li><strong>Eliminate distractions:</strong> Background noise, notifications, and divided attention all increase processing delay by tens of milliseconds.</li>
-            <li><strong>Escalate difficulty gradually:</strong> Start on Rookie mode, then progress through Pro and F1 Elite as your baseline improves.</li>
+            <li><strong>{tr("Daily short sessions:")}</strong> {tr("Ten focused runs per day builds neural pathways more effectively than occasional marathon sessions.")}</li>
+            <li><strong>{tr("Optimize hardware:")}</strong> {tr("A monitor with 1 ms response time and 144 Hz+ refresh rate, paired with a high-polling-rate mouse (1000 Hz+), minimizes system-introduced latency.")}</li>
+            <li><strong>{tr("Physical readiness:")}</strong> {tr("Stay hydrated, warm your fingers before testing, and avoid testing when fatigued — reaction time degrades measurably with both.")}</li>
+            <li><strong>{tr("Eliminate distractions:")}</strong> {tr("Background noise, notifications, and divided attention all increase processing delay by tens of milliseconds.")}</li>
+            <li><strong>{tr("Escalate difficulty gradually:")}</strong> {tr("Start on Rookie mode, then progress through Pro and F1 Elite as your baseline improves.")}</li>
           </ul>
 
-          <h2 style={h2Style}>A Simple Four-Week Training Framework</h2>
+          <h2 style={h2Style}>{tr("A Simple Four-Week Training Framework")}</h2>
           <p style={bodyText}>
-            Structured, progressive practice tends to outperform random, unstructured testing. In the first
-            week, focus purely on establishing a stable baseline on Rookie mode — run ten attempts per day and
-            resist the urge to chase a single lucky result, since the goal at this stage is consistency rather
-            than a personal best. In the second week, move to Pro mode and pay close attention to your false
-            start count; if it rises noticeably, that is a signal you are anticipating rather than reacting,
-            and you should consciously slow down your intent to respond until the lights actually go out. By
-            the third week, most users can comfortably alternate between Pro and F1 Elite, using the harder
-            mode specifically to sharpen patience against a longer, more unpredictable delay window. In the
-            final week, aim for quality over quantity: five to eight highly focused attempts per session,
-            each treated like a real competitive round, tend to produce more durable improvement than a large
-            volume of half-attentive taps.
-          </p>
+            {tr("Structured, progressive practice tends to outperform random, unstructured testing. In the first\r\n            week, focus purely on establishing a stable baseline on Rookie mode — run ten attempts per day and\r\n            resist the urge to chase a single lucky result, since the goal at this stage is consistency rather\r\n            than a personal best. In the second week, move to Pro mode and pay close attention to your false\r\n            start count; if it rises noticeably, that is a signal you are anticipating rather than reacting,\r\n            and you should consciously slow down your intent to respond until the lights actually go out. By\r\n            the third week, most users can comfortably alternate between Pro and F1 Elite, using the harder\r\n            mode specifically to sharpen patience against a longer, more unpredictable delay window. In the\r\n            final week, aim for quality over quantity: five to eight highly focused attempts per session,\r\n            each treated like a real competitive round, tend to produce more durable improvement than a large\r\n            volume of half-attentive taps.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Avoiding False Starts</h2>
+          <h2 style={h2Style}>{tr("Avoiding False Starts")}</h2>
           <p style={bodyText}>
-            Advanced clicking techniques such as Jitter Clicking or Butterfly Clicking require precise rhythm
-            control. The strict Jump Start penalty system in this simulator conditions you to wait for the
-            correct visual stimulus rather than anticipating it — a skill directly transferable to competitive
-            gameplay where premature inputs result in cooldown or action cancellation.
-          </p>
+            {tr("Advanced clicking techniques such as Jitter Clicking or Butterfly Clicking require precise rhythm\r\n            control. The strict Jump Start penalty system in this simulator conditions you to wait for the\r\n            correct visual stimulus rather than anticipating it — a skill directly transferable to competitive\r\n            gameplay where premature inputs result in cooldown or action cancellation.\r\n          ")}</p>
           <p style={bodyText}>
-            A useful mental model borrowed from real motorsport is to treat the wait after the fifth light as
-            a countdown with no fixed length rather than a countdown you can predict. Drivers who consistently
-            avoid jump starts describe holding a relaxed, ready posture rather than a tensed, anticipatory
-            one — tension and anticipation are precisely what cause the nervous system to fire a motor command
-            before the visual stimulus has actually been processed. Practicing a calm, neutral starting
-            position before each attempt can measurably reduce your false-start rate over time.
-          </p>
+            {tr("A useful mental model borrowed from real motorsport is to treat the wait after the fifth light as\r\n            a countdown with no fixed length rather than a countdown you can predict. Drivers who consistently\r\n            avoid jump starts describe holding a relaxed, ready posture rather than a tensed, anticipatory\r\n            one — tension and anticipation are precisely what cause the nervous system to fire a motor command\r\n            before the visual stimulus has actually been processed. Practicing a calm, neutral starting\r\n            position before each attempt can measurably reduce your false-start rate over time.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Equipment and Hardware Considerations</h2>
+          <h2 style={h2Style}>{tr("Equipment and Hardware Considerations")}</h2>
           <p style={bodyText}>
-            While reaction time is fundamentally a biological process, the hardware chain between the screen
-            and your recorded result introduces its own latency, and that latency is additive to your true
-            biological response. A standard 60 Hz monitor only refreshes the displayed image sixty times per
-            second, which means the visual stimulus can sit undisplayed for up to roughly sixteen milliseconds
-            before you even have a chance to perceive it. Moving to a 144 Hz or 240 Hz panel shrinks that
-            window considerably, which is part of why competitive gamers overwhelmingly favor high-refresh
-            displays.
-          </p>
+            {tr("While reaction time is fundamentally a biological process, the hardware chain between the screen\r\n            and your recorded result introduces its own latency, and that latency is additive to your true\r\n            biological response. A standard 60 Hz monitor only refreshes the displayed image sixty times per\r\n            second, which means the visual stimulus can sit undisplayed for up to roughly sixteen milliseconds\r\n            before you even have a chance to perceive it. Moving to a 144 Hz or 240 Hz panel shrinks that\r\n            window considerably, which is part of why competitive gamers overwhelmingly favor high-refresh\r\n            displays.\r\n          ")}</p>
           <p style={bodyText}>
-            Input devices matter too. Wireless peripherals, particularly budget models using older
-            connection protocols, can introduce a small but measurable polling delay compared to a wired
-            connection or a modern high-polling-rate wireless receiver. Mouse polling rate, specifically,
-            determines how frequently your input device reports its state to the computer; a 1000 Hz mouse
-            reports a thousand times per second, versus the older 125 Hz standard which reports only eight
-            times as often less. None of this changes your underlying neurological reaction speed, but it
-            does affect the number that ultimately appears on screen, which is why serious competitors treat
-            hardware optimization as a legitimate part of reaction training.
-          </p>
+            {tr("Input devices matter too. Wireless peripherals, particularly budget models using older\r\n            connection protocols, can introduce a small but measurable polling delay compared to a wired\r\n            connection or a modern high-polling-rate wireless receiver. Mouse polling rate, specifically,\r\n            determines how frequently your input device reports its state to the computer; a 1000 Hz mouse\r\n            reports a thousand times per second, versus the older 125 Hz standard which reports only eight\r\n            times as often less. None of this changes your underlying neurological reaction speed, but it\r\n            does affect the number that ultimately appears on screen, which is why serious competitors treat\r\n            hardware optimization as a legitimate part of reaction training.\r\n          ")}</p>
           <p style={bodyText}>
-            On mobile devices, touchscreen digitizers themselves introduce a small amount of processing
-            overhead compared to a physical mouse click, and this can vary meaningfully between manufacturers
-            and even between browser engines on the same device. If you are comparing scores across desktop
-            and mobile, keep in mind that the two platforms are not perfectly equivalent measurement
-            environments.
-          </p>
+            {tr("On mobile devices, touchscreen digitizers themselves introduce a small amount of processing\r\n            overhead compared to a physical mouse click, and this can vary meaningfully between manufacturers\r\n            and even between browser engines on the same device. If you are comparing scores across desktop\r\n            and mobile, keep in mind that the two platforms are not perfectly equivalent measurement\r\n            environments.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Lifestyle Factors That Influence Reaction Speed</h2>
+          <h2 style={h2Style}>{tr("Lifestyle Factors That Influence Reaction Speed")}</h2>
           <p style={bodyText}>
-            Reaction time is sensitive to your physiological state in the moment you take the test, which is
-            part of why a single result should never be treated as a definitive measurement of your ability.
-            Sleep deprivation is one of the most well documented degraders of reaction speed; even a single
-            night of significantly reduced sleep can slow simple reaction time by a noticeable margin,
-            comparable in some studies to the impairment associated with mild alcohol intoxication. Chronic
-            sleep debt compounds this effect over time.
-          </p>
+            {tr("Reaction time is sensitive to your physiological state in the moment you take the test, which is\r\n            part of why a single result should never be treated as a definitive measurement of your ability.\r\n            Sleep deprivation is one of the most well documented degraders of reaction speed; even a single\r\n            night of significantly reduced sleep can slow simple reaction time by a noticeable margin,\r\n            comparable in some studies to the impairment associated with mild alcohol intoxication. Chronic\r\n            sleep debt compounds this effect over time.\r\n          ")}</p>
           <p style={bodyText}>
-            Hydration status plays a similar, if smaller, role — even mild dehydration has been associated
-            with reduced alertness and slower cognitive processing speed. Moderate caffeine intake, on the
-            other hand, is one of the few substances with reasonably consistent evidence for a short-term
-            improvement in simple reaction time, largely due to its effect on alertness and arousal, though
-            excessive intake can introduce jitteriness that works against fine motor precision.
-          </p>
+            {tr("Hydration status plays a similar, if smaller, role — even mild dehydration has been associated\r\n            with reduced alertness and slower cognitive processing speed. Moderate caffeine intake, on the\r\n            other hand, is one of the few substances with reasonably consistent evidence for a short-term\r\n            improvement in simple reaction time, largely due to its effect on alertness and arousal, though\r\n            excessive intake can introduce jitteriness that works against fine motor precision.\r\n          ")}</p>
           <p style={bodyText}>
-            Physical warm-up also matters more than most people expect. Cold hands and stiff fingers have
-            measurably slower fine motor response than warmed-up ones, which is why many competitive gamers
-            perform a brief hand-stretching or warm-up routine before high-stakes matches. Mental warm-up
-            follows a similar principle: your first few attempts in any session are typically slower than
-            attempts five or six, simply because attention and readiness sharpen with repetition.
-          </p>
+            {tr("Physical warm-up also matters more than most people expect. Cold hands and stiff fingers have\r\n            measurably slower fine motor response than warmed-up ones, which is why many competitive gamers\r\n            perform a brief hand-stretching or warm-up routine before high-stakes matches. Mental warm-up\r\n            follows a similar principle: your first few attempts in any session are typically slower than\r\n            attempts five or six, simply because attention and readiness sharpen with repetition.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Common Myths About Reaction Time</h2>
+          <h2 style={h2Style}>{tr("Common Myths About Reaction Time")}</h2>
           <p style={{ ...bodyText, marginBottom: '1rem' }}>
-            A few persistent misconceptions are worth addressing directly:
-          </p>
+            {tr("A few persistent misconceptions are worth addressing directly:\r\n          ")}</p>
           <ul style={listStyle}>
-            <li><strong>"Reaction time can be trained down to near zero."</strong> Human neural transmission has hard physiological limits; results consistently below roughly 100 ms are virtually always the product of anticipation rather than genuine improvement.</li>
-            <li><strong>"A faster mouse alone will fix a slow reaction time."</strong> Hardware reduces system-introduced latency, but it cannot substitute for the underlying neurological response — both factors matter, but they are not interchangeable.</li>
-            <li><strong>"Reaction time is fixed at birth and cannot improve."</strong> While there is a genetic component, deliberate practice, better sleep, and improved focus have all been shown to produce measurable, if modest, improvements over time.</li>
-            <li><strong>"One great score proves elite skill."</strong> A single fast result is often influenced by luck, mild anticipation, or a favorable random delay; a stable average across many attempts is a far more reliable indicator.</li>
-            <li><strong>"Reaction time and hand-eye coordination are the same thing."</strong> Reaction time measures how quickly you detect and respond to a stimulus, while hand-eye coordination also involves spatial accuracy and continuous tracking — related but distinct skills.</li>
+            <li><strong>{tr("\"Reaction time can be trained down to near zero.\"")}</strong> {tr("Human neural transmission has hard physiological limits; results consistently below roughly 100 ms are virtually always the product of anticipation rather than genuine improvement.")}</li>
+            <li><strong>{tr("\"A faster mouse alone will fix a slow reaction time.\"")}</strong> {tr("Hardware reduces system-introduced latency, but it cannot substitute for the underlying neurological response — both factors matter, but they are not interchangeable.")}</li>
+            <li><strong>{tr("\"Reaction time is fixed at birth and cannot improve.\"")}</strong> {tr("While there is a genetic component, deliberate practice, better sleep, and improved focus have all been shown to produce measurable, if modest, improvements over time.")}</li>
+            <li><strong>{tr("\"One great score proves elite skill.\"")}</strong> {tr("A single fast result is often influenced by luck, mild anticipation, or a favorable random delay; a stable average across many attempts is a far more reliable indicator.")}</li>
+            <li><strong>{tr("\"Reaction time and hand-eye coordination are the same thing.\"")}</strong> {tr("Reaction time measures how quickly you detect and respond to a stimulus, while hand-eye coordination also involves spatial accuracy and continuous tracking — related but distinct skills.")}</li>
           </ul>
 
-          <h2 style={h2Style}>Why This Test Helps Gamers</h2>
+          <h2 style={h2Style}>{tr("Why This Test Helps Gamers")}</h2>
           <p style={{ ...bodyText, marginBottom: '1rem' }}>
-            Integrating consistent F1 reaction training accelerates performance across multiple competitive disciplines:
-          </p>
+            {tr("Integrating consistent F1 reaction training accelerates performance across multiple competitive disciplines:\r\n          ")}</p>
           <ul style={listStyle}>
-            <li><strong>FPS titles (CS2, Valorant, Apex):</strong> Lower reaction time translates directly to faster first-shot execution and reduced time-to-kill.</li>
-            <li><strong>Fighting games:</strong> Frame-precise punish windows demand sub-200 ms response to capitalize on opponent recovery gaps.</li>
-            <li><strong>Battle Royale:</strong> Faster looting, quicker weapon swaps, and earlier aiming decisions all compound reaction-speed advantages.</li>
-            <li><strong>CPS benchmarks:</strong> Optimizing click latency can help produce cleaner bursts at the start of a high-speed click counter.</li>
-            <li><strong>Racing simulators (iRacing, F1 24):</strong> Consistent, well-timed throttle and brake inputs — skills this test directly trains.</li>
-            <li><strong>MOBA titles (League of Legends, Dota 2):</strong> Faster reflexes improve last-hitting precision and reaction to sudden ability combos in team fights.</li>
-            <li><strong>Rhythm and music games:</strong> While rhythm games rely more on timing prediction than raw reaction, a lower baseline reaction time still improves recovery from unexpected pattern breaks.</li>
+            <li><strong>{tr("FPS titles (CS2, Valorant, Apex):")}</strong> {tr("Lower reaction time translates directly to faster first-shot execution and reduced time-to-kill.")}</li>
+            <li><strong>{tr("Fighting games:")}</strong> {tr("Frame-precise punish windows demand sub-200 ms response to capitalize on opponent recovery gaps.")}</li>
+            <li><strong>{tr("Battle Royale:")}</strong> {tr("Faster looting, quicker weapon swaps, and earlier aiming decisions all compound reaction-speed advantages.")}</li>
+            <li><strong>{tr("CPS benchmarks:")}</strong> {tr("Optimizing click latency can help produce cleaner bursts at the start of a high-speed click counter.")}</li>
+            <li><strong>{tr("Racing simulators (iRacing, F1 24):")}</strong> {tr("Consistent, well-timed throttle and brake inputs — skills this test directly trains.")}</li>
+            <li><strong>{tr("MOBA titles (League of Legends, Dota 2):")}</strong> {tr("Faster reflexes improve last-hitting precision and reaction to sudden ability combos in team fights.")}</li>
+            <li><strong>{tr("Rhythm and music games:")}</strong> {tr("While rhythm games rely more on timing prediction than raw reaction, a lower baseline reaction time still improves recovery from unexpected pattern breaks.")}</li>
           </ul>
 
-          <h2 style={h2Style}>Shifting Into Elite Pro Tiers</h2>
+          <h2 style={h2Style}>{tr("Shifting Into Elite Pro Tiers")}</h2>
           <p style={bodyText}>
-            While the global median reaction time sits around 250 ms, elite esports professionals and actual
-            F1 grid drivers operate closer to the sub-150 ms mark. Regular structured training actively
-            conditions your neural pathways to narrow that window — tracked visibly in your personal history
-            panel above.
-          </p>
+            {tr("While the global median reaction time sits around 250 ms, elite esports professionals and actual\r\n            F1 grid drivers operate closer to the sub-150 ms mark. Regular structured training actively\r\n            conditions your neural pathways to narrow that window — tracked visibly in your personal history\r\n            panel above.\r\n          ")}</p>
           <p style={bodyText}>
-            It is worth setting realistic expectations about the shape of this improvement curve. Most users
-            see their fastest gains in the first one to two weeks of consistent practice, as they learn the
-            test's rhythm, adjust their posture and grip, and eliminate obvious anticipation errors. Gains
-            beyond that point tend to be smaller and more gradual, often just five to fifteen milliseconds
-            over subsequent weeks, because at that stage you are no longer eliminating avoidable mistakes but
-            genuinely pushing against your underlying neurological response ceiling. This is entirely normal
-            and mirrors the improvement curves seen in professional athlete training data.
-          </p>
+            {tr("It is worth setting realistic expectations about the shape of this improvement curve. Most users\r\n            see their fastest gains in the first one to two weeks of consistent practice, as they learn the\r\n            test's rhythm, adjust their posture and grip, and eliminate obvious anticipation errors. Gains\r\n            beyond that point tend to be smaller and more gradual, often just five to fifteen milliseconds\r\n            over subsequent weeks, because at that stage you are no longer eliminating avoidable mistakes but\r\n            genuinely pushing against your underlying neurological response ceiling. This is entirely normal\r\n            and mirrors the improvement curves seen in professional athlete training data.\r\n          ")}</p>
 
-          <h2 style={h2Style}>The History of Reaction Time Research</h2>
+          <h2 style={h2Style}>{tr("The History of Reaction Time Research")}</h2>
           <p style={bodyText}>
-            Formal measurement of human reaction time dates back to nineteenth-century experimental
-            psychology, when researchers first used simple mechanical apparatuses to time how quickly a
-            person could respond to a light or sound. Those early studies established the roughly 200 to
-            250 millisecond baseline that modern digital tests, including this one, still consistently
-            reproduce today. What has changed is precision and accessibility — a task that once required a
-            physical laboratory and specialized timing equipment can now be measured in a browser using
-            high-resolution timing APIs accurate to a fraction of a millisecond.
-          </p>
+            {tr("Formal measurement of human reaction time dates back to nineteenth-century experimental\r\n            psychology, when researchers first used simple mechanical apparatuses to time how quickly a\r\n            person could respond to a light or sound. Those early studies established the roughly 200 to\r\n            250 millisecond baseline that modern digital tests, including this one, still consistently\r\n            reproduce today. What has changed is precision and accessibility — a task that once required a\r\n            physical laboratory and specialized timing equipment can now be measured in a browser using\r\n            high-resolution timing APIs accurate to a fraction of a millisecond.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Simple vs Choice Reaction Time Explained</h2>
+          <h2 style={h2Style}>{tr("Simple vs Choice Reaction Time Explained")}</h2>
           <p style={bodyText}>
-            It bears repeating because it is so often misunderstood in online discussion: a simple reaction
-            time test, like this one, only ever asks one question — has the stimulus appeared, yes or no.
-            A choice reaction time test asks a harder question first — which stimulus appeared, and which of
-            several possible responses does it call for. Because the brain must complete an extra
-            identification and selection step, choice reaction times are reliably slower, often by fifty
-            milliseconds or more, than simple reaction times measured in the same person under the same
-            conditions. Comparing your F1 test result to a choice-based test score, such as certain esports
-            aim-training drills, will always look faster because the two tools are measuring different things.
-          </p>
+            {tr("It bears repeating because it is so often misunderstood in online discussion: a simple reaction\r\n            time test, like this one, only ever asks one question — has the stimulus appeared, yes or no.\r\n            A choice reaction time test asks a harder question first — which stimulus appeared, and which of\r\n            several possible responses does it call for. Because the brain must complete an extra\r\n            identification and selection step, choice reaction times are reliably slower, often by fifty\r\n            milliseconds or more, than simple reaction times measured in the same person under the same\r\n            conditions. Comparing your F1 test result to a choice-based test score, such as certain esports\r\n            aim-training drills, will always look faster because the two tools are measuring different things.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Reaction Time in Professional Esports</h2>
+          <h2 style={h2Style}>{tr("Reaction Time in Professional Esports")}</h2>
           <p style={bodyText}>
-            Top-tier esports organizations increasingly treat reaction time as a trainable athletic attribute
-            rather than a fixed trait, incorporating regular simple and choice reaction drills into practice
-            regimens alongside traditional in-game scrims. Publicly reported reaction benchmarks from
-            professional first-person-shooter players frequently fall in the 150 to 200 millisecond range,
-            reinforcing the idea that the gap between an average player and a professional is measured in
-            tens of milliseconds, not hundreds — small margins that disciplined, repeated practice can close.
-          </p>
+            {tr("Top-tier esports organizations increasingly treat reaction time as a trainable athletic attribute\r\n            rather than a fixed trait, incorporating regular simple and choice reaction drills into practice\r\n            regimens alongside traditional in-game scrims. Publicly reported reaction benchmarks from\r\n            professional first-person-shooter players frequently fall in the 150 to 200 millisecond range,\r\n            reinforcing the idea that the gap between an average player and a professional is measured in\r\n            tens of milliseconds, not hundreds — small margins that disciplined, repeated practice can close.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Reaction Time in Motorsport Beyond Formula 1</h2>
+          <h2 style={h2Style}>{tr("Reaction Time in Motorsport Beyond Formula 1")}</h2>
           <p style={bodyText}>
-            The lights-out start format popularized by Formula 1 has been adopted, in one form or another, by
-            most major motorsport series, including endurance racing and various single-seater feeder
-            categories, precisely because it has proven to be the most reliable way to standardize a fair,
-            simultaneous start across a wide field of competitors. Drag racing uses a related but distinct
-            system — a vertical "Christmas tree" of staged lights — which similarly punishes early movement
-            with a red-light disqualification, underscoring how central controlled, randomized-delay starts
-            are across the wider world of competitive racing.
-          </p>
+            {tr("The lights-out start format popularized by Formula 1 has been adopted, in one form or another, by\r\n            most major motorsport series, including endurance racing and various single-seater feeder\r\n            categories, precisely because it has proven to be the most reliable way to standardize a fair,\r\n            simultaneous start across a wide field of competitors. Drag racing uses a related but distinct\r\n            system — a vertical \"Christmas tree\" of staged lights — which similarly punishes early movement\r\n            with a red-light disqualification, underscoring how central controlled, randomized-delay starts\r\n            are across the wider world of competitive racing.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Glossary of Key Terms</h2>
+          <h2 style={h2Style}>{tr("Glossary of Key Terms")}</h2>
           <ul style={listStyle}>
-            <li><strong>Simple reaction time:</strong> The interval between a single expected stimulus and a single corresponding response, which is what this test measures.</li>
-            <li><strong>Choice reaction time:</strong> The interval when a participant must first identify which of multiple stimuli appeared before selecting the correct response.</li>
-            <li><strong>Jump start / false start:</strong> Responding before the actual stimulus appears, resulting in an invalidated attempt and a penalty.</li>
-            <li><strong>Personal best (PB):</strong> The single fastest valid reaction time recorded across all of a user's saved attempts.</li>
-            <li><strong>Input latency:</strong> The delay introduced by hardware — displays, peripherals, and connection type — between an event occurring and it being registered or displayed.</li>
-            <li><strong>Neuromuscular response:</strong> The chain of nerve signals traveling from the brain's motor cortex to the muscles responsible for executing a physical action.</li>
+            <li><strong>{tr("Simple reaction time:")}</strong> {tr("The interval between a single expected stimulus and a single corresponding response, which is what this test measures.")}</li>
+            <li><strong>{tr("Choice reaction time:")}</strong> {tr("The interval when a participant must first identify which of multiple stimuli appeared before selecting the correct response.")}</li>
+            <li><strong>{tr("Jump start / false start:")}</strong> {tr("Responding before the actual stimulus appears, resulting in an invalidated attempt and a penalty.")}</li>
+            <li><strong>{tr("Personal best (PB):")}</strong> {tr("The single fastest valid reaction time recorded across all of a user's saved attempts.")}</li>
+            <li><strong>{tr("Input latency:")}</strong> {tr("The delay introduced by hardware — displays, peripherals, and connection type — between an event occurring and it being registered or displayed.")}</li>
+            <li><strong>{tr("Neuromuscular response:")}</strong> {tr("The chain of nerve signals traveling from the brain's motor cortex to the muscles responsible for executing a physical action.")}</li>
           </ul>
 
-          <h2 style={h2Style}>How Your Results Are Stored and Verified</h2>
+          <h2 style={h2Style}>{tr("How Your Results Are Stored and Verified")}</h2>
           <p style={bodyText}>
-            Every attempt you complete is saved directly in your browser's local storage rather than on a
-            remote server, which means your history, personal best, and false-start count remain private to
-            your own device and are never transmitted anywhere. Each saved entry is tagged with a lightweight
-            integrity checksum derived from the recorded time, the selected mode, and the timestamp, which
-            allows the application to detect and silently discard any entry that has been corrupted or
-            manually tampered with through browser developer tools. This keeps your personal best meaningful
-            as a record of genuine attempts rather than an editable number.
-          </p>
+            {tr("Every attempt you complete is saved directly in your browser's local storage rather than on a\r\n            remote server, which means your history, personal best, and false-start count remain private to\r\n            your own device and are never transmitted anywhere. Each saved entry is tagged with a lightweight\r\n            integrity checksum derived from the recorded time, the selected mode, and the timestamp, which\r\n            allows the application to detect and silently discard any entry that has been corrupted or\r\n            manually tampered with through browser developer tools. This keeps your personal best meaningful\r\n            as a record of genuine attempts rather than an editable number.\r\n          ")}</p>
           <p style={bodyText}>
-            Because the data lives in local storage, clearing your browser's site data, switching to a
-            private or incognito window, or moving to a different device or browser will all reset your
-            saved history back to zero. If you want to preserve a long-term record of your progress, it is
-            worth periodically using the share feature to export a snapshot of your best times before
-            clearing browser data or switching setups.
-          </p>
+            {tr("Because the data lives in local storage, clearing your browser's site data, switching to a\r\n            private or incognito window, or moving to a different device or browser will all reset your\r\n            saved history back to zero. If you want to preserve a long-term record of your progress, it is\r\n            worth periodically using the share feature to export a snapshot of your best times before\r\n            clearing browser data or switching setups.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Comparing This Test to Other Reaction Tools</h2>
+          <h2 style={h2Style}>{tr("Comparing This Test to Other Reaction Tools")}</h2>
           <p style={bodyText}>
-            Generic reaction-time testers typically use a single, unstructured event, such as a screen
-            switching from red to green at a random moment, with no build-up phase at all. That approach
-            measures the same underlying biological quantity, but it lacks the anticipation-management
-            challenge that the five-light gantry introduces. Because Formula 1's actual start procedure was
-            specifically engineered over decades to prevent professional drivers — some of the most trained
-            reflexes on the planet — from jumping the start, the lights-out format is widely regarded as a
-            more rigorous and more engaging test of genuine reaction discipline than a simple color-swap
-            tool.
-          </p>
+            {tr("Generic reaction-time testers typically use a single, unstructured event, such as a screen\r\n            switching from red to green at a random moment, with no build-up phase at all. That approach\r\n            measures the same underlying biological quantity, but it lacks the anticipation-management\r\n            challenge that the five-light gantry introduces. Because Formula 1's actual start procedure was\r\n            specifically engineered over decades to prevent professional drivers — some of the most trained\r\n            reflexes on the planet — from jumping the start, the lights-out format is widely regarded as a\r\n            more rigorous and more engaging test of genuine reaction discipline than a simple color-swap\r\n            tool.\r\n          ")}</p>
           <p style={bodyText}>
-            Other tools, such as aim trainers used by first-person shooter players, combine reaction time
-            with spatial precision and tracking accuracy, producing a composite score rather than an isolated
-            reaction measurement. If your goal is specifically to understand and train your raw
-            stimulus-to-response speed in isolation, a dedicated simple reaction time format like this one is
-            the more precise instrument; if your goal is broader aim and tracking skill, a combined aim
-            trainer is a better complement to use alongside it.
-          </p>
+            {tr("Other tools, such as aim trainers used by first-person shooter players, combine reaction time\r\n            with spatial precision and tracking accuracy, producing a composite score rather than an isolated\r\n            reaction measurement. If your goal is specifically to understand and train your raw\r\n            stimulus-to-response speed in isolation, a dedicated simple reaction time format like this one is\r\n            the more precise instrument; if your goal is broader aim and tracking skill, a combined aim\r\n            trainer is a better complement to use alongside it.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Mobile vs Desktop Testing Differences</h2>
+          <h2 style={h2Style}>{tr("Mobile vs Desktop Testing Differences")}</h2>
           <p style={bodyText}>
-            Desktop testing with a mouse or keyboard tends to produce marginally more consistent results
-            because physical buttons offer immediate, tactile confirmation of input and are processed through
-            a mature, well-optimized input pipeline in most browsers. Touchscreens introduce a digitizer
-            sampling step that can add a small amount of variable latency, and results can differ slightly
-            between browsers even on the same physical device. Neither platform is "wrong" — they simply
-            measure the same underlying reaction speed through a slightly different technical pathway, so
-            it's most meaningful to track your personal trend on a single platform rather than directly
-            comparing a desktop score to a mobile one.
-          </p>
+            {tr("Desktop testing with a mouse or keyboard tends to produce marginally more consistent results\r\n            because physical buttons offer immediate, tactile confirmation of input and are processed through\r\n            a mature, well-optimized input pipeline in most browsers. Touchscreens introduce a digitizer\r\n            sampling step that can add a small amount of variable latency, and results can differ slightly\r\n            between browsers even on the same physical device. Neither platform is \"wrong\" — they simply\r\n            measure the same underlying reaction speed through a slightly different technical pathway, so\r\n            it's most meaningful to track your personal trend on a single platform rather than directly\r\n            comparing a desktop score to a mobile one.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Understanding Your Stats Dashboard</h2>
+          <h2 style={h2Style}>{tr("Understanding Your Stats Dashboard")}</h2>
           <p style={bodyText}>
-            The statistics panel above the fold surfaces four figures that matter most for tracking genuine
-            improvement: your all-time personal best, your rolling average across the last ten completed
-            attempts, your total race count, and your cumulative false-start count. The rolling average is
-            usually the more informative number day to day, since a single personal best can be influenced
-            by a lucky random delay, while an average smooths out that noise and reflects your true current
-            skill level more accurately.
-          </p>
+            {tr("The statistics panel above the fold surfaces four figures that matter most for tracking genuine\r\n            improvement: your all-time personal best, your rolling average across the last ten completed\r\n            attempts, your total race count, and your cumulative false-start count. The rolling average is\r\n            usually the more informative number day to day, since a single personal best can be influenced\r\n            by a lucky random delay, while an average smooths out that noise and reflects your true current\r\n            skill level more accurately.\r\n          ")}</p>
 
-          <h2 style={h2Style}>How Achievements Work</h2>
+          <h2 style={h2Style}>{tr("How Achievements Work")}</h2>
           <p style={bodyText}>
-            Achievement badges unlock automatically as your saved history meets specific milestones, ranging
-            from completing your very first race to crossing speed thresholds like sub-200ms, sub-150ms, and
-            volume milestones such as ten, fifty, or one hundred completed attempts. These badges are
-            calculated live from your locally stored history each time you load the page, so they will
-            re-lock if your browser data is ever cleared, but they provide a lightweight way to gamify
-            consistent practice rather than chasing a single standout score.
-          </p>
+            {tr("Achievement badges unlock automatically as your saved history meets specific milestones, ranging\r\n            from completing your very first race to crossing speed thresholds like sub-200ms, sub-150ms, and\r\n            volume milestones such as ten, fifty, or one hundred completed attempts. These badges are\r\n            calculated live from your locally stored history each time you load the page, so they will\r\n            re-lock if your browser data is ever cleared, but they provide a lightweight way to gamify\r\n            consistent practice rather than chasing a single standout score.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Why Sound and Vibration Feedback Matter</h2>
+          <h2 style={h2Style}>{tr("Why Sound and Vibration Feedback Matter")}</h2>
           <p style={bodyText}>
-            Each illuminating light plays a short audio cue, and a personal-best result triggers a distinct
-            ascending tone alongside a confetti animation, while supported mobile devices also receive haptic
-            vibration feedback at key moments. Multisensory feedback — engaging hearing and touch alongside
-            vision — has been shown in reaction research to sometimes produce marginally faster responses
-            than a purely visual stimulus alone, because the brain can integrate signals from multiple senses
-            simultaneously. If you want the purest possible visual-only measurement, the mute toggle lets you
-            disable audio cues entirely while keeping the visual sequence unchanged.
-          </p>
+            {tr("Each illuminating light plays a short audio cue, and a personal-best result triggers a distinct\r\n            ascending tone alongside a confetti animation, while supported mobile devices also receive haptic\r\n            vibration feedback at key moments. Multisensory feedback — engaging hearing and touch alongside\r\n            vision — has been shown in reaction research to sometimes produce marginally faster responses\r\n            than a purely visual stimulus alone, because the brain can integrate signals from multiple senses\r\n            simultaneously. If you want the purest possible visual-only measurement, the mute toggle lets you\r\n            disable audio cues entirely while keeping the visual sequence unchanged.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Setting Realistic Improvement Goals</h2>
+          <h2 style={h2Style}>{tr("Setting Realistic Improvement Goals")}</h2>
           <p style={bodyText}>
-            Rather than fixating on a single dramatic target like breaking 150 milliseconds immediately, it is
-            more productive to set incremental goals tied to your rolling average — for example, aiming to
-            lower your ten-run average by ten to twenty milliseconds over two weeks of consistent practice.
-            Incremental, average-based goals are far more achievable and far more reflective of genuine skill
-            growth than chasing a single best-case outlier result.
-          </p>
+            {tr("Rather than fixating on a single dramatic target like breaking 150 milliseconds immediately, it is\r\n            more productive to set incremental goals tied to your rolling average — for example, aiming to\r\n            lower your ten-run average by ten to twenty milliseconds over two weeks of consistent practice.\r\n            Incremental, average-based goals are far more achievable and far more reflective of genuine skill\r\n            growth than chasing a single best-case outlier result.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Tracking Long-Term Progress</h2>
+          <h2 style={h2Style}>{tr("Tracking Long-Term Progress")}</h2>
           <p style={bodyText}>
-            The recent-history bar chart and scrollable log beneath your statistics give you a rolling visual
-            record of your last several attempts, color-coded by performance tier, making it easy to spot
-            whether your recent runs are trending faster, slower, or holding steady. Reviewing this chart
-            before and after a training session, rather than judging performance from any single tap, is the
-            most reliable way to confirm that a practice routine is actually working.
-          </p>
+            {tr("The recent-history bar chart and scrollable log beneath your statistics give you a rolling visual\r\n            record of your last several attempts, color-coded by performance tier, making it easy to spot\r\n            whether your recent runs are trending faster, slower, or holding steady. Reviewing this chart\r\n            before and after a training session, rather than judging performance from any single tap, is the\r\n            most reliable way to confirm that a practice routine is actually working.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Sharing Your Score and Competing With Friends</h2>
+          <h2 style={h2Style}>{tr("Sharing Your Score and Competing With Friends")}</h2>
           <p style={bodyText}>
-            The share button generates a formatted summary of your latest result and rating, which can be
-            sent directly through your device's native share sheet or copied to your clipboard if sharing is
-            unavailable. Friendly competition is one of the most effective and enjoyable ways to stay
-            consistent with practice — challenging a friend or teammate to beat your personal best adds
-            social accountability that a solo leaderboard cannot replicate.
-          </p>
+            {tr("The share button generates a formatted summary of your latest result and rating, which can be\r\n            sent directly through your device's native share sheet or copied to your clipboard if sharing is\r\n            unavailable. Friendly competition is one of the most effective and enjoyable ways to stay\r\n            consistent with practice — challenging a friend or teammate to beat your personal best adds\r\n            social accountability that a solo leaderboard cannot replicate.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Final Thoughts on Mastering the Lights-Out Start</h2>
+          <h2 style={h2Style}>{tr("Final Thoughts on Mastering the Lights-Out Start")}</h2>
           <p style={bodyText}>
-            Reaction time will always carry an element of natural variation from run to run, but the gap
-            between an average result and an elite one is smaller, and more trainable, than most people
-            assume. Consistent short practice sessions, sensible hardware choices, healthy sleep and
-            hydration habits, and an honest focus on your rolling average rather than a single lucky attempt
-            are, together, the most reliable formula for genuinely lowering your numbers over time — on this
-            simulator and in the competitive pursuits it is designed to sharpen you for.
-          </p>
+            {tr("Reaction time will always carry an element of natural variation from run to run, but the gap\r\n            between an average result and an elite one is smaller, and more trainable, than most people\r\n            assume. Consistent short practice sessions, sensible hardware choices, healthy sleep and\r\n            hydration habits, and an honest focus on your rolling average rather than a single lucky attempt\r\n            are, together, the most reliable formula for genuinely lowering your numbers over time — on this\r\n            simulator and in the competitive pursuits it is designed to sharpen you for.\r\n          ")}</p>
 
-          <h2 style={h2Style}>Frequently Asked Questions</h2>
+          <h2 style={h2Style}>{tr("Frequently Asked Questions")}</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
             {FAQ_ITEMS.map((faq, index) => (
               <div

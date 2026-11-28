@@ -1,5 +1,8 @@
 "use client";
 
+import { usePageI18n } from '../lib/page-i18n';
+import { useLang } from '../contexts/LanguageContext';
+import pageDict from '../locales/pages/AccuracyTestPage.json';
 import {
   useState,
   useRef,
@@ -333,6 +336,7 @@ interface HeatmapProps {
 }
 
 const KeyboardHeatmap = memo(function KeyboardHeatmap({ keyErrors, keyPresses }: HeatmapProps) {
+  const { tr } = usePageI18n(pageDict);
   const maxErr = Math.max(1, ...Object.values(keyErrors));
 
   function getKeyColor(k: string): string {
@@ -355,8 +359,7 @@ const KeyboardHeatmap = memo(function KeyboardHeatmap({ keyErrors, keyPresses }:
   return (
     <div style={{ marginTop: '1.5rem' }}>
       <h3 style={{ color: '#fff', fontWeight: 700, marginBottom: '1rem', fontSize: '1rem' }}>
-        ⌨️ Keyboard Heatmap
-      </h3>
+        {tr("⌨️ Keyboard Heatmap\r\n      ")}</h3>
       <div style={{
         background: 'var(--bg-card)', border: '1px solid var(--border)',
         borderRadius: '12px', padding: '1.25rem', overflowX: 'auto',
@@ -404,8 +407,7 @@ const KeyboardHeatmap = memo(function KeyboardHeatmap({ keyErrors, keyPresses }:
             <div style={{
               fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.5rem',
             }}>
-              Most mistyped keys:
-            </div>
+              {tr("Most mistyped keys:\r\n            ")}</div>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               {topMistyped.map(([key, count]) => (
                 <span key={key} style={{
@@ -433,6 +435,7 @@ const KeyboardHeatmap = memo(function KeyboardHeatmap({ keyErrors, keyPresses }:
 interface AccuracyGraphProps { data: AccuracyPoint[] }
 
 const AccuracyGraph = memo(function AccuracyGraph({ data }: AccuracyGraphProps) {
+  const { tr } = usePageI18n(pageDict);
   if (data.length < 2) return null;
 
   const W = 600, H = 160, PAD = 32;
@@ -455,8 +458,7 @@ const AccuracyGraph = memo(function AccuracyGraph({ data }: AccuracyGraphProps) 
   return (
     <div style={{ marginTop: '1.5rem' }}>
       <h3 style={{ color: '#fff', fontWeight: 700, marginBottom: '1rem', fontSize: '1rem' }}>
-        📈 Accuracy Over Time
-      </h3>
+        {tr("📈 Accuracy Over Time\r\n      ")}</h3>
       <div style={{
         background: 'var(--bg-card)', border: '1px solid var(--border)',
         borderRadius: '12px', padding: '1rem', overflowX: 'auto',
@@ -505,8 +507,8 @@ const AccuracyGraph = memo(function AccuracyGraph({ data }: AccuracyGraphProps) 
           display: 'flex', justifyContent: 'space-between',
           fontSize: '0.65rem', color: 'var(--text-muted)', paddingLeft: PAD, paddingRight: PAD,
         }}>
-          <span>Start</span>
-          <span>End</span>
+          <span>{tr("Start")}</span>
+          <span>{tr("End")}</span>
         </div>
       </div>
     </div>
@@ -539,6 +541,7 @@ const ResultModal = memo(function ResultModal({
   onRestart, onClose,
   keyErrors, keyPresses, accuracyLog,
 }: ResultModalProps) {
+  const { tr } = usePageI18n(pageDict);
   const rating     = getRating(accuracy);
   const isPerfect  = accuracy === 100;
   const completion = Math.round((typedLen / targetLen) * 100);
@@ -592,7 +595,7 @@ const ResultModal = memo(function ResultModal({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Test Results"
+        aria-label={tr("Test Results")}
         style={{
           position: 'fixed', top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -611,7 +614,7 @@ const ResultModal = memo(function ResultModal({
       >
         <button
           onClick={onClose}
-          aria-label="Close results"
+          aria-label={tr("Close results")}
           style={{
             position: 'absolute', top: '0.5rem', right: '0.5rem',
             background: 'rgba(0,245,255,0.1)',
@@ -626,8 +629,7 @@ const ResultModal = memo(function ResultModal({
         >X</button>
 
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.1rem' }}>
-          Your Result
-        </div>
+          {tr("Your Result\r\n        ")}</div>
 
         <div style={{
           fontSize: 'clamp(1.9rem, 5.5vw, 3rem)',
@@ -637,7 +639,7 @@ const ResultModal = memo(function ResultModal({
           marginBottom: '0.05rem',
         }}>
           {accuracy}%{' '}
-          <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>Accuracy</span>
+          <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>{tr("Accuracy")}</span>
         </div>
 
         <div style={{
@@ -699,17 +701,17 @@ const ResultModal = memo(function ResultModal({
             className="btn btn-secondary"
             onClick={onRestart}
             style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
-          >Reset</button>
+          >{tr("Reset")}</button>
           <button
             className="btn btn-primary"
             onClick={onRestart}
             style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
-          >Try Again</button>
+          >{tr("Try Again")}</button>
           <button
             className="btn btn-secondary"
             onClick={copyResults}
             style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
-          >Copy Results</button>
+          >{tr("Copy Results")}</button>
         </div>
 
         {(Object.keys(keyErrors).length > 0 || Object.keys(keyPresses).length > 0) && (
@@ -737,13 +739,15 @@ const ResultModal = memo(function ResultModal({
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
 
 const Breadcrumb = memo(function Breadcrumb() {
+  const { tr } = usePageI18n(pageDict);
+  const { localeHref } = useLang();
   const crumbs = [
     { label: 'Home', href: '/' },
     { label: 'Keyboard Tools', href: '/keyboard' },
     { label: 'Keyboard Accuracy Test', href: '/accuracy' },
   ];
   return (
-    <nav aria-label="Breadcrumb" style={{ marginBottom: '1.5rem' }}>
+    <nav aria-label={tr("Breadcrumb")} style={{ marginBottom: '1.5rem' }}>
       <ol style={{
         display: 'flex', alignItems: 'center', gap: '0.4rem',
         listStyle: 'none', margin: 0, padding: 0,
@@ -754,7 +758,7 @@ const Breadcrumb = memo(function Breadcrumb() {
           <li key={c.href} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             {i < crumbs.length - 1 ? (
               <>
-                <a href={c.href} style={{
+                <a href={localeHref(c.href)} style={{
                   color: 'var(--neon-cyan)', textDecoration: 'none',
                   transition: 'opacity 0.2s',
                 }}
@@ -877,6 +881,7 @@ const FAQ_ITEMS = [
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function AccuracyTestPage() {
+  const { tr } = usePageI18n(pageDict);
   const [state, dispatch]       = useReducer(reducer, initState(60));
   const [showModal, setShowModal] = useState(false);
   const [customInput, setCustomInput] = useState('');
@@ -1096,11 +1101,10 @@ export default function AccuracyTestPage() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="section-label">Keyboard Tool</div>
-          <h1 className="tool-title">Keyboard Accuracy Test</h1>
+          <div className="section-label">{tr("Keyboard Tool")}</div>
+          <h1 className="tool-title">{tr("Keyboard Accuracy Test")}</h1>
           <p className="tool-subtitle">
-            Type the text with maximum accuracy — track WPM, CPM, errors, and more!
-          </p>
+            {tr("Type the text with maximum accuracy — track WPM, CPM, errors, and more!\r\n          ")}</p>
         </div>
 
         {/* Timer Mode Selection */}
@@ -1110,8 +1114,7 @@ export default function AccuracyTestPage() {
             textTransform: 'uppercase', letterSpacing: '0.05em',
             marginBottom: '0.5rem',
           }}>
-            Timer Mode
-          </div>
+            {tr("Timer Mode\r\n          ")}</div>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             {TIMER_OPTIONS.map(({ label, value }) => (
               <button
@@ -1150,8 +1153,7 @@ export default function AccuracyTestPage() {
                 marginLeft: '0.5rem',
               }}
             >
-              ✏️ Custom Text
-            </button>
+              {tr("✏️ Custom Text\r\n            ")}</button>
 
             {/* Mute toggle */}
             <button
@@ -1184,12 +1186,11 @@ export default function AccuracyTestPage() {
             <div style={{
               fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem',
             }}>
-              Paste or type your custom text (min 10 characters):
-            </div>
+              {tr("Paste or type your custom text (min 10 characters):\r\n            ")}</div>
             <textarea
               value={customInput}
               onChange={e => setCustomInput(e.target.value)}
-              placeholder="Enter your custom text here…"
+              placeholder={tr("Enter your custom text here…")}
               rows={4}
               style={{
                 width: '100%', boxSizing: 'border-box',
@@ -1208,12 +1209,10 @@ export default function AccuracyTestPage() {
             )}
             <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem' }}>
               <button className="btn btn-primary" onClick={handleApplyCustom}>
-                Apply Custom Text
-              </button>
+                {tr("Apply Custom Text\r\n              ")}</button>
               {state.useCustom && (
                 <button className="btn btn-secondary" onClick={handleDisableCustom}>
-                  Use Default Text
-                </button>
+                  {tr("Use Default Text\r\n                ")}</button>
               )}
             </div>
           </div>
@@ -1248,7 +1247,7 @@ export default function AccuracyTestPage() {
           <div
             role="button"
             tabIndex={0}
-            aria-label="Typing area — click to focus"
+            aria-label={tr("Typing area — click to focus")}
             onClick={focusInput}
             onKeyDown={e => e.key === 'Enter' && focusInput()}
             style={{
@@ -1290,7 +1289,7 @@ export default function AccuracyTestPage() {
           value={state.typed}
           onChange={handleChange}
           disabled={state.phase === 'done'}
-          aria-label="Typing input"
+          aria-label={tr("Typing input")}
           style={{ position: 'fixed', top: '-9999px', left: '-9999px', opacity: 0 }}
           autoComplete="off"
           autoCorrect="off"
@@ -1305,7 +1304,7 @@ export default function AccuracyTestPage() {
             tabIndex={0}
             onClick={focusInput}
             onKeyDown={e => e.key === 'Enter' && focusInput()}
-            aria-label="Click to focus typing area"
+            aria-label={tr("Click to focus typing area")}
             style={{
               background: 'rgba(0,245,255,0.05)',
               border: '1px dashed rgba(0,245,255,0.2)',
@@ -1327,8 +1326,7 @@ export default function AccuracyTestPage() {
         {/* Reset */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
           <button className="btn btn-secondary" onClick={handleReset}>
-            🔄 Reset Test
-          </button>
+            {tr("🔄 Reset Test\r\n          ")}</button>
         </div>
 
         {/* Animations */}
@@ -1356,12 +1354,12 @@ export default function AccuracyTestPage() {
         `}</style>
 
         {/* ── MORE TOOLS GRID ── */}
-        <section aria-label="More Tools" style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
+        <section aria-label={tr("More Tools")} style={{ marginBottom: '3.5rem', marginTop: '1rem' }}>
           <h2 style={{
             fontWeight: 800, fontSize: '1.5rem', color: '#fff',
             marginBottom: '1.5rem', textAlign: 'center',
             letterSpacing: '-0.3px',
-          }}>More Tools</h2>
+          }}>{tr("More Tools")}</h2>
           <div
             className="cps-games-grid"
             style={{
@@ -1418,364 +1416,164 @@ export default function AccuracyTestPage() {
 
         <article style={{ color: 'var(--text-muted)', lineHeight: '1.8', fontSize: '0.95rem' }}>
 
-          <h2 style={h2}>What is Keyboard Accuracy?</h2>
+          <h2 style={h2}>{tr("What is Keyboard Accuracy?")}</h2>
           <p style={p}>
-            Keyboard accuracy is a measurement of how precisely a typist strikes the correct keys while composing
-            text. It is expressed as a percentage — the ratio of correct keystrokes to total keystrokes — and is
-            one of the two foundational metrics of typing proficiency, alongside speed (WPM). While speed
-            determines how fast information is entered, accuracy determines how <em>correctly</em> that
-            information is entered. A typist who produces 120 WPM with only 80% accuracy is, in practical
-            terms, generating a flood of errors that must be corrected before any document, email, or line of
-            code can be used. For this reason, seasoned professionals almost universally prioritise accuracy
-            before chasing higher speeds.
-          </p>
+            {tr("Keyboard accuracy is a measurement of how precisely a typist strikes the correct keys while composing\r\n            text. It is expressed as a percentage — the ratio of correct keystrokes to total keystrokes — and is\r\n            one of the two foundational metrics of typing proficiency, alongside speed (WPM). While speed\r\n            determines how fast information is entered, accuracy determines how ")}<em>{tr("correctly")}</em> {tr("that\r\n            information is entered. A typist who produces 120 WPM with only 80% accuracy is, in practical\r\n            terms, generating a flood of errors that must be corrected before any document, email, or line of\r\n            code can be used. For this reason, seasoned professionals almost universally prioritise accuracy\r\n            before chasing higher speeds.\r\n          ")}</p>
           <p style={p}>
-            Modern typing tests measure accuracy in real time by comparing each character entered against the
-            target passage. This tool logs every keystroke, identifies errors immediately, updates the accuracy
-            percentage continuously, and produces a keyboard heatmap at the end of the session so you can see
-            exactly which keys are causing the most trouble.
-          </p>
+            {tr("Modern typing tests measure accuracy in real time by comparing each character entered against the\r\n            target passage. This tool logs every keystroke, identifies errors immediately, updates the accuracy\r\n            percentage continuously, and produces a keyboard heatmap at the end of the session so you can see\r\n            exactly which keys are causing the most trouble.\r\n          ")}</p>
 
-          <h2 style={h2}>How Keyboard Accuracy Is Calculated</h2>
+          <h2 style={h2}>{tr("How Keyboard Accuracy Is Calculated")}</h2>
           <p style={p}>
-            The formula is straightforward: <strong>Accuracy (%) = ((Total Typed − Errors) / Total Typed) × 100</strong>.
-            An "error" is any character that does not match the corresponding character in the target text at that
-            position. If you type the letter <em>e</em> where a <em>r</em> is expected, that counts as one error.
-            Deleting and retyping does not remove previously recorded errors in most professional tests, because
-            the goal is to capture raw keystroke accuracy, not corrected accuracy. This is why typing slowly and
-            correctly from the start always produces a better final score than typing fast and correcting.
-          </p>
+            {tr("The formula is straightforward: ")}<strong>{tr("Accuracy (%) = ((Total Typed − Errors) / Total Typed) × 100")}</strong>{tr(".\r\n            An \"error\" is any character that does not match the corresponding character in the target text at that\r\n            position. If you type the letter ")}<em>e</em> {tr("where a ")}<em>r</em> {tr("is expected, that counts as one error.\r\n            Deleting and retyping does not remove previously recorded errors in most professional tests, because\r\n            the goal is to capture raw keystroke accuracy, not corrected accuracy. This is why typing slowly and\r\n            correctly from the start always produces a better final score than typing fast and correcting.\r\n          ")}</p>
           <p style={p}>
-            This test also calculates <strong>Net WPM</strong>, which applies an error penalty to your raw speed,
-            giving a realistic view of your effective output. Raw WPM counts every character typed; Net WPM
-            subtracts for errors to approximate the actual usable text you produce per minute.
-          </p>
+            {tr("This test also calculates ")}<strong>{tr("Net WPM")}</strong>{tr(", which applies an error penalty to your raw speed,\r\n            giving a realistic view of your effective output. Raw WPM counts every character typed; Net WPM\r\n            subtracts for errors to approximate the actual usable text you produce per minute.\r\n          ")}</p>
 
-          <h2 style={h2}>How to Improve Typing Accuracy</h2>
+          <h2 style={h2}>{tr("How to Improve Typing Accuracy")}</h2>
           <p style={p}>
-            Improving accuracy is a deliberate, patient process. The single most effective strategy is to slow
-            down intentionally until you can type a passage with near-zero errors, then gradually increase speed
-            while maintaining that accuracy floor. This approach builds correct motor pathways instead of
-            reinforcing sloppy habits at high speed. Other proven techniques include:
-          </p>
+            {tr("Improving accuracy is a deliberate, patient process. The single most effective strategy is to slow\r\n            down intentionally until you can type a passage with near-zero errors, then gradually increase speed\r\n            while maintaining that accuracy floor. This approach builds correct motor pathways instead of\r\n            reinforcing sloppy habits at high speed. Other proven techniques include:\r\n          ")}</p>
           <ul style={ul}>
-            <li style={li}><strong>Daily short sessions:</strong> Ten focused minutes outperform one hour of unfocused typing.</li>
-            <li style={li}><strong>Targeting weak keys:</strong> Use the heatmap to identify your problem keys, then practise words that use them heavily.</li>
-            <li style={li}><strong>Correct posture:</strong> Slouching or awkward wrist angles cause fatigue-driven errors. Sit upright with forearms parallel to the desk.</li>
-            <li style={li}><strong>Eyes on the screen:</strong> Resist looking at your hands. Visual dependency breaks the neural feedback loop that enables touch typing.</li>
-            <li style={li}><strong>Custom text practice:</strong> Use the Custom Text feature to practise domain-specific vocabulary you actually need — programming keywords, legal terminology, medical terms, etc.</li>
+            <li style={li}><strong>{tr("Daily short sessions:")}</strong> {tr("Ten focused minutes outperform one hour of unfocused typing.")}</li>
+            <li style={li}><strong>{tr("Targeting weak keys:")}</strong> {tr("Use the heatmap to identify your problem keys, then practise words that use them heavily.")}</li>
+            <li style={li}><strong>{tr("Correct posture:")}</strong> {tr("Slouching or awkward wrist angles cause fatigue-driven errors. Sit upright with forearms parallel to the desk.")}</li>
+            <li style={li}><strong>{tr("Eyes on the screen:")}</strong> {tr("Resist looking at your hands. Visual dependency breaks the neural feedback loop that enables touch typing.")}</li>
+            <li style={li}><strong>{tr("Custom text practice:")}</strong> {tr("Use the Custom Text feature to practise domain-specific vocabulary you actually need — programming keywords, legal terminology, medical terms, etc.")}</li>
           </ul>
 
-          <h2 style={h2}>Best Finger Placement for Typing</h2>
+          <h2 style={h2}>{tr("Best Finger Placement for Typing")}</h2>
           <p style={p}>
-            The home-row position is the foundation of accurate touch typing. Your left hand fingers rest on
-            <strong> A–S–D–F</strong> and your right hand fingers on <strong>J–K–L–;</strong>. Both thumbs hover
-            over the space bar. From this base position, each finger is responsible for a column of keys directly
-            above and below it. Your index fingers, being the strongest, cover two columns each (F and G for
-            left; J and H for right). The pinky fingers manage the outermost columns, including frequently used
-            keys like Q, A, Z on the left and P, semicolon, and slash on the right.
-          </p>
+            {tr("The home-row position is the foundation of accurate touch typing. Your left hand fingers rest on\r\n            ")}<strong> A–S–D–F</strong> {tr("and your right hand fingers on ")}<strong>J–K–L–;</strong>{tr(". Both thumbs hover\r\n            over the space bar. From this base position, each finger is responsible for a column of keys directly\r\n            above and below it. Your index fingers, being the strongest, cover two columns each (F and G for\r\n            left; J and H for right). The pinky fingers manage the outermost columns, including frequently used\r\n            keys like Q, A, Z on the left and P, semicolon, and slash on the right.\r\n          ")}</p>
           <p style={p}>
-            Anchoring to the home row means your fingers travel the minimum possible distance for every
-            keystroke, which reduces both errors and fatigue. Many beginners skip this and develop idiosyncratic
-            "hunt and peck" techniques that permanently cap their accuracy and speed.
-          </p>
+            {tr("Anchoring to the home row means your fingers travel the minimum possible distance for every\r\n            keystroke, which reduces both errors and fatigue. Many beginners skip this and develop idiosyncratic\r\n            \"hunt and peck\" techniques that permanently cap their accuracy and speed.\r\n          ")}</p>
 
-          <h2 style={h2}>Common Typing Mistakes</h2>
+          <h2 style={h2}>{tr("Common Typing Mistakes")}</h2>
           <p style={p}>
-            Most typing errors fall into predictable categories. Understanding them helps you target practice
-            intelligently:
-          </p>
+            {tr("Most typing errors fall into predictable categories. Understanding them helps you target practice\r\n            intelligently:\r\n          ")}</p>
           <ul style={ul}>
-            <li style={li}><strong>Transpositions:</strong> Swapping adjacent letters (typing "teh" for "the") usually caused by one finger striking before another has fully lifted.</li>
-            <li style={li}><strong>Substitutions:</strong> Hitting a neighbouring key instead of the intended one, most common at the edges of finger territories.</li>
-            <li style={li}><strong>Omissions:</strong> Skipping a letter, often in common letter clusters the brain pre-empts.</li>
-            <li style={li}><strong>Doublings:</strong> Repeating a letter unintentionally, especially on strong-finger keys like F, J, and D.</li>
-            <li style={li}><strong>Capitalisation errors:</strong> Inconsistent Shift timing, often caused by releasing Shift too early or too late.</li>
+            <li style={li}><strong>{tr("Transpositions:")}</strong> {tr("Swapping adjacent letters (typing \"teh\" for \"the\") usually caused by one finger striking before another has fully lifted.")}</li>
+            <li style={li}><strong>{tr("Substitutions:")}</strong> {tr("Hitting a neighbouring key instead of the intended one, most common at the edges of finger territories.")}</li>
+            <li style={li}><strong>{tr("Omissions:")}</strong> {tr("Skipping a letter, often in common letter clusters the brain pre-empts.")}</li>
+            <li style={li}><strong>{tr("Doublings:")}</strong> {tr("Repeating a letter unintentionally, especially on strong-finger keys like F, J, and D.")}</li>
+            <li style={li}><strong>{tr("Capitalisation errors:")}</strong> {tr("Inconsistent Shift timing, often caused by releasing Shift too early or too late.")}</li>
           </ul>
 
-          <h2 style={h2}>Accuracy vs. WPM — Which Matters More?</h2>
+          <h2 style={h2}>{tr("Accuracy vs. WPM — Which Matters More?")}</h2>
           <p style={p}>
-            In almost every real-world context, accuracy matters more than raw speed. Consider that a legal
-            transcriptionist who produces 80 WPM at 99% accuracy delivers a near-perfect document. The same
-            typist at 120 WPM with 90% accuracy produces a document riddled with errors that requires
-            substantial time to proofread and correct — negating any speed advantage. For programmers, a single
-            mistyped character can cause a compilation error or a hard-to-trace runtime bug, making per-keystroke
-            accuracy critically important.
-          </p>
+            {tr("In almost every real-world context, accuracy matters more than raw speed. Consider that a legal\r\n            transcriptionist who produces 80 WPM at 99% accuracy delivers a near-perfect document. The same\r\n            typist at 120 WPM with 90% accuracy produces a document riddled with errors that requires\r\n            substantial time to proofread and correct — negating any speed advantage. For programmers, a single\r\n            mistyped character can cause a compilation error or a hard-to-trace runtime bug, making per-keystroke\r\n            accuracy critically important.\r\n          ")}</p>
           <p style={p}>
-            That said, accuracy and speed are not mutually exclusive. With sufficient practice, both improve
-            simultaneously. The correct approach is to treat accuracy as a non-negotiable floor and let speed
-            rise organically from consistent, error-free practice rather than the reverse.
-          </p>
+            {tr("That said, accuracy and speed are not mutually exclusive. With sufficient practice, both improve\r\n            simultaneously. The correct approach is to treat accuracy as a non-negotiable floor and let speed\r\n            rise organically from consistent, error-free practice rather than the reverse.\r\n          ")}</p>
 
-          <h2 style={h2}>Why Accuracy Matters in the Workplace</h2>
+          <h2 style={h2}>{tr("Why Accuracy Matters in the Workplace")}</h2>
           <p style={p}>
-            In professional environments, typing accuracy directly affects productivity, professionalism, and
-            data integrity. Emails with typos create poor impressions. Reports with data-entry errors can lead
-            to costly decisions. Code with syntax errors stalls development pipelines. A study of office workers
-            found that professionals who maintained above 95% accuracy spent up to 40% less time in error-
-            correction activities than those who typed quickly but carelessly.
-          </p>
+            {tr("In professional environments, typing accuracy directly affects productivity, professionalism, and\r\n            data integrity. Emails with typos create poor impressions. Reports with data-entry errors can lead\r\n            to costly decisions. Code with syntax errors stalls development pipelines. A study of office workers\r\n            found that professionals who maintained above 95% accuracy spent up to 40% less time in error-\r\n            correction activities than those who typed quickly but carelessly.\r\n          ")}</p>
 
-          <h2 style={h2}>Benefits of Daily Typing Practice</h2>
+          <h2 style={h2}>{tr("Benefits of Daily Typing Practice")}</h2>
           <p style={p}>
-            Consistent daily practice — even as little as ten minutes — has compounding benefits. Within the
-            first two weeks, most beginners notice a measurable reduction in error rates. By the end of the first
-            month, finger positioning becomes semi-automatic, freeing cognitive bandwidth for the content being
-            composed rather than the mechanics of typing. Advanced typists who practise daily maintain or improve
-            their accuracy even as they age, because the motor programmes are deeply embedded in procedural
-            memory.
-          </p>
+            {tr("Consistent daily practice — even as little as ten minutes — has compounding benefits. Within the\r\n            first two weeks, most beginners notice a measurable reduction in error rates. By the end of the first\r\n            month, finger positioning becomes semi-automatic, freeing cognitive bandwidth for the content being\r\n            composed rather than the mechanics of typing. Advanced typists who practise daily maintain or improve\r\n            their accuracy even as they age, because the motor programmes are deeply embedded in procedural\r\n            memory.\r\n          ")}</p>
 
-          <h2 style={h2}>Best Keyboard for Typing Accuracy</h2>
+          <h2 style={h2}>{tr("Best Keyboard for Typing Accuracy")}</h2>
           <p style={p}>
-            The best keyboard for accuracy is largely the one you are most comfortable with. That said,
-            keyboards with a consistent, well-defined actuation point help typists develop reliable muscle
-            memory. Full-sized keyboards with dedicated number rows and function keys reduce finger travel to
-            reach shared keys. Keyboards with enough key travel (1.5–2 mm minimum) provide the physical
-            feedback necessary for accurate touch typing.
-          </p>
+            {tr("The best keyboard for accuracy is largely the one you are most comfortable with. That said,\r\n            keyboards with a consistent, well-defined actuation point help typists develop reliable muscle\r\n            memory. Full-sized keyboards with dedicated number rows and function keys reduce finger travel to\r\n            reach shared keys. Keyboards with enough key travel (1.5–2 mm minimum) provide the physical\r\n            feedback necessary for accurate touch typing.\r\n          ")}</p>
 
-          <h2 style={h2}>Mechanical vs. Membrane Keyboards</h2>
+          <h2 style={h2}>{tr("Mechanical vs. Membrane Keyboards")}</h2>
           <p style={p}>
-            Mechanical keyboards use individual switches under each key that provide distinct tactile or auditory
-            feedback at the actuation point. This feedback helps touch typists know precisely when a keystroke
-            has registered without bottoming out the key — a technique called "light touch" typing that
-            significantly reduces errors and fatigue during long sessions. Membrane keyboards use a continuous
-            pressure pad and tend to have mushier, less distinct actuation, which can make it harder to develop
-            consistent keystroke timing.
-          </p>
+            {tr("Mechanical keyboards use individual switches under each key that provide distinct tactile or auditory\r\n            feedback at the actuation point. This feedback helps touch typists know precisely when a keystroke\r\n            has registered without bottoming out the key — a technique called \"light touch\" typing that\r\n            significantly reduces errors and fatigue during long sessions. Membrane keyboards use a continuous\r\n            pressure pad and tend to have mushier, less distinct actuation, which can make it harder to develop\r\n            consistent keystroke timing.\r\n          ")}</p>
           <p style={p}>
-            Popular switch types for accuracy-focused typists include tactile switches (e.g., Cherry MX Brown,
-            Topre) that provide a bump without a loud click, and clicky switches (e.g., Cherry MX Blue) that
-            add an auditory confirmation. Silent linear switches are preferred in shared workspaces where noise
-            is a concern.
-          </p>
+            {tr("Popular switch types for accuracy-focused typists include tactile switches (e.g., Cherry MX Brown,\r\n            Topre) that provide a bump without a loud click, and clicky switches (e.g., Cherry MX Blue) that\r\n            add an auditory confirmation. Silent linear switches are preferred in shared workspaces where noise\r\n            is a concern.\r\n          ")}</p>
 
-          <h2 style={h2}>Typing Tips for Beginners</h2>
+          <h2 style={h2}>{tr("Typing Tips for Beginners")}</h2>
           <ul style={ul}>
-            <li style={li}>Start with the home-row lesson before attempting full passages.</li>
-            <li style={li}>Use all ten fingers from day one — avoid building single-hand habits.</li>
-            <li style={li}>Set a target accuracy (e.g., 90%) before increasing your speed.</li>
-            <li style={li}>Take regular breaks — finger fatigue is a leading cause of accuracy drops.</li>
-            <li style={li}>Use this tool's 15-second and 30-second modes for focused sprint practice.</li>
+            <li style={li}>{tr("Start with the home-row lesson before attempting full passages.")}</li>
+            <li style={li}>{tr("Use all ten fingers from day one — avoid building single-hand habits.")}</li>
+            <li style={li}>{tr("Set a target accuracy (e.g., 90%) before increasing your speed.")}</li>
+            <li style={li}>{tr("Take regular breaks — finger fatigue is a leading cause of accuracy drops.")}</li>
+            <li style={li}>{tr("Use this tool's 15-second and 30-second modes for focused sprint practice.")}</li>
           </ul>
 
-          <h2 style={h2}>Typing Tips for Programmers</h2>
+          <h2 style={h2}>{tr("Typing Tips for Programmers")}</h2>
           <p style={p}>
-            Programmers face unique accuracy demands: brackets, semicolons, underscores, and camelCase patterns
-            are unforgiving. Specific tips include:
-          </p>
+            {tr("Programmers face unique accuracy demands: brackets, semicolons, underscores, and camelCase patterns\r\n            are unforgiving. Specific tips include:\r\n          ")}</p>
           <ul style={ul}>
-            <li style={li}>Practise sequences like <code style={{ background: 'rgba(255,255,255,0.07)', padding: '0 4px', borderRadius: '3px' }}>{'() => {}'}</code> and <code style={{ background: 'rgba(255,255,255,0.07)', padding: '0 4px', borderRadius: '3px' }}>[]</code> in isolation.</li>
-            <li style={li}>Use the Custom Text feature to paste real code snippets and practise them.</li>
-            <li style={li}>Learn keyboard shortcuts to reduce mouse dependency, which breaks typing flow.</li>
-            <li style={li}>Choose a keyboard layout optimised for programming (e.g., Programmer Dvorak, Colemak-DH).</li>
+            <li style={li}>{tr("Practise sequences like ")}<code style={{ background: 'rgba(255,255,255,0.07)', padding: '0 4px', borderRadius: '3px' }}>{'() => {}'}</code> {tr("and ")}<code style={{ background: 'rgba(255,255,255,0.07)', padding: '0 4px', borderRadius: '3px' }}>[]</code> {tr("in isolation.")}</li>
+            <li style={li}>{tr("Use the Custom Text feature to paste real code snippets and practise them.")}</li>
+            <li style={li}>{tr("Learn keyboard shortcuts to reduce mouse dependency, which breaks typing flow.")}</li>
+            <li style={li}>{tr("Choose a keyboard layout optimised for programming (e.g., Programmer Dvorak, Colemak-DH).")}</li>
           </ul>
 
-          <h2 style={h2}>Office Typing Accuracy Standards</h2>
+          <h2 style={h2}>{tr("Office Typing Accuracy Standards")}</h2>
           <p style={p}>
-            Most office and administrative roles require a minimum of <strong>40–60 WPM</strong> with at least
-            <strong> 95% accuracy</strong>. Executive assistants, legal secretaries, and medical transcriptionists
-            typically face requirements of <strong>70–100 WPM</strong> at <strong>97%–99% accuracy</strong>.
-            Many employers now include a timed typing test as a standard part of the hiring process, making it
-            worthwhile to demonstrate verifiable accuracy benchmarks.
-          </p>
+            {tr("Most office and administrative roles require a minimum of ")}<strong>{tr("40–60 WPM")}</strong> {tr("with at least\r\n            ")}<strong> {tr("95% accuracy")}</strong>{tr(". Executive assistants, legal secretaries, and medical transcriptionists\r\n            typically face requirements of ")}<strong>{tr("70–100 WPM")}</strong> {tr("at ")}<strong>{tr("97%–99% accuracy")}</strong>{tr(".\r\n            Many employers now include a timed typing test as a standard part of the hiring process, making it\r\n            worthwhile to demonstrate verifiable accuracy benchmarks.\r\n          ")}</p>
 
-          <h2 style={h2}>Typing Accuracy for Data-Entry Jobs</h2>
+          <h2 style={h2}>{tr("Typing Accuracy for Data-Entry Jobs")}</h2>
           <p style={p}>
-            Data-entry positions are among the most accuracy-sensitive roles in the workforce. A single transposed
-            digit in a financial record, a misspelled patient name in a medical database, or an incorrect postal
-            code in a shipping system can cascade into costly downstream errors. Standards for data-entry
-            professionals typically start at <strong>98%</strong> accuracy and often require verified certification
-            from a recognised typing assessment. Using this tool's 120-second mode is an excellent way to
-            simulate the endurance required for data-entry work.
-          </p>
+            {tr("Data-entry positions are among the most accuracy-sensitive roles in the workforce. A single transposed\r\n            digit in a financial record, a misspelled patient name in a medical database, or an incorrect postal\r\n            code in a shipping system can cascade into costly downstream errors. Standards for data-entry\r\n            professionals typically start at ")}<strong>98%</strong> {tr("accuracy and often require verified certification\r\n            from a recognised typing assessment. Using this tool's 120-second mode is an excellent way to\r\n            simulate the endurance required for data-entry work.\r\n          ")}</p>
 
-          <h2 style={h2}>How Long Does It Take to Improve Typing Accuracy?</h2>
+          <h2 style={h2}>{tr("How Long Does It Take to Improve Typing Accuracy?")}</h2>
           <p style={p}>
-            Improvement timelines vary by starting level, practice consistency, and individual learning rate.
-            As a general guide:
-          </p>
+            {tr("Improvement timelines vary by starting level, practice consistency, and individual learning rate.\r\n            As a general guide:\r\n          ")}</p>
           <ul style={ul}>
-            <li style={li}><strong>2 weeks:</strong> Noticeable reduction in common errors with daily 10-minute practice.</li>
-            <li style={li}><strong>1 month:</strong> Home-row positioning becomes automatic; accuracy typically reaches 90%+.</li>
-            <li style={li}><strong>3 months:</strong> Touch typing is largely unconscious; accuracy stabilises above 95%.</li>
-            <li style={li}><strong>6–12 months:</strong> Consistent 98%–100% accuracy is achievable with sustained practice.</li>
+            <li style={li}><strong>{tr("2 weeks:")}</strong> {tr("Noticeable reduction in common errors with daily 10-minute practice.")}</li>
+            <li style={li}><strong>{tr("1 month:")}</strong> {tr("Home-row positioning becomes automatic; accuracy typically reaches 90%+.")}</li>
+            <li style={li}><strong>{tr("3 months:")}</strong> {tr("Touch typing is largely unconscious; accuracy stabilises above 95%.")}</li>
+            <li style={li}><strong>{tr("6–12 months:")}</strong> {tr("Consistent 98%–100% accuracy is achievable with sustained practice.")}</li>
           </ul>
           <p style={p}>
-            The most important variable is consistency. Five minutes every day will outperform one hour per week
-            because the motor memory consolidation that happens during sleep requires recent, repeated activation
-            of the same neural pathways.
-          </p>
+            {tr("The most important variable is consistency. Five minutes every day will outperform one hour per week\r\n            because the motor memory consolidation that happens during sleep requires recent, repeated activation\r\n            of the same neural pathways.\r\n          ")}</p>
 
-          <h2 style={h2}>The Science Behind Typing Accuracy</h2>
+          <h2 style={h2}>{tr("The Science Behind Typing Accuracy")}</h2>
           <p style={p}>
-            Typing is a form of procedural memory — the same category of learning responsible for riding a
-            bicycle or playing a musical instrument. Unlike declarative memory, which stores facts and can be
-            consciously recalled, procedural memory is built through repetition and stored largely in the
-            cerebellum and basal ganglia, structures that coordinate fine motor sequences. Each time you type a
-            word correctly, the neural pathway associated with that specific finger sequence is reinforced. Each
-            time you type it incorrectly, a competing, weaker pathway is also strengthened, which is why
-            "unlearning" a persistent mistake often takes longer than learning it correctly would have in the
-            first place.
-          </p>
+            {tr("Typing is a form of procedural memory — the same category of learning responsible for riding a\r\n            bicycle or playing a musical instrument. Unlike declarative memory, which stores facts and can be\r\n            consciously recalled, procedural memory is built through repetition and stored largely in the\r\n            cerebellum and basal ganglia, structures that coordinate fine motor sequences. Each time you type a\r\n            word correctly, the neural pathway associated with that specific finger sequence is reinforced. Each\r\n            time you type it incorrectly, a competing, weaker pathway is also strengthened, which is why\r\n            \"unlearning\" a persistent mistake often takes longer than learning it correctly would have in the\r\n            first place.\r\n          ")}</p>
           <p style={p}>
-            Sleep plays a documented role in this consolidation process. Research on motor-skill learning has
-            repeatedly shown that a skill practised shortly before sleep shows measurable overnight improvement
-            without any additional practice, because the brain replays and strengthens the relevant motor
-            sequences during certain sleep stages. This is one of the strongest arguments for short, frequent,
-            daily practice sessions rather than infrequent marathon sessions: each practice window seeds a
-            consolidation cycle, and more cycles compound into faster skill acquisition.
-          </p>
+            {tr("Sleep plays a documented role in this consolidation process. Research on motor-skill learning has\r\n            repeatedly shown that a skill practised shortly before sleep shows measurable overnight improvement\r\n            without any additional practice, because the brain replays and strengthens the relevant motor\r\n            sequences during certain sleep stages. This is one of the strongest arguments for short, frequent,\r\n            daily practice sessions rather than infrequent marathon sessions: each practice window seeds a\r\n            consolidation cycle, and more cycles compound into faster skill acquisition.\r\n          ")}</p>
           <p style={p}>
-            Accuracy also has a strong attentional component. Working memory has limited capacity, and a
-            beginner's attention is split between recalling key locations, monitoring the screen, and composing
-            the intended message. As key locations become automatic, that freed attention can be redirected
-            toward accuracy monitoring and, eventually, toward the content being written rather than the
-            mechanics of writing it. This is why experienced typists often report that fast, accurate typing
-            "feels effortless" — the cognitive load of the physical act has been almost entirely offloaded to
-            procedural memory.
-          </p>
+            {tr("Accuracy also has a strong attentional component. Working memory has limited capacity, and a\r\n            beginner's attention is split between recalling key locations, monitoring the screen, and composing\r\n            the intended message. As key locations become automatic, that freed attention can be redirected\r\n            toward accuracy monitoring and, eventually, toward the content being written rather than the\r\n            mechanics of writing it. This is why experienced typists often report that fast, accurate typing\r\n            \"feels effortless\" — the cognitive load of the physical act has been almost entirely offloaded to\r\n            procedural memory.\r\n          ")}</p>
 
-          <h2 style={h2}>Typing Accuracy Across Keyboard Layouts</h2>
+          <h2 style={h2}>{tr("Typing Accuracy Across Keyboard Layouts")}</h2>
           <p style={p}>
-            While QWERTY remains the dominant keyboard layout worldwide, alternative layouts such as Dvorak and
-            Colemak were specifically engineered around accuracy and efficiency principles. QWERTY's letter
-            arrangement was originally designed in the 1870s to reduce the mechanical jamming of typewriter
-            hammers, not to optimise for human hand movement — a constraint that no longer applies to modern
-            keyboards but persists as the global standard purely through inertia and familiarity.
-          </p>
+            {tr("While QWERTY remains the dominant keyboard layout worldwide, alternative layouts such as Dvorak and\r\n            Colemak were specifically engineered around accuracy and efficiency principles. QWERTY's letter\r\n            arrangement was originally designed in the 1870s to reduce the mechanical jamming of typewriter\r\n            hammers, not to optimise for human hand movement — a constraint that no longer applies to modern\r\n            keyboards but persists as the global standard purely through inertia and familiarity.\r\n          ")}</p>
           <p style={p}>
-            The Dvorak Simplified Keyboard places the most frequently used English letters on the home row,
-            claiming to reduce finger travel distance by a significant margin compared with QWERTY. Colemak, a
-            more recent alternative, preserves many common QWERTY shortcut positions (like Z, X, C, V for
-            undo/cut/copy/paste) while still moving high-frequency letters closer to the home row, making the
-            transition less disruptive for touch typists switching from QWERTY. Studies comparing layouts show
-            mixed results on raw speed gains, but many switchers report a genuine reduction in awkward finger
-            stretches and, consequently, fewer substitution errors. Regardless of layout, the underlying
-            principle for building accuracy is identical: minimise finger travel, anchor to a stable home
-            position, and build the motor sequence through repetition.
-          </p>
+            {tr("The Dvorak Simplified Keyboard places the most frequently used English letters on the home row,\r\n            claiming to reduce finger travel distance by a significant margin compared with QWERTY. Colemak, a\r\n            more recent alternative, preserves many common QWERTY shortcut positions (like Z, X, C, V for\r\n            undo/cut/copy/paste) while still moving high-frequency letters closer to the home row, making the\r\n            transition less disruptive for touch typists switching from QWERTY. Studies comparing layouts show\r\n            mixed results on raw speed gains, but many switchers report a genuine reduction in awkward finger\r\n            stretches and, consequently, fewer substitution errors. Regardless of layout, the underlying\r\n            principle for building accuracy is identical: minimise finger travel, anchor to a stable home\r\n            position, and build the motor sequence through repetition.\r\n          ")}</p>
 
-          <h2 style={h2}>Ergonomics and Injury Prevention</h2>
+          <h2 style={h2}>{tr("Ergonomics and Injury Prevention")}</h2>
           <p style={p}>
-            Accuracy and ergonomics are more closely linked than most typists realise. Poor posture and awkward
-            wrist angles do not just cause discomfort — they actively degrade fine motor control, leading to more
-            substitution and omission errors as fatigue sets in during longer sessions. Maintaining a neutral
-            wrist position (neither bent up nor down), keeping elbows at roughly a 90-degree angle, and
-            positioning the monitor at eye level all reduce the physical strain that erodes accuracy over time.
-          </p>
+            {tr("Accuracy and ergonomics are more closely linked than most typists realise. Poor posture and awkward\r\n            wrist angles do not just cause discomfort — they actively degrade fine motor control, leading to more\r\n            substitution and omission errors as fatigue sets in during longer sessions. Maintaining a neutral\r\n            wrist position (neither bent up nor down), keeping elbows at roughly a 90-degree angle, and\r\n            positioning the monitor at eye level all reduce the physical strain that erodes accuracy over time.\r\n          ")}</p>
           <p style={p}>
-            Repetitive strain injuries, including carpal tunnel syndrome and tendonitis, are strongly associated
-            with tense, high-force keystrokes rather than with typing volume alone. Typists who consciously
-            practise a light touch — pressing keys just enough to actuate them rather than bottoming out
-            forcefully — tend to report both fewer injuries and higher long-term accuracy, since a controlled,
-            relaxed keystroke is inherently more precise than a tense, forceful one. Taking short breaks every
-            20–30 minutes to stretch the hands and wrists is a simple, evidence-based habit that protects both
-            long-term health and typing precision.
-          </p>
+            {tr("Repetitive strain injuries, including carpal tunnel syndrome and tendonitis, are strongly associated\r\n            with tense, high-force keystrokes rather than with typing volume alone. Typists who consciously\r\n            practise a light touch — pressing keys just enough to actuate them rather than bottoming out\r\n            forcefully — tend to report both fewer injuries and higher long-term accuracy, since a controlled,\r\n            relaxed keystroke is inherently more precise than a tense, forceful one. Taking short breaks every\r\n            20–30 minutes to stretch the hands and wrists is a simple, evidence-based habit that protects both\r\n            long-term health and typing precision.\r\n          ")}</p>
 
-          <h2 style={h2}>A Brief History of Typing Tests</h2>
+          <h2 style={h2}>{tr("A Brief History of Typing Tests")}</h2>
           <p style={p}>
-            Formal typing assessments date back to the earliest typewriter competitions of the late 19th century,
-            when manufacturers staged public speed contests to promote their machines. As typewriters became
-            standard office equipment through the 20th century, businesses formalised typing tests as a hiring
-            requirement for secretarial and clerical roles, typically measuring gross words per minute over a
-            five-minute passage with a fixed error penalty. The transition to computers in the 1980s and 1990s
-            introduced software-based tests capable of tracking individual keystrokes in real time, enabling far
-            more granular accuracy metrics than were previously possible on paper-based assessments.
-          </p>
+            {tr("Formal typing assessments date back to the earliest typewriter competitions of the late 19th century,\r\n            when manufacturers staged public speed contests to promote their machines. As typewriters became\r\n            standard office equipment through the 20th century, businesses formalised typing tests as a hiring\r\n            requirement for secretarial and clerical roles, typically measuring gross words per minute over a\r\n            five-minute passage with a fixed error penalty. The transition to computers in the 1980s and 1990s\r\n            introduced software-based tests capable of tracking individual keystrokes in real time, enabling far\r\n            more granular accuracy metrics than were previously possible on paper-based assessments.\r\n          ")}</p>
           <p style={p}>
-            Today's browser-based typing tests, including this one, extend that tradition with instant visual
-            feedback: live accuracy percentages, per-key error heatmaps, and accuracy-over-time graphs that would
-            have been impossible to produce with a stopwatch and a typed page. This real-time feedback loop is
-            itself a training aid — seeing an error highlighted immediately reinforces the correction far more
-            effectively than reviewing a final tally after the fact.
-          </p>
+            {tr("Today's browser-based typing tests, including this one, extend that tradition with instant visual\r\n            feedback: live accuracy percentages, per-key error heatmaps, and accuracy-over-time graphs that would\r\n            have been impossible to produce with a stopwatch and a typed page. This real-time feedback loop is\r\n            itself a training aid — seeing an error highlighted immediately reinforces the correction far more\r\n            effectively than reviewing a final tally after the fact.\r\n          ")}</p>
 
-          <h2 style={h2}>Typing Accuracy for Gamers and Streamers</h2>
+          <h2 style={h2}>{tr("Typing Accuracy for Gamers and Streamers")}</h2>
           <p style={p}>
-            Competitive gaming and live streaming place unusual demands on typing accuracy. In-game chat commands,
-            build orders, and callouts often need to be typed in seconds without diverting visual attention from
-            the game itself — a skill that depends entirely on touch-typing accuracy rather than speed alone,
-            since even a single mistyped command can fail silently. Streamers additionally need to type chat
-            responses, moderation commands, and donation acknowledgements while maintaining commentary, making
-            error-free "blind" typing (without looking at the keyboard or even the text field) a genuinely
-            valuable skill. Short-burst practice modes, like this tool's 15-second and 30-second timers, closely
-            mirror the quick, high-pressure typing bursts gamers and streamers actually need.
-          </p>
+            {tr("Competitive gaming and live streaming place unusual demands on typing accuracy. In-game chat commands,\r\n            build orders, and callouts often need to be typed in seconds without diverting visual attention from\r\n            the game itself — a skill that depends entirely on touch-typing accuracy rather than speed alone,\r\n            since even a single mistyped command can fail silently. Streamers additionally need to type chat\r\n            responses, moderation commands, and donation acknowledgements while maintaining commentary, making\r\n            error-free \"blind\" typing (without looking at the keyboard or even the text field) a genuinely\r\n            valuable skill. Short-burst practice modes, like this tool's 15-second and 30-second timers, closely\r\n            mirror the quick, high-pressure typing bursts gamers and streamers actually need.\r\n          ")}</p>
 
-          <h2 style={h2}>Typing Accuracy Certifications</h2>
+          <h2 style={h2}>{tr("Typing Accuracy Certifications")}</h2>
           <p style={p}>
-            Several organisations offer recognised typing certifications that combine speed and accuracy
-            benchmarks, often required for government, legal, and administrative positions. These certifications
-            typically involve a proctored, timed test measuring gross WPM alongside a strict accuracy threshold,
-            with results provided as an official, verifiable document. While this tool is not a certification
-            provider, regularly training on it — particularly in the 60-second and 120-second modes it offers —
-            is a practical, no-cost way to prepare for the format and pressure of a proctored certification exam
-            before sitting one.
-          </p>
+            {tr("Several organisations offer recognised typing certifications that combine speed and accuracy\r\n            benchmarks, often required for government, legal, and administrative positions. These certifications\r\n            typically involve a proctored, timed test measuring gross WPM alongside a strict accuracy threshold,\r\n            with results provided as an official, verifiable document. While this tool is not a certification\r\n            provider, regularly training on it — particularly in the 60-second and 120-second modes it offers —\r\n            is a practical, no-cost way to prepare for the format and pressure of a proctored certification exam\r\n            before sitting one.\r\n          ")}</p>
 
-          <h2 style={h2}>Using This Tool to Track Long-Term Progress</h2>
+          <h2 style={h2}>{tr("Using This Tool to Track Long-Term Progress")}</h2>
           <p style={p}>
-            The most effective way to use any typing accuracy test is not as a one-off score, but as a recurring
-            checkpoint. Re-run the same timer mode (for example, the 60-second test) at a fixed cadence — once a
-            day or a few times a week — and record the accuracy and Net WPM shown in the results modal after each
-            session using the "Copy Results" button. Over a few weeks, a clear trend line emerges: accuracy
-            typically climbs quickly at first, plateaus, and then rises again once weak keys identified by the
-            heatmap have been specifically drilled. Pairing the built-in accuracy-over-time graph within a single
-            session with a personal log across sessions gives visibility at both the micro level (did accuracy
-            dip toward the end of this test, suggesting fatigue?) and the macro level (is accuracy trending
-            upward month over month?).
-          </p>
+            {tr("The most effective way to use any typing accuracy test is not as a one-off score, but as a recurring\r\n            checkpoint. Re-run the same timer mode (for example, the 60-second test) at a fixed cadence — once a\r\n            day or a few times a week — and record the accuracy and Net WPM shown in the results modal after each\r\n            session using the \"Copy Results\" button. Over a few weeks, a clear trend line emerges: accuracy\r\n            typically climbs quickly at first, plateaus, and then rises again once weak keys identified by the\r\n            heatmap have been specifically drilled. Pairing the built-in accuracy-over-time graph within a single\r\n            session with a personal log across sessions gives visibility at both the micro level (did accuracy\r\n            dip toward the end of this test, suggesting fatigue?) and the macro level (is accuracy trending\r\n            upward month over month?).\r\n          ")}</p>
 
-          <h2 style={h2}>Typing Accuracy in Other Languages</h2>
+          <h2 style={h2}>{tr("Typing Accuracy in Other Languages")}</h2>
           <p style={p}>
-            Accuracy dynamics shift noticeably when typing in languages beyond English. Languages with diacritics,
-            such as French, Spanish, or Vietnamese, require additional keystrokes or dead-key sequences (pressing
-            an accent key followed by a letter), introducing new categories of possible errors around timing and
-            sequencing rather than simple key substitution. Input-method editors used for Chinese, Japanese, and
-            Korean layer a phonetic or component-based typing stage on top of the physical keyboard, meaning
-            "accuracy" partly depends on correctly selecting the right candidate character from a list rather than
-            on keystroke precision alone. Right-to-left languages like Arabic and Hebrew introduce their own
-            layout and directionality considerations that can affect cursor tracking and error visualisation in
-            typing software. Regardless of language, the underlying training principle holds: build the specific
-            motor sequences for that language's most frequent letter combinations through deliberate, unhurried
-            repetition, and let speed follow accuracy rather than the other way around.
-          </p>
+            {tr("Accuracy dynamics shift noticeably when typing in languages beyond English. Languages with diacritics,\r\n            such as French, Spanish, or Vietnamese, require additional keystrokes or dead-key sequences (pressing\r\n            an accent key followed by a letter), introducing new categories of possible errors around timing and\r\n            sequencing rather than simple key substitution. Input-method editors used for Chinese, Japanese, and\r\n            Korean layer a phonetic or component-based typing stage on top of the physical keyboard, meaning\r\n            \"accuracy\" partly depends on correctly selecting the right candidate character from a list rather than\r\n            on keystroke precision alone. Right-to-left languages like Arabic and Hebrew introduce their own\r\n            layout and directionality considerations that can affect cursor tracking and error visualisation in\r\n            typing software. Regardless of language, the underlying training principle holds: build the specific\r\n            motor sequences for that language's most frequent letter combinations through deliberate, unhurried\r\n            repetition, and let speed follow accuracy rather than the other way around.\r\n          ")}</p>
 
-          <h2 style={h2}>Building a Personal Practice Routine</h2>
+          <h2 style={h2}>{tr("Building a Personal Practice Routine")}</h2>
           <p style={p}>
-            A well-structured practice routine treats accuracy training the same way an athlete treats technical
-            drills: short, focused, and specific to identified weaknesses rather than generic repetition. A
-            practical weekly structure might begin with a baseline 60-second test to establish a starting accuracy
-            and Net WPM figure, followed by several days of targeted drills built around the keys flagged in that
-            session's heatmap — typing word lists or short phrases that repeat the problem letters at a
-            deliberately reduced speed. Toward the end of the week, a second 60-second test measures whether
-            accuracy improved, and the cycle repeats with a fresh set of target keys. This heatmap-driven,
-            iterative approach is considerably more efficient than simply retyping the same generic passage
-            dozens of times, because it directs limited practice time toward the specific motor patterns that are
-            actually failing rather than reinforcing patterns that are already reliable.
-          </p>
+            {tr("A well-structured practice routine treats accuracy training the same way an athlete treats technical\r\n            drills: short, focused, and specific to identified weaknesses rather than generic repetition. A\r\n            practical weekly structure might begin with a baseline 60-second test to establish a starting accuracy\r\n            and Net WPM figure, followed by several days of targeted drills built around the keys flagged in that\r\n            session's heatmap — typing word lists or short phrases that repeat the problem letters at a\r\n            deliberately reduced speed. Toward the end of the week, a second 60-second test measures whether\r\n            accuracy improved, and the cycle repeats with a fresh set of target keys. This heatmap-driven,\r\n            iterative approach is considerably more efficient than simply retyping the same generic passage\r\n            dozens of times, because it directs limited practice time toward the specific motor patterns that are\r\n            actually failing rather than reinforcing patterns that are already reliable.\r\n          ")}</p>
           <p style={p}>
-            It is also worth varying practice material periodically. Relying solely on pangram-style sentences
-            like the one used as this tool's default text builds strong general letter coverage, but real-world
-            typing — emails, reports, code, chat messages — has its own rhythm and vocabulary. Switching between
-            the default text and the Custom Text feature, loaded with material genuinely relevant to your work,
-            ensures that the accuracy gains measured here translate directly into the accuracy you experience
-            day to day.
-          </p>
+            {tr("It is also worth varying practice material periodically. Relying solely on pangram-style sentences\r\n            like the one used as this tool's default text builds strong general letter coverage, but real-world\r\n            typing — emails, reports, code, chat messages — has its own rhythm and vocabulary. Switching between\r\n            the default text and the Custom Text feature, loaded with material genuinely relevant to your work,\r\n            ensures that the accuracy gains measured here translate directly into the accuracy you experience\r\n            day to day.\r\n          ")}</p>
 
           {/* FAQ */}
-          <div aria-label="Frequently Asked Questions" style={{ marginTop: '3rem' }}>
+          <div aria-label={tr("Frequently Asked Questions")} style={{ marginTop: '3rem' }}>
             <h2 style={{
               fontSize: '1.3rem', fontWeight: 900,
               marginTop: 0, marginBottom: '1.25rem',
             }}>
-              Frequently Asked Questions
-            </h2>
+              {tr("Frequently Asked Questions\r\n            ")}</h2>
 
             <div role="list" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {FAQ_ITEMS.map(({ q, a }, idx) => {
